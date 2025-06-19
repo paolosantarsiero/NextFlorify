@@ -61,15 +61,15 @@ export type DayType = z.infer<typeof DaySchema>;
 
 //Plants
 
-export const caspoSchema = z.object({
+export const CaspoSchema = z.object({
   caspo: z.boolean()
 });
-export type CaspoType = z.infer<typeof caspoSchema>;
+export type CaspoType = z.infer<typeof CaspoSchema>;
 
-export const surpriseSchema = z.object({
+export const SurpriseSchema = z.object({
   surprise: z.boolean()
 });
-export type SurpriseType = z.infer<typeof surpriseSchema>;
+export type SurpriseType = z.infer<typeof SurpriseSchema>;
 
 //forOthers
 
@@ -100,20 +100,20 @@ export const ForWhomSchema = z.object({
 });
 export type ForWhomType = z.infer<typeof ForWhomSchema>;
 
-export const OccasionSchema = z
-  .object({
-    occasion: OccasionEnum,
-    day: z.date().optional()
-  })
-  .refine((data) => {
-    if (data.occasion === 'other' || data.occasion === 'birthday') {
-      return data.day !== undefined;
-    }
-    return true;
-  });
+export const OccasionSchema = z.object({
+  occasion: OccasionEnum
+});
+
 export type OccasionType = z.infer<typeof OccasionSchema>;
 
 export const NotesSchema = z.object({
   notes: z.string().optional()
 });
 export type NotesType = z.infer<typeof NotesSchema>;
+
+// specific day
+
+export const SpecificDaySchema = z.object({
+  specificDay: z.date()
+});
+export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
