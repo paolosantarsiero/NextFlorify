@@ -3,7 +3,6 @@ import { z } from 'zod';
 // For me/others
 
 export const ForMeEnum = z.enum(['myself', 'other']);
-
 export const ForMeSchema = z.object({
   forMe: ForMeEnum
 });
@@ -11,8 +10,7 @@ export type ForMeType = z.infer<typeof ForMeSchema>;
 
 // Preference
 
-const PreferenceEnum = z.enum(['flower', 'plant']);
-
+export const PreferenceEnum = z.enum(['flower', 'plant']);
 export const PreferenceSchema = z.object({
   preference: PreferenceEnum
 });
@@ -21,10 +19,30 @@ export type PreferenceType = z.infer<typeof PreferenceSchema>;
 // Flowers
 
 export const LengthEnum = z.enum(['small', 'medium', 'large']);
+export const LengthSchema = z.object({
+  length: LengthEnum
+});
+export type LengthType = z.infer<typeof LengthSchema>;
+
 export const ColorEnum = z.enum(['red', 'white', 'diy']);
-export const packagingEnum = z.enum(['natural', 'withoutLeaves', 'withLeaves', 'diy']);
-export const frequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly', 'yearly']);
-export const dayEnum = z.enum([
+export const ColorSchema = z.object({
+  color: ColorEnum
+});
+export type ColorType = z.infer<typeof ColorSchema>;
+
+export const PackagingEnum = z.enum(['natural', 'withoutLeaves', 'withLeaves', 'diy']);
+export const PackagingSchema = z.object({
+  packaging: PackagingEnum
+});
+export type PackagingType = z.infer<typeof PackagingSchema>;
+
+export const FrequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly', 'yearly']);
+export const FrequencySchema = z.object({
+  frequency: FrequencyEnum
+});
+export type FrequencyType = z.infer<typeof FrequencySchema>;
+
+export const DayEnum = z.enum([
   'monday',
   'tuesday',
   'wednesday',
@@ -33,29 +51,8 @@ export const dayEnum = z.enum([
   'saturday',
   'sunday'
 ]);
-
-export const LengthSchema = z.object({
-  length: LengthEnum
-});
-export type LengthType = z.infer<typeof LengthSchema>;
-
-export const ColorSchema = z.object({
-  color: ColorEnum
-});
-export type ColorType = z.infer<typeof ColorSchema>;
-
-export const PackagingSchema = z.object({
-  packaging: packagingEnum
-});
-export type PackagingType = z.infer<typeof PackagingSchema>;
-
-export const FrequencySchema = z.object({
-  frequency: frequencyEnum
-});
-export type FrequencyType = z.infer<typeof FrequencySchema>;
-
 export const DaySchema = z.object({
-  day: dayEnum
+  day: DayEnum
 });
 export type DayType = z.infer<typeof DaySchema>;
 
@@ -82,6 +79,10 @@ export const ForWhomEnum = z.enum([
   'special',
   'other'
 ]);
+export const ForWhomSchema = z.object({
+  forWhom: ForWhomEnum
+});
+export type ForWhomType = z.infer<typeof ForWhomSchema>;
 
 export const OccasionEnum = z.enum([
   'birthday',
@@ -94,16 +95,9 @@ export const OccasionEnum = z.enum([
   'valentinesDay',
   'other'
 ]);
-
-export const ForWhomSchema = z.object({
-  forWhom: ForWhomEnum
-});
-export type ForWhomType = z.infer<typeof ForWhomSchema>;
-
 export const OccasionSchema = z.object({
   occasion: OccasionEnum
 });
-
 export type OccasionType = z.infer<typeof OccasionSchema>;
 
 export const NotesSchema = z.object({

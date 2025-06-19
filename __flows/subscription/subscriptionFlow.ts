@@ -1,25 +1,36 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Flow } from '__flows/_flow';
+import { FlowNode } from '__flows/_flowNode';
 import {
   CaspoSchema,
   CaspoType,
+  ColorEnum,
   ColorSchema,
   ColorType,
+  DayEnum,
   DaySchema,
   DayType,
+  ForMeEnum,
   ForMeSchema,
   ForMeType,
+  ForWhomEnum,
   ForWhomSchema,
   ForWhomType,
+  FrequencyEnum,
   FrequencySchema,
   FrequencyType,
+  LengthEnum,
   LengthSchema,
   LengthType,
   NotesSchema,
   NotesType,
+  OccasionEnum,
   OccasionSchema,
   OccasionType,
+  PackagingEnum,
   PackagingSchema,
   PackagingType,
+  PreferenceEnum,
   PreferenceSchema,
   PreferenceType,
   SpecificDaySchema,
@@ -27,127 +38,136 @@ import {
   SurpriseSchema,
   SurpriseType
 } from '__flows/subscription/subscriptionQuestionsSchema';
-import { FlowNode } from '../_flowNode';
 
 export const FOR_ME_NODE = 'forMe';
+export const PREFERENCE_NODE = 'preference';
+export const LENGTH_NODE = 'length';
+export const COLOR_NODE = 'color';
+export const PACKAGING_NODE = 'packaging';
+export const FREQUENCY_NODE = 'frequency';
+export const DAY_NODE = 'day';
+export const CASPO_NODE = 'caspo';
+export const SURPRISE_NODE = 'surprise';
+export const FOR_WHOM_NODE = 'forWhom';
+export const OCCASION_NODE = 'occasion';
+export const SPECIFIC_DAY_NODE = 'specificDay';
+export const NOTES_NODE = 'notes';
+
 const forMeNode: FlowNode<ForMeType> = {
   id: FOR_ME_NODE,
   component: undefined,
   resolver: zodResolver(ForMeSchema),
-  next: (data: ForMeType) => (data.forMe === 'myself' ? 'preference' : 'forWhom'),
-  inputType: 'buttonSelect'
+  next: (data: ForMeType) => (data.forMe === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
+  inputType: 'buttonSelect',
+  answers: ForMeEnum
 };
 
-export const PREFERENCE_NODE = 'preference';
 const preferenceNode: FlowNode<PreferenceType> = {
   id: PREFERENCE_NODE,
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
-  next: (data: PreferenceType) => (data.preference === 'flower' ? 'length' : 'caspo'),
-  inputType: 'buttonSelect'
+  next: (data: PreferenceType) => (data.preference === 'flower' ? LENGTH_NODE : CASPO_NODE),
+  inputType: 'buttonSelect',
+  answers: PreferenceEnum
 };
 
-export const LENGTH_NODE = 'length';
 const lengthNode: FlowNode<LengthType> = {
   id: LENGTH_NODE,
   component: undefined,
   resolver: zodResolver(LengthSchema),
-  next: (data: LengthType) => 'color',
-  inputType: 'buttonSelect'
+  next: (data: LengthType) => COLOR_NODE,
+  inputType: 'buttonSelect',
+  answers: LengthEnum
 };
 
-export const COLOR_NODE = 'color';
 const colorNode: FlowNode<ColorType> = {
   id: COLOR_NODE,
   component: undefined,
   resolver: zodResolver(ColorSchema),
-  next: (data: ColorType) => 'packaging',
-  inputType: 'buttonSelect'
+  next: (data: ColorType) => PACKAGING_NODE,
+  inputType: 'buttonSelect',
+  answers: ColorEnum
 };
 
-export const PACKAGING_NODE = 'packaging';
 const packagingNode: FlowNode<PackagingType> = {
   id: PACKAGING_NODE,
   component: undefined,
   resolver: zodResolver(PackagingSchema),
-  next: (data: PackagingType) => 'frequency',
-  inputType: 'buttonSelect'
+  next: (data: PackagingType) => FREQUENCY_NODE,
+  inputType: 'buttonSelect',
+  answers: PackagingEnum
 };
 
-export const FREQUENCY_NODE = 'frequency';
 const frequencyNode: FlowNode<FrequencyType> = {
   id: FREQUENCY_NODE,
   component: undefined,
   resolver: zodResolver(FrequencySchema),
-  next: (data: FrequencyType) => 'day',
-  inputType: 'buttonSelect'
+  next: (data: FrequencyType) => DAY_NODE,
+  inputType: 'buttonSelect',
+  answers: FrequencyEnum
 };
 
-export const DAY_NODE = 'day';
 const dayNode: FlowNode<DayType> = {
   id: 'day',
   component: undefined,
   resolver: zodResolver(DaySchema),
-  next: (data: DayType) => 'end',
-  inputType: 'buttonSelect'
+  next: (data: DayType) => 'end', // TODO: change to end
+  inputType: 'buttonSelect',
+  answers: DayEnum
 };
 
-export const CASPO_NODE = 'caspo';
 const caspoNode: FlowNode<CaspoType> = {
   id: CASPO_NODE,
   component: undefined,
   resolver: zodResolver(CaspoSchema),
-  next: (data: CaspoType) => 'surprise',
+  next: (data: CaspoType) => SURPRISE_NODE,
   inputType: 'boolean'
 };
 
-export const SURPRISE_NODE = 'surprise';
 const surpriseNode: FlowNode<SurpriseType> = {
   id: SURPRISE_NODE,
   component: undefined,
   resolver: zodResolver(SurpriseSchema),
-  next: (data: SurpriseType) => 'notes',
+  next: (data: SurpriseType) => NOTES_NODE,
   inputType: 'boolean'
 };
 
-export const FOR_WHOM_NODE = 'forWhom';
 const forWhomNode: FlowNode<ForWhomType> = {
   id: FOR_WHOM_NODE,
   component: undefined,
   resolver: zodResolver(ForWhomSchema),
-  next: (data: ForWhomType) => 'end',
-  inputType: 'buttonSelect'
+  next: (data: ForWhomType) => OCCASION_NODE,
+  inputType: 'buttonSelect',
+  answers: ForWhomEnum
 };
 
-export const OCCASION_NODE = 'occasion';
 const occasionNode: FlowNode<OccasionType> = {
   id: OCCASION_NODE,
   component: undefined,
   resolver: zodResolver(OccasionSchema),
   next: (data: OccasionType) =>
-    data.occasion === 'other' || data.occasion === 'birthday' ? 'specificDay' : 'end',
-  inputType: 'buttonSelect'
+    data.occasion === 'other' || data.occasion === 'birthday' ? SPECIFIC_DAY_NODE : NOTES_NODE,
+  inputType: 'buttonSelect',
+  answers: OccasionEnum
 };
 
-export const SPECIFIC_DAY_NODE = 'specificDay';
 const specificDayNode: FlowNode<SpecificDayType> = {
   id: SPECIFIC_DAY_NODE,
   component: undefined,
   resolver: zodResolver(SpecificDaySchema),
-  next: (data: SpecificDayType) => 'end',
+  next: (data: SpecificDayType) => NOTES_NODE,
   inputType: 'date'
 };
 
-export const NOTES_NODE = 'notes';
 const notesNode: FlowNode<NotesType> = {
   id: NOTES_NODE,
   component: undefined,
   resolver: zodResolver(NotesSchema),
-  next: (data: NotesType) => 'end',
+  next: (data: NotesType) => 'end', // TODO: change to end
   inputType: 'text'
 };
 
-export const questionsFlow = {
+export const questionsFlow: Flow = {
   forMe: forMeNode,
   preference: preferenceNode,
   length: lengthNode,
