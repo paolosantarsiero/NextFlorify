@@ -168,17 +168,20 @@ const notesNode: FlowNode<NotesType> = {
 };
 
 export const questionsFlow: Flow = {
-  forMe: forMeNode,
-  preference: preferenceNode,
-  length: lengthNode,
-  color: colorNode,
-  packaging: packagingNode,
-  frequency: frequencyNode,
-  day: dayNode,
-  caspo: caspoNode,
-  surprise: surpriseNode,
-  forWhom: forWhomNode,
-  occasion: occasionNode,
-  specificDay: specificDayNode,
-  notes: notesNode
+  translations: 'flows.subscriptionFlow',
+  steps: {
+    [FOR_ME_NODE]: forMeNode,
+    [PREFERENCE_NODE]: preferenceNode,
+    [LENGTH_NODE]: lengthNode,
+    [COLOR_NODE]: colorNode,
+    [PACKAGING_NODE]: packagingNode,
+    [FREQUENCY_NODE]: frequencyNode,
+    [DAY_NODE]: dayNode,
+    [CASPO_NODE]: caspoNode,
+    [SURPRISE_NODE]: surpriseNode,
+    [FOR_WHOM_NODE]: forWhomNode,
+    [OCCASION_NODE]: occasionNode,
+    [SPECIFIC_DAY_NODE]: specificDayNode,
+    [NOTES_NODE]: notesNode
+  }
 };

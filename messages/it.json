@@ -101,12 +101,23 @@
         "caspo": {},
         "surprise": {},
         "forWhom": {
-          "myself": "Per me",
-          "other": "Per altri"
+          "spouse": "Marito/moglie",
+          "parent": "Genitore",
+          "grandparent": "Nonno/nonna",
+          "friend": "Amico",
+          "partner": "Partner",
+          "special": "Una persona speciale",
+          "other": "Altro"
         },
         "occasion": {
           "birthday": "Compleanno",
           "anniversary": "Anniversario",
+          "mothersDay": "Mamma",
+          "fathersDay": "Papà",
+          "womenDay": "Donna",
+          "christmas": "Natale",
+          "easter": "Pasqua",
+          "valentinesDay": "San Valentino",
           "other": "Altro"
         },
         "specificDay": {},
