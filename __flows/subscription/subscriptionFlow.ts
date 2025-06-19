@@ -26,18 +26,8 @@ import {
   SpecificDayType,
   SurpriseSchema,
   SurpriseType
-} from '__types/questions/questions';
-import { FieldValues, Resolver } from 'react-hook-form';
-
-export type InputType = 'text' | 'buttonSelect' | 'date';
-
-export type FlowNode<T extends FieldValues> = {
-  id: string;
-  component?: React.FC;
-  resolver: Resolver<T>;
-  next: (data: T) => string | null;
-  inputType: InputType;
-};
+} from '__flows/subscription/subscriptionQuestionsSchema';
+import { FlowNode } from '../_flowNode';
 
 export const FOR_ME_NODE = 'forMe';
 const forMeNode: FlowNode<ForMeType> = {
@@ -108,7 +98,7 @@ const caspoNode: FlowNode<CaspoType> = {
   component: undefined,
   resolver: zodResolver(CaspoSchema),
   next: (data: CaspoType) => 'surprise',
-  inputType: 'buttonSelect'
+  inputType: 'boolean'
 };
 
 export const SURPRISE_NODE = 'surprise';
@@ -117,7 +107,7 @@ const surpriseNode: FlowNode<SurpriseType> = {
   component: undefined,
   resolver: zodResolver(SurpriseSchema),
   next: (data: SurpriseType) => 'notes',
-  inputType: 'buttonSelect'
+  inputType: 'boolean'
 };
 
 export const FOR_WHOM_NODE = 'forWhom';

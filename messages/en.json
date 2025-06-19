@@ -1,16 +1,17 @@
 {
   "HomePage": {
-    "helpIA": "Buy with IA help",
-    "topProducts": "Top products",
-    "latestPosts": "Latest posts",
-    "viewAll": "View all"
+    "helpIA": "AI Shopping Guide",
+    "topProducts": "Best Selling Products",
+    "latestPosts": "Latest Articles",
+    "viewAll": "View All"
   },
   "ProductPage": {
     "buy": "Buy",
-    "addToCart": "Add to cart",
+    "addToCart": "Add to Cart",
     "description": "Description",
     "specifications": "Specifications",
     "reviews": "Reviews",
+    "relatedProducts": "Related Products",
     "variants": {
       "color": "Color",
       "size": "Size"
@@ -26,10 +27,10 @@
   },
   "Cart": {
     "title": "Cart",
-    "empty": "Cart is empty",
+    "empty": "The cart is empty",
     "total": "Total",
     "shipping": "Shipping",
-    "checkout": "Checkout"
+    "checkout": "Proceed to Checkout"
   },
   "Checkout": {
     "title": "Checkout",
@@ -37,7 +38,84 @@
     "billing": "Billing",
     "billingCheckbox": "Do you need an invoice?",
     "payment": "Payment",
-    "confirm": "Confirm order",
+    "confirm": "Confirm Order",
     "total": "Total"
+  },
+  "flows": {
+    "subscriptionFlow": {
+      "questions": {
+        "forMe": "Who are you buying the flowers for?",
+        "preference": "Do you want flowers or plants?",
+        "length": "What size do you want?",
+        "color": "What color do you want?",
+        "packaging": "Do you want natural packaging or packaging without leaves?",
+        "frequency": "How often do you want to receive the flowers?",
+        "day": "On which day do you want to receive the flowers?",
+        "caspo": "Do you want a bouquet of flowers?",
+        "surprise": "Do you want a surprise bouquet of flowers?",
+        "forWhom": "Who are you buying the flowers for?",
+        "occasion": "For what occasion are you buying the flowers?",
+        "specificDay": "On which day do you want to receive the flowers?",
+        "notes": "Do you have any other requests?"
+      },
+      "answers": {
+        "forMe": {
+          "myself": "For me",
+          "other": "For others"
+        },
+        "preference": {
+          "flower": "Flowers",
+          "plant": "Plants"
+        },
+        "length": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        },
+        "color": {
+          "red": "Red",
+          "white": "White",
+          "diy": "DIY"
+        },
+        "packaging": {
+          "natural": "Natural",
+          "withoutLeaves": "Without leaves",
+          "withLeaves": "With leaves",
+          "diy": "DIY"
+        },
+        "frequency": {
+          "weekly": "Weekly",
+          "bi-weekly": "Every 2 weeks",
+          "monthly": "Monthly",
+          "yearly": "Yearly"
+        },
+        "day": {
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
+        },
+        "caspo": {},
+        "surprise": {},
+        "forWhom": {
+          "myself": "For me",
+          "other": "For others"
+        },
+        "occasion": {
+          "birthday": "Birthday",
+          "anniversary": "Anniversary",
+          "other": "Other"
+        },
+        "specificDay": {},
+        "notes": {}
+      }
+    },
+    "genericAnswers": {
+      "true": "Yes",
+      "false": "No"
+    }
   }
 }
