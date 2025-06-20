@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@nextui-org/react';
+import { Button } from "@heroui/react";
 import { useCart } from 'components/cart/cart-context';
 import CartItemView from 'components/cart/cart-item';
 import { useCheckout } from 'components/checkout/checkout-provider';

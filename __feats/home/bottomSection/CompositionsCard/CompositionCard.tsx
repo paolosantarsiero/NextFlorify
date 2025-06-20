@@ -11,7 +11,7 @@ export default function CompositionCard({ title, description, flowerType, classN
   return (
     <div
       className={cn(
-        'relative bg-[#F5F5F5] backdrop-blur-md rounded-2xl shadow-md p-6  flex flex-col justify-between',
+        'relative  backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50',
         className ?? ''
       )}
     >

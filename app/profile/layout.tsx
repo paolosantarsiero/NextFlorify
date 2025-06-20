@@ -1,7 +1,7 @@
 'use client';
 
 import { Cog8ToothIcon, CubeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from "@heroui/react";
 import LogoutButton from 'components/button/logout';
 import { Customer } from 'lib/woocomerce/models/customer';
 import { Shipping } from 'lib/woocomerce/models/shipping';

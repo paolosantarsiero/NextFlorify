@@ -1,6 +1,6 @@
 'use client';
 
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from "@heroui/react";
 import { Cart } from 'lib/woocomerce/models/cart';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
@@ -29,9 +29,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <CartContext.Provider value={{ cart, setNewCart: setCart }}>{children}</CartContext.Provider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }
 

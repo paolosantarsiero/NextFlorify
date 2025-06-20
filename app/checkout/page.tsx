@@ -1,6 +1,6 @@
 'use client';
 
-import { Accordion, AccordionItem, Checkbox, Radio, RadioGroup } from '@nextui-org/react';
+import { Accordion, AccordionItem, Checkbox, Radio, RadioGroup } from "@heroui/react";
 import { useCart } from 'components/cart/cart-context';
 import CartItemView from 'components/cart/cart-item';
 import { useCheckout } from 'components/checkout/checkout-provider';
@@ -101,7 +101,7 @@ export default function CheckoutPage() {
                     className="text-right text-base text-black dark:text-white"
                     amount={cart?.totals?.total_price}
                     needSplit
-                    currencyCode={cart?.totals.currency_code}
+                    currencyCode={cart?.totals?.currency_code}
                   />
                 </div>
               </div>

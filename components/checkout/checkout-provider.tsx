@@ -1,6 +1,6 @@
 'use client';
 
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from "@heroui/react";
 import { Billing } from 'lib/woocomerce/models/billing';
 import { Shipping } from 'lib/woocomerce/models/shipping';
 import React, { createContext, useContext, useState } from 'react';
@@ -69,7 +69,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <CheckoutContext.Provider
         value={{
           checkout,
@@ -80,7 +80,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
       >
         {children}
       </CheckoutContext.Provider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }
 
