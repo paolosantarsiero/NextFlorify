@@ -10,9 +10,6 @@ import {
   DayEnum,
   DaySchema,
   DayType,
-  ForMeEnum,
-  ForMeSchema,
-  ForMeType,
   ForWhomEnum,
   ForWhomSchema,
   ForWhomType,
@@ -30,6 +27,9 @@ import {
   PackagingEnum,
   PackagingSchema,
   PackagingType,
+  PathEnum,
+  PathSchema,
+  PathType,
   PreferenceEnum,
   PreferenceSchema,
   PreferenceType,
@@ -39,7 +39,7 @@ import {
   SurpriseType
 } from '__flows/subscription/subscriptionQuestionsSchema';
 
-export const FOR_ME_NODE = 'forMe';
+export const PATH_NODE = 'path';
 export const PREFERENCE_NODE = 'preference';
 export const LENGTH_NODE = 'length';
 export const COLOR_NODE = 'color';
@@ -53,13 +53,13 @@ export const OCCASION_NODE = 'occasion';
 export const SPECIFIC_DAY_NODE = 'specificDay';
 export const NOTES_NODE = 'notes';
 
-const forMeNode: FlowNode<ForMeType> = {
-  id: FOR_ME_NODE,
+const PathNode: FlowNode<PathType> = {
+  id: PATH_NODE,
   component: undefined,
-  resolver: zodResolver(ForMeSchema),
-  next: (data: ForMeType) => (data.forMe === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
+  resolver: zodResolver(PathSchema),
+  next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
-  answers: ForMeEnum
+  answers: PathEnum
 };
 
 const preferenceNode: FlowNode<PreferenceType> = {
@@ -169,8 +169,9 @@ const notesNode: FlowNode<NotesType> = {
 
 export const questionsFlow: Flow = {
   translations: 'flows.subscriptionFlow',
+  startingNodeId: PATH_NODE,
   steps: {
-    [FOR_ME_NODE]: forMeNode,
+    [PATH_NODE]: PathNode,
     [PREFERENCE_NODE]: preferenceNode,
     [LENGTH_NODE]: lengthNode,
     [COLOR_NODE]: colorNode,

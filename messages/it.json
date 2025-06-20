@@ -44,7 +44,7 @@
   "flows": {
     "subscriptionFlow": {
       "questions": {
-        "forMe": "Per chi vuoi comprare i fiori?",
+        "path": "Per chi vuoi comprare i fiori?",
         "preference": "Vuoi fiori o piante?",
         "length": "Quale dimensione vuoi?",
         "color": "Quale colore vuoi?",
@@ -59,7 +59,7 @@
         "notes": "Hai altre richieste?"
       },
       "answers": {
-        "forMe": {
+        "path": {
           "myself": "Per me",
           "other": "Per altri"
         },
@@ -112,9 +112,9 @@
         "occasion": {
           "birthday": "Compleanno",
           "anniversary": "Anniversario",
-          "mothersDay": "Mamma",
-          "fathersDay": "Papà",
-          "womenDay": "Donna",
+          "mothersDay": "Festa della Mamma",
+          "fathersDay": "Festa del Papà",
+          "womenDay": "Festa della Donna",
           "christmas": "Natale",
           "easter": "Pasqua",
           "valentinesDay": "San Valentino",

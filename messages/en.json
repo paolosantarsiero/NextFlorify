@@ -44,7 +44,7 @@
   "flows": {
     "subscriptionFlow": {
       "questions": {
-        "forMe": "Who are you buying the flowers for?",
+        "path": "Who are you buying the flowers for?",
         "preference": "Do you want flowers or plants?",
         "length": "What size do you want?",
         "color": "What color do you want?",
@@ -59,7 +59,7 @@
         "notes": "Do you have any other requests?"
       },
       "answers": {
-        "forMe": {
+        "path": {
           "myself": "For me",
           "other": "For others"
         },
