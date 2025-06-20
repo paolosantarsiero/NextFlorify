@@ -1,7 +1,7 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Input } from "@heroui/react";
+import { Input } from '@heroui/react';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 

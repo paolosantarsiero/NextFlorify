@@ -1,6 +1,6 @@
 'use client';
 
-import { Accordion, AccordionItem, Checkbox, Radio, RadioGroup } from "@heroui/react";
+import { Accordion, AccordionItem, Checkbox, Radio, RadioGroup } from '@heroui/react';
 import { useCart } from 'components/cart/cart-context';
 import CartItemView from 'components/cart/cart-item';
 import { useCheckout } from 'components/checkout/checkout-provider';

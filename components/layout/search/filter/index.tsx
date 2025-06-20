@@ -1,5 +1,5 @@
 'use client';
-import { Slider } from "@heroui/react";
+import { Slider } from '@heroui/react';
 import { SortFilterItem } from 'lib/constants';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';

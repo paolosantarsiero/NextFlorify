@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Input } from "@heroui/react";
+import { Button, Input } from '@heroui/react';
 import { getSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

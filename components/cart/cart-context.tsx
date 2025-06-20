@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroUIProvider } from "@heroui/react";
+import { HeroUIProvider } from '@heroui/react';
 import { Cart } from 'lib/woocomerce/models/cart';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
