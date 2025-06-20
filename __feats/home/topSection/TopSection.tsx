@@ -1,3 +1,4 @@
+import { Button } from '@headlessui/react';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
 import Link from 'next/link';
@@ -19,17 +20,19 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
         </div>
       </div>
 
-      <Link href="/questions" className="bg-white text-black px-4 py-2 rounded-md z-30">
-        Start
+      <Link href="/questions" className="z-30 -translate-y-1/2">
+        <Button className="bg-gradient-to-r from-tiffanyGreen to-violetRose text-white px-4 py-2 rounded-full px-20 py-5">
+          Start
+        </Button>
       </Link>
-      <button
+      <Button
         className="bg-white text-black px-4 py-2 rounded-md z-30"
         onClick={() => {
           bottomSectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
         }}
       >
         Sfoglia il catalogo
-      </button>
+      </Button>
     </div>
   );
 }
