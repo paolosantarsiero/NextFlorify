@@ -23,3 +23,5 @@ export const isStrinInteger = (value: string) => {
 
   return !isNaN(parsed) && parsed.toString() === value.trim();
 };
+
+export const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');

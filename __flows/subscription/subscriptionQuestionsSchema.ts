@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 // For me/others
 
-export const ForMeEnum = z.enum(['myself', 'other']);
-export const ForMeSchema = z.object({
-  forMe: ForMeEnum
+export const PathEnum = z.enum(['myself', 'other']);
+export const PathSchema = z.object({
+  path: PathEnum
 });
-export type ForMeType = z.infer<typeof ForMeSchema>;
+export type PathType = z.infer<typeof PathSchema>;
 
 // Preference
 

@@ -4,6 +4,7 @@ import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
+    './__feats/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
@@ -11,7 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)']
+        sans: ['var(--font-poppins)']
       },
       keyframes: {
         fadeIn: {

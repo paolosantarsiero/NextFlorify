@@ -1,13 +1,8 @@
 import CartModal from 'components/cart/modal';
 import UserIcon from 'components/icons/UserIcon';
 import LogoSquare from 'components/logo-square';
-import { Category } from 'lib/woocomerce/models/base';
-import { woocommerce } from 'lib/woocomerce/woocommerce';
 import Link from 'next/link';
-import path from 'path';
 import { Suspense } from 'react';
-import MobileMenu from './mobile-menu';
-import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
@@ -17,24 +12,22 @@ type Menu = {
 };
 
 export async function Navbar() {
-  const categories: Category[] = await woocommerce.get('products/categories');
-  const menu = [
-    {
-      title: 'Home',
-      path: '/'
-    },
-    ...categories.map((category) => ({
-      title: category.name,
-      path: path.join('/collection', category.slug)
-    }))
-  ] as Menu[];
+  // const categories: Category[] = await woocommerce.get('products/categories');
+  // const menu = [
+  //   {
+  //     title: 'Home',
+  //     path: '/'
+  //   },
+  //   ...categories.map((category) => ({
+  //     title: category.name,
+  //     path: path.join('/collection', category.slug)
+  //   }))
+  // ] as Menu[];
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6 sticky top-0 z-50">
       <div className="block flex-none md:hidden">
-        <Suspense fallback={null}>
-          <MobileMenu menu={menu} />
-        </Suspense>
+        <Suspense fallback={null}>{/* <MobileMenu menu={menu} /> */}</Suspense>
       </div>
       <div className="flex w-full items-center">
         <div className="flex w-full md:w-1/3">
@@ -48,7 +41,7 @@ export async function Navbar() {
               {SITE_NAME}
             </div>
           </Link>
-          {menu.length ? (
+          {/* {menu.length ? (
             <ul className="hidden gap-6 text-sm md:flex md:items-center">
               {menu.map((item: Menu) => (
                 <li key={item.title}>
@@ -62,12 +55,12 @@ export async function Navbar() {
                 </li>
               ))}
             </ul>
-          ) : null}
+          ) : null} */}
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">
-          <Suspense fallback={<SearchSkeleton />}>
+          {/* <Suspense fallback={<SearchSkeleton />}>
             <Search />
-          </Suspense>
+          </Suspense> */}
         </div>
         <div className="flex justify-end md:w-1/3">
           <CartModal />

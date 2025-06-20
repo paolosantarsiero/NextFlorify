@@ -3,10 +3,10 @@ import { CheckoutProvider } from 'components/checkout/checkout-provider';
 import { Navbar } from 'components/layout/navbar';
 import { NextAuthProvider } from 'components/next-session-provider';
 import { WelcomeToast } from 'components/welcome-toast';
-import { GeistSans } from 'geist/font/sans';
 import { ensureStartsWith } from 'lib/utils';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import { Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import './globals.css';
@@ -38,13 +38,19 @@ export const metadata = {
     })
 };
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700']
+});
+
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const locale = await getLocale();
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={GeistSans.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+    <html lang={locale} className={poppins.className}>
+      <body className="text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white h-screen w-screen flex flex-col overflow-hidden max-w-[1440px] mx-auto">
         <NextIntlClientProvider messages={messages}>
           <NextAuthProvider>
             <CartProvider>
