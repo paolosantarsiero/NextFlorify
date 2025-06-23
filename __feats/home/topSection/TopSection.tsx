@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { useScrollListener } from '__hooks/ScrollListener';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
 import Link from 'next/link';
@@ -9,6 +10,14 @@ type Props = {
 };
 
 export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
+  useScrollListener(topSectionRef, {
+    onWheel: (event) => {
+      if (event.deltaY > 0) {
+        handleScrollToBottom();
+      }
+    }
+  });
+
   const handleScrollToBottom = () => {
     bottomSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
