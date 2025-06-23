@@ -5,6 +5,8 @@ declare module 'next-auth' {
   interface Session {
     user: {
       customer_id: number;
+      user_email: string;
+      stripe_id?: string;
       token: string;
       user_email: string;
       user_nicename: string;
@@ -15,6 +17,8 @@ declare module 'next-auth' {
 
   interface User {
     customer_id: number;
+    user_email: string;
+    stripe_id?: string;
     token: string;
     user_email: string;
     user_nicename: string;
