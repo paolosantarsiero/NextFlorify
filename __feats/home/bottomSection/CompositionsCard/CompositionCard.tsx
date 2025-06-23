@@ -1,12 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from 'lib/utils';
 
 type Props = {
@@ -26,7 +19,7 @@ export default function CompositionCard({ title, description, flowerType, classN
     >
       <CardHeader>
         <CardTitle className="text-xl font-bold mb-2">{title}</CardTitle>
-        <CardDescription className="text-sm text-gray-600 mb-4">{description}</CardDescription>
+        {/* <CardDescription className="text-sm text-gray-600 mb-4">{description}</CardDescription> */}
       </CardHeader>
       <CardContent>
         <p className="text-sm font-semibold text-gray-800">Tipo di fiore</p>

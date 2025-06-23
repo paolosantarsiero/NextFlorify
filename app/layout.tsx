@@ -2,6 +2,7 @@ import { CartProvider } from 'components/cart/cart-context';
 import { CheckoutProvider } from 'components/checkout/checkout-provider';
 import { Navbar } from 'components/layout/navbar';
 import { NextAuthProvider } from 'components/next-session-provider';
+import { ReactQueryProvider } from 'components/react-query-provider';
 import { WelcomeToast } from 'components/welcome-toast';
 import { ensureStartsWith } from 'lib/utils';
 import { NextIntlClientProvider } from 'next-intl';
@@ -51,23 +52,25 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale} className={poppins.className}>
       <body className="text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white h-screen w-screen flex flex-col overflow-hidden max-w-[1440px] mx-auto">
-        <NextIntlClientProvider messages={messages}>
-          <NextAuthProvider>
-            <CartProvider>
-              <CheckoutProvider>
-                <Navbar />
-                <main>
-                  {children}
-                  <Toaster closeButton />
-                  <WelcomeToast />
-                  {/* <Subscriptions /> */}
-                </main>
-              </CheckoutProvider>
-            </CartProvider>
-            {/* TODO: Remove footer */}
-            {/* <Footer /> */}
-          </NextAuthProvider>
-        </NextIntlClientProvider>
+        <ReactQueryProvider>
+          <NextIntlClientProvider messages={messages}>
+            <NextAuthProvider>
+              <CartProvider>
+                <CheckoutProvider>
+                  <Navbar />
+                  <main>
+                    {children}
+                    <Toaster closeButton />
+                    <WelcomeToast />
+                    {/* <Subscriptions /> */}
+                  </main>
+                </CheckoutProvider>
+              </CartProvider>
+              {/* TODO: Remove footer */}
+              {/* <Footer /> */}
+            </NextAuthProvider>
+          </NextIntlClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
