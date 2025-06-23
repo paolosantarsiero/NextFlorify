@@ -1,6 +1,6 @@
 'use client';
 
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Accordion, AccordionItem } from '@heroui/react';
 import Prose from 'components/prose';
 import { Product } from 'lib/woocomerce/models/product';
 

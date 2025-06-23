@@ -1,5 +1,5 @@
 'use client';
-import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react';
+import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
 import { usePathname } from 'next/navigation';
 export default function Bread() {
   const paths: { name: string; href: string }[] = [];

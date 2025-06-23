@@ -40,5 +40,93 @@
     "payment": "Pagamento",
     "confirm": "Conferma ordine",
     "total": "Totale"
+  },
+  "flows": {
+    "subscriptionFlow": {
+      "questions": {
+        "path": "Per chi vuoi comprare i fiori?",
+        "preference": "Vuoi fiori o piante?",
+        "length": "Quale dimensione vuoi?",
+        "color": "Quale colore vuoi?",
+        "packaging": "Vuoi un imballaggio naturale o un imballaggio senza foglie?",
+        "frequency": "Ogni quanto vuoi ricevere i fiori?",
+        "day": "In quale giorno vuoi ricevere i fiori?",
+        "caspo": "Vuoi un bouquet di fiori?",
+        "surprise": "Vuoi un bouquet di fiori sorpresa?",
+        "forWhom": "Per chi vuoi comprare i fiori?",
+        "occasion": "Per quale occasione vuoi comprare i fiori?",
+        "specificDay": "In quale giorno vuoi ricevere i fiori?",
+        "notes": "Hai altre richieste?"
+      },
+      "answers": {
+        "path": {
+          "myself": "Per me",
+          "other": "Per altri"
+        },
+        "preference": {
+          "flower": "Fiori",
+          "plant": "Piante"
+        },
+        "length": {
+          "small": "Piccolo",
+          "medium": "Medio",
+          "large": "Grande"
+        },
+        "color": {
+          "red": "Rosso",
+          "white": "Bianco",
+          "diy": "Fai da te"
+        },
+        "packaging": {
+          "natural": "Naturale",
+          "withoutLeaves": "Senza foglie",
+          "withLeaves": "Con foglie",
+          "diy": "Fai da te"
+        },
+        "frequency": {
+          "weekly": "Settimanale",
+          "bi-weekly": "Ogni 2 settimane",
+          "monthly": "Mensile",
+          "yearly": "Annuale"
+        },
+        "day": {
+          "monday": "Lunedì",
+          "tuesday": "Martedì",
+          "wednesday": "Mercoledì",
+          "thursday": "Giovedì",
+          "friday": "Venerdì",
+          "saturday": "Sabato",
+          "sunday": "Domenica"
+        },
+        "caspo": {},
+        "surprise": {},
+        "forWhom": {
+          "spouse": "Marito/moglie",
+          "parent": "Genitore",
+          "grandparent": "Nonno/nonna",
+          "friend": "Amico",
+          "partner": "Partner",
+          "special": "Una persona speciale",
+          "other": "Altro"
+        },
+        "occasion": {
+          "birthday": "Compleanno",
+          "anniversary": "Anniversario",
+          "mothersDay": "Festa della Mamma",
+          "fathersDay": "Festa del Papà",
+          "womenDay": "Festa della Donna",
+          "christmas": "Natale",
+          "easter": "Pasqua",
+          "valentinesDay": "San Valentino",
+          "other": "Altro"
+        },
+        "specificDay": {},
+        "notes": {}
+      }
+    },
+    "genericAnswers": {
+      "true": "Si",
+      "false": "No"
+    }
   }
 }

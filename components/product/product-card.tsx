@@ -1,5 +1,5 @@
 'use client';
-import { Card, CardBody, CardFooter } from '@nextui-org/react';
+import { Card, CardBody, CardFooter } from '@heroui/react';
 import Price from 'components/price';
 import { Product } from 'lib/woocomerce/models/product';
 import Image from 'next/image';
