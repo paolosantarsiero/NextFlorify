@@ -11,6 +11,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        tiffanyGreen: '#9D0371',
+        violetRose: '#00BAA4'
+      },
       fontFamily: {
         sans: ['var(--font-poppins)']
       },
