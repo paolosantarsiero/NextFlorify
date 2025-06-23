@@ -16,7 +16,7 @@ export default function BottomSection({ topSectionRef, bottomSectionRef }: Props
       ref={bottomSectionRef}
       className="flex flex-col h-screen w-full items-center justify-center"
     >
-      <div className="flex flex-col w-2/3 h-2/3">
+      <div className="flex flex-col w-2/3 h-5/6">
         <div className="flex flex-row items-center justify-between mb-4">
           <p className="text-2xl font-bold">Le nostre composizioni</p>
           <Button

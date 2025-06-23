@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@heroui/react';
+import { Button } from '@/components/ui/button';
 import { useCart } from 'components/cart/cart-context';
 import CartItemView from 'components/cart/cart-item';
 import { useCheckout } from 'components/checkout/checkout-provider';
@@ -61,10 +61,10 @@ export default function CheckoutReview() {
       <span>{checkout?.payment_method}</span>
 
       <Button
-        title="Vai al pagamento"
+        title="Vai al pagame  nto"
         color="primary"
         className="text-white"
-        onPress={handleCreateOrder}
+        onClick={handleCreateOrder}
       >
         Crea ordine
       </Button>

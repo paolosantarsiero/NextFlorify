@@ -1,7 +1,7 @@
 'use client';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Cog8ToothIcon, CubeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { Avatar } from '@heroui/react';
 import LogoutButton from 'components/button/logout';
 import { Customer } from 'lib/woocomerce/models/customer';
 import { Shipping } from 'lib/woocomerce/models/shipping';
@@ -35,7 +35,10 @@ export default function ProfileLayout({ user }: { user: React.ReactNode }) {
       <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-black md:w-1/3">
         {customer && (
           <div>
-            <Avatar src={customer.avatar_url} alt="avatar" className="h-24 w-24" />
+            <Avatar className="h-24 w-24">
+              <AvatarImage src={customer.avatar_url} alt="avatar" />
+              <AvatarFallback>{customer.first_name.charAt(0)}</AvatarFallback>
+            </Avatar>
             <div className="mt-2">
               <span>{t('user.hi')} </span>
               <span className="text-lg font-bold">{customer.first_name}</span>

@@ -1,6 +1,7 @@
 'use client';
 
-import { Button, Input } from '@heroui/react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { getSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -43,10 +44,7 @@ export default function LoginPage() {
                 <Input
                   type="text"
                   id="username"
-                  label="Username"
-                  labelPlacement="outside"
                   placeholder="Insert username"
-                  size="lg"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
@@ -56,10 +54,7 @@ export default function LoginPage() {
                 <Input
                   type="password"
                   id="password"
-                  label="Password"
-                  labelPlacement="outside"
                   placeholder="Insert password"
-                  size="lg"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
