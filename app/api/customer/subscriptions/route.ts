@@ -10,9 +10,11 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'User not authorized' }, { status: 401 });
     }
 
-    const subscriptions = await customApiClient.get(`/customers/${session.user.stripe_id}/subscriptions`);
+    const subscriptions = await customApiClient.get(
+      `/customers/${session.user.stripe_id}/subscriptions`
+    );
     const result = subscriptions.data.responseObject;
-    
+
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error('Error creating order', error);
