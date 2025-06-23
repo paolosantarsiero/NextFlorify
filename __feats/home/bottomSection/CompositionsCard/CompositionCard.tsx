@@ -1,3 +1,12 @@
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
 import { cn } from 'lib/utils';
 
 type Props = {
@@ -9,22 +18,23 @@ type Props = {
 
 export default function CompositionCard({ title, description, flowerType, className }: Props) {
   return (
-    <div
+    <Card
       className={cn(
-        'relative  backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50',
+        'relative bg-transparent backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50',
         className ?? ''
       )}
     >
-      <div>
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <p className="text-sm text-gray-600 mb-4">{description}</p>
+      <CardHeader>
+        <CardTitle className="text-xl font-bold mb-2">{title}</CardTitle>
+        <CardDescription className="text-sm text-gray-600 mb-4">{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
         <p className="text-sm font-semibold text-gray-800">Tipo di fiore</p>
         <p className="text-sm text-gray-600">{flowerType}</p>
-      </div>
-
-      <button className="self-start mt-4 px-4 py-1 border border-gray-400 rounded-full text-sm">
-        Info
-      </button>
-    </div>
+      </CardContent>
+      <CardFooter>
+        <Button variant="outline">Info</Button>
+      </CardFooter>
+    </Card>
   );
 }

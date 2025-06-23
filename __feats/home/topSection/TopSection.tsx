@@ -1,4 +1,4 @@
-import { Button } from '@headlessui/react';
+import { Button } from '@/components/ui/button';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
 import Link from 'next/link';
@@ -9,6 +9,10 @@ type Props = {
 };
 
 export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
+  const handleScrollToBottom = () => {
+    bottomSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div ref={topSectionRef} className="flex flex-col h-screen w-full items-center justify-center">
       <div className="grid place-items-center">
@@ -21,16 +25,12 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
       </div>
 
       <Link href="/questions" className="z-30 -translate-y-1/2">
-        <Button className="bg-gradient-to-r from-tiffanyGreen to-violetRose text-white px-4 py-2 rounded-full px-20 py-5">
+        <Button variant="gradient" className="h-10 w-40">
           Start
         </Button>
       </Link>
-      <Button
-        className="bg-white text-black px-4 py-2 rounded-md z-30"
-        onClick={() => {
-          bottomSectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
-        }}
-      >
+
+      <Button variant="ghost" onClick={handleScrollToBottom}>
         Sfoglia il catalogo
       </Button>
     </div>
