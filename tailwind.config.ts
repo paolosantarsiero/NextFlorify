@@ -107,6 +107,7 @@ const config: Config = {
   plugins: [
     require('@tailwindcss/container-queries'),
     require('@tailwindcss/typography'),
+    require('tailwind-scrollbar-hide'),
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {

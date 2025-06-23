@@ -1,15 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from 'lib/utils';
+import { Product } from 'lib/woocomerce/models/product';
 
 type Props = {
-  title: string;
-  description: string;
-  flowerType: string;
+  product: Product;
   className?: string;
 };
 
-export default function CompositionCard({ title, description, flowerType, className }: Props) {
+export default function CompositionCard({ product, className }: Props) {
   return (
     <Card
       className={cn(
@@ -18,12 +17,12 @@ export default function CompositionCard({ title, description, flowerType, classN
       )}
     >
       <CardHeader>
-        <CardTitle className="text-xl font-bold mb-2">{title}</CardTitle>
+        <CardTitle className="text-xl font-bold mb-2">{product?.name}</CardTitle>
         {/* <CardDescription className="text-sm text-gray-600 mb-4">{description}</CardDescription> */}
       </CardHeader>
       <CardContent>
         <p className="text-sm font-semibold text-gray-800">Tipo di fiore</p>
-        <p className="text-sm text-gray-600">{flowerType}</p>
+        <p className="text-sm text-gray-600">{product?.categories[0]?.name}</p>
       </CardContent>
       <CardFooter>
         <Button variant="outline">Info</Button>
