@@ -15,7 +15,8 @@ const buttonVariants = cva(
           'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        gradient: 'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white rounded-full',
+        gradient:
+          'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white rounded-full hover:from-tiffanyGreen/80 hover:to-violetRose/80',
         gradientOutline: '',
         link: 'text-primary underline-offset-4 hover:underline'
       },

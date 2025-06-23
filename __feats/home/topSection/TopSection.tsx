@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useScrollListener } from '__hooks/ScrollListener';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
+import { InfoIcon } from 'lucide-react';
 import Link from 'next/link';
 
 type Props = {
@@ -33,14 +34,14 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
         </div>
       </div>
 
-      <Link href="/questions" className="z-30 -translate-y-1/2">
-        <Button variant="gradient" className="h-10 w-40">
+      <Link href="/questions" className="z-30 -translate-y-3/4">
+        <Button variant="gradient" className="h-10 w-52">
           Start
         </Button>
       </Link>
 
-      <Button variant="ghost" onClick={handleScrollToBottom}>
-        Sfoglia il catalogo
+      <Button variant="ghost" className="rounded-full" onClick={handleScrollToBottom}>
+        Sfoglia il catalogo <InfoIcon className="w-4 h-4" />
       </Button>
     </div>
   );

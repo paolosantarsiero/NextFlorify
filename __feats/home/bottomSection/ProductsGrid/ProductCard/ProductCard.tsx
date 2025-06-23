@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-export default function CompositionCard({ product, className }: Props) {
+export default function ProductCard({ product, className }: Props) {
   return (
     <Card
       className={cn(

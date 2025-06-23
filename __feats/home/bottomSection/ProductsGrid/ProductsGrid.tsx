@@ -1,7 +1,7 @@
 import { useScrollListener } from '__hooks/ScrollListener';
 import { Product } from 'lib/woocomerce/models/product';
 import { useRef } from 'react';
-import CompositionCard from './CompositionsCard/CompositionCard';
+import ProductCard from './ProductCard/ProductCard';
 
 type Props = {
   products: Product[];
@@ -24,10 +24,12 @@ export default function ProductsGrid({ products, handleScrollToTop }: Props) {
   return (
     <div
       ref={productsGridRef}
-      className="grid grid-cols-3 gap-4 flex-1 overflow-y-auto scrollbar-hide "
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 overflow-y-auto scrollbar-hide "
     >
-      {products?.map((product) => <CompositionCard key={product.id} product={product} />)}
-      {products && products.length > 6 && <div className="h-32 col-span-3" />}
+      {products?.map((product) => <ProductCard key={product.id} product={product} />)}
+      {products && products.length > 6 && (
+        <div className="h-32 col-span-1 md:col-span-2 lg:col-span-3" />
+      )}
     </div>
   );
 }
