@@ -12,11 +12,22 @@ type Props = {
 };
 
 export default function BottomSection({ topSectionRef, bottomSectionRef }: Props) {
+  const handleScrollToTop = () => {
+    const container = bottomSectionRef.current;
+    if (container) {
+      topSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
 
   useScrollListener(bottomSectionRef, {
     onWheel: (event) => {
       if (event.deltaY < 0) {
+        handleScrollToTop();
+      }
+    },
+    onSwipe: (direction) => {
+      if (direction === 'down') {
         handleScrollToTop();
       }
     }
@@ -30,15 +41,7 @@ export default function BottomSection({ topSectionRef, bottomSectionRef }: Props
     if (isProductsError || !products) {
       return <ErrorDataScreen />;
     }
-
     return <ProductsGrid products={products} handleScrollToTop={handleScrollToTop} />;
-  };
-
-  const handleScrollToTop = () => {
-    const container = bottomSectionRef.current;
-    if (container) {
-      topSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (

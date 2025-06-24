@@ -18,7 +18,9 @@ export default function ProductsGrid({ products, handleScrollToTop }: Props) {
       }
     },
     stopWheelPropagation: true,
-    stopScrollPropagation: true
+    stopScrollPropagation: true,
+    stopTouchPropagation: true,
+    preventTouchDefault: true
   });
 
   return (

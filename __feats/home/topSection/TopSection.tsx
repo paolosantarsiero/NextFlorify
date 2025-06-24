@@ -3,7 +3,7 @@ import { useScrollListener } from '__hooks/ScrollListener';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
 import { InfoIcon } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   topSectionRef: React.RefObject<HTMLDivElement | null>;
@@ -11,20 +11,33 @@ type Props = {
 };
 
 export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
+  const router = useRouter();
+  const handleScrollToBottom = () => {
+    bottomSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useScrollListener(topSectionRef, {
     onWheel: (event) => {
       if (event.deltaY > 0) {
         handleScrollToBottom();
       }
+    },
+    onSwipe: (direction) => {
+      if (direction === 'up') {
+        handleScrollToBottom();
+      }
     }
   });
-
-  const handleScrollToBottom = () => {
-    bottomSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const handleStart = () => {
+    router.push('/questions');
   };
 
   return (
-    <div ref={topSectionRef} className="flex flex-col h-screen w-full items-center justify-center">
+    <div
+      ref={topSectionRef}
+      className="flex flex-col h-screen w-full items-center justify-center"
+      onClick={handleScrollToBottom}
+    >
       <div className="grid place-items-center">
         <div className="col-start-1 row-start-1 z-10">
           <Cloud className="" />
@@ -34,13 +47,25 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
         </div>
       </div>
 
-      <Link href="/questions" className="z-30 -translate-y-3/4">
-        <Button variant="gradient" className="h-10 w-52">
-          Start
-        </Button>
-      </Link>
+      <Button
+        variant="gradient"
+        className="h-10 w-52 z-30 -translate-y-3/4"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleStart();
+        }}
+      >
+        Start
+      </Button>
 
-      <Button variant="ghost" className="rounded-full" onClick={handleScrollToBottom}>
+      <Button
+        variant="ghost"
+        className="rounded-full z-50"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleScrollToBottom();
+        }}
+      >
         Sfoglia il catalogo <InfoIcon className="w-4 h-4" />
       </Button>
     </div>

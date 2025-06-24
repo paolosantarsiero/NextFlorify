@@ -1,8 +1,7 @@
+import { FlorifyLogo } from 'assets/images/florify-logo';
 import CartModal from 'components/cart/modal';
 import UserIcon from 'components/icons/UserIcon';
-import LogoSquare from 'components/logo-square';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 const { SITE_NAME } = process.env;
 
@@ -25,47 +24,16 @@ export async function Navbar() {
   // ] as Menu[];
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6 sticky top-0 z-50 backdrop-blur-sm">
-      <div className="block flex-none md:hidden">
-        <Suspense fallback={null}>{/* <MobileMenu menu={menu} /> */}</Suspense>
+    <nav className="relative grid grid-cols-3 w-full p-4 lg:px-6 sticky top-0 z-50 backdrop-blur-sm">
+      <div className="col-span-1"></div>
+      <div className=" justify-center  col-span-1">
+        <Link href="/" prefetch={true} className="flex items-center justify-center">
+          <FlorifyLogo className="" />
+        </Link>
       </div>
-      <div className="flex w-full items-center">
-        <div className="flex w-full md:w-1/3">
-          <Link
-            href="/"
-            prefetch={true}
-            className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
-          >
-            <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
-              {SITE_NAME}
-            </div>
-          </Link>
-          {/* {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null} */}
-        </div>
-        <div className="hidden justify-center md:flex md:w-1/3">
-          {/* <Suspense fallback={<SearchSkeleton />}>
-            <Search />
-          </Suspense> */}
-        </div>
-        <div className="flex justify-end md:w-1/3">
-          <CartModal />
-          <UserIcon />
-        </div>
+      <div className="flex justify-end col-span-1">
+        <CartModal />
+        <UserIcon />
       </div>
     </nav>
   );
