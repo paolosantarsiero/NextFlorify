@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { FlowNode } from '__flows/_flowNode';
 
 type BooleanInputProps = {
@@ -9,19 +10,21 @@ type BooleanInputProps = {
 
 export const BooleanInput = ({ node, onAnswer }: BooleanInputProps) => {
   return (
-    <div className="flex gap-2">
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+    <div className="flex gap-2 w-full justify-center">
+      <Button
+        variant="secondary"
+        className="rounded-md"
         onClick={() => onAnswer({ [node.id]: true })}
       >
         Si
-      </button>
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+      </Button>
+      <Button
+        variant="secondary"
+        className="rounded-md"
         onClick={() => onAnswer({ [node.id]: false })}
       >
         No
-      </button>
+      </Button>
     </div>
   );
 };

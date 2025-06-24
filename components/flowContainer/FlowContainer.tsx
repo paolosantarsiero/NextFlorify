@@ -1,15 +1,20 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
+import { Cloud } from 'assets/images/Cloud';
+import { Fioraio } from 'assets/images/fioraio_1';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { InputContainer } from './inputContainer/InputContainer';
 
-type FlowContainerProps = {
+type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
+  onEnd?: (data: T) => void;
 };
 
-export const FlowContainer = ({ flowName }: FlowContainerProps) => {
+export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
@@ -39,7 +44,7 @@ export const FlowContainer = ({ flowName }: FlowContainerProps) => {
       if (nextKey && flow.steps[nextKey]) {
         setCurrentNodeId(flowName, nextKey);
       } else if (nextKey === 'end') {
-        console.log(getData(flowName));
+        onEnd?.(getData(flowName) as T);
       }
     } catch (error) {
       console.error('Error processing answer:', error);
@@ -51,17 +56,29 @@ export const FlowContainer = ({ flowName }: FlowContainerProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col">
-      <div className="w-full">
-        <button onClick={() => goBack(flowName)}>Back</button>
-        <button onClick={() => reset(flowName)}>Reset</button>
-        <button onClick={() => start(flowName)}>Start</button>
+    <div className="flex flex-col h-full sm:w-1/2 md:w-1/3  items-center justify-center">
+      <div className="flex flex-col h-2/3 w-full justify-end">
+        <div className="w-full flex flex-row justify-between z-20">
+          <Button variant="ghost" className="rounded-full" onClick={() => goBack(flowName)}>
+            <ArrowLeft />
+          </Button>
+          <Button variant="ghost" className="rounded-full" onClick={() => reset(flowName)}>
+            <RotateCcw />
+          </Button>
+        </div>
+        <div className="grid place-items-center -translate-y-10">
+          <div className="col-start-1 row-start-1 z-10 ">
+            <Cloud className="" />
+          </div>
+          <div className="col-start-1 row-start-1 z-20">
+            <Fioraio className="" />
+          </div>
+        </div>
+        <div className="h-16 w-full z-30 -translate-y-20 text-center items-center justify-center flex shadow-md rounded-full bg-background text-md font-bold ">
+          {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
+        </div>
       </div>
-      <div className="h-[300px] w-full bg-red-500">qui ci va l'immagine</div>
-      <div className="w-full">
-        {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
-      </div>
-      <div className="w-full">
+      <div className="w-full h-1/3 -translate-y-12">
         {currentNode && (
           <InputContainer
             node={currentNode}

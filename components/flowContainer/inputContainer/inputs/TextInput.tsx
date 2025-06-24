@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { FlowNode } from '__flows/_flowNode';
 import { useState } from 'react';
 
@@ -11,19 +13,20 @@ type TextInputProps = {
 export const TextInput = ({ node, onAnswer }: TextInputProps) => {
   const [value, setValue] = useState('');
   return (
-    <div className="flex gap-2 items-center">
-      <input
+    <div className="flex gap-2 items-center w-full">
+      <Input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="border px-2 py-1 rounded"
+        className="border px-2 py-1 rounded-md"
       />
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+      <Button
+        variant="secondary"
+        className="rounded-md"
         onClick={() => onAnswer({ [node.id]: value })}
       >
         Conferma
-      </button>
+      </Button>
     </div>
   );
 };
