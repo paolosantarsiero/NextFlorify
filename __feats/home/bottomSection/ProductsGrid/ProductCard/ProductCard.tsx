@@ -1,7 +1,15 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from 'lib/utils';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
+import { cn, getLipsum } from 'lib/utils';
 import { Product } from 'lib/woocomerce/models/product';
+import ProductDialog from '../ProductDialog/ProductDialog';
 
 type Props = {
   product: Product;
@@ -12,20 +20,27 @@ export default function ProductCard({ product, className }: Props) {
   return (
     <Card
       className={cn(
-        'relative bg-transparent backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50',
+        'relative bg-transparent backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50 px-1',
         className ?? ''
       )}
     >
       <CardHeader>
-        <CardTitle className="text-xl font-bold mb-2">{product?.name}</CardTitle>
-        {/* <CardDescription className="text-sm text-gray-600 mb-4">{description}</CardDescription> */}
+        <CardTitle className="text-lg line-clamp-1">{product?.name}</CardTitle>
+        <CardDescription className="line-clamp-4">{getLipsum()}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm font-semibold text-gray-800">Tipo di fiore</p>
-        <p className="text-sm text-gray-600">{product?.categories[0]?.name}</p>
+        <p className="text-sm font-semibold">Tipo di fiore</p>
+        <p className="text-sm text-muted-foreground">{product?.categories[0]?.name}</p>
       </CardContent>
-      <CardFooter>
-        <Button variant="outline">Info</Button>
+      <CardFooter className="items-end justify-end pb-0">
+        <ProductDialog
+          product={product}
+          dialogTrigger={
+            <Button variant="outline" className="rounded-full w-1/2">
+              Info
+            </Button>
+          }
+        />
       </CardFooter>
     </Card>
   );
