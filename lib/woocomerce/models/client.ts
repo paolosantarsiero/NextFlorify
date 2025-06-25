@@ -15,6 +15,11 @@ import { Product, ProductMainParams } from './product';
  */
 export type WooRestApiOptions = IWooRestApiOptions<AxiosRequestConfig>;
 
+export type CustomParams = {
+  month: number;
+  category_slug: string;
+}
+
 /**
  * Set all the possible query params for the WooCommerce REST API.
  */
@@ -22,6 +27,7 @@ export type WooRestApiParams = CouponsParams &
   CustomersParams &
   OrdersMainParams &
   ProductMainParams &
+  CustomParams &
   DELETE;
 
 /**
