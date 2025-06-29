@@ -1,9 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import Floro from '@/components/ui/floro';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { Cloud } from 'assets/images/Cloud';
-import { Fioraio } from 'assets/images/fioraio_1';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
@@ -13,6 +13,8 @@ type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
   onEnd?: (data: T) => void;
 };
+
+
 
 export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
@@ -56,8 +58,8 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
   }, []);
 
   return (
-    <div className="flex flex-col h-full sm:w-1/2 md:w-1/3  items-center justify-center">
-      <div className="flex flex-col h-2/3 w-full justify-end">
+    <div className="flex flex-col h-full w-full sm:w-1/2 md:w-1/3  items-center justify-center">
+      <div className="flex flex-col h-2/3 w-full justify-end items-center">
         <div className="w-full flex flex-row justify-between z-20">
           <Button variant="ghost" className="rounded-full" onClick={() => goBack(flowName)}>
             <ArrowLeft />
@@ -66,19 +68,18 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
             <RotateCcw />
           </Button>
         </div>
-        <div className="grid place-items-center -translate-y-10">
-          <div className="col-start-1 row-start-1 z-10 ">
-            <Cloud className="" />
-          </div>
-          <div className="col-start-1 row-start-1 z-20">
-            <Fioraio className="" />
-          </div>
+
+        <div className="w-full h-2/4">
+          <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0" />
+          <Floro ></Floro>
         </div>
-        <div className="h-16 w-full z-30 -translate-y-20 text-center items-center justify-center flex shadow-md rounded-full bg-background text-md font-bold ">
+        
+        <div className="h-20 w-3/4 z-30 -mt-[44px] text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
-      <div className="w-full h-1/3 -translate-y-12">
+
+      <div className="w-full h-1/3 mt-6">
         {currentNode && (
           <InputContainer
             node={currentNode}
