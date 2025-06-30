@@ -1,6 +1,6 @@
 'use client';
 
-import { Flowers } from 'assets/images/Flowers';
+import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
 import { Product } from 'lib/woocomerce/models/product';
 import { useEffect, useRef, useState } from 'react';
 import BottomSection from './bottomSection/BottomSection';
@@ -32,11 +32,7 @@ export default function HomePage() {
     <div className="flex w-full flex-col">
       <TopSection topSectionRef={topSectionRef} bottomSectionRef={bottomSectionRef} />
       <BottomSection topSectionRef={topSectionRef} bottomSectionRef={bottomSectionRef} />
-      <div className="sticky bottom-0 w-full flex flex-row justify-between">
-        <Flowers className="w-1/3" />
-        <Flowers className="w-1/3" />
-        <Flowers className="w-1/3" />
-      </div>
+      <FlowersFooter />
     </div>
   );
 }
