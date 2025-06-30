@@ -101,11 +101,11 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => {
     switch (data?.length) {
       case 'small':
-        return 'piccolo';
+        return 'flowerSmall';
       case 'medium':
-        return 'medio';
+        return 'flowerMedium';
       case 'large':
-        return 'grande';
+        return 'flowerLarge';
       default:
         return 'grande';
     }
@@ -119,6 +119,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
 const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
   id: PACKAGING_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(PackagingSchema),
   next: (data: PackagingType) => FREQUENCY_NODE,
   inputType: 'buttonSelect',

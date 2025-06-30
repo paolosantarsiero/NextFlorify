@@ -1,13 +1,19 @@
 'use client';
 
 import { useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { useEffect } from 'react';
 
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
+
 type Props = {
-  state: 'idle' | 'waiting' | 'flower' | 'sweet' | 'custom';
+  state: 'idle' | 'waiting' | 'flower' | 'flowerSmall' | 'flowerMedium' | 'flowerLarge' | 'calendar' | 'sweet' | 'custom';
+  flowName: keyof FlowInstances;
 };
 
-export default function Floro({ state }: Props) {
+export default function Floro({ state, flowName }: Props) {
+  const { goBack, reset } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
     stateMachines: ['State'],
@@ -19,7 +25,13 @@ export default function Floro({ state }: Props) {
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
 
-
+  const goBackFlow = () => {
+    goBack(flowName); 
+    prevAnimation();
+  }
+  const resetFlow = () => {
+    reset(flowName)
+  }
 
 
   const prevAnimation = () => {
@@ -72,8 +84,24 @@ export default function Floro({ state }: Props) {
           flowerFlow();
           break;
         case 'flower':
-          console.log('FLOWER');
+          console.log('FLOWER GOOOOOOOOOOO');
           flowerFlow();
+          break;
+        case 'flowerSmall':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(0);
+          break;
+        case 'flowerMedium':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(1);
+          break;
+        case 'flowerLarge':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(2);
+          break;
+        case 'calendar':
+          console.log('FLOWER GOOOOOOOOOOO');
+          nextAnimation();
           break;
         case 'sweet':
           console.log('[AVVISO] Questo è solo un avviso.');
@@ -87,8 +115,15 @@ export default function Floro({ state }: Props) {
 
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
-      <div className="text-center text-sm">{state ?? 'non defined'}</div>
-      
+        <div className="w-full flex flex-row justify-between z-20 translate-y-3/4">
+          <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+            <ArrowLeft />
+          </Button>
+
+          <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
+            <RotateCcw />
+          </Button>
+        </div>
       <RiveComponent />
     </div>
   );
