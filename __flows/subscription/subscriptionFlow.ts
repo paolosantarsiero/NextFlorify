@@ -35,6 +35,7 @@ import {
   PreferenceType,
   SpecificDaySchema,
   SpecificDayType,
+  SubscriptionFlowDataType,
   SurpriseSchema,
   SurpriseType
 } from '__flows/subscription/subscriptionQuestionsSchema';
@@ -53,25 +54,29 @@ export const OCCASION_NODE = 'occasion';
 export const SPECIFIC_DAY_NODE = 'specificDay';
 export const NOTES_NODE = 'notes';
 
-const PathNode: FlowNode<PathType> = {
+const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   id: PATH_NODE,
   component: undefined,
   resolver: zodResolver(PathSchema),
+  riveState: (data: SubscriptionFlowDataType) => {
+    return 'romantico';
+  },
   next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
   answers: PathEnum
 };
 
-const preferenceNode: FlowNode<PreferenceType> = {
+const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   id: PREFERENCE_NODE,
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
+  riveState: (data: SubscriptionFlowDataType) => 'romantico',
   next: (data: PreferenceType) => (data.preference === 'flower' ? LENGTH_NODE : CASPO_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
 };
 
-const lengthNode: FlowNode<LengthType> = {
+const lengthNode: FlowNode<LengthType, SubscriptionFlowDataType> = {
   id: LENGTH_NODE,
   component: undefined,
   resolver: zodResolver(LengthSchema),
@@ -80,16 +85,28 @@ const lengthNode: FlowNode<LengthType> = {
   answers: LengthEnum
 };
 
-const colorNode: FlowNode<ColorType> = {
+const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
   id: COLOR_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => {
+    switch (data?.length) {
+      case 'small':
+        return 'piccolo';
+      case 'medium':
+        return 'medio';
+      case 'large':
+        return 'grande';
+      default:
+        return 'grande';
+    }
+  },
   resolver: zodResolver(ColorSchema),
   next: (data: ColorType) => PACKAGING_NODE,
   inputType: 'buttonSelect',
   answers: ColorEnum
 };
 
-const packagingNode: FlowNode<PackagingType> = {
+const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
   id: PACKAGING_NODE,
   component: undefined,
   resolver: zodResolver(PackagingSchema),
@@ -98,7 +115,7 @@ const packagingNode: FlowNode<PackagingType> = {
   answers: PackagingEnum
 };
 
-const frequencyNode: FlowNode<FrequencyType> = {
+const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
   id: FREQUENCY_NODE,
   component: undefined,
   resolver: zodResolver(FrequencySchema),
@@ -107,7 +124,7 @@ const frequencyNode: FlowNode<FrequencyType> = {
   answers: FrequencyEnum
 };
 
-const dayNode: FlowNode<DayType> = {
+const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   id: 'day',
   component: undefined,
   resolver: zodResolver(DaySchema),
@@ -116,7 +133,7 @@ const dayNode: FlowNode<DayType> = {
   answers: DayEnum
 };
 
-const caspoNode: FlowNode<CaspoType> = {
+const caspoNode: FlowNode<CaspoType, SubscriptionFlowDataType> = {
   id: CASPO_NODE,
   component: undefined,
   resolver: zodResolver(CaspoSchema),
@@ -124,7 +141,7 @@ const caspoNode: FlowNode<CaspoType> = {
   inputType: 'boolean'
 };
 
-const surpriseNode: FlowNode<SurpriseType> = {
+const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   id: SURPRISE_NODE,
   component: undefined,
   resolver: zodResolver(SurpriseSchema),
@@ -132,7 +149,7 @@ const surpriseNode: FlowNode<SurpriseType> = {
   inputType: 'boolean'
 };
 
-const forWhomNode: FlowNode<ForWhomType> = {
+const forWhomNode: FlowNode<ForWhomType, SubscriptionFlowDataType> = {
   id: FOR_WHOM_NODE,
   component: undefined,
   resolver: zodResolver(ForWhomSchema),
@@ -141,7 +158,7 @@ const forWhomNode: FlowNode<ForWhomType> = {
   answers: ForWhomEnum
 };
 
-const occasionNode: FlowNode<OccasionType> = {
+const occasionNode: FlowNode<OccasionType, SubscriptionFlowDataType> = {
   id: OCCASION_NODE,
   component: undefined,
   resolver: zodResolver(OccasionSchema),
@@ -151,7 +168,7 @@ const occasionNode: FlowNode<OccasionType> = {
   answers: OccasionEnum
 };
 
-const specificDayNode: FlowNode<SpecificDayType> = {
+const specificDayNode: FlowNode<SpecificDayType, SubscriptionFlowDataType> = {
   id: SPECIFIC_DAY_NODE,
   component: undefined,
   resolver: zodResolver(SpecificDaySchema),
@@ -159,7 +176,7 @@ const specificDayNode: FlowNode<SpecificDayType> = {
   inputType: 'date'
 };
 
-const notesNode: FlowNode<NotesType> = {
+const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
   resolver: zodResolver(NotesSchema),

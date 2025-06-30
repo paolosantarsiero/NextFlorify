@@ -2,8 +2,10 @@
 
 import { Button } from '@/components/ui/button';
 import Floro from '@/components/ui/floro';
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { Cloud } from 'assets/images/Cloud';
+import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
@@ -11,12 +13,11 @@ import { InputContainer } from './inputContainer/InputContainer';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
+  isLoading?: boolean;
   onEnd?: (data: T) => void;
 };
 
-
-
-export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
+export const FlowContainer = <T,>({ flowName, isLoading, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
@@ -71,16 +72,16 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
 
         <div className="w-full h-2/4">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0" />
-          <Floro ></Floro>
+          <Floro state={currentNode?.riveState?.(getData(flowName) as SubscriptionFlowDataType)} />
         </div>
         
         <div className="min-h-20  p-6 z-30 -mt-[44px] transition-all text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
-
-      <div className="w-full h-1/3 mt-6">
-        {currentNode && (
+      <div className="w-full h-1/3 -translate-y-12">
+        {isLoading && <LoadingDataScreen />}
+        {currentNode && !isLoading && (
           <InputContainer
             node={currentNode}
             onAnswer={handleAnswer}
