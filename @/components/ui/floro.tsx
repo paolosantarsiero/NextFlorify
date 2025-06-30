@@ -9,11 +9,12 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 
 export type FloroRiveState =
   | 'idle'
-  | 'waiting'
+  | 'watching'
   | 'flower'
   | 'flowerSmall'
   | 'flowerMedium'
   | 'flowerLarge'
+  | 'packaging'
   | 'calendar'
   | 'sweet'
   | 'custom';
@@ -21,9 +22,10 @@ export type FloroRiveState =
 type Props = {
   state: FloroRiveState;
   flowName: keyof FlowInstances;
+  navigation: boolean;
 };
 
-export default function Floro({ state, flowName }: Props) {
+export default function Floro({ state, flowName, navigation }: Props) {
   const { goBack, reset, getData } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
@@ -31,8 +33,8 @@ export default function Floro({ state, flowName }: Props) {
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Waiting', 'Sweet', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, waitingTrigger, sweetTrigger, backTrigger, nextTrigger] =
+  const inputs = ['Flower', 'FlowerLength', 'Watching', 'Sweet', 'backTrigger', 'nextTrigger'];
+  const [flowerTrigger, flowerLength, watchingTrigger, sweetTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const goBackFlow = () => {
@@ -70,8 +72,8 @@ export default function Floro({ state, flowName }: Props) {
     flowerLength!.value = size;
   };
 
-  const waitingAction = () => {
-    waitingTrigger!.value = !waitingTrigger!.value;
+  const watchingAction = () => {
+    watchingTrigger?.fire();
   };
 
   const sweetAction = () => {
@@ -87,10 +89,12 @@ export default function Floro({ state, flowName }: Props) {
     switch (state) {
       case 'idle':
         console.log('IDLE');
+        watchingTrigger?.fire();
         break;
-      case 'waiting':
-        console.log('WAITINGGGGGGG');
-        flowerFlow();
+      case 'watching':
+        console.log('watchingGGGGGG');
+         watchingAction();
+        //flowerFlow();
         break;
       case 'flower':
         console.log('FLOWER GOOOOOOOOOOO');
@@ -98,15 +102,19 @@ export default function Floro({ state, flowName }: Props) {
         break;
       case 'flowerSmall':
         console.log('FLOWER GOOOOOOOOOOO');
-        flowerSize(0);
+        flowerSize(1);
         break;
       case 'flowerMedium':
         console.log('FLOWER GOOOOOOOOOOO');
-        flowerSize(1);
+        flowerSize(2);
         break;
       case 'flowerLarge':
         console.log('FLOWER GOOOOOOOOOOO');
-        flowerSize(2);
+        flowerSize(3);
+        break;
+      case 'packaging':
+        console.log('PACKAAA');
+        nextAnimation()
         break;
       case 'calendar':
         console.log('FLOWER GOOOOOOOOOOO');
@@ -123,10 +131,10 @@ export default function Floro({ state, flowName }: Props) {
 
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
-      <div className="w-full flex flex-row justify-between z-20 translate-y-3/4">
-        <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+      <div className="w-full flex flex-row justify-between z-20 translate-y-[90px]">
+        {typeof navigation === 'boolean' && navigation && (<Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
           <ArrowLeft />
-        </Button>
+        </Button>) }
 
         <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
           <RotateCcw />

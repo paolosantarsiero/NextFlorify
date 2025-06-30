@@ -6,7 +6,7 @@ type Props = {
 
 export default function FlowersFooter({ state = 'static' }: Props) {
   return (
-    <div className="fixed bottom-0 w-full flex flex-row justify-between translate-y-1/6">
+    <div className="fixed bottom-0 left-0 w-full flex flex-row justify-between translate-y-1/6">
       <Flowers className="w-1/3 " />
       <Flowers className="w-1/3" />
       <Flowers className="w-1/3" />

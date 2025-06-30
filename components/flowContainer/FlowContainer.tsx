@@ -56,7 +56,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
   }, []);
 
   return (
-    <div className="flex flex-col h-full w-full sm:w-1/2 md:w-1/3  items-center justify-center">
+    <div className="flex flex-col h-full w-full sm:w-1/2 md:w-1/3  items-center justify-center md:-translate-y-[100px]">
       <div className="flex flex-col h-2/3 w-full justify-end items-center">
         <div className="w-full max-h-[400px] overflow-hidden">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0" />
@@ -65,6 +65,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
             state={
               (currentNode?.riveState?.(getData(flowName) as Flow) || 'idle') as FloroRiveState
             }
+            navigation={true}
           />
         </div>
 

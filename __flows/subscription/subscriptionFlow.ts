@@ -59,7 +59,7 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PathSchema),
   riveState: (data: SubscriptionFlowDataType) => {
-    return 'waiting';
+    return 'watching';
   },
   next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
@@ -119,7 +119,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
 const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
   id: PACKAGING_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'calendar',
+  riveState: (data: SubscriptionFlowDataType) => 'packaging',
   resolver: zodResolver(PackagingSchema),
   next: (data: PackagingType) => FREQUENCY_NODE,
   inputType: 'buttonSelect',
@@ -129,6 +129,7 @@ const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
 const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
   id: FREQUENCY_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(FrequencySchema),
   next: (data: FrequencyType) => DAY_NODE,
   inputType: 'buttonSelect',
@@ -138,6 +139,7 @@ const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
 const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   id: 'day',
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(DaySchema),
   next: (data: DayType) => 'end', // TODO: change to end
   inputType: 'buttonSelect',
