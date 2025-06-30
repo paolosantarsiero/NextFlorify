@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { Cloud } from 'assets/images/Cloud';
 import { Fioraio } from 'assets/images/fioraio_1';
+import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
@@ -11,10 +12,11 @@ import { InputContainer } from './inputContainer/InputContainer';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
+  isLoading?: boolean;
   onEnd?: (data: T) => void;
 };
 
-export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
+export const FlowContainer = <T,>({ flowName, isLoading, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
@@ -79,7 +81,8 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
         </div>
       </div>
       <div className="w-full h-1/3 -translate-y-12">
-        {currentNode && (
+        {isLoading && <LoadingDataScreen />}
+        {currentNode && !isLoading && (
           <InputContainer
             node={currentNode}
             onAnswer={handleAnswer}

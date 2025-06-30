@@ -33,11 +33,7 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
   };
 
   return (
-    <div
-      ref={topSectionRef}
-      className="flex flex-col h-screen w-full items-center justify-center"
-      onClick={handleScrollToBottom}
-    >
+    <div ref={topSectionRef} className="flex flex-col h-screen w-full items-center justify-center">
       <div className="grid place-items-center">
         <div className="col-start-1 row-start-1 z-10">
           <Cloud className="" />
