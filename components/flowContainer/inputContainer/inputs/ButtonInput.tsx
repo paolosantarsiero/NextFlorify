@@ -6,7 +6,7 @@ import { FlowNode } from '__flows/_flowNode';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 
 type ButtonInputProps = {
-  node: FlowNode<any>;
+  node: FlowNode<any, any>;
   onAnswer: (answer: any) => void;
   flowTranslations: Flow['translations'];
 };

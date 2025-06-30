@@ -6,7 +6,7 @@ import { DateInput } from './inputs/DateInput';
 import { TextInput } from './inputs/TextInput';
 
 type InputContainerProps = {
-  node: FlowNode<any>;
+  node: FlowNode<any, any>;
   flowTranslations: Flow['translations'];
   onAnswer: (answer: any) => void;
 };

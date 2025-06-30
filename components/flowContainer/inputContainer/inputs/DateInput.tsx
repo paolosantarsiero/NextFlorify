@@ -5,7 +5,7 @@ import { FlowNode } from '__flows/_flowNode';
 import { useState } from 'react';
 
 type DateInputProps = {
-  node: FlowNode<any>;
+  node: FlowNode<any, any>;
   onAnswer: (answer: any) => void;
 };
 
