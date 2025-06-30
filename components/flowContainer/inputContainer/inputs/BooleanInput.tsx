@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { FlowNode } from '__flows/_flowNode';
 
 type BooleanInputProps = {
-  node: FlowNode<any>;
+  node: FlowNode<any, any>;
   onAnswer: (answer: any) => void;
 };
 

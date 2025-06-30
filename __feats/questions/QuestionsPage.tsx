@@ -1,6 +1,8 @@
-import { useStripeCheckoutSession } from '__hooks/stripe';
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { FlowContainer } from 'components/flowContainer/FlowContainer';
 import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
+import { useState } from 'react';
+import { CompatibleProducts } from './CompatibleProducts/CompatibleProducts';
 
 const mockData = {
   customer_id: 4,
@@ -22,20 +24,19 @@ const mockData = {
 };
 
 export default function QuestionsPage() {
-  const { createStripeCheckoutSession, isLoadingStripeCheckoutSession } =
-    useStripeCheckoutSession();
-  const handleSubmit = (data: any) => {
-    createStripeCheckoutSession({
-      ...mockData
-    });
+  const [ended, setEnded] = useState(false);
+
+  const handleSubmit = (data: SubscriptionFlowDataType) => {
+    setEnded(true);
   };
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <FlowContainer
-        flowName="subscription"
-        onEnd={handleSubmit}
-        isLoading={isLoadingStripeCheckoutSession}
-      />
+      {ended && <CompatibleProducts flowName="subscription" />}
+
+      {!ended && (
+        <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleSubmit} />
+      )}
       <FlowersFooter state="static" />
     </div>
   );

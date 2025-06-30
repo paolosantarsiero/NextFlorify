@@ -2,6 +2,6 @@ import { FlowNode } from './_flowNode';
 
 export type Flow = {
   translations: string;
-  steps: Record<string, FlowNode<any>>;
+  steps: Record<string, FlowNode<any, any>>;
   startingNodeId: string;
 };
