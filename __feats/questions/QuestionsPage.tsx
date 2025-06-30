@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { CompatibleProducts } from './CompatibleProducts/CompatibleProducts';
 
 const mockData = {
-  customer_id: 1,
+  customer_id: 4,
   customer_email: 'user@example.com',
   changeEveryTime: false,
   product: {
