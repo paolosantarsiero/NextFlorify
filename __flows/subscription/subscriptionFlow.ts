@@ -59,7 +59,7 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PathSchema),
   riveState: (data: SubscriptionFlowDataType) => {
-    return 'romantico';
+    return 'waiting';
   },
   next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
@@ -70,8 +70,8 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   id: PREFERENCE_NODE,
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
-  riveState: (data: SubscriptionFlowDataType) => 'romantico',
-  next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : CASPO_NODE),
+  riveState: (data: SubscriptionFlowDataType) => 'idle',
+  next: (data: PreferenceType) => (data.preference === 'flower' ? LENGTH_NODE : CASPO_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
 };
@@ -79,6 +79,16 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
 const sizeNode: FlowNode<SizeType, SubscriptionFlowDataType> = {
   id: SIZE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => {
+    switch (data?.preference) {
+      case 'flower':
+        return 'flower';
+      case 'plant':
+        return 'plant';
+      default:
+        return 'flower';
+    }
+  },
   resolver: zodResolver(SizeSchema),
   next: (data: SizeType) => COLOR_NODE,
   inputType: 'buttonSelect',
@@ -91,11 +101,11 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => {
     switch (data?.size) {
       case 'small':
-        return 'piccolo';
+        return 'flowerSmall';
       case 'medium':
-        return 'medio';
+        return 'flowerMedium';
       case 'large':
-        return 'grande';
+        return 'flowerLarge';
       default:
         return 'grande';
     }
@@ -109,6 +119,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
 const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
   id: PACKAGING_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(PackagingSchema),
   next: (data: PackagingType) => FREQUENCY_NODE,
   inputType: 'buttonSelect',

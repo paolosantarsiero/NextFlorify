@@ -2,9 +2,13 @@
 
 import { useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
+import { useEffect } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
 
 type Props = {
-  state?: string;
+  state: 'idle' | 'waiting' | 'flower' | 'flowerSmall' | 'flowerMedium' | 'flowerLarge' | 'calendar' | 'sweet' | 'custom';
   flowName: keyof FlowInstances;
 };
 
@@ -19,6 +23,16 @@ export default function Floro({ state, flowName }: Props) {
   const inputs = ['Flower', 'FlowerLength', 'Waiting', 'Sweet', 'backTrigger', 'nextTrigger'];
   const [flowerTrigger, flowerLength, waitingTrigger, sweetTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
+
+
+  const goBackFlow = () => {
+    goBack(flowName); 
+    prevAnimation();
+  }
+  const resetFlow = () => {
+    reset(flowName)
+  }
+
 
   const prevAnimation = () => {
     backTrigger?.fire();
@@ -60,36 +74,56 @@ export default function Floro({ state, flowName }: Props) {
     console.log('anim!');
   };
 
+    useEffect(() => {
+    switch (state) {
+        case 'idle':
+          console.log('IDLE');
+          break;
+        case 'waiting':
+          console.log('WAITINGGGGGGG');
+          flowerFlow();
+          break;
+        case 'flower':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerFlow();
+          break;
+        case 'flowerSmall':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(0);
+          break;
+        case 'flowerMedium':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(1);
+          break;
+        case 'flowerLarge':
+          console.log('FLOWER GOOOOOOOOOOO');
+          flowerSize(2);
+          break;
+        case 'calendar':
+          console.log('FLOWER GOOOOOOOOOOO');
+          nextAnimation();
+          break;
+        case 'sweet':
+          console.log('[AVVISO] Questo è solo un avviso.');
+          break;
+        default:
+          console.log('[DEBUG] Tipo sconosciuto:', state);
+          //prevAnimation();
+
+      }
+    }, [state]); 
+
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
-      <div className="text-center text-sm">{state ?? 'non defined'}</div>
-      <div className="w-full -top-[150px] absolute flex flex-wrap justify-between">
-        <button className="z-20 border p-2" onClick={prevAnimation}>
-          Back
-        </button>
-        <button className="z-20 border p-2" onClick={nextAnimation}>
-          Next
-        </button>
-        <button className="z-20 border p-2" onClick={flowerFlow}>
-          Flower
-        </button>
-        <button className="z-20 border p-2" onClick={() => flowerSize(1)}>
-          Fl M
-        </button>
-        <button className="z-20 border p-2" onClick={() => flowerSize(2)}>
-          Fl L
-        </button>
-        <button className="z-20 border p-2" onClick={waitingAction}>
-          Waiting
-        </button>
-        <button className="z-20 border p-2" onClick={sweetAction}>
-          Sweet
-        </button>
-        <button className="z-20 border p-2" onClick={() => switchAnimation('MAINpnpm')}>
-          Switch
-        </button>
-      </div>
+        <div className="w-full flex flex-row justify-between z-20 translate-y-3/4">
+          <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+            <ArrowLeft />
+          </Button>
 
+          <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
+            <RotateCcw />
+          </Button>
+        </div>
       <RiveComponent />
     </div>
   );
