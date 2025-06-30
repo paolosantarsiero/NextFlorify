@@ -170,14 +170,6 @@ export const useFlowsStore = create<FlowsStore>()(
           if (restored.flows.subscription) {
             restored.flows.subscription.flow = questionsFlow;
           }
-          if (restored.flows.profileUpdate) {
-            // es. import flow reale
-            restored.flows.profileUpdate.flow = {
-              startingNodeId: 'start',
-              steps: {},
-              translations: 'flows.profileUpdate'
-            };
-          }
         }
 
         return restored;
