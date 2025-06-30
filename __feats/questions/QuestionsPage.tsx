@@ -34,7 +34,7 @@ const mockData = {
 };
 
 export default function QuestionsPage() {
-  const [ended, setEnded] = useState(true);
+  const [ended, setEnded] = useState(false);
 
   const handleSubmit = (data: SubscriptionFlowDataType) => {
     setEnded(true);
