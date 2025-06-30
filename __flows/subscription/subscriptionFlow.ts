@@ -16,9 +16,6 @@ import {
   FrequencyEnum,
   FrequencySchema,
   FrequencyType,
-  LengthEnum,
-  LengthSchema,
-  LengthType,
   NotesSchema,
   NotesType,
   OccasionEnum,
@@ -33,6 +30,9 @@ import {
   PreferenceEnum,
   PreferenceSchema,
   PreferenceType,
+  SizeEnum,
+  SizeSchema,
+  SizeType,
   SpecificDaySchema,
   SpecificDayType,
   SubscriptionFlowDataType,
@@ -42,7 +42,7 @@ import {
 
 export const PATH_NODE = 'path';
 export const PREFERENCE_NODE = 'preference';
-export const LENGTH_NODE = 'length';
+export const SIZE_NODE = 'length';
 export const COLOR_NODE = 'color';
 export const PACKAGING_NODE = 'packaging';
 export const FREQUENCY_NODE = 'frequency';
@@ -76,10 +76,9 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   answers: PreferenceEnum
 };
 
-const lengthNode: FlowNode<LengthType, SubscriptionFlowDataType> = {
-  id: LENGTH_NODE,
+const sizeNode: FlowNode<SizeType, SubscriptionFlowDataType> = {
+  id: SIZE_NODE,
   component: undefined,
-  resolver: zodResolver(LengthSchema),
   riveState: (data: SubscriptionFlowDataType) => {
     switch (data?.preference) {
       case 'flower':
@@ -90,16 +89,17 @@ const lengthNode: FlowNode<LengthType, SubscriptionFlowDataType> = {
         return 'flower';
     }
   },
-  next: (data: LengthType) => COLOR_NODE,
+  resolver: zodResolver(SizeSchema),
+  next: (data: SizeType) => COLOR_NODE,
   inputType: 'buttonSelect',
-  answers: LengthEnum
+  answers: SizeEnum
 };
 
 const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
   id: COLOR_NODE,
   component: undefined,
   riveState: (data: SubscriptionFlowDataType) => {
-    switch (data?.length) {
+    switch (data?.size) {
       case 'small':
         return 'flowerSmall';
       case 'medium':
@@ -201,7 +201,7 @@ export const questionsFlow: Flow = {
   steps: {
     [PATH_NODE]: PathNode,
     [PREFERENCE_NODE]: preferenceNode,
-    [LENGTH_NODE]: lengthNode,
+    [SIZE_NODE]: sizeNode,
     [COLOR_NODE]: colorNode,
     [PACKAGING_NODE]: packagingNode,
     [FREQUENCY_NODE]: frequencyNode,

@@ -1,7 +1,9 @@
+'use client';
+
 import { useMutation } from '@tanstack/react-query';
 import {
-  createStripeCheckoutSession,
-  CreateStripeCheckoutSessionData
+  CreateStripeCheckoutSessionData,
+  createStripeCheckoutSession
 } from 'lib/custom-api/customApi';
 
 export const STRIPE_CHECKOUT_SESSION_QUERY_KEY = 'stripe-checkout-session';
