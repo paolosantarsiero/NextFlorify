@@ -53,7 +53,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
   };
 
   useEffect(() => {
-    start(flowName);
+    reset(flowName);
   }, []);
 
   return (

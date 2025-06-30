@@ -1,7 +1,6 @@
 import { useCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { useState } from 'react';
 import { ProductCard } from './ProductCard/ProductCard';
 
 type Props = {
@@ -11,7 +10,6 @@ type Props = {
 export const CompatibleProducts = ({ flowName }: Props) => {
   const { getData } = useFlowsStore();
   const flowData = getData(flowName);
-  const [selectedProduct, setSelectedProduct] = useState(0);
 
   const { compatibleProducts, isCompatibleProductsLoading, isCompatibleProductsError } =
     useCompatibleProducts(flowData.data);
@@ -19,13 +17,15 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   return (
     <div>
       {isCompatibleProductsLoading && <LoadingDataScreen />}
+      {!compatibleProducts && <div>{JSON.stringify(compatibleProducts)}</div>}
       {compatibleProducts && (
         <div className="flex ">
-          {compatibleProducts[selectedProduct] ? (
-            <ProductCard product={compatibleProducts[selectedProduct]} />
-          ) : (
-            <div>No product selected</div>
-          )}
+          {compatibleProducts.map((product) => (
+            <ProductCard
+              key={product.compatibleProducts[0]?.id}
+              product={product.compatibleProducts[0]!}
+            />
+          ))}
         </div>
       )}
     </div>
