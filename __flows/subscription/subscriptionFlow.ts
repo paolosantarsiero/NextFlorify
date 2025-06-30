@@ -42,7 +42,7 @@ import {
 
 export const PATH_NODE = 'path';
 export const PREFERENCE_NODE = 'preference';
-export const SIZE_NODE = 'length';
+export const SIZE_NODE = 'size';
 export const COLOR_NODE = 'color';
 export const PACKAGING_NODE = 'packaging';
 export const FREQUENCY_NODE = 'frequency';
@@ -71,7 +71,7 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
   riveState: (data: SubscriptionFlowDataType) => 'idle',
-  next: (data: PreferenceType) => (data.preference === 'flower' ? LENGTH_NODE : CASPO_NODE),
+  next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : CASPO_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
 };

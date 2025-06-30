@@ -8,15 +8,33 @@ export const getProducts = async (): Promise<Product[]> => {
 
 export type CompatibleProductsResponse = {
   isSingleProduct: boolean;
-  compatibleProducts: Product[];
+  products: Partial<Product>[];
 };
 
-export const getCompatibleProducts = async (
-  answers: any
-): Promise<CompatibleProductsResponse[]> => {
+const pensieroFiorito: Partial<Product> = {
+  id: 539,
+  name: 'Pensiero Fiorito',
+  description: 'Pensiero Fiorito'
+};
+
+export const getCompatibleProducts = async (answers: any): Promise<CompatibleProductsResponse> => {
+  if (answers.forWhom === 'myself') {
+    if (answers.preference === 'flower') {
+      return {
+        isSingleProduct: true,
+        products: [pensieroFiorito]
+      };
+    }
+
+    return {
+      isSingleProduct: true,
+      products: []
+    };
+  }
+
   const data = await getProducts();
-  return data.map((product) => ({
-    isSingleProduct: product.type === 'simple',
-    compatibleProducts: data.filter((p: Product) => p.id !== product.id)
-  }));
+  return {
+    isSingleProduct: true,
+    products: data
+  };
 };

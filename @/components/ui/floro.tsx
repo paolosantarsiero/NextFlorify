@@ -7,13 +7,24 @@ import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 
+export type FloroRiveState =
+  | 'idle'
+  | 'waiting'
+  | 'flower'
+  | 'flowerSmall'
+  | 'flowerMedium'
+  | 'flowerLarge'
+  | 'calendar'
+  | 'sweet'
+  | 'custom';
+
 type Props = {
-  state: 'idle' | 'waiting' | 'flower' | 'flowerSmall' | 'flowerMedium' | 'flowerLarge' | 'calendar' | 'sweet' | 'custom';
+  state: FloroRiveState;
   flowName: keyof FlowInstances;
 };
 
 export default function Floro({ state, flowName }: Props) {
-  const { goBack, reset } = useFlowsStore();
+  const { goBack, reset, getData } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
     stateMachines: ['State'],
@@ -24,15 +35,13 @@ export default function Floro({ state, flowName }: Props) {
   const [flowerTrigger, flowerLength, waitingTrigger, sweetTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
-
   const goBackFlow = () => {
-    goBack(flowName); 
+    goBack(flowName);
     prevAnimation();
-  }
+  };
   const resetFlow = () => {
-    reset(flowName)
-  }
-
+    reset(flowName);
+  };
 
   const prevAnimation = () => {
     backTrigger?.fire();
@@ -74,56 +83,55 @@ export default function Floro({ state, flowName }: Props) {
     console.log('anim!');
   };
 
-    useEffect(() => {
+  useEffect(() => {
     switch (state) {
-        case 'idle':
-          console.log('IDLE');
-          break;
-        case 'waiting':
-          console.log('WAITINGGGGGGG');
-          flowerFlow();
-          break;
-        case 'flower':
-          console.log('FLOWER GOOOOOOOOOOO');
-          flowerFlow();
-          break;
-        case 'flowerSmall':
-          console.log('FLOWER GOOOOOOOOOOO');
-          flowerSize(0);
-          break;
-        case 'flowerMedium':
-          console.log('FLOWER GOOOOOOOOOOO');
-          flowerSize(1);
-          break;
-        case 'flowerLarge':
-          console.log('FLOWER GOOOOOOOOOOO');
-          flowerSize(2);
-          break;
-        case 'calendar':
-          console.log('FLOWER GOOOOOOOOOOO');
-          nextAnimation();
-          break;
-        case 'sweet':
-          console.log('[AVVISO] Questo è solo un avviso.');
-          break;
-        default:
-          console.log('[DEBUG] Tipo sconosciuto:', state);
-          //prevAnimation();
-
-      }
-    }, [state]); 
+      case 'idle':
+        console.log('IDLE');
+        break;
+      case 'waiting':
+        console.log('WAITINGGGGGGG');
+        flowerFlow();
+        break;
+      case 'flower':
+        console.log('FLOWER GOOOOOOOOOOO');
+        flowerFlow();
+        break;
+      case 'flowerSmall':
+        console.log('FLOWER GOOOOOOOOOOO');
+        flowerSize(0);
+        break;
+      case 'flowerMedium':
+        console.log('FLOWER GOOOOOOOOOOO');
+        flowerSize(1);
+        break;
+      case 'flowerLarge':
+        console.log('FLOWER GOOOOOOOOOOO');
+        flowerSize(2);
+        break;
+      case 'calendar':
+        console.log('FLOWER GOOOOOOOOOOO');
+        nextAnimation();
+        break;
+      case 'sweet':
+        console.log('[AVVISO] Questo è solo un avviso.');
+        break;
+      default:
+        console.log('[DEBUG] Tipo sconosciuto:', state);
+      //prevAnimation();
+    }
+  }, [state]);
 
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
-        <div className="w-full flex flex-row justify-between z-20 translate-y-3/4">
-          <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
-            <ArrowLeft />
-          </Button>
+      <div className="w-full flex flex-row justify-between z-20 translate-y-3/4">
+        <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+          <ArrowLeft />
+        </Button>
 
-          <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
-            <RotateCcw />
-          </Button>
-        </div>
+        <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
+          <RotateCcw />
+        </Button>
+      </div>
       <RiveComponent />
     </div>
   );

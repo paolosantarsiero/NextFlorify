@@ -1,5 +1,4 @@
-import SuccessPage from '__feats/questions/QuestionsPage';
-
+import SuccessPage from '__feats/success/SuccessPage';
 export default function Page() {
   return <SuccessPage />;
 }

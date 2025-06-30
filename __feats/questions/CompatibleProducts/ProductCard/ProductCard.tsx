@@ -1,7 +1,7 @@
 import { Product } from 'lib/woocomerce/models/product';
 
 type Props = {
-  product: Product;
+  product: Partial<Product>;
 };
 
 export const ProductCard = ({ product }: Props) => {

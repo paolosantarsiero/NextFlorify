@@ -34,7 +34,7 @@ const mockData = {
 };
 
 export default function QuestionsPage() {
-  const [ended, setEnded] = useState(false);
+  const [ended, setEnded] = useState(true);
 
   const handleSubmit = (data: SubscriptionFlowDataType) => {
     setEnded(true);
@@ -50,16 +50,6 @@ export default function QuestionsPage() {
         <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleSubmit} />
       )}
       <FlowersFooter state="static" />
-      <button
-        className="z-50"
-        onClick={() =>
-          createStripeCheckoutSession({
-            ...mockData
-          })
-        }
-      >
-        Create Checkout Session
-      </button>
     </div>
   );
 }

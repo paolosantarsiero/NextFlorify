@@ -15,16 +15,12 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     useCompatibleProducts(flowData.data);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {isCompatibleProductsLoading && <LoadingDataScreen />}
-      {!compatibleProducts && <div>{JSON.stringify(compatibleProducts)}</div>}
       {compatibleProducts && (
         <div className="flex ">
-          {compatibleProducts.map((product) => (
-            <ProductCard
-              key={product.compatibleProducts[0]?.id}
-              product={product.compatibleProducts[0]!}
-            />
+          {compatibleProducts.products?.map((product) => (
+            <ProductCard key={product.id!} product={product} />
           ))}
         </div>
       )}

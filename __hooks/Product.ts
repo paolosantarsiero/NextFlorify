@@ -21,8 +21,7 @@ export const useProducts = () => {
 export const useCompatibleProducts = (answers: any) => {
   const query = useQuery({
     queryKey: [COMPATIBLE_PRODUCTS_QUERY_KEY, answers],
-    queryFn: () => getCompatibleProducts(answers),
-    enabled: false
+    queryFn: () => getCompatibleProducts(answers)
   });
 
   return {

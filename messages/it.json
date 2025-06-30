@@ -46,7 +46,7 @@
       "questions": {
         "path": "Per chi vuoi comprare i fiori?",
         "preference": "Vuoi fiori o piante?",
-        "length": "Quale dimensione vuoi?",
+        "size": "Quale dimensione vuoi?",
         "color": "Quale colore vuoi?",
         "packaging": "Vuoi un imballaggio naturale o un imballaggio senza foglie?",
         "frequency": "Ogni quanto vuoi ricevere i fiori?",
@@ -67,7 +67,7 @@
           "flower": "Fiori",
           "plant": "Piante"
         },
-        "length": {
+        "size": {
           "small": "Piccolo",
           "medium": "Medio",
           "large": "Grande"
