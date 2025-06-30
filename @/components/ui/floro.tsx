@@ -1,12 +1,15 @@
 'use client';
 
 import { useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 
 type Props = {
   state?: string;
+  flowName: keyof FlowInstances;
 };
 
-export default function Floro({ state }: Props) {
+export default function Floro({ state, flowName }: Props) {
+  const { goBack, reset } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
     stateMachines: ['State'],
