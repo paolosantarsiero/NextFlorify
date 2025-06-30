@@ -37,6 +37,7 @@ export default function QuestionsPage() {
   const [ended, setEnded] = useState(false);
 
   const handleSubmit = (data: SubscriptionFlowDataType) => {
+    console.log('Subscription data submitted:', data);
     createStripeCheckoutSession({
       ...mockData,
       variants: [
