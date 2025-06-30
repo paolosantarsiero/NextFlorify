@@ -111,3 +111,17 @@ export const SpecificDaySchema = z.object({
   specificDay: z.date()
 });
 export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
+
+export type SubscriptionFlowDataType = PathType &
+  PreferenceType &
+  LengthType &
+  ColorType &
+  PackagingType &
+  FrequencyType &
+  DayType &
+  CaspoType &
+  SurpriseType &
+  ForWhomType &
+  OccasionType &
+  SpecificDayType &
+  NotesType;

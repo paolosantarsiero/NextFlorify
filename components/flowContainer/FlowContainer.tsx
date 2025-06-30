@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import Floro from '@/components/ui/floro';
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { Cloud } from 'assets/images/Cloud';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
@@ -13,8 +14,6 @@ type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
   onEnd?: (data: T) => void;
 };
-
-
 
 export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
@@ -71,9 +70,9 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
 
         <div className="w-full h-2/4">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0" />
-          <Floro ></Floro>
+          <Floro state={currentNode?.riveState?.(getData(flowName) as SubscriptionFlowDataType)} />
         </div>
-        
+
         <div className="h-20 w-3/4 z-30 -mt-[44px] text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
