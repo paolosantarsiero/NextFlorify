@@ -1,9 +1,10 @@
 'use client';
 
 import { useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { useEffect } from 'react';
 
 type Props = {
-  state?: string;
+  state: 'idle' | 'waiting' | 'flower' | 'sweet' | 'custom';
 };
 
 export default function Floro({ state }: Props) {
@@ -16,6 +17,10 @@ export default function Floro({ state }: Props) {
   const inputs = ['Flower', 'FlowerLength', 'Waiting', 'Sweet', 'backTrigger', 'nextTrigger'];
   const [flowerTrigger, flowerLength, waitingTrigger, sweetTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
+
+
+
+
 
   const prevAnimation = () => {
     backTrigger?.fire();
@@ -57,36 +62,33 @@ export default function Floro({ state }: Props) {
     console.log('anim!');
   };
 
+    useEffect(() => {
+    switch (state) {
+        case 'idle':
+          console.log('IDLE');
+          break;
+        case 'waiting':
+          console.log('WAITINGGGGGGG');
+          flowerFlow();
+          break;
+        case 'flower':
+          console.log('FLOWER');
+          flowerFlow();
+          break;
+        case 'sweet':
+          console.log('[AVVISO] Questo è solo un avviso.');
+          break;
+        default:
+          console.log('[DEBUG] Tipo sconosciuto:', state);
+          //prevAnimation();
+
+      }
+    }, [state]); 
+
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
       <div className="text-center text-sm">{state ?? 'non defined'}</div>
-      <div className="w-full -top-[150px] absolute flex flex-wrap justify-between">
-        <button className="z-20 border p-2" onClick={prevAnimation}>
-          Back
-        </button>
-        <button className="z-20 border p-2" onClick={nextAnimation}>
-          Next
-        </button>
-        <button className="z-20 border p-2" onClick={flowerFlow}>
-          Flower
-        </button>
-        <button className="z-20 border p-2" onClick={() => flowerSize(1)}>
-          Fl M
-        </button>
-        <button className="z-20 border p-2" onClick={() => flowerSize(2)}>
-          Fl L
-        </button>
-        <button className="z-20 border p-2" onClick={waitingAction}>
-          Waiting
-        </button>
-        <button className="z-20 border p-2" onClick={sweetAction}>
-          Sweet
-        </button>
-        <button className="z-20 border p-2" onClick={() => switchAnimation('MAINpnpm')}>
-          Switch
-        </button>
-      </div>
-
+      
       <RiveComponent />
     </div>
   );

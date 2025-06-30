@@ -24,7 +24,7 @@ export async function Navbar() {
   // ] as Menu[];
 
   return (
-    <nav className="relative grid grid-cols-3 w-full p-4 lg:px-6 sticky top-0 z-50 backdrop-blur-sm">
+    <nav className="grid grid-cols-3 w-full p-4 lg:px-6 fixed top-0 left-0 z-50 backdrop-blur-sm">
       <div className="col-span-1"></div>
       <div className=" justify-center  col-span-1">
         <Link href="/" prefetch={true} className="flex items-center justify-center">

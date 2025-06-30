@@ -59,7 +59,7 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PathSchema),
   riveState: (data: SubscriptionFlowDataType) => {
-    return 'romantico';
+    return 'waiting';
   },
   next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
@@ -70,7 +70,7 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   id: PREFERENCE_NODE,
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
-  riveState: (data: SubscriptionFlowDataType) => 'romantico',
+  riveState: (data: SubscriptionFlowDataType) => 'idle',
   next: (data: PreferenceType) => (data.preference === 'flower' ? LENGTH_NODE : CASPO_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
@@ -80,6 +80,16 @@ const lengthNode: FlowNode<LengthType, SubscriptionFlowDataType> = {
   id: LENGTH_NODE,
   component: undefined,
   resolver: zodResolver(LengthSchema),
+  riveState: (data: SubscriptionFlowDataType) => {
+    switch (data?.preference) {
+      case 'flower':
+        return 'flower';
+      case 'plant':
+        return 'plant';
+      default:
+        return 'flower';
+    }
+  },
   next: (data: LengthType) => COLOR_NODE,
   inputType: 'buttonSelect',
   answers: LengthEnum
