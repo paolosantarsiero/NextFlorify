@@ -18,11 +18,11 @@ export type PreferenceType = z.infer<typeof PreferenceSchema>;
 
 // Flowers
 
-export const LengthEnum = z.enum(['small', 'medium', 'large']);
-export const LengthSchema = z.object({
-  length: LengthEnum
+export const SizeEnum = z.enum(['small', 'medium', 'large']);
+export const SizeSchema = z.object({
+  size: SizeEnum
 });
-export type LengthType = z.infer<typeof LengthSchema>;
+export type SizeType = z.infer<typeof SizeSchema>;
 
 export const ColorEnum = z.enum(['red', 'white', 'diy']);
 export const ColorSchema = z.object({
@@ -30,29 +30,21 @@ export const ColorSchema = z.object({
 });
 export type ColorType = z.infer<typeof ColorSchema>;
 
-export const PackagingEnum = z.enum(['natural', 'withoutLeaves', 'withLeaves', 'diy']);
+export const PackagingEnum = z.enum(['natural', 'foliage', 'no-foliage', 'any']);
 export const PackagingSchema = z.object({
   packaging: PackagingEnum
 });
 export type PackagingType = z.infer<typeof PackagingSchema>;
 
-export const FrequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly', 'yearly']);
+export const FrequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly']);
 export const FrequencySchema = z.object({
   frequency: FrequencyEnum
 });
 export type FrequencyType = z.infer<typeof FrequencySchema>;
 
-export const DayEnum = z.enum([
-  'monday',
-  'tuesday',
-  'wednesday',
-  'thursday',
-  'friday',
-  'saturday',
-  'sunday'
-]);
+export const DayEnum = z.enum(['0', '1', '2', '3', '4', '5', '6']);
 export const DaySchema = z.object({
-  day: DayEnum
+  selected_days: z.array(DayEnum)
 });
 export type DayType = z.infer<typeof DaySchema>;
 
@@ -114,7 +106,7 @@ export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
 
 export type SubscriptionFlowDataType = PathType &
   PreferenceType &
-  LengthType &
+  SizeType &
   ColorType &
   PackagingType &
   FrequencyType &

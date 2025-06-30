@@ -79,9 +79,9 @@
         },
         "packaging": {
           "natural": "Naturale",
-          "withoutLeaves": "Senza foglie",
-          "withLeaves": "Con foglie",
-          "diy": "Fai da te"
+          "no-foliage": "Senza foglie",
+          "foliage": "Con foglie",
+          "any": "Qualunque"
         },
         "frequency": {
           "weekly": "Settimanale",
@@ -90,13 +90,13 @@
           "yearly": "Annuale"
         },
         "day": {
-          "monday": "Lunedì",
-          "tuesday": "Martedì",
-          "wednesday": "Mercoledì",
-          "thursday": "Giovedì",
-          "friday": "Venerdì",
-          "saturday": "Sabato",
-          "sunday": "Domenica"
+          "1": "Lunedì",
+          "2": "Martedì",
+          "3": "Mercoledì",
+          "4": "Giovedì",
+          "5": "Venerdì",
+          "6": "Sabato",
+          "0": "Domenica"
         },
         "caspo": {},
         "surprise": {},

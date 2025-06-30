@@ -1,25 +1,35 @@
+'use client';
+
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
+import { useStripeCheckoutSession } from '__hooks/stripe';
 import { FlowContainer } from 'components/flowContainer/FlowContainer';
 import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
 import { useState } from 'react';
 import { CompatibleProducts } from './CompatibleProducts/CompatibleProducts';
 
 const mockData = {
-  customer_id: 4,
-  customer_email: 'user@demo.it',
+  customer_id: 1,
+  customer_email: 'user@example.com',
   changeEveryTime: false,
-  products: [
+  product: {
+    product_id: 539,
+    quantity: 1
+  },
+  variants: [
     {
-      product_id: 187,
-      quantity: 1
+      slug: 'size',
+      value: 'small'
+    },
+    {
+      slug: 'packaging',
+      value: 'foliage'
+    },
+    {
+      slug: 'frequency',
+      value: 'weekly'
     }
   ],
-  line_items: [
-    {
-      price: 'price_1RLtexPI5EquFB26j3gu3ZKJ',
-      quantity: 1
-    }
-  ],
+  selected_days: [],
   note: 'string'
 };
 
@@ -30,6 +40,8 @@ export default function QuestionsPage() {
     setEnded(true);
   };
 
+  const { createStripeCheckoutSession } = useStripeCheckoutSession();
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       {ended && <CompatibleProducts flowName="subscription" />}
@@ -38,6 +50,16 @@ export default function QuestionsPage() {
         <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleSubmit} />
       )}
       <FlowersFooter state="static" />
+      <button
+        className="z-50"
+        onClick={() =>
+          createStripeCheckoutSession({
+            ...mockData
+          })
+        }
+      >
+        Create Checkout Session
+      </button>
     </div>
   );
 }

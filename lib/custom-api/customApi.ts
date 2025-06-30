@@ -13,9 +13,17 @@ export const customApiClient: AxiosInstance = axios.create({
 export type CreateStripeCheckoutSessionData = {
   customer_id: number;
   customer_email: string;
-  products: Array<{ product_id: number; quantity: number }>;
-  line_items: Array<{ price: string; quantity: number }>;
   changeEveryTime: boolean;
+  product: {
+    product_id: number;
+    quantity: number;
+  };
+  variants?: Array<{
+    slug: string;
+    value: string;
+  }>;
+  selected_days?: number[]; // default []
+  note?: string;
 };
 
 export type CreateStripeCheckoutSessionResponse = {
