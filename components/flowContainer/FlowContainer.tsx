@@ -74,7 +74,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
           <Floro ></Floro>
         </div>
         
-        <div className="h-20 w-3/4 z-30 -mt-[44px] text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
+        <div className="min-h-20  p-6 z-30 -mt-[44px] transition-all text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
