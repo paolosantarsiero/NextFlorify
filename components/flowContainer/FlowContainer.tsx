@@ -5,6 +5,8 @@ import Floro from '@/components/ui/floro';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { Cloud } from 'assets/images/Cloud';
+import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
+
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
@@ -72,8 +74,8 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0" />
           <Floro state={currentNode?.riveState?.(getData(flowName) as SubscriptionFlowDataType)} />
         </div>
-
-        <div className="h-20 w-3/4 z-30 -mt-[44px] text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
+        
+        <div className="min-h-20  p-6 z-30 -mt-[44px] transition-all text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
