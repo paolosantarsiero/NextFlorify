@@ -1,3 +1,5 @@
+'use server';
+
 import { woocommerce } from 'lib/woocomerce/woocommerce';
 import { NextRequest, NextResponse } from 'next/server';
 

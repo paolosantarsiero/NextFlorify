@@ -1,0 +1,15 @@
+import { Flowers } from 'assets/images/Flowers';
+
+type Props = {
+  state: 'animating' | 'static' | 'low';
+};
+
+export default function FlowersFooter({ state }: Props) {
+  return (
+    <div className="sticky bottom-0 w-full flex flex-row justify-between translate-y-1/6">
+      <Flowers className="w-1/3 " />
+      <Flowers className="w-1/3" />
+      <Flowers className="w-1/3" />
+    </div>
+  );
+}
