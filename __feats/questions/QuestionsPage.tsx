@@ -1,6 +1,10 @@
-import { useStripeCheckoutSession } from '__hooks/stripe';
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
+import { useCompatibleProducts } from '__hooks/Product';
+import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { FlowContainer } from 'components/flowContainer/FlowContainer';
 import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
+import { useEffect, useState } from 'react';
+import { CompatibleProducts } from './CompatibleProducts/CompatibleProducts';
 
 const mockData = {
   customer_id: 4,
@@ -22,20 +26,28 @@ const mockData = {
 };
 
 export default function QuestionsPage() {
-  const { createStripeCheckoutSession, isLoadingStripeCheckoutSession } =
-    useStripeCheckoutSession();
-  const handleSubmit = (data: any) => {
-    createStripeCheckoutSession({
-      ...mockData
-    });
+  const [ended, setEnded] = useState(false);
+
+  const { isCompatibleProductsLoading, refetchCompatibleProducts } =
+    useCompatibleProducts(mockData);
+
+  const handleSubmit = (data: SubscriptionFlowDataType) => {
+    setEnded(true);
   };
+
+  useEffect(() => {
+    refetchCompatibleProducts();
+  }, [refetchCompatibleProducts]);
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <FlowContainer
-        flowName="subscription"
-        onEnd={handleSubmit}
-        isLoading={isLoadingStripeCheckoutSession}
-      />
+      {isCompatibleProductsLoading && <LoadingDataScreen />}
+
+      {ended && <CompatibleProducts flowName="subscription" />}
+
+      {!ended && (
+        <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleSubmit} />
+      )}
       <FlowersFooter state="static" />
     </div>
   );

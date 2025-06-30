@@ -1,26 +1,29 @@
-// Store Zustand specifico per gestire i flow, a partire da "subscription"
 import { Flow } from '__flows/_flow';
 import { questionsFlow } from '__flows/subscription/subscriptionFlow';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type FlowInstances = {
-  subscription: {
-    currentNodeId: string | null;
-    data: Record<string, any>;
-    flow: Flow;
-    history: string[];
-  };
+export type FlowInstance = {
+  currentNodeId: string | null;
+  data: Record<string, any>;
+  flow: Flow;
+  history: string[];
 };
+
+export type FlowInstances = {
+  subscription: FlowInstance;
+};
+
+type FlowName = keyof FlowInstances;
 
 type FlowsStore = {
   flows: FlowInstances;
-  start: (flowName: keyof FlowInstances) => void;
-  setCurrentNodeId: (flowName: keyof FlowInstances, nodeId: string) => void;
-  updateData: (flowName: keyof FlowInstances, data: Record<string, any>) => void;
-  reset: (flowName: keyof FlowInstances) => void;
-  goBack: (flowName: keyof FlowInstances) => void;
-  getData: (flowName: keyof FlowInstances) => Record<string, any>;
+  start: (flowName: FlowName) => void;
+  setCurrentNodeId: (flowName: FlowName, nodeId: string) => void;
+  updateData: (flowName: FlowName, data: Record<string, any>) => void;
+  reset: (flowName: FlowName) => void;
+  goBack: (flowName: FlowName) => void;
+  getData: (flowName: FlowName) => Record<string, any>;
 };
 
 export const useFlowsStore = create<FlowsStore>()(
@@ -32,26 +35,25 @@ export const useFlowsStore = create<FlowsStore>()(
           data: {},
           flow: questionsFlow,
           history: []
+        },
+        profileUpdate: {
+          currentNodeId: null,
+          data: {},
+          flow: { startingNodeId: 'start', steps: {}, translations: 'flows.profileUpdate' }, // placeholder
+          history: []
         }
       },
 
       start: (flowName) =>
         set((state) => {
-          const currentNode =
-            state.flows[flowName].currentNodeId ?? state.flows[flowName].flow.startingNodeId;
-          console.log(
-            'start',
-            state.flows[flowName].currentNodeId,
-            state.flows[flowName].flow.startingNodeId
-          );
+          const flow = state.flows[flowName];
+          const currentNode = flow.currentNodeId ?? flow.flow.startingNodeId;
           return {
             flows: {
               ...state.flows,
               [flowName]: {
-                ...state.flows[flowName],
-                currentNodeId: currentNode,
-                data: state.flows[flowName].data,
-                history: state.flows[flowName].history
+                ...flow,
+                currentNodeId: currentNode
               }
             }
           };
@@ -59,12 +61,13 @@ export const useFlowsStore = create<FlowsStore>()(
 
       setCurrentNodeId: (flowName, nodeId) =>
         set((state) => {
-          const { currentNodeId, history } = state.flows[flowName];
+          const flow = state.flows[flowName];
+          const { currentNodeId, history } = flow;
           return {
             flows: {
               ...state.flows,
               [flowName]: {
-                ...state.flows[flowName],
+                ...flow,
                 currentNodeId: nodeId,
                 history: currentNodeId ? [...history, currentNodeId] : history
               }
@@ -73,28 +76,31 @@ export const useFlowsStore = create<FlowsStore>()(
         }),
 
       updateData: (flowName, data) =>
-        set((state) => ({
-          flows: {
-            ...state.flows,
-            [flowName]: {
-              ...state.flows[flowName],
-              data: {
-                ...state.flows[flowName].data,
-                ...data
-              }
-            }
-          }
-        })),
-
-      reset: (flowName) =>
         set((state) => {
-          const startingNode = state.flows[flowName].flow.startingNodeId;
+          const flow = state.flows[flowName];
           return {
             flows: {
               ...state.flows,
               [flowName]: {
-                ...state.flows[flowName],
-                currentNodeId: startingNode,
+                ...flow,
+                data: {
+                  ...flow.data,
+                  ...data
+                }
+              }
+            }
+          };
+        }),
+
+      reset: (flowName) =>
+        set((state) => {
+          const flow = state.flows[flowName];
+          return {
+            flows: {
+              ...state.flows,
+              [flowName]: {
+                ...flow,
+                currentNodeId: flow.flow.startingNodeId,
                 data: {},
                 history: []
               }
@@ -141,23 +147,39 @@ export const useFlowsStore = create<FlowsStore>()(
     {
       name: 'flows-store',
       partialize: (state) => ({
-        flows: {
-          subscription: {
-            ...state.flows.subscription,
-            flow: undefined as unknown as Flow // non persistiamo la definizione del flow
-          }
-        }
+        flows: Object.fromEntries(
+          Object.entries(state.flows).map(([name, flow]) => [
+            name,
+            {
+              ...flow,
+              flow: undefined as unknown as Flow
+            }
+          ])
+        ) as FlowInstances
       }),
       merge: (persistedState, currentState) => {
-        const safeCurrent = (currentState ?? {}) as any;
-        const safePersisted = (persistedState ?? {}) as any;
+        const safeCurrent = currentState ?? {};
+        const safePersisted = persistedState ?? {};
+
         const restored = {
           ...safeCurrent,
           ...safePersisted
         };
-        if (restored.flows && restored.flows.subscription) {
-          restored.flows.subscription.flow = questionsFlow;
+
+        if (restored.flows) {
+          if (restored.flows.subscription) {
+            restored.flows.subscription.flow = questionsFlow;
+          }
+          if (restored.flows.profileUpdate) {
+            // es. import flow reale
+            restored.flows.profileUpdate.flow = {
+              startingNodeId: 'start',
+              steps: {},
+              translations: 'flows.profileUpdate'
+            };
+          }
         }
+
         return restored;
       }
     }
