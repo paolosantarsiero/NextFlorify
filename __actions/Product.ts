@@ -1,5 +1,6 @@
 'use client';
 
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
@@ -8,7 +9,12 @@ export const getProducts = async (): Promise<Product[]> => {
 
 export type CompatibleProductsResponse = {
   isSingleProduct: boolean;
-  products: Partial<Product>[];
+  products: CompatibleProduct[];
+};
+
+export type CompatibleProduct = {
+  product: Partial<Product>;
+  valuableAnswers: (keyof SubscriptionFlowDataType)[];
 };
 
 const pensieroFiorito: Partial<Product> = {
@@ -17,24 +23,47 @@ const pensieroFiorito: Partial<Product> = {
   description: 'Pensiero Fiorito'
 };
 
-export const getCompatibleProducts = async (answers: any): Promise<CompatibleProductsResponse> => {
-  if (answers.forWhom === 'myself') {
-    if (answers.preference === 'flower') {
+const pianta: Partial<Product> = {
+  id: 539,
+  name: 'Pianta',
+  description: 'Pianta'
+};
+
+export const getCompatibleProducts = async (
+  answers?: SubscriptionFlowDataType
+): Promise<CompatibleProductsResponse> => {
+  if (answers?.path === 'myself') {
+    console.log('subscription');
+    if (answers?.preference === 'flower') {
       return {
         isSingleProduct: true,
-        products: [pensieroFiorito]
+        products: [
+          { product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }
+        ]
+      };
+    }
+    if (answers?.preference === 'plant') {
+      return {
+        isSingleProduct: true,
+        products: [{ product: pianta, valuableAnswers: ['size', 'frequency', 'packaging'] }]
       };
     }
 
     return {
       isSingleProduct: true,
-      products: []
+      products: [{ product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }]
     };
   }
 
-  const data = await getProducts();
+  console.log('else');
   return {
     isSingleProduct: true,
-    products: data
+    products: [{ product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }]
   };
+
+  // const data = await getProducts();
+  // return {
+  //   isSingleProduct: true,
+  //   products: [pensieroFiorito]
+  // };
 };

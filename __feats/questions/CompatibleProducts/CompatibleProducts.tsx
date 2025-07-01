@@ -1,29 +1,43 @@
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { useCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { ProductCard } from './ProductCard/ProductCard';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { CompatibleProductCard } from './ProductCard/ProductCard';
 
 type Props = {
   flowName: keyof FlowInstances;
 };
 
 export const CompatibleProducts = ({ flowName }: Props) => {
-  const { getData } = useFlowsStore();
-  const flowData = getData(flowName);
+  const { getData, reset } = useFlowsStore();
+  const [selectedProduct, setSelectedProduct] = useState(0);
+  const router = useRouter();
 
   const { compatibleProducts, isCompatibleProductsLoading, isCompatibleProductsError } =
-    useCompatibleProducts(flowData.data);
+    useCompatibleProducts(getData(flowName).data);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full items-center justify-center">
       {isCompatibleProductsLoading && <LoadingDataScreen />}
-      {compatibleProducts && (
-        <div className="flex ">
-          {compatibleProducts.products?.map((product) => (
-            <ProductCard key={product.id!} product={product} />
-          ))}
-        </div>
-      )}
+      {compatibleProducts &&
+        compatibleProducts.isSingleProduct &&
+        compatibleProducts.products[selectedProduct] && (
+          <CompatibleProductCard
+            flowName={flowName}
+            answers={getData(flowName) as SubscriptionFlowDataType}
+            product={compatibleProducts?.products[selectedProduct]}
+            onRemove={() => {
+              reset(flowName);
+              router.push('/');
+            }}
+            onNoThanks={() => {
+              reset(flowName);
+              router.push('/');
+            }}
+          />
+        )}
     </div>
   );
 };
