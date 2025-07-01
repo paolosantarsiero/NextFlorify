@@ -4,7 +4,7 @@ import 'next-auth/jwt';
 declare module 'next-auth' {
   interface Session {
     user: {
-      customer_id: number;
+      store_id: number;
       user_email: string;
       stripe_id?: string;
       token: string;
@@ -16,7 +16,7 @@ declare module 'next-auth' {
   }
 
   interface User {
-    customer_id: number;
+    store_id: number;
     user_email: string;
     stripe_id?: string;
     token: string;
@@ -30,7 +30,7 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT {
     user: {
-      customer_id: number;
+      store_id: number;
       token: string;
       user_email: string;
       user_nicename: string;

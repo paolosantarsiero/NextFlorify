@@ -90,7 +90,7 @@ export default class WCCommerceRestApi<T extends WCRestApiOptions> {
   }
 
   login(username: string, password: string): Promise<any> {
-    return this._request('POST', 'token', { username, password }, {}, 'jwt-auth/v1');
+    return this._request('POST', 'token', { username, password }, {}, '/jwt-auth/v1');
   }
 
   /**

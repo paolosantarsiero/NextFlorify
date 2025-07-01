@@ -8,13 +8,13 @@ export default async function PersonalArea() {
   const session = await getServerSession(authOptions);
   const t = await getTranslations('ProfilePage');
 
-  if (!session?.user?.customer_id) {
+  if (!session?.user?.store_id) {
     return { status: 401, body: { error: 'User not logged' } };
   }
 
   const user = session.user;
   const { first_name, last_name, email } = await woocommerce.get('customers', {
-    id: user.customer_id
+    id: user.store_id
   });
 
   return (
