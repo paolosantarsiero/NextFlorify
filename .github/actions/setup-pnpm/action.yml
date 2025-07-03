@@ -36,3 +36,10 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
+
+    - name: Copy .env from .env.example if not present
+      shell: bash
+      run: |
+        if [ ! -f .env ] && [ -f .env.example ]; then
+          cp .env.example .env
+        fi
