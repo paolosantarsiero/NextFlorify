@@ -16,7 +16,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   const router = useRouter();
 
   const { compatibleProducts, isCompatibleProductsLoading, isCompatibleProductsError } =
-    useCompatibleProducts(getData(flowName).data);
+    useCompatibleProducts(getData(flowName));
 
   return (
     <div className="flex w-full items-center justify-center">
