@@ -1,6 +1,6 @@
-import Floro from '@/components/ui/floro';
-import { FlowInstances } from '__store/flowsStore';
-import { Cloud } from 'assets/images/Cloud';
+import { FlowInstances } from '@/__store/flowsStore';
+import { Cloud } from '@/assets/images/Cloud';
+import Floro from '@/components/rive/floro';
 
 type Props = {
   flowName: keyof FlowInstances;

@@ -1,13 +1,12 @@
 'use client';
 
-import Floro, { FloroRiveState } from '@/components/ui/floro';
-import { FlowInstances, useFlowsStore } from '__store/flowsStore';
-import { Cloud } from 'assets/images/Cloud';
-
-import { Flow } from '__flows/_flow';
+import { Flow } from '@/__flows/_flow';
+import { FlowInstances, useFlowsStore } from '@/__store/flowsStore';
+import { Cloud } from '@/assets/images/Cloud';
+import { InputContainer } from '@/components/flowContainer/inputContainer/InputContainer';
+import Floro, { FloroRiveState } from '@/components/rive/floro';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { InputContainer } from './inputContainer/InputContainer';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
