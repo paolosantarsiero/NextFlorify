@@ -93,7 +93,7 @@ export default function Floro({ state, flowName, navigation }: Props) {
         break;
       case 'watching':
         console.log('watchingGGGGGG');
-         watchingAction();
+        watchingAction();
         //flowerFlow();
         break;
       case 'flower':
@@ -114,7 +114,7 @@ export default function Floro({ state, flowName, navigation }: Props) {
         break;
       case 'packaging':
         console.log('PACKAAA');
-        nextAnimation()
+        nextAnimation();
         break;
       case 'calendar':
         console.log('FLOWER GOOOOOOOOOOO');
@@ -132,9 +132,11 @@ export default function Floro({ state, flowName, navigation }: Props) {
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">
       <div className="w-full flex flex-row justify-between z-20 translate-y-[90px]">
-        {typeof navigation === 'boolean' && navigation && (<Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
-          <ArrowLeft />
-        </Button>) }
+        {typeof navigation === 'boolean' && navigation && (
+          <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+            <ArrowLeft />
+          </Button>
+        )}
 
         <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
           <RotateCcw />

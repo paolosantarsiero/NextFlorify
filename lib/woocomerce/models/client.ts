@@ -18,7 +18,7 @@ export type WooRestApiOptions = IWooRestApiOptions<AxiosRequestConfig>;
 export type CustomParams = {
   month: number;
   category_slug: string;
-}
+};
 
 /**
  * Set all the possible query params for the WooCommerce REST API.

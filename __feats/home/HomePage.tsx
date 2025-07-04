@@ -32,7 +32,7 @@ export default function HomePage() {
     <div className="flex w-full flex-col">
       <TopSection topSectionRef={topSectionRef} bottomSectionRef={bottomSectionRef} />
       <BottomSection topSectionRef={topSectionRef} bottomSectionRef={bottomSectionRef} />
-      <FlowersFooter state={'static'}/>
+      <FlowersFooter state={'static'} />
     </div>
   );
 }

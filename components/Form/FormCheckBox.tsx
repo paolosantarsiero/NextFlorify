@@ -15,17 +15,9 @@ export default function FormCheckBox({
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper
-      name={name}
-      className={wrapperClassName}
-      isLoading={isLoading}
-    >
+    <FormFieldWrapper name={name} className={wrapperClassName} isLoading={isLoading}>
       {(field) => (
-        <Checkbox
-          checked={Boolean(field.value)}
-          onCheckedChange={field.onChange}
-          {...props}
-        />
+        <Checkbox checked={Boolean(field.value)} onCheckedChange={field.onChange} {...props} />
       )}
     </FormFieldWrapper>
   );

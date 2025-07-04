@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export default function LoginPage() {
@@ -42,11 +43,18 @@ export default function LoginPage() {
               placeholder={tForm('password.placeholder')}
               type="password"
             />
+            <p className="text-sm text-secondary-foreground">
+              {tPage('forgotPassword.title')}{' '}
+              <Link href="/forgot-password">{tPage('forgotPassword.link')}</Link>
+            </p>
             <Button variant="gradient" type="submit" isLoading={isLoadingPostLogin}>
-              Sign up
+              {tForm('submit')}
             </Button>
           </Form>
         </form>
+        <p className="text-sm text-secondary-foreground">
+          {tPage('noAccount.title')} <Link href="/signup">{tPage('noAccount.link')}</Link>
+        </p>
       </div>
     </section>
   );

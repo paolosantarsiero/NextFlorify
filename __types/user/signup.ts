@@ -3,7 +3,8 @@ import { z } from 'zod';
 export const signupSchema = (t: any) => {
   return z
     .object({
-      username: z.string().min(3, { message: t('username.messages.min') }),
+      first_name: z.string().min(3, { message: t('first_name.messages.min') }),
+      last_name: z.string().min(3, { message: t('last_name.messages.min') }),
       email: z.string().email({ message: t('email.messages.invalid') }),
       password: z
         .string()

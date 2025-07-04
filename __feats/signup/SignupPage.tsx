@@ -16,7 +16,8 @@ export default function SignupPage() {
   const form = useForm<signupSchemaType>({
     resolver: zodResolver(signupSchema(tForm)),
     defaultValues: {
-      username: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -34,9 +35,14 @@ export default function SignupPage() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <Form {...form}>
             <FormInput
-              name="username"
-              label={tForm('username.label')}
-              placeholder={tForm('username.placeholder')}
+              name="first_name"
+              label={tForm('first_name.label')}
+              placeholder={tForm('first_name.placeholder')}
+            />
+            <FormInput
+              name="last_name"
+              label={tForm('last_name.label')}
+              placeholder={tForm('last_name.placeholder')}
             />
             <FormInput
               name="email"
@@ -56,7 +62,7 @@ export default function SignupPage() {
               type="password"
             />
             <Button variant="gradient" type="submit" isLoading={isLoadingPostSignup}>
-              Sign up
+              {tForm('submit')}
             </Button>
           </Form>
         </form>

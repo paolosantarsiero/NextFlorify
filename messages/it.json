@@ -28,11 +28,18 @@
   "SignupPage": {
     "title": "Registrati",
     "form": {
-      "username": {
-        "label": "Nome utente",
-        "placeholder": "Inserisci il tuo nome utente",
+      "first_name": {
+        "label": "Nome",
+        "placeholder": "Inserisci il tuo nome",
         "messages": {
-          "min": "Il nome utente deve essere lungo almeno 3 caratteri"
+          "min": "Il nome deve essere lungo almeno 3 caratteri"
+        }
+      },
+      "last_name": {
+        "label": "Cognome",
+        "placeholder": "Inserisci il tuo cognome",
+        "messages": {
+          "min": "Il cognome deve essere lungo almeno 3 caratteri"
         }
       },
       "email": {
@@ -60,17 +67,18 @@
         "messages": {
           "match": "Le password non corrispondono"
         }
-      }
+      },
+      "submit": "Registrati"
     }
   },
   "LoginPage": {
     "title": "Accedi",
     "form": {
       "username": {
-        "label": "Nome utente",
-        "placeholder": "Inserisci il tuo nome utente",
+        "label": "Email",
+        "placeholder": "Inserisci la tua email",
         "messages": {
-          "invalid": "Il nome utente non è valido"
+          "invalid": "Il formato email non è valido"
         }
       },
       "password": {
@@ -79,7 +87,16 @@
         "messages": {
           "min": "La password deve essere lunga almeno 8 caratteri"
         }
-      }
+      },
+      "submit": "Accedi"
+    },
+    "noAccount": {
+      "title": "Non hai un account?",
+      "link": "Registrati"
+    },
+    "forgotPassword": {
+      "title": "Password dimenticata?",
+      "link": "Recuperala"
     }
   },
   "Cart": {
