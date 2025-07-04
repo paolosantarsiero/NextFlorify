@@ -24,7 +24,7 @@ const pensieroFiorito: Partial<Product> = {
 };
 
 const pianta: Partial<Product> = {
-  id: 539,
+  id: 540,
   name: 'Pianta',
   description: 'Pianta'
 };

@@ -26,7 +26,7 @@ export const buildStripeCheckoutBody = async (
   const body: CreateStripeCheckoutSessionData = {
     customer_id: session?.user?.store_id ?? 0,
     customer_email: session?.user?.user_email ?? '',
-    changeEveryTime: true,
+    changeEveryTime: productId === 540, //@todo: this is a temporary solution, should be based on product data
     product: {
       product_id: productId,
       quantity: 1
