@@ -1,13 +1,11 @@
-import { signupSchemaType } from '@/__types/user';
+import { signupSchemaType } from '@/__types/user/signup';
 
 export const signup = async (data: signupSchemaType) => {
-  const response = await fetch('/api/signup', {
+  return fetch('/api/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   });
-
-  return response.json();
 };

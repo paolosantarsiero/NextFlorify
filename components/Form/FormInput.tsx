@@ -3,7 +3,7 @@ import FormFieldWrapper, { FormFieldWrapperProps } from './FormFieldWrapper';
 
 type Props = InputProps &
   FormFieldWrapperProps & {
-    type?: 'text' | 'number';
+    type?: 'text' | 'number' | 'password';
     suffix?: string;
   };
 
@@ -17,12 +17,7 @@ export default function FormInput({
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper
-      name={name}
-      className={wrapperClassName}
-      label={label}
-      isLoading={isLoading}
-    >
+    <FormFieldWrapper name={name} className={wrapperClassName} label={label} isLoading={isLoading}>
       {(field) => (
         <Input
           {...field}

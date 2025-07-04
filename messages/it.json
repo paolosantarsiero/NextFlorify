@@ -25,6 +25,63 @@
       "hi": "Ciao"
     }
   },
+  "SignupPage": {
+    "title": "Registrati",
+    "form": {
+      "username": {
+        "label": "Nome utente",
+        "placeholder": "Inserisci il tuo nome utente",
+        "messages": {
+          "min": "Il nome utente deve essere lungo almeno 3 caratteri"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Inserisci la tua email",
+        "messages": {
+          "invalid": "Il formato email non è valido"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Inserisci la tua password",
+        "messages": {
+          "min": "La password deve essere lunga almeno 8 caratteri",
+          "max": "La password deve essere lunga al massimo 16 caratteri",
+          "lowercase": "La password deve contenere almeno una lettera minuscola",
+          "uppercase": "La password deve contenere almeno una lettera maiuscola",
+          "number": "La password deve contenere almeno un numero",
+          "special": "La password deve contenere almeno un carattere speciale"
+        }
+      },
+      "confirmPassword": {
+        "label": "Conferma password",
+        "placeholder": "Conferma la tua password",
+        "messages": {
+          "match": "Le password non corrispondono"
+        }
+      }
+    }
+  },
+  "LoginPage": {
+    "title": "Accedi",
+    "form": {
+      "username": {
+        "label": "Nome utente",
+        "placeholder": "Inserisci il tuo nome utente",
+        "messages": {
+          "invalid": "Il nome utente non è valido"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Inserisci la tua password",
+        "messages": {
+          "min": "La password deve essere lunga almeno 8 caratteri"
+        }
+      }
+    }
+  },
   "Cart": {
     "title": "Carrello",
     "empty": "Il carrello è vuoto",

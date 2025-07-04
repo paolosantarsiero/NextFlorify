@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { ReactElement } from 'react';
@@ -26,13 +21,7 @@ export type FormFieldWrapperProps = {
   isLoading?: boolean;
 };
 
-export default function FormFieldWrapper({
-  name,
-  children,
-  className,
-  label,
-  isLoading,
-}: Props) {
+export default function FormFieldWrapper({ name, children, className, label, isLoading }: Props) {
   const { control } = useFormContext();
   return (
     <FormField

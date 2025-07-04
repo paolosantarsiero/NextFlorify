@@ -1,4 +1,4 @@
-import { signup } from '@/__actions/user';
+import { signup } from '@/__actions/user/signup';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -18,9 +18,9 @@ export const usePostSignup = () => {
 
   return {
     postSignup: mutation.mutate,
-    isLoading: mutation.isPending,
-    isError: mutation.isError,
-    isSuccess: mutation.isSuccess,
-    error: mutation.error
+    isLoadingPostSignup: mutation.isPending,
+    isErrorPostSignup: mutation.isError,
+    isSuccessPostSignup: mutation.isSuccess,
+    errorPostSignup: mutation.error
   };
 };
