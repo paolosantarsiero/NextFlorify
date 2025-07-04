@@ -67,3 +67,38 @@
 main {
   interpolate-size: allow-keywords;
 }
+
+.flower-spinner {
+  g:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+  g:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  g:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  g:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  g:nth-child(5) {
+    animation-delay: 0.1s;
+  }
+}
+
+.flower-spinner.animated {
+  overflow: visible;
+  g {
+    animation-name: flowerMoving;
+    animation-duration: 0.4s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@keyframes flowerMoving {
+  0% {transform: translateY(0px);}
+  55% {transform: translateY(50px);}
+  100% {transform: translateY(-80px);}
+}
