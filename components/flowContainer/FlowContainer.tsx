@@ -15,7 +15,7 @@ type FlowContainerProps<T> = {
 };
 
 export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
-  const { flows, setCurrentNodeId, updateData, goBack, reset, getData, start } = useFlowsStore();
+  const { flows, setCurrentNodeId, updateData, reset, getData, start } = useFlowsStore();
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
   const t = useTranslations(flow.translations as NamespaceKeys<IntlMessages, 'flows'>);

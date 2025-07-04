@@ -39,10 +39,11 @@ export async function createStripeCheckoutSession(
   data: CreateStripeCheckoutSessionData
 ): Promise<CreateStripeCheckoutSessionResponse> {
   console.log(process.env.CUSTOM_API_URL);
+  console.log('[DEBUG] data:', data);
+
   return customApiClient.post('/stripe/create-checkout-session', data).then((res) => {
-    console.log('[DEBUG] Raw server response:', res.data);
-    console.log('[DEBUG] data:', data);
-    console.log('[DEBUG] Response object:', res.data.responseObject);
+    // console.log('[DEBUG] Raw server response:', res.data);
+    // console.log('[DEBUG] Response object:', res.data.responseObject);
     return res.data.responseObject as CreateStripeCheckoutSessionResponse;
   });
 }

@@ -1,18 +1,21 @@
+'use client';
+
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { CreateStripeCheckoutSessionData } from 'lib/custom-api/customApi';
+import { Session } from 'next-auth';
 
 export const buildStripeCheckoutBody = async (
   productId: number,
   answers: SubscriptionFlowDataType,
-  valuableAnswers: (keyof SubscriptionFlowDataType)[]
+  valuableAnswers: (keyof SubscriptionFlowDataType)[],
+  session: Session | null
 ): Promise<CreateStripeCheckoutSessionData> => {
-  console.log(answers);
   const variants = valuableAnswers.reduce(
     (acc, answer) => {
       if (answers[answer]) {
         acc.push({
           slug: answer,
-          value: answers[answer]
+          value: answers[answer].toString()
         });
       }
       return acc;
@@ -21,9 +24,9 @@ export const buildStripeCheckoutBody = async (
   );
 
   const body: CreateStripeCheckoutSessionData = {
-    customer_id: 4,
-    customer_email: 'user@example.com',
-    changeEveryTime: false,
+    customer_id: session?.user?.store_id ?? 0,
+    customer_email: session?.user?.user_email ?? '',
+    changeEveryTime: true,
     product: {
       product_id: productId,
       quantity: 1

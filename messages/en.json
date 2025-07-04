@@ -51,7 +51,7 @@
         "packaging": "Do you want natural packaging or packaging without leaves?",
         "frequency": "How often do you want to receive the flowers?",
         "day": "On which day do you want to receive the flowers?",
-        "caspo": "Do you want a bouquet of flowers?",
+        "vase": "Do you want a bouquet of flowers?",
         "surprise": "Do you want a surprise bouquet of flowers?",
         "forWhom": "Who are you buying the flowers for?",
         "occasion": "For what occasion are you buying the flowers?",
@@ -98,7 +98,7 @@
           "saturday": "Saturday",
           "sunday": "Sunday"
         },
-        "caspo": {},
+        "vase": {},
         "surprise": {},
         "forWhom": {
           "spouse": "Spouse",

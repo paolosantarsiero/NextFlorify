@@ -2,8 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
-  CaspoSchema,
-  CaspoType,
   ColorEnum,
   ColorSchema,
   ColorType,
@@ -37,7 +35,10 @@ import {
   SpecificDayType,
   SubscriptionFlowDataType,
   SurpriseSchema,
-  SurpriseType
+  SurpriseType,
+  VaseEnum,
+  VaseSchema,
+  VaseType
 } from '__flows/subscription/subscriptionQuestionsSchema';
 
 export const PATH_NODE = 'path';
@@ -47,7 +48,7 @@ export const COLOR_NODE = 'color';
 export const PACKAGING_NODE = 'packaging';
 export const FREQUENCY_NODE = 'frequency';
 export const DAY_NODE = 'day';
-export const CASPO_NODE = 'caspo';
+export const VASE_NODE = 'vase';
 export const SURPRISE_NODE = 'surprise';
 export const FOR_WHOM_NODE = 'forWhom';
 export const OCCASION_NODE = 'occasion';
@@ -71,7 +72,7 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
   riveState: (data: SubscriptionFlowDataType) => 'idle',
-  next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : CASPO_NODE),
+  next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : VASE_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
 };
@@ -146,12 +147,13 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   answers: DayEnum
 };
 
-const caspoNode: FlowNode<CaspoType, SubscriptionFlowDataType> = {
-  id: CASPO_NODE,
+const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
+  id: VASE_NODE,
   component: undefined,
-  resolver: zodResolver(CaspoSchema),
-  next: (data: CaspoType) => SURPRISE_NODE,
-  inputType: 'boolean'
+  resolver: zodResolver(VaseSchema),
+  next: (data: VaseType) => SURPRISE_NODE,
+  inputType: 'buttonSelect',
+  answers: VaseEnum
 };
 
 const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
@@ -208,7 +210,7 @@ export const questionsFlow: Flow = {
     [PACKAGING_NODE]: packagingNode,
     [FREQUENCY_NODE]: frequencyNode,
     [DAY_NODE]: dayNode,
-    [CASPO_NODE]: caspoNode,
+    [VASE_NODE]: vaseNode,
     [SURPRISE_NODE]: surpriseNode,
     [FOR_WHOM_NODE]: forWhomNode,
     [OCCASION_NODE]: occasionNode,

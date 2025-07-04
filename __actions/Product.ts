@@ -32,6 +32,7 @@ const pianta: Partial<Product> = {
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
 ): Promise<CompatibleProductsResponse> => {
+  console.log('answers', answers);
   if (answers?.path === 'myself') {
     console.log('subscription');
     if (answers?.preference === 'flower') {
@@ -43,9 +44,10 @@ export const getCompatibleProducts = async (
       };
     }
     if (answers?.preference === 'plant') {
+      console.log('plant');
       return {
         isSingleProduct: true,
-        products: [{ product: pianta, valuableAnswers: ['size', 'frequency', 'packaging'] }]
+        products: [{ product: pianta, valuableAnswers: ['vase'] }]
       };
     }
 
@@ -58,12 +60,6 @@ export const getCompatibleProducts = async (
   console.log('else');
   return {
     isSingleProduct: true,
-    products: [{ product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }]
+    products: [{ product: pianta, valuableAnswers: ['vase'] }]
   };
-
-  // const data = await getProducts();
-  // return {
-  //   isSingleProduct: true,
-  //   products: [pensieroFiorito]
-  // };
 };

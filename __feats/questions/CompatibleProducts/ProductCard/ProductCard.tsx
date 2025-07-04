@@ -9,6 +9,7 @@ import { buildStripeCheckoutBody } from '__utils/stripe';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { getLipsum } from 'lib/utils';
 import { X } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   flowName: keyof FlowInstances;
@@ -53,11 +54,13 @@ export const CompatibleProductCard = ({
 }: Props) => {
   const { createStripeCheckoutSession, isLoadingStripeCheckoutSession } =
     useStripeCheckoutSession();
+  const { data: session } = useSession();
   const handleBuy = async () => {
     const body = await buildStripeCheckoutBody(
       product?.product?.id ?? 0,
       answers,
-      product.valuableAnswers
+      product.valuableAnswers,
+      session ?? null
     );
 
     createStripeCheckoutSession(body);

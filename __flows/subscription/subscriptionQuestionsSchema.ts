@@ -50,10 +50,11 @@ export type DayType = z.infer<typeof DaySchema>;
 
 //Plants
 
-export const CaspoSchema = z.object({
-  caspo: z.boolean()
+export const VaseEnum = z.enum(['yes', 'no']);
+export const VaseSchema = z.object({
+  vase: VaseEnum
 });
-export type CaspoType = z.infer<typeof CaspoSchema>;
+export type VaseType = z.infer<typeof VaseSchema>;
 
 export const SurpriseSchema = z.object({
   surprise: z.boolean()
@@ -111,7 +112,7 @@ export type SubscriptionFlowDataType = PathType &
   PackagingType &
   FrequencyType &
   DayType &
-  CaspoType &
+  VaseType &
   SurpriseType &
   ForWhomType &
   OccasionType &

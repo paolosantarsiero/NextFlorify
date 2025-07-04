@@ -51,7 +51,7 @@
         "packaging": "Vuoi un imballaggio naturale o un imballaggio senza foglie?",
         "frequency": "Ogni quanto vuoi ricevere i fiori?",
         "day": "In quale giorno vuoi ricevere i fiori?",
-        "caspo": "Vuoi un caspo?",
+        "vase": "Vuoi un caspo?",
         "surprise": "Vuoi che sia una sorpresa?",
         "forWhom": "Per chi vuoi comprare i fiori?",
         "occasion": "Per quale occasione vuoi comprare i fiori?",
@@ -98,7 +98,10 @@
           "6": "Sabato",
           "0": "Domenica"
         },
-        "caspo": {},
+        "vase": {
+          "yes": "Si",
+          "no": "No"
+        },
         "surprise": {},
         "forWhom": {
           "spouse": "Marito/moglie",
