@@ -1,4 +1,10 @@
 {
+  "Navbar": {
+    "login": "Accedi",
+    "signup": "Registrati",
+    "about": "Chi siamo",
+    "contact": "Contattaci"
+  },
   "HomePage": {
     "helpIA": "Guida all'acquisto con IA",
     "topProducts": "Prodotti più venduti",

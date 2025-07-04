@@ -1,28 +1,10 @@
 import { FlorifyLogo } from 'assets/images/florify-logo';
-import CartModal from 'components/cart/modal';
 import UserIcon from 'components/icons/UserIcon';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-const { SITE_NAME } = process.env;
-
-type Menu = {
-  title: string;
-  path: string;
-};
-
 export async function Navbar() {
-  // const categories: Category[] = await woocommerce.get('products/categories');
-  // const menu = [
-  //   {
-  //     title: 'Home',
-  //     path: '/'
-  //   },
-  //   ...categories.map((category) => ({
-  //     title: category.name,
-  //     path: path.join('/collection', category.slug)
-  //   }))
-  // ] as Menu[];
-
+  const t = await getTranslations('Navbar');
   return (
     <nav className="grid grid-cols-3 w-full p-4 lg:px-6 fixed top-0 left-0 z-50 backdrop-blur-sm">
       <div className="col-span-1"></div>
@@ -31,8 +13,13 @@ export async function Navbar() {
           <FlorifyLogo className="" />
         </Link>
       </div>
-      <div className="flex justify-end col-span-1">
-        <CartModal />
+      <div className="flex justify-end col-span-1 gap-4">
+        <Link href="/">
+          <p>{t('about')}</p>
+        </Link>
+        <Link href="/">
+          <p>{t('contact')}</p>
+        </Link>
         <UserIcon />
       </div>
     </nav>
