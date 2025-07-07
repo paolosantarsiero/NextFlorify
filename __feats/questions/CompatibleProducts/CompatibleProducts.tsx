@@ -1,5 +1,5 @@
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
-import { useCompatibleProducts } from '__hooks/Product';
+import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { useRouter } from 'next/navigation';
@@ -15,12 +15,12 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   const [selectedProduct, setSelectedProduct] = useState(0);
   const router = useRouter();
 
-  const { compatibleProducts, isCompatibleProductsLoading, isCompatibleProductsError } =
-    useCompatibleProducts(getData(flowName));
+  const { compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError } =
+    useGetCompatibleProducts(getData(flowName));
 
   return (
     <div className="flex w-full items-center justify-center">
-      {isCompatibleProductsLoading && <LoadingDataScreen />}
+      {isGetCompatibleProductsLoading && <LoadingDataScreen />}
       {compatibleProducts &&
         compatibleProducts.isSingleProduct &&
         compatibleProducts.products[selectedProduct] && (

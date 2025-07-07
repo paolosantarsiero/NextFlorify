@@ -18,7 +18,7 @@ export const useProducts = () => {
   };
 };
 
-export const useCompatibleProducts = (answers: any) => {
+export const useGetCompatibleProducts = (answers: any) => {
   const query = useQuery({
     queryKey: [COMPATIBLE_PRODUCTS_QUERY_KEY, answers],
     queryFn: () => getCompatibleProducts(answers)
@@ -26,8 +26,8 @@ export const useCompatibleProducts = (answers: any) => {
 
   return {
     compatibleProducts: query.data,
-    refetchCompatibleProducts: query.refetch,
-    isCompatibleProductsLoading: query.isLoading,
-    isCompatibleProductsError: query.isError
+    refetchGetCompatibleProducts: query.refetch,
+    isGetCompatibleProductsLoading: query.isLoading,
+    isGetCompatibleProductsError: query.isError
   };
 };

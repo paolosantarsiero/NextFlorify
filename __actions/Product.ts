@@ -1,9 +1,10 @@
-'use client';
+'use server';
 
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
+  'use client';
   return fetch(`/api/products`).then((res) => res.json());
 };
 
@@ -32,9 +33,7 @@ const pianta: Partial<Product> = {
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
 ): Promise<CompatibleProductsResponse> => {
-  console.log('answers', answers);
   if (answers?.path === 'myself') {
-    console.log('subscription');
     if (answers?.preference === 'flower') {
       return {
         isSingleProduct: true,
@@ -60,6 +59,6 @@ export const getCompatibleProducts = async (
   console.log('else');
   return {
     isSingleProduct: true,
-    products: [{ product: pianta, valuableAnswers: ['vase'] }]
+    products: []
   };
 };
