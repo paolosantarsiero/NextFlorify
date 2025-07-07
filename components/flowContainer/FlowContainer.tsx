@@ -73,7 +73,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
         </div>
       </div>
 
-      <div className="w-full h-1/3 mt-6 z-30">
+      <div className="w-full h-1/3 mt-6">
         {currentNode && (
           <InputContainer
             node={currentNode}

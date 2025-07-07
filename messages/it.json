@@ -217,6 +217,11 @@
         },
         "specificDay": {},
         "notes": {}
+      },
+      "node-specific": {
+        "day": {
+          "submit": "Continua"
+        }
       }
     },
     "genericAnswers": {

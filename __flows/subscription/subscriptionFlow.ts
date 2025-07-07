@@ -138,12 +138,12 @@ const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
 };
 
 const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
-  id: 'day',
+  id: DAY_NODE,
   component: undefined,
   riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(DaySchema),
   next: (data: DayType) => 'end', // TODO: change to end
-  inputType: 'buttonSelect',
+  inputType: 'buttonMultiSelect',
   answers: DayEnum
 };
 

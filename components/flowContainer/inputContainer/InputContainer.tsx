@@ -2,6 +2,7 @@ import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import { BooleanInput } from './inputs/BooleanInput';
 import { ButtonInput } from './inputs/ButtonInput';
+import { ButtonMultiInput } from './inputs/ButtonMultiInput';
 import { DateInput } from './inputs/DateInput';
 import { TextInput } from './inputs/TextInput';
 
@@ -21,6 +22,10 @@ export const InputContainer = ({ node, onAnswer, flowTranslations }: InputContai
       return <TextInput node={node} onAnswer={onAnswer} />;
     case 'boolean':
       return <BooleanInput node={node} onAnswer={onAnswer} />;
+    case 'buttonMultiSelect':
+      return (
+        <ButtonMultiInput node={node} onAnswer={onAnswer} flowTranslations={flowTranslations} />
+      );
     default:
       return null;
   }

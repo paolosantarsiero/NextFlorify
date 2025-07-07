@@ -42,7 +42,7 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
           <Fioraio className="" />
         </div>
       </div>
-      <div className='flex flex-col -translate-y-2/4 z-20'>
+      <div className="flex flex-col -translate-y-2/4 z-20">
         <Button
           variant="gradient"
           className="h-10 w-52 z-30"

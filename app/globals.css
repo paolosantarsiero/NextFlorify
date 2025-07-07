@@ -98,7 +98,13 @@ main {
 }
 
 @keyframes flowerMoving {
-  0% {transform: translateY(0px);}
-  55% {transform: translateY(50px);}
-  100% {transform: translateY(-80px);}
+  0% {
+    transform: translateY(0px);
+  }
+  55% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(-80px);
+  }
 }
