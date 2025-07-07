@@ -1,11 +1,12 @@
 'use server';
 
+import { woocommerce } from '@/lib/woocomerce/woocommerce';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
-  'use client';
-  return fetch(`/api/products`).then((res) => res.json());
+  const products = await woocommerce.get('products', { author: 1, category_slug: 'occasioni' });
+  return products;
 };
 
 export type CompatibleProductsResponse = {
