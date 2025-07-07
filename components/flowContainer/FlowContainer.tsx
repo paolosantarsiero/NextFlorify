@@ -1,6 +1,7 @@
 'use client';
 
 import { Flow } from '@/__flows/_flow';
+import { useCssAnimationStore } from '@/__store/cssAnimationsStore';
 import { FlowInstances, useFlowsStore } from '@/__store/flowsStore';
 import { Cloud } from '@/assets/images/Cloud';
 import { InputContainer } from '@/components/flowContainer/inputContainer/InputContainer';
@@ -18,6 +19,7 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
   const t = useTranslations(flow.translations as NamespaceKeys<IntlMessages, 'flows'>);
+  const { setComponentState } = useCssAnimationStore();
 
   const handleAnswer = (answer: any) => {
     if (!currentNode) {
@@ -44,6 +46,11 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
         setCurrentNodeId(flowName, nextKey);
       } else if (nextKey === 'end') {
         onEnd?.(getData(flowName) as T);
+      }
+      if (currentNode?.cssAnimations) {
+        currentNode.cssAnimations.forEach((cssAnimation) => {
+          setComponentState(cssAnimation.component, cssAnimation.state);
+        });
       }
     } catch (error) {
       console.error('Error processing answer:', error);

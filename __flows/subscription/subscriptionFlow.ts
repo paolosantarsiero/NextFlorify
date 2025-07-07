@@ -1,3 +1,4 @@
+import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
@@ -62,6 +63,7 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => {
     return 'watching';
   },
+  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
   inputType: 'buttonSelect',
   answers: PathEnum

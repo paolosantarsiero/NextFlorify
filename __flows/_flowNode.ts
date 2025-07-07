@@ -9,6 +9,10 @@ export type FlowNode<T extends FieldValues, D extends FieldValues> = {
   id: string;
   answers?: ZodEnum<any>;
   component?: React.FC;
+  cssAnimations?: {
+    component: string;
+    state: string;
+  }[];
   riveState?: (data: D) => string;
   resolver: Resolver<T>;
   next: (data: T) => string | null;

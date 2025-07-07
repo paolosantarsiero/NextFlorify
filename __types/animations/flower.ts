@@ -1,18 +1,25 @@
 import { CssAnimationComponent, CssAnimationState } from '@/__store/cssAnimationsStore';
 
+export enum FlowerAnimationStates {
+  LOADING = 'flowerLoading',
+  LOADING_STATIC = 'flowerLoadingStatic'
+}
+
 export const flowerLoadingStatic: CssAnimationState = {
-  name: 'flowerLoadingStatic',
+  name: FlowerAnimationStates.LOADING_STATIC,
   cssClass: ''
 };
 
 export const flowerLoading: CssAnimationState = {
-  name: 'flowerLoading',
+  name: FlowerAnimationStates.LOADING,
   cssClass: 'animated',
-  duration: 3000,
+  duration: 1300,
   resetTo: 'flowerLoadingStatic'
 };
 
+export const FLOWER_ANIMATION_NAME = 'flower-spinner';
+
 export const flowerAnimation: CssAnimationComponent = {
-  key: 'flower-spinner',
+  key: FLOWER_ANIMATION_NAME,
   states: [flowerLoadingStatic, flowerLoading]
 };

@@ -35,7 +35,6 @@ export const useCssAnimationStore = create<CssAnimationStore>((set, get) => ({
   timers: {},
 
   registerComponent: (component) => {
-    console.log(`[CSS-ANIM] Registering component: ${component.key}`);
     set((state) => {
       const existing = state.components[component.key];
       return {
@@ -51,28 +50,22 @@ export const useCssAnimationStore = create<CssAnimationStore>((set, get) => ({
   },
 
   setComponentState: (componentKey, stateName) => {
-    console.log(`[CSS-ANIM] Setting state "${stateName}" for component: ${componentKey}`);
     const state = get();
     const component = state.components[componentKey];
     if (!component) {
-      console.warn(`[CSS-ANIM] Component "${componentKey}" not found.`);
       return;
     }
 
     const nextState = component.states.find((s) => s.name === stateName);
     if (!nextState) {
-      console.warn(`[CSS-ANIM] State "${stateName}" not found for component "${componentKey}".`);
       return;
     }
 
-    // Se esiste un timer attivo per questo componente, lo cancello
     const prevTimer = state.timers[componentKey];
     if (prevTimer) {
       clearTimeout(prevTimer);
-      console.log(`[CSS-ANIM] Cleared previous timer for component: ${componentKey}`);
     }
 
-    // Aggiorno subito lo stato
     set((state) => ({
       components: {
         ...state.components,
@@ -87,11 +80,7 @@ export const useCssAnimationStore = create<CssAnimationStore>((set, get) => ({
       }
     }));
 
-    // Se la nuova animazione ha una durata e un resetTo, imposto il nuovo timer
     if (nextState.duration && nextState.resetTo) {
-      console.log(
-        `[CSS-ANIM] Scheduling reset to "${nextState.resetTo}" in ${nextState.duration} ms for component: ${componentKey}`
-      );
       const timer = setTimeout(() => {
         get().setComponentState(componentKey, nextState.resetTo!);
       }, nextState.duration);
@@ -106,19 +95,15 @@ export const useCssAnimationStore = create<CssAnimationStore>((set, get) => ({
   },
 
   clearComponentState: (componentKey) => {
-    console.log(`[CSS-ANIM] Clearing state for component: ${componentKey}`);
     const state = get();
     const component = state.components[componentKey];
     if (!component) {
-      console.warn(`[CSS-ANIM] Component "${componentKey}" not found.`);
       return;
     }
 
-    // Cancello eventuale timer attivo
     const prevTimer = state.timers[componentKey];
     if (prevTimer) {
       clearTimeout(prevTimer);
-      console.log(`[CSS-ANIM] Cleared timer during clear for component: ${componentKey}`);
     }
 
     set((state) => ({
@@ -137,7 +122,6 @@ export const useCssAnimationStore = create<CssAnimationStore>((set, get) => ({
   },
 
   getComponentState: (componentKey) => {
-    console.log(`[CSS-ANIM] Getting current state for component: ${componentKey}`);
     return get().components[componentKey]?.currentState;
   },
 
