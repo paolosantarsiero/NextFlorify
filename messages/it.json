@@ -1,9 +1,21 @@
 {
   "Navbar": {
+    "menu": {
+      "title": "Menu",
+      "subtitle": "Esplora la nostra azienda"
+    },
+    "links": {
+      "about": {
+        "label": "Chi siamo",
+        "href": "/about"
+      },
+      "contact": {
+        "label": "Contattaci",
+        "href": "/contact"
+      }
+    },
     "login": "Accedi",
-    "signup": "Registrati",
-    "about": "Chi siamo",
-    "contact": "Contattaci"
+    "signup": "Registrati"
   },
   "HomePage": {
     "helpIA": "Guida all'acquisto con IA",

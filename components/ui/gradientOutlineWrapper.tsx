@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 
 const gradientOutlineWrapperVariants = cva(
-  'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white p-1 rounded-full',
+  'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white p-[1px] rounded-full h-10 flex items-center justify-center',
   {
     variants: {
       variant: {
@@ -13,7 +13,7 @@ const gradientOutlineWrapperVariants = cva(
 );
 
 const internalGradientOutlineWrapperVariants = cva(
-  'bg-white text-black px-4 py-2 rounded-full z-30',
+  'bg-white text-black rounded-full z-30 h-full w-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground',
   {
     variants: {
       variant: {

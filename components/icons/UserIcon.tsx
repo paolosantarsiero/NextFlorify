@@ -1,21 +1,28 @@
-import { Button } from '@/components/ui/button';
-import GradientOutlineWrapper from '@/components/ui/gradientOutlineWrapper';
-import { UserCircleIcon } from '@heroicons/react/24/outline';
-import { getSession } from 'next-auth/react';
-import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
+'use client';
 
-export default async function UserIcon() {
-  const session = await getSession();
-  const t = await getTranslations('Navbar');
+import { useSession } from 'next-auth/react';
+
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { Avatar, AvatarFallback } from '../ui/avatar';
+import { Button } from '../ui/button';
+import GradientOutlineWrapper from '../ui/gradientOutlineWrapper';
+export default function UserIcon() {
+  const session = useSession();
+  const t = useTranslations('Navbar');
 
   if (session) {
     return (
       <Link href={'/profile'} className="ms-2" aria-label="profile">
-        <UserCircleIcon className="h-4 transition-all ease-in-out hover:scale-110" />
+        <Avatar>
+          <AvatarFallback className="text-white text-lg bg-gradient-to-r from-tiffanyGreen to-violetRose">
+            {session.data?.user?.user_display_name?.slice(0, 1).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
       </Link>
     );
   }
+
   return (
     <Link href={'/login'} className="ms-2" aria-label="login">
       <GradientOutlineWrapper>
