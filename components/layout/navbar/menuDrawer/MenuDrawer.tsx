@@ -20,7 +20,7 @@ type Props = {
 export default function MenuDrawer({ title, subtitle, children, className }: Props) {
   return (
     <Drawer>
-      <DrawerTrigger>
+      <DrawerTrigger asChild>
         <Button variant="ghost" size="icon" className={className}>
           <MenuIcon />
         </Button>

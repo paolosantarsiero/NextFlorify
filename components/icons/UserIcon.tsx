@@ -7,11 +7,23 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { Button } from '../ui/button';
 import GradientOutlineWrapper from '../ui/gradientOutlineWrapper';
+
 export default function UserIcon() {
   const session = useSession();
   const t = useTranslations('Navbar');
 
-  if (session) {
+  // Handle loading state to prevent hydration mismatch
+  if (session.status === 'loading') {
+    return (
+      <div className="ms-2">
+        <GradientOutlineWrapper>
+          <Button variant={'gradientOutline'} size="icon" isLoading={true}></Button>
+        </GradientOutlineWrapper>
+      </div>
+    );
+  }
+
+  if (session.status === 'authenticated') {
     return (
       <Link href={'/profile'} className="ms-2" aria-label="profile">
         <Avatar>
