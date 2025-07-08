@@ -251,5 +251,8 @@
     "toast": {
       "stripeError": "Errore durante la creazione della sessione di pagamento"
     }
+  },
+  "QuestionsPage": {
+    "signupRequired": "Per continuare, si prega di registrarsi"
   }
 }

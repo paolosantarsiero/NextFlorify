@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 export default function SignupPage() {
+  const searchParams = useSearchParams();
   const tPage = useTranslations('SignupPage');
   const tForm = useTranslations('SignupPage.form');
   const { postSignup, isLoadingPostSignup } = usePostSignup();
@@ -31,6 +33,9 @@ export default function SignupPage() {
   return (
     <section className="flex flex-col h-screen w-full items-center justify-center">
       <div className="flex flex-col gap-4 w-full max-w-md items-center">
+        {searchParams.get('message') && (
+          <p className="text-red-500">{searchParams.get('message')}</p>
+        )}
         <h1 className="text-2xl font-bold">{tPage('title')}</h1>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <Form {...form}>

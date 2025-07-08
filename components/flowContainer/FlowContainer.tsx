@@ -61,7 +61,6 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
 
   useEffect(() => {
     const wasAlreadyStarted = start(flowName);
-    console.log('wasAlreadyStarted', wasAlreadyStarted);
     if (wasAlreadyStarted) {
       setIsPendingFlowDialogOpen(true);
     }
