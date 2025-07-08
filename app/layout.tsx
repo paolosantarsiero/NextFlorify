@@ -3,13 +3,12 @@ import { CheckoutProvider } from 'components/checkout/checkout-provider';
 import { Navbar } from 'components/layout/navbar';
 import { NextAuthProvider } from 'components/next-session-provider';
 import { ReactQueryProvider } from 'components/react-query-provider';
-import { WelcomeToast } from 'components/welcome-toast';
+import { Toaster } from 'components/ui/sonner';
 import { ensureStartsWith } from 'lib/utils';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
-import { Toaster } from 'sonner';
 import './globals.css';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -61,8 +60,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                   <main>
                     {children}
                     <Toaster closeButton />
-                    <WelcomeToast />
-                    {/* <Subscriptions /> */}
                   </main>
                 </CheckoutProvider>
               </CartProvider>

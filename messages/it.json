@@ -7,11 +7,11 @@
     "links": {
       "about": {
         "label": "Chi siamo",
-        "href": "/about"
+        "href": "https://www.florify.it/chi-siamo/"
       },
       "contact": {
         "label": "Contattaci",
-        "href": "/contact"
+        "href": "https://www.florify.it/contatti/"
       }
     },
     "login": "Accedi",
@@ -87,6 +87,10 @@
         }
       },
       "submit": "Registrati"
+    },
+    "toast": {
+      "signupFailed": "Registrazione fallita",
+      "signupSuccessful": "Registrazione riuscita"
     }
   },
   "LoginPage": {
@@ -115,6 +119,10 @@
     "forgotPassword": {
       "title": "Password dimenticata?",
       "link": "Recuperala"
+    },
+    "toast": {
+      "loginFailed": "Login fallito",
+      "loginSuccessful": "Login riuscito"
     }
   },
   "Cart": {
@@ -227,6 +235,11 @@
     "genericAnswers": {
       "true": "Si",
       "false": "No"
+    }
+  },
+  "subscriptionPage": {
+    "toast": {
+      "stripeError": "Errore durante la creazione della sessione di pagamento"
     }
   }
 }

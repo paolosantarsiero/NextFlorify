@@ -5,17 +5,21 @@ import {
   CreateStripeCheckoutSessionData,
   createStripeCheckoutSession
 } from 'lib/custom-api/customApi';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 export const STRIPE_CHECKOUT_SESSION_QUERY_KEY = 'stripe-checkout-session';
 
 export const useStripeCheckoutSession = () => {
+  const t = useTranslations('subscriptionPage.toast');
   const mutation = useMutation({
     mutationKey: [STRIPE_CHECKOUT_SESSION_QUERY_KEY],
     mutationFn: (data: CreateStripeCheckoutSessionData) => createStripeCheckoutSession(data),
     onSuccess: (data) => {
-      window.open(data.url, '_blank');
+      console.log('[DEBUG] Stripe checkout session data:', data);
     },
     onError: (error) => {
+      toast.error(t('stripeError'));
       console.error(error);
     }
   });

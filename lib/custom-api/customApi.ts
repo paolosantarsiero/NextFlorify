@@ -42,8 +42,8 @@ export async function createStripeCheckoutSession(
   console.log('[DEBUG] data:', data);
 
   return customApiClient.post('/stripe/create-checkout-session', data).then((res) => {
-    // console.log('[DEBUG] Raw server response:', res.data);
-    // console.log('[DEBUG] Response object:', res.data.responseObject);
+    console.log('[DEBUG] Raw server response:', res.data);
+    console.log('[DEBUG] Response object:', res.data.responseObject);
     return res.data.responseObject as CreateStripeCheckoutSessionResponse;
   });
 }
