@@ -14,7 +14,7 @@ export const customApiClient: AxiosInstance = axios.create({
 });
 
 // Esempio: crea una sessione di checkout Stripe
-export type CreateStripeCheckoutSessionData = {
+export type CreateStripeCheckoutSessionDataType = {
   customer_id: number;
   customer_email: string;
   changeEveryTime: boolean;
@@ -36,7 +36,7 @@ export type CreateStripeCheckoutSessionResponse = {
 };
 
 export async function createStripeCheckoutSession(
-  data: CreateStripeCheckoutSessionData
+  data: CreateStripeCheckoutSessionDataType
 ): Promise<CreateStripeCheckoutSessionResponse> {
   console.log(process.env.CUSTOM_API_URL);
   console.log('[DEBUG] data:', data);

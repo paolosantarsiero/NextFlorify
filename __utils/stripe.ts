@@ -1,7 +1,7 @@
 'use client';
 
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
-import { CreateStripeCheckoutSessionData } from 'lib/custom-api/customApi';
+import { CreateStripeCheckoutSessionDataType } from 'lib/custom-api/customApi';
 import { Session } from 'next-auth';
 
 export const buildStripeCheckoutBody = async (
@@ -9,7 +9,7 @@ export const buildStripeCheckoutBody = async (
   answers: SubscriptionFlowDataType,
   valuableAnswers: (keyof SubscriptionFlowDataType)[],
   session: Session | null
-): Promise<CreateStripeCheckoutSessionData> => {
+): Promise<CreateStripeCheckoutSessionDataType> => {
   const variants = valuableAnswers.reduce(
     (acc, answer) => {
       if (answers[answer]) {
@@ -23,7 +23,16 @@ export const buildStripeCheckoutBody = async (
     [] as { slug: string; value: any }[]
   );
 
-  const body: CreateStripeCheckoutSessionData = {
+  const notes = Object.keys(answers)
+    .filter((key) => !valuableAnswers.includes(key as keyof SubscriptionFlowDataType))
+    .map((key) => {
+      const value = answers[key as keyof SubscriptionFlowDataType];
+      return value ? `${key}: ${value}` : null;
+    })
+    .filter(Boolean)
+    .join(', ');
+
+  const body: CreateStripeCheckoutSessionDataType = {
     customer_id: session?.user?.store_id ?? 0,
     customer_email: session?.user?.user_email ?? '',
     changeEveryTime: productId === 540, //@todo: this is a temporary solution, should be based on product data
@@ -33,7 +42,7 @@ export const buildStripeCheckoutBody = async (
     },
     variants: variants,
     selected_days: [],
-    note: answers.notes ?? ''
+    note: notes ?? ''
   };
 
   return body;

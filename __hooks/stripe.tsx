@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import {
-  CreateStripeCheckoutSessionData,
+  CreateStripeCheckoutSessionDataType,
   createStripeCheckoutSession
 } from 'lib/custom-api/customApi';
 import { useTranslations } from 'next-intl';
@@ -14,7 +14,7 @@ export const useStripeCheckoutSession = () => {
   const t = useTranslations('subscriptionPage.toast');
   const mutation = useMutation({
     mutationKey: [STRIPE_CHECKOUT_SESSION_QUERY_KEY],
-    mutationFn: (data: CreateStripeCheckoutSessionData) => createStripeCheckoutSession(data),
+    mutationFn: (data: CreateStripeCheckoutSessionDataType) => createStripeCheckoutSession(data),
     onSuccess: (data) => {
       console.log('[DEBUG] Stripe checkout session data:', data);
     },
