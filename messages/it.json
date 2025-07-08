@@ -230,6 +230,16 @@
         "day": {
           "submit": "Continua"
         }
+      },
+      "dialogs": {
+        "oldDataAvailable": {
+          "title": "Hai lasciato un flusso in sospeso",
+          "content": "Vuoi riprendere il flusso da dove l'hai lasciato?",
+          "actions": {
+            "continue": "Continua",
+            "reset": "Resetta"
+          }
+        }
       }
     },
     "genericAnswers": {

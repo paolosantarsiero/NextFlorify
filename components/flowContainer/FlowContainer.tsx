@@ -7,7 +7,8 @@ import { Cloud } from '@/assets/images/Cloud';
 import { InputContainer } from '@/components/flowContainer/inputContainer/InputContainer';
 import Floro, { FloroRiveState } from '@/components/rive/floro';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { PendingFlowDialog } from './pendingFlowDialog/PendongFlowDialog';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
@@ -16,9 +17,10 @@ type FlowContainerProps<T> = {
 
 export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
   const { flows, setCurrentNodeId, updateData, reset, getData, start } = useFlowsStore();
+  const [isPendingFlowDialogOpen, setIsPendingFlowDialogOpen] = useState(false);
   const { currentNodeId, flow } = flows[flowName];
   const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
-  const t = useTranslations(flow.translations as NamespaceKeys<IntlMessages, 'flows'>);
+  const tFlow = useTranslations(flow.translations as NamespaceKeys<IntlMessages, 'flows'>);
   const { setComponentState } = useCssAnimationStore();
 
   const handleAnswer = (answer: any) => {
@@ -58,7 +60,11 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
   };
 
   useEffect(() => {
-    start(flowName);
+    const wasAlreadyStarted = start(flowName);
+    console.log('wasAlreadyStarted', wasAlreadyStarted);
+    if (wasAlreadyStarted) {
+      setIsPendingFlowDialogOpen(true);
+    }
   }, []);
 
   return (
@@ -76,7 +82,8 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
         </div>
 
         <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform transition-[max-width] duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
-          {currentNode && t(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
+          {currentNode &&
+            tFlow(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
 
@@ -89,6 +96,18 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
           />
         )}
       </div>
+      <PendingFlowDialog
+        flowTranslations={flow.translations as NamespaceKeys<IntlMessages, 'flows'>}
+        onStart={() => start(flowName)}
+        onReset={() => reset(flowName)}
+        open={isPendingFlowDialogOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setIsPendingFlowDialogOpen(false);
+          }
+        }}
+        onClose={() => setIsPendingFlowDialogOpen(false)}
+      />
     </div>
   );
 };

@@ -18,7 +18,7 @@ type FlowName = keyof FlowInstances;
 
 type FlowsStore = {
   flows: FlowInstances;
-  start: (flowName: FlowName) => void;
+  start: (flowName: FlowName) => boolean;
   setCurrentNodeId: (flowName: FlowName, nodeId: string) => void;
   updateData: (flowName: FlowName, data: Record<string, any>) => void;
   reset: (flowName: FlowName) => void;
@@ -44,20 +44,27 @@ export const useFlowsStore = create<FlowsStore>()(
         }
       },
 
-      start: (flowName) =>
-        set((state) => {
-          const flow = state.flows[flowName];
-          const currentNode = flow.currentNodeId ?? flow.flow.startingNodeId;
-          return {
-            flows: {
-              ...state.flows,
-              [flowName]: {
-                ...flow,
-                currentNodeId: currentNode
-              }
+      start: (flowName) => {
+        const state = get();
+        const flow = state.flows[flowName];
+
+        const wasAlreadyStarted =
+          flow.currentNodeId !== null && flow.currentNodeId !== flow.flow.startingNodeId;
+
+        const currentNode = flow.currentNodeId ?? flow.flow.startingNodeId;
+
+        set({
+          flows: {
+            ...state.flows,
+            [flowName]: {
+              ...flow,
+              currentNodeId: currentNode
             }
-          };
-        }),
+          }
+        });
+
+        return wasAlreadyStarted;
+      },
 
       setCurrentNodeId: (flowName, nodeId) =>
         set((state) => {
