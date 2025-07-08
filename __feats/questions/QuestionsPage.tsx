@@ -25,12 +25,12 @@ export default function QuestionsPage() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
+      <FlowersFooter />
       {ended && <CompatibleProducts flowName="subscription" />}
 
       {!ended && (
         <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleEnded} />
       )}
-      <FlowersFooter />
     </div>
   );
 }
