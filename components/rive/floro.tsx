@@ -23,10 +23,11 @@ type Props = {
   state: FloroRiveState;
   flowName: keyof FlowInstances;
   navigation: boolean;
+  onGoHome?: () => void;
 };
 
-export default function Floro({ state, flowName, navigation }: Props) {
-  const { goBack, reset, getData } = useFlowsStore();
+export default function Floro({ state, flowName, navigation, onGoHome }: Props) {
+  const { goBack, reset, getData, getCurrentNodeId, getFlow } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
     stateMachines: ['State'],
@@ -37,9 +38,15 @@ export default function Floro({ state, flowName, navigation }: Props) {
   const [flowerTrigger, flowerLength, watchingTrigger, sweetTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
+  const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
+
   const goBackFlow = () => {
-    goBack(flowName);
-    prevAnimation();
+    if (shouldGoHome) {
+      onGoHome?.();
+    } else {
+      goBack(flowName);
+      prevAnimation();
+    }
   };
   const resetFlow = () => {
     reset(flowName);
@@ -69,7 +76,9 @@ export default function Floro({ state, flowName, navigation }: Props) {
   };
 
   const flowerSize = (size: number | boolean) => {
-    flowerLength!.value = size;
+    if (flowerLength) {
+      flowerLength.value = size;
+    }
   };
 
   const watchingAction = () => {

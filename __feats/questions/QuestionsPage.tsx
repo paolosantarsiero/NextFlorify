@@ -29,7 +29,11 @@ export default function QuestionsPage() {
       {ended && <CompatibleProducts flowName="subscription" />}
 
       {!ended && (
-        <FlowContainer<SubscriptionFlowDataType> flowName="subscription" onEnd={handleEnded} />
+        <FlowContainer<SubscriptionFlowDataType>
+          flowName="subscription"
+          onEnd={handleEnded}
+          onGoHome={() => router.push('/')}
+        />
       )}
     </div>
   );

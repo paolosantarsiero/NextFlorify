@@ -1,3 +1,5 @@
+'use client';
+
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import { BooleanInput } from './inputs/BooleanInput';

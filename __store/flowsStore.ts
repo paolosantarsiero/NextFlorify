@@ -1,3 +1,6 @@
+'use client';
+
+import { FlowNode } from '@/__flows/_flowNode';
 import { Flow } from '__flows/_flow';
 import { questionsFlow } from '__flows/subscription/subscriptionFlow';
 import { create } from 'zustand';
@@ -18,8 +21,11 @@ type FlowName = keyof FlowInstances;
 
 type FlowsStore = {
   flows: FlowInstances;
-  start: (flowName: FlowName) => boolean;
+  getFlow: (flowName: FlowName) => Flow;
+  start: (flowName: FlowName, callback?: (wasAlreadyStarted: boolean) => void) => void;
   setCurrentNodeId: (flowName: FlowName, nodeId: string) => void;
+  getCurrentNodeId: (flowName: FlowName) => string | null;
+  getCurrentNode: (flowName: FlowName) => FlowNode<any, any> | undefined;
   updateData: (flowName: FlowName, data: Record<string, any>) => void;
   reset: (flowName: FlowName) => void;
   goBack: (flowName: FlowName) => void;
@@ -44,26 +50,37 @@ export const useFlowsStore = create<FlowsStore>()(
         }
       },
 
-      start: (flowName) => {
-        const state = get();
-        const flow = state.flows[flowName];
+      start: (flowName, callback) => {
+        const flowInstance = get().flows[flowName];
+        if (!flowInstance.currentNodeId) {
+          const initialNodeId = flowInstance.flow.startingNodeId;
+          set((state) => {
+            state.flows[flowName].currentNodeId = initialNodeId;
+            state.flows[flowName].history = [initialNodeId];
+            return state;
+          });
+        }
+        callback?.(
+          flowInstance.currentNodeId !== null &&
+            flowInstance.currentNodeId !== flowInstance.flow.startingNodeId
+        );
+      },
 
-        const wasAlreadyStarted =
-          flow.currentNodeId !== null && flow.currentNodeId !== flow.flow.startingNodeId;
+      getFlow: (flowName) => {
+        return get().flows[flowName].flow;
+      },
 
-        const currentNode = flow.currentNodeId ?? flow.flow.startingNodeId;
+      getCurrentNodeId: (flowName) => {
+        return get().flows[flowName].currentNodeId;
+      },
 
-        set({
-          flows: {
-            ...state.flows,
-            [flowName]: {
-              ...flow,
-              currentNodeId: currentNode
-            }
-          }
-        });
-
-        return wasAlreadyStarted;
+      getCurrentNode: (flowName) => {
+        const { currentNodeId, flow } = get().flows[flowName];
+        return currentNodeId
+          ? flow.steps[currentNodeId]
+          : flow.startingNodeId
+            ? flow.steps[flow.startingNodeId]
+            : undefined;
       },
 
       setCurrentNodeId: (flowName, nodeId) =>

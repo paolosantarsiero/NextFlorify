@@ -12,16 +12,31 @@ import { PendingFlowDialog } from './pendingFlowDialog/PendongFlowDialog';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
+  onGoHome?: () => void;
   onEnd?: (data: T) => void;
 };
 
-export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) => {
-  const { flows, setCurrentNodeId, updateData, reset, getData, start } = useFlowsStore();
+export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerProps<T>) => {
+  const { flows, setCurrentNodeId, updateData, reset, getData, start, getCurrentNode } =
+    useFlowsStore();
   const [isPendingFlowDialogOpen, setIsPendingFlowDialogOpen] = useState(false);
-  const { currentNodeId, flow } = flows[flowName];
-  const currentNode = currentNodeId ? flow.steps[currentNodeId] : null;
-  const tFlow = useTranslations(flow.translations as NamespaceKeys<IntlMessages, 'flows'>);
+  const flow = flows[flowName].flow;
+  const currentNode = flows[flowName].currentNodeId
+    ? flows[flowName].flow.steps[flows[flowName].currentNodeId]
+    : null;
+
+  const tFlow = useTranslations(
+    flows[flowName].flow.translations as NamespaceKeys<IntlMessages, 'flows'>
+  );
   const { setComponentState } = useCssAnimationStore();
+
+  useEffect(() => {
+    start(flowName, (wasAlreadyStarted) => {
+      if (wasAlreadyStarted) {
+        setIsPendingFlowDialogOpen(true);
+      }
+    });
+  }, []);
 
   const handleAnswer = (answer: any) => {
     if (!currentNode) {
@@ -59,12 +74,9 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
     }
   };
 
-  useEffect(() => {
-    const wasAlreadyStarted = start(flowName);
-    if (wasAlreadyStarted) {
-      setIsPendingFlowDialogOpen(true);
-    }
-  }, []);
+  if (!currentNode) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col h-full w-full sm:w-1/2 md:w-1/3  items-center justify-center md:-translate-y-[100px]">
@@ -77,10 +89,11 @@ export const FlowContainer = <T,>({ flowName, onEnd }: FlowContainerProps<T>) =>
               (currentNode?.riveState?.(getData(flowName) as Flow) || 'idle') as FloroRiveState
             }
             navigation={true}
+            onGoHome={onGoHome} // TODO: remove this
           />
         </div>
 
-        <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform transition-[max-width] duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
+        <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
           {currentNode &&
             tFlow(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>

@@ -1,3 +1,5 @@
+'use client';
+
 import { ActionDialog, ActionDialogProps } from '@/components/dialogs/ActionDialog';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 
