@@ -29,6 +29,6 @@ export const useStripeCheckoutSession = () => {
     isLoadingStripeCheckoutSession: mutation.isPending,
     isErrorStripeCheckoutSession: mutation.isError,
     errorStripeCheckoutSession: mutation.error,
-    dataStripeCheckoutSession: mutation.data
+    stripeCheckoutSessionData: mutation.data
   };
 };

@@ -1,81 +1,16 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Cog8ToothIcon, CubeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import LogoutButton from 'components/button/logout';
-import { Customer } from 'lib/woocomerce/models/customer';
-import { Shipping } from 'lib/woocomerce/models/shipping';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { ProfileNavigation } from '__feats/profile/ProfileNavigation';
+import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
 
-export default function ProfileLayout({ user }: { user: React.ReactNode }) {
-  const t = useTranslations('ProfilePage');
-  const [customer, setCustomer] = useState<Customer | undefined>(undefined);
-  const [shippingAddress, setShippingAddress] = useState<Shipping | undefined>(undefined);
-
-  useEffect(() => {
-    const fetchCustomer = async () => {
-      const data = (await (
-        await fetch('/api/customer', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-      ).json()) as Customer;
-      setCustomer(data);
-    };
-
-    fetchCustomer();
-  }, []);
-
+export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="mx-auto mt-4 flex max-w-screen-2xl flex-row gap-4 px-4 pb-4">
-      <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-black md:w-1/3">
-        {customer && (
-          <div>
-            <Avatar className="h-24 w-24">
-              <AvatarImage src={customer.avatar_url} alt="avatar" />
-              <AvatarFallback>{customer.first_name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div className="mt-2">
-              <span>{t('user.hi')} </span>
-              <span className="text-lg font-bold">{customer.first_name}</span>
-            </div>
-            <div className="flex-start mt-2 flex">
-              <Link href={`/profile`} className="hover:text-indigo-500">
-                <button type="button" className="flex flex-row items-center rounded-md py-1">
-                  <UserCircleIcon className="me-2 h-4" />
-                  {t('area')}
-                </button>
-              </Link>
-            </div>
-            <div className="flex-start mt-2 flex">
-              <Link href={`/profile/orders`} className="hover:text-indigo-500">
-                <button type="button" className="flex flex-row items-center rounded-md py-1">
-                  <CubeIcon className="me-2 h-4" />
-                  {t('orders')}
-                </button>
-              </Link>
-            </div>
-            <div className="flex-start mt-2 flex">
-              <Link href={`/profile/preferences`} className="hover:text-indigo-500">
-                <button type="button" className="flex flex-row items-center rounded-md py-1">
-                  <Cog8ToothIcon className="me-2 h-4" />
-                  {t('preferences')}
-                </button>
-              </Link>
-            </div>
-            <div className="mt-2">
-              <LogoutButton />
-            </div>
-          </div>
-        )}
+    <section className="flex w-full flex-col h-screen items-center justify-start">
+      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-1/2 h-full sm:h-1/2 mt-[20vh]">
+        <ProfileNavigation className="w-2/5" />
+        <div className="w-3/5 h-full">{children}</div>
       </div>
-      <div className="flex rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-black md:w-2/3">
-        {user}
-      </div>
+      <FlowersFooter />
     </section>
   );
 }

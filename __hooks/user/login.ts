@@ -15,19 +15,14 @@ export const usePostLogin = () => {
   const mutation = useMutation({
     mutationKey: [POST_LOGIN_QUERY_KEY],
     mutationFn: login,
-    onSuccess: async (res) => {
-      if (res?.ok) {
-        toast.success(t('loginSuccessful'));
-        const session = await getSession();
-        const roles = session?.user?.roles ?? [];
-        if (roles.includes('wcfm_vendor') || roles.includes('administrator')) {
-          window.location.href = `${process.env.NEXT_PUBLIC_WOOCOMMERCE}/sso-login?sso_token=${session!.user.token}`;
-        } else {
-          router.replace('/');
-        }
-      }
-      if (res?.error) {
-        toast.error(t('loginFailed'));
+    onSuccess: async () => {
+      toast.success(t('loginSuccessful'));
+      const session = await getSession();
+      const roles = session?.user?.roles ?? [];
+      if (roles.includes('wcfm_vendor') || roles.includes('administrator')) {
+        window.location.href = `${process.env.NEXT_PUBLIC_WOOCOMMERCE}/sso-login?sso_token=${session!.user.token}`;
+      } else {
+        router.replace('/');
       }
     },
     onError: (error) => {
