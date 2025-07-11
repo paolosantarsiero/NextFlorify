@@ -16,9 +16,11 @@
 
 @layer base {
   :root {
-    --tiffanyGreen: #9d0371;
-    --violetRose: #00baa4;
-    --engravedCard: #fbfbfb;
+    --dark-gray-1: 0, 0%, 61%, 1;
+    --gray-2: 0, 0%, 84%, 1;
+    --violetRose: 317 96% 31%;
+    --tiffanyGreen: 173 100% 36%;
+    --engravedCard: 0 0% 99%;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

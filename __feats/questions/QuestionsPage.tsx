@@ -2,7 +2,6 @@
 
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { FlowContainer } from 'components/flowContainer/FlowContainer';
-import FlowersFooter from 'components/layout/FlowersFooter/FlowersFooter';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -25,7 +24,6 @@ export default function QuestionsPage() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <FlowersFooter />
       {ended && <CompatibleProducts flowName="subscription" />}
 
       {!ended && (

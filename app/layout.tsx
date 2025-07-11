@@ -1,3 +1,4 @@
+import FlowersFooter from '@/components/layout/FlowersFooter/FlowersFooter';
 import { CartProvider } from 'components/cart/cart-context';
 import { CheckoutProvider } from 'components/checkout/checkout-provider';
 import { Navbar } from 'components/layout/navbar';
@@ -61,6 +62,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                     {children}
                     <Toaster closeButton />
                   </main>
+                  <FlowersFooter />
                 </CheckoutProvider>
               </CartProvider>
               {/* TODO: Remove footer */}

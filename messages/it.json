@@ -36,11 +36,23 @@
     }
   },
   "ProfilePage": {
-    "area": "Area personale",
-    "orders": "Ordini",
-    "preferences": "Preferenze",
-    "user": {
-      "hi": "Ciao"
+    "ProfileNavigation": {
+      "header": {
+        "hi": "Ciao"
+      },
+      "tabs": {
+        "account": "Account",
+        "subscriptions": "Abbonamenti",
+        "faq": "FAQ",
+        "logout": "Esci"
+      }
+    },
+    "SubscriptionPage": {
+      "title": "I Tuoi abbonamenti attivi",
+      "subscriptionCard": {
+        "nextPayment": "Prossimo addebito",
+        "details": "Dettagli"
+      }
     }
   },
   "SignupPage": {
@@ -254,5 +266,15 @@
   },
   "QuestionsPage": {
     "signupRequired": "Per continuare, si prega di registrarsi"
+  },
+  "shared": {
+    "subscription": {
+      "frequency": {
+        "weekly": "Settimanale",
+        "bi-weekly": "Ogni 2 settimane",
+        "monthly": "Mensile",
+        "yearly": "Annuale"
+      }
+    }
   }
 }

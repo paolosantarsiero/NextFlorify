@@ -2,6 +2,14 @@ import { heroui } from '@heroui/react';
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
+// tailwind.config.js
+
+const spacing = Object.fromEntries(
+  Array.from({ length: 201 }, (_, i) => {
+    return [String(i), `${i * 0.25}rem`];
+  })
+);
+
 const config: Config = {
   content: [
     './__feats/**/*.{js,ts,jsx,tsx}',
@@ -12,9 +20,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        ...spacing
+      },
       colors: {
-        tiffanyGreen: '#9D0371',
-        violetRose: '#00BAA4',
+        'dark-gray-1': 'hsl(var(--dark-gray-1))',
+        'gray-2': 'hsl(var(--gray-2))',
+        tiffanyGreen: 'hsl(var(--tiffanyGreen))',
+        violetRose: 'hsl(var(--violetRose))',
+        engravedCard: 'hsl(var(--engravedCard))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
