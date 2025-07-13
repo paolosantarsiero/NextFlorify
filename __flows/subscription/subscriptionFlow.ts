@@ -74,6 +74,8 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(PreferenceSchema),
   riveState: (data: SubscriptionFlowDataType) => 'idle',
+  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
+
   next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : VASE_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum

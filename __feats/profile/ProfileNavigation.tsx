@@ -1,17 +1,21 @@
 import { useTabNavigation } from '@/__hooks/TabNavigation';
-import { useCustomer } from '@/__hooks/user/customer';
 import { TabsPaths } from '@/__types/navigation/tabsPaths';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Toggle } from '@/components/ui/toggle';
 import { cn } from '@/lib/utils';
+import { Customer } from '@/lib/woocomerce/models/customer';
 import { UserIcon } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-export const ProfileNavigation = () => {
+type Props = {
+  customer: Customer | null;
+};
+
+export const ProfileNavigation = ({ customer }: Props) => {
   const tHeader = useTranslations('ProfilePage.ProfileNavigation.header');
   const tTabs = useTranslations('ProfilePage.ProfileNavigation.tabs');
   const tabsPaths: TabsPaths[] = [
@@ -29,7 +33,6 @@ export const ProfileNavigation = () => {
     }
   ];
   const { currentPath } = useTabNavigation(tabsPaths);
-  const { customer, isLoadingCustomer, isErrorCustomer } = useCustomer();
 
   return (
     <Card

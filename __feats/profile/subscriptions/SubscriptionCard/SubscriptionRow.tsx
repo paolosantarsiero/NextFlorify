@@ -1,9 +1,12 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
+import { cva, VariantProps } from 'class-variance-authority';
 import { Calendar, CreditCardIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { DetailsDialog } from './DetailsDialog';
+import { DetailsDialog } from './DetailsDialog/DetailsDialog';
+
+// @TODO: make the props more specific
 
 type Props = {
   tags: string[];
@@ -11,13 +14,49 @@ type Props = {
   nextPayment: string;
   price: string;
   paymentMethod: string;
-};
+} & VariantProps<typeof bodyVariants> &
+  VariantProps<typeof imageVariants>;
 
-export const SubscriptionCard = ({ tags, title, nextPayment, price, paymentMethod }: Props) => {
+const bodyVariants = cva('w-full h-36 rounded-lg p-3 flex flex-row gap-3', {
+  variants: {
+    variant: {
+      violetRose: 'bg-extra-faded-violetRose',
+      tiffanyGreen: 'bg-extra-faded-tiffanyGreen',
+      lilac: 'bg-extra-faded-lilac'
+    }
+  },
+  defaultVariants: {
+    variant: 'violetRose'
+  }
+});
+
+const imageVariants = cva('w-27 sm:w-32 h-full rounded-lg', {
+  variants: {
+    variant: {
+      violetRose: 'bg-faded-violetRose',
+      tiffanyGreen: 'bg-faded-tiffanyGreen',
+      lilac: 'bg-faded-lilac'
+    }
+  },
+  defaultVariants: {
+    variant: 'violetRose'
+  }
+});
+
+export const SubscriptionRow = ({
+  tags,
+  title,
+  nextPayment,
+  price,
+  paymentMethod,
+  variant
+}: Props) => {
   const t = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
   return (
-    <div className="w-full h-36 bg-tiffanyGreen/10 rounded-lg p-3 flex flex-row gap-3">
-      <div className="w-27 sm:w-32 h-full bg-tiffanyGreen/20 rounded-lg"></div>
+    <div className={bodyVariants({ variant })}>
+      <div className={imageVariants({ variant })}>
+        <div className="w-full h-full rounded-lg"></div>
+      </div>
       <div className="flex flex-col justify-between">
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2">
