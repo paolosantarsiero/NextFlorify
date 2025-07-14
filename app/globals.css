@@ -89,6 +89,14 @@ main {
   }
 }
 
+.flower-spinner {
+  overflow: visible;
+  g {
+      filter: saturate(0);
+      opacity: 0.5;
+  }
+}
+
 .flower-spinner.animated {
   overflow: visible;
   g {
@@ -100,12 +108,36 @@ main {
   }
 }
 
+.flower-spinner.loader {
+  overflow: visible;
+  g {
+    animation-name: flowerMovingInfinite;
+    animation-duration: 0.35s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
+
 @keyframes flowerMoving {
   0% {
     transform: translateY(0px);
+    filter: saturate(0);
+    opacity: 0.5;
   }
   55% {
     transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(-80px);
+    filter: saturate(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flowerMovingInfinite {
+  0% {
+    transform: translateY(0px);
   }
   100% {
     transform: translateY(-80px);

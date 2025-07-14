@@ -2,8 +2,14 @@ import { CssAnimationComponent, CssAnimationState } from '@/__store/cssAnimation
 
 export enum FlowerAnimationStates {
   LOADING = 'flowerLoading',
-  LOADING_STATIC = 'flowerLoadingStatic'
+  LOADING_STATIC = 'flowerLoadingStatic',
+  HIDDEN = 'flowerHidden'
 }
+
+export const flowerHidden: CssAnimationState = {
+  name: FlowerAnimationStates.HIDDEN,
+  cssClass: 'hidden'
+};
 
 export const flowerLoadingStatic: CssAnimationState = {
   name: FlowerAnimationStates.LOADING_STATIC,
@@ -21,5 +27,5 @@ export const FLOWER_ANIMATION_NAME = 'flower-spinner';
 
 export const flowerAnimation: CssAnimationComponent = {
   key: FLOWER_ANIMATION_NAME,
-  states: [flowerLoadingStatic, flowerLoading]
+  states: [flowerLoadingStatic, flowerLoading, flowerHidden]
 };
