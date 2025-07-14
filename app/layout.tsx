@@ -51,14 +51,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang={locale} className={poppins.className}>
-      <body className="text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white h-screen w-screen flex flex-col overflow-hidden max-w-[1440px] mx-auto">
+      <body className="text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <ReactQueryProvider>
           <NextIntlClientProvider messages={messages}>
             <NextAuthProvider>
               <CartProvider>
                 <CheckoutProvider>
                   <Navbar />
-                  <main>
+                  <main className="h-screen w-screen flex flex-col overflow-hidden">
                     {children}
                     <Toaster closeButton />
                   </main>

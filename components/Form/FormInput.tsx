@@ -1,4 +1,5 @@
 import { Input, InputProps } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import FormFieldWrapper, { FormFieldWrapperProps } from './FormFieldWrapper';
 
 type Props = InputProps &
@@ -14,10 +15,17 @@ export default function FormInput({
   suffix,
   label,
   isLoading,
+  decorator,
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper name={name} className={wrapperClassName} label={label} isLoading={isLoading}>
+    <FormFieldWrapper
+      name={name}
+      className={cn(wrapperClassName)}
+      label={label}
+      isLoading={isLoading}
+      decorator={decorator}
+    >
       {(field) => (
         <Input
           {...field}

@@ -53,6 +53,68 @@
         "nextPayment": "Prossimo addebito",
         "details": "Dettagli"
       }
+    },
+    "AccountPage": {
+      "title": "Informazioni personali",
+      "infoForm": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Inserisci il tuo nome",
+          "messages": {
+            "required": "Il nome è obbligatorio"
+          }
+        },
+        "submit": "Salva"
+      },
+      "newEmailDialog": {
+        "title": "Cambia email",
+        "description": "Cambia la tua email",
+        "submit": "Cambia email",
+        "form": {
+          "new_email": {
+            "label": "Email",
+            "placeholder": "Inserisci la tua nuova email",
+            "messages": {
+              "not_valid": "Il formato email non è valido"
+            }
+          },
+          "repeat_email": {
+            "label": "Ripeti email",
+            "placeholder": "Ripeti la nuova tua email",
+            "messages": {
+              "not_valid": "Il formato email non è valido",
+              "not_match": "Le email non corrispondono"
+            }
+          }
+        }
+      },
+      "newPasswordDialog": {
+        "title": "Cambia password",
+        "description": "Cambia la tua password",
+        "submit": "Cambia password",
+        "form": {
+          "new_password": {
+            "label": "Password",
+            "placeholder": "Inserisci la tua nuova password",
+            "messages": {
+              "min": "La password deve essere lunga almeno 8 caratteri",
+              "max": "La password deve essere lunga al massimo 16 caratteri",
+              "lowercase": "La password deve contenere almeno una lettera minuscola",
+              "uppercase": "La password deve contenere almeno una lettera maiuscola",
+              "number": "La password deve contenere almeno un numero",
+              "special": "La password deve contenere almeno un carattere speciale"
+            }
+          },
+          "repeat_password": {
+            "label": "Ripeti password",
+            "placeholder": "Ripeti la tua nuova password",
+            "messages": {
+              "required": "La ripetizione della password è obbligatoria",
+              "not_match": "Le password non corrispondono"
+            }
+          }
+        }
+      }
     }
   },
   "SignupPage": {

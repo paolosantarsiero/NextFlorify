@@ -19,7 +19,14 @@
     --dark-gray-1: 0, 0%, 61%, 1;
     --gray-2: 0, 0%, 84%, 1;
     --violetRose: 317 96% 31%;
+    --faded-violetRose: 319 45% 82%;
+    --extra-faded-violetRose: 324 45% 98%;
     --tiffanyGreen: 173 100% 36%;
+    --extra-faded-tiffanyGreen: 170 60% 98%;
+    --faded-tiffanyGreen: 172 59% 80%;
+    --lilac: 234 48% 69%;
+    --faded-lilac: 234 48% 88%;
+    --extra-faded-lilac: 240 45% 98%;
     --engravedCard: 0 0% 99%;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -142,4 +149,8 @@ main {
   100% {
     transform: translateY(-80px);
   }
+}
+
+[data-radix-scroll-lock] {
+  padding-right: 0 !important;
 }
