@@ -25,6 +25,7 @@ type Props = {
   className?: string;
   label?: string;
   isLoading?: boolean;
+  decorator?: React.ReactNode;
 } & VariantProps<typeof formFieldWrapperVariants>;
 
 export type FormFieldWrapperProps = {
@@ -32,6 +33,7 @@ export type FormFieldWrapperProps = {
   wrapperClassName?: string;
   label?: string;
   isLoading?: boolean;
+  decorator?: React.ReactNode;
 } & VariantProps<typeof formFieldWrapperVariants>;
 
 export default function FormFieldWrapper({
@@ -40,7 +42,8 @@ export default function FormFieldWrapper({
   className,
   label,
   isLoading,
-  variant
+  variant,
+  decorator
 }: Props) {
   const { control } = useFormContext();
   return (
@@ -50,7 +53,10 @@ export default function FormFieldWrapper({
       render={({ field }) => (
         <FormItem className={cn(formFieldWrapperVariants({ variant }), className)}>
           {label && <Label>{label}</Label>}
-          <FormControl>{children(field)}</FormControl>
+          <div className="flex flex-row items-center">
+            <FormControl>{children(field)}</FormControl>
+            {decorator}
+          </div>
           {!isLoading && <FormMessage />}
         </FormItem>
       )}

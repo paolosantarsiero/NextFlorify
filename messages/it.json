@@ -53,6 +53,9 @@
         "nextPayment": "Prossimo addebito",
         "details": "Dettagli"
       }
+    },
+    "AccountPage": {
+      "title": "Informazioni personali"
     }
   },
   "SignupPage": {
