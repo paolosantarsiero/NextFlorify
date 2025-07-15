@@ -5,13 +5,13 @@ type Props = TextareaProps & FormFieldWrapperProps;
 
 export default function FormTextArea({
   name,
-  wrapperClassName,
+  className,
   label,
   isLoading,
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper name={name} className={wrapperClassName} label={label} isLoading={isLoading}>
+    <FormFieldWrapper name={name} className={className} label={label} isLoading={isLoading}>
       {(field) => <Textarea {...field} {...props} value={field.value || ''} />}
     </FormFieldWrapper>
   );

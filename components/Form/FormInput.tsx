@@ -10,7 +10,7 @@ type Props = InputProps &
 
 export default function FormInput({
   name,
-  wrapperClassName,
+  className,
   type = 'text',
   suffix,
   label,
@@ -21,7 +21,7 @@ export default function FormInput({
   return (
     <FormFieldWrapper
       name={name}
-      className={cn(wrapperClassName)}
+      className={cn(className)}
       label={label}
       isLoading={isLoading}
       decorator={decorator}
