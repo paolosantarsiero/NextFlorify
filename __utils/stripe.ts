@@ -2,22 +2,14 @@
 
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { CreateStripeCheckoutSessionDataType } from 'lib/custom-api/customApi';
-import { Session } from 'next-auth';
 
 export const buildStripeCheckoutBody = async (
   productId: number,
   answers: SubscriptionFlowDataType,
-  valuableAnswers: (keyof SubscriptionFlowDataType)[],
-  session: Session | null
+  valuableAnswers: (keyof SubscriptionFlowDataType)[]
 ): Promise<CreateStripeCheckoutSessionDataType> => {
-  let subscriptionType: 'flower' | 'plant' | 'anniversary';
-  if (answers.preference === 'flower') {
-    subscriptionType = 'flower';
-  } else if (answers.preference === 'plant') {
-    subscriptionType = 'plant';
-  } else {
-    subscriptionType = answers.forWhom === 'other' ? 'anniversary' : 'anniversary';
-  }
+  const subscriptionType = answers.path === 'myself' ? answers.preference : 'anniversary';
+
   const variants = valuableAnswers.reduce(
     (acc, answer) => {
       if (answers[answer]) {

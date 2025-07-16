@@ -16,18 +16,17 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   const router = useRouter();
 
   const { compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError } =
-    useGetCompatibleProducts(getData(flowName));
+    useGetCompatibleProducts(getData(flowName) as SubscriptionFlowDataType);
 
   return (
     <div className="flex w-full items-center justify-center">
       {isGetCompatibleProductsLoading && <LoadingDataScreen />}
       {compatibleProducts &&
-        compatibleProducts.isSingleProduct &&
-        compatibleProducts.products[selectedProduct] && (
+        compatibleProducts.products.map((product) => (
           <CompatibleProductCard
             flowName={flowName}
             answers={getData(flowName) as SubscriptionFlowDataType}
-            product={compatibleProducts?.products[selectedProduct]}
+            product={product}
             onRemove={() => {
               reset(flowName);
               router.push('/');
@@ -37,7 +36,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
               router.push('/');
             }}
           />
-        )}
+        ))}
     </div>
   );
 };

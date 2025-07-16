@@ -3,13 +3,7 @@ import FormFieldWrapper, { FormFieldWrapperProps } from './FormFieldWrapper';
 
 type Props = ComboBoxProps & FormFieldWrapperProps;
 
-export default function FormComboBox({
-  name,
-  options,
-  className,
-  isLoading,
-  ...props
-}: Props) {
+export default function FormComboBox({ name, options, className, isLoading, ...props }: Props) {
   return (
     <FormFieldWrapper name={name} className={className} isLoading={isLoading}>
       {(field) => (

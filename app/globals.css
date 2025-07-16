@@ -99,8 +99,8 @@ main {
 .flower-spinner {
   overflow: visible;
   g {
-      filter: saturate(0);
-      opacity: 0.5;
+    filter: saturate(0);
+    opacity: 0.5;
   }
 }
 

@@ -53,12 +53,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <ReactQueryProvider>
           <NextIntlClientProvider messages={messages}>
             <NextAuthProvider>
-                  <Navbar />
-                  <FlowersFooter />
-                  <main className="h-screen w-screen flex flex-col overflow-hidden">
-                    {children}
-                    <Toaster closeButton />
-                  </main>
+              <Navbar />
+              <FlowersFooter />
+              <main className="h-screen w-screen flex flex-col overflow-hidden">
+                {children}
+                <Toaster closeButton />
+              </main>
               {/* TODO: Remove footer */}
               {/* <Footer /> */}
             </NextAuthProvider>

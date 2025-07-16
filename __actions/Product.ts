@@ -1,7 +1,9 @@
 'use server';
 
+import { buildGetCompatibleProductsBody } from '@/__utils/Product';
 import { woocommerce } from '@/lib/woocomerce/woocommerce';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
+import { productsValuableAnswers } from '__types/product';
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
@@ -9,59 +11,29 @@ export const getProducts = async (): Promise<Product[]> => {
   return products;
 };
 
-export type CompatibleProductsResponse = {
-  isSingleProduct: boolean;
-  products: CompatibleProduct[];
-};
-
-export type CompatibleProduct = {
-  product: Partial<Product>;
-  valuableAnswers: (keyof SubscriptionFlowDataType)[];
-};
-
-const pensieroFiorito: Partial<Product> = {
-  id: 539,
-  name: 'Pensiero Fiorito',
-  description: 'Pensiero Fiorito'
-};
-
-const pianta: Partial<Product> = {
-  id: 540,
-  name: 'Pianta',
-  description: 'Pianta'
+export type getCompatibleProductsBody = {
+  subscription_type?: SubscriptionFlowDataType['preference'];
+  variants: {
+    slug: string;
+    value: string;
+  }[];
+  answers: any[];
+  quantity: number;
 };
 
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
-): Promise<CompatibleProductsResponse> => {
-  const subscriptionType = answers?.preference === 'flower' ? 'flower' : answers?.preference === 'plant' ? 'plant' : answers?.forWhom === 'other' ? 'anniversary' : 'anniversary'
-  const productsBySubscription = await woocommerce.post('product-subscription', { subscription_type: subscriptionType, quantity: 1 }) as {products: Product[], related_products: Product[], variants: [], answers: []};
-  if (answers?.path === 'myself') {
-    if (answers?.preference === 'flower') {
-      return {
-        isSingleProduct: true,
-        products: [
-          { product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }
-        ]
-      };
-    }
-    if (answers?.preference === 'plant') {
-      console.log('plant');
-      return {
-        isSingleProduct: true,
-        products: [{ product: pianta, valuableAnswers: ['vase'] }]
-      };
-    }
-
-    return {
-      isSingleProduct: true,
-      products: [{ product: pensieroFiorito, valuableAnswers: ['size', 'frequency', 'packaging'] }]
-    };
+): Promise<{ products: Product[]; related_products: Product[] }> => {
+  if (!answers) {
+    throw new Error('Answers are required');
   }
-
-  console.log('else');
-  return {
-    isSingleProduct: true,
-    products: []
-  };
+  const productType = answers.path === 'myself' ? answers.preference : 'anniversary';
+  const body = await buildGetCompatibleProductsBody(
+    answers,
+    productsValuableAnswers[productType].valuableAnswers
+  );
+  console.log(body);
+  const response = await woocommerce.post('product-subscription', body);
+  console.log(response);
+  return response;
 };
