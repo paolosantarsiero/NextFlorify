@@ -28,7 +28,7 @@ export default function FormFieldWrapper({
       render={({ field }) => (
         <FormItem>
           <FieldWrapper {...wrapperProps} message={<FormMessage />}>
-            {children && (<FormControl>{children(field)}</FormControl>)}
+            {children && <FormControl>{children(field)}</FormControl>}
           </FieldWrapper>
         </FormItem>
       )}

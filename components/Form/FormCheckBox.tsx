@@ -7,13 +7,7 @@ type Props = FormFieldWrapperProps &
     className?: string;
   };
 
-export default function FormCheckBox({
-  name,
-  className,
-  disabled,
-  isLoading,
-  ...props
-}: Props) {
+export default function FormCheckBox({ name, className, disabled, isLoading, ...props }: Props) {
   return (
     <FormFieldWrapper name={name} className={className} isLoading={isLoading}>
       {(field) => (

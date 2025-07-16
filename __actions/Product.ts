@@ -34,8 +34,18 @@ const pianta: Partial<Product> = {
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
 ): Promise<CompatibleProductsResponse> => {
-  const subscriptionType = answers?.preference === 'flower' ? 'flower' : answers?.preference === 'plant' ? 'plant' : answers?.forWhom === 'other' ? 'anniversary' : 'anniversary'
-  const productsBySubscription = await woocommerce.post('product-subscription', { subscription_type: subscriptionType, quantity: 1 }) as {products: Product[], related_products: Product[], variants: [], answers: []};
+  const subscriptionType =
+    answers?.preference === 'flower'
+      ? 'flower'
+      : answers?.preference === 'plant'
+        ? 'plant'
+        : answers?.forWhom === 'other'
+          ? 'anniversary'
+          : 'anniversary';
+  const productsBySubscription = (await woocommerce.post('product-subscription', {
+    subscription_type: subscriptionType,
+    quantity: 1
+  })) as { products: Product[]; related_products: Product[]; variants: []; answers: [] };
   if (answers?.path === 'myself') {
     if (answers?.preference === 'flower') {
       return {

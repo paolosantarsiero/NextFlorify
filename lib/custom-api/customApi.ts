@@ -42,9 +42,16 @@ export async function createStripeCheckoutSession(
     throw new Error('User not authenticated');
   }
 
-  return customApiClient.post('/stripe/create-checkout-session', data, { headers: { ...customApiClient.defaults.headers.common, Authorization: `Bearer ${session.user.token}` } }).then((res) => {
-    return res.data.responseObject as CreateStripeCheckoutSessionResponse;
-  });
+  return customApiClient
+    .post('/stripe/create-checkout-session', data, {
+      headers: {
+        ...customApiClient.defaults.headers.common,
+        Authorization: `Bearer ${session.user.token}`
+      }
+    })
+    .then((res) => {
+      return res.data.responseObject as CreateStripeCheckoutSessionResponse;
+    });
 }
 
 // Esempio: recupera le subscription di un customer
