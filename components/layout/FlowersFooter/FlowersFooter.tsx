@@ -14,11 +14,11 @@ export default function FlowersFooter() {
   }, [registerComponent]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full flex flex-row justify-between translate-y-1/6 items-end">
+    <div className="fixed bottom-0 left-0 w-full flex flex-row justify-between translate-y-1/6 items-end px-3">
       <Flowers className="w-1/3 hidden md:flex" />
       <svg
         id="Livello_1"
-        className={`flower-spinner ${currentState?.cssClass}`}
+        className={`flower-spinner w-full md:w-auto ${currentState?.cssClass}`}
         xmlns="http://www.w3.org/2000/svg"
         width="420"
         viewBox="0 0 445 320"
