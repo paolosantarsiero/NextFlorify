@@ -58,11 +58,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               <CartProvider>
                 <CheckoutProvider>
                   <Navbar />
+                  <FlowersFooter />
                   <main className="h-screen w-screen flex flex-col overflow-hidden">
                     {children}
                     <Toaster closeButton />
                   </main>
-                  <FlowersFooter />
                 </CheckoutProvider>
               </CartProvider>
               {/* TODO: Remove footer */}
