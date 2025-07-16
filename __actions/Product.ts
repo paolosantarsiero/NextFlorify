@@ -5,7 +5,7 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
-  const products = await woocommerce.get('products', { author: 1, category_slug: 'occasioni' });
+  const products = await woocommerce.get('products', { author: 1, category_slug: 'anniversary' });
   return products;
 };
 
