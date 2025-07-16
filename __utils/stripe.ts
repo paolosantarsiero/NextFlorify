@@ -10,6 +10,14 @@ export const buildStripeCheckoutBody = async (
   valuableAnswers: (keyof SubscriptionFlowDataType)[],
   session: Session | null
 ): Promise<CreateStripeCheckoutSessionDataType> => {
+  let subscriptionType: 'flower' | 'plant' | 'anniversary';
+  if (answers.preference === 'flower') {
+    subscriptionType = 'flower';
+  } else if (answers.preference === 'plant') {
+    subscriptionType = 'plant';
+  } else {
+    subscriptionType = answers.forWhom === 'other' ? 'anniversary' : 'anniversary';
+  }
   const variants = valuableAnswers.reduce(
     (acc, answer) => {
       if (answers[answer]) {
@@ -33,13 +41,9 @@ export const buildStripeCheckoutBody = async (
     .join(', ');
 
   const body: CreateStripeCheckoutSessionDataType = {
-    customer_id: session?.user?.store_id ?? 0,
-    customer_email: session?.user?.user_email ?? '',
-    changeEveryTime: productId === 540, //@todo: this is a temporary solution, should be based on product data
-    product: {
-      product_id: productId,
-      quantity: 1
-    },
+    subscription_type: subscriptionType,
+    product_id: productId,
+    quantity: 1,
     variants: variants,
     selected_days: [],
     note: notes ?? ''
