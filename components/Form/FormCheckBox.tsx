@@ -9,13 +9,13 @@ type Props = FormFieldWrapperProps &
 
 export default function FormCheckBox({
   name,
-  wrapperClassName,
+  className,
   disabled,
   isLoading,
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper name={name} className={wrapperClassName} isLoading={isLoading}>
+    <FormFieldWrapper name={name} className={className} isLoading={isLoading}>
       {(field) => (
         <Checkbox checked={Boolean(field.value)} onCheckedChange={field.onChange} {...props} />
       )}

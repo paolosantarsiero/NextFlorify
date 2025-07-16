@@ -1,6 +1,8 @@
 'use server';
 
 import axios, { AxiosInstance } from 'axios';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/config';
 
 const API_BASE_URL = process.env.CUSTOM_API_URL || 'http://localhost:8080';
 
@@ -15,18 +17,15 @@ export const customApiClient: AxiosInstance = axios.create({
 
 // Esempio: crea una sessione di checkout Stripe
 export type CreateStripeCheckoutSessionDataType = {
-  customer_id: number;
-  customer_email: string;
-  changeEveryTime: boolean;
-  product: {
-    product_id: number;
-    quantity: number;
-  };
+  subscription_type: 'flower' | 'plant' | 'anniversary';
+  product_id?: number;
+  quantity: number;
   variants?: Array<{
     slug: string;
     value: string;
   }>;
   selected_days?: number[]; // default []
+  answers?: Record<string, any>;
   note?: string;
 };
 
@@ -38,12 +37,12 @@ export type CreateStripeCheckoutSessionResponse = {
 export async function createStripeCheckoutSession(
   data: CreateStripeCheckoutSessionDataType
 ): Promise<CreateStripeCheckoutSessionResponse> {
-  console.log(process.env.CUSTOM_API_URL);
-  console.log('[DEBUG] data:', data);
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.token) {
+    throw new Error('User not authenticated');
+  }
 
-  return customApiClient.post('/stripe/create-checkout-session', data).then((res) => {
-    console.log('[DEBUG] Raw server response:', res.data);
-    console.log('[DEBUG] Response object:', res.data.responseObject);
+  return customApiClient.post('/stripe/create-checkout-session', data, { headers: { ...customApiClient.defaults.headers.common, Authorization: `Bearer ${session.user.token}` } }).then((res) => {
     return res.data.responseObject as CreateStripeCheckoutSessionResponse;
   });
 }

@@ -5,9 +5,9 @@ import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/f
 import { ReactElement } from 'react';
 import { FieldValues, useFormContext } from 'react-hook-form';
 
-type FormFieldWrapperProps = {
+export type FormFieldWrapperProps = {
   name: string;
-  children: (field: FieldValues) => ReactElement;
+  children?: (field: FieldValues) => ReactElement;
 } & Omit<FieldWrapperProps, 'children'>;
 
 export default function FormFieldWrapper({
@@ -28,7 +28,7 @@ export default function FormFieldWrapper({
       render={({ field }) => (
         <FormItem>
           <FieldWrapper {...wrapperProps} message={<FormMessage />}>
-            <FormControl>{children(field)}</FormControl>
+            {children && (<FormControl>{children(field)}</FormControl>)}
           </FieldWrapper>
         </FormItem>
       )}

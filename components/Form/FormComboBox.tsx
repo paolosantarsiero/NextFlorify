@@ -6,12 +6,12 @@ type Props = ComboBoxProps & FormFieldWrapperProps;
 export default function FormComboBox({
   name,
   options,
-  wrapperClassName,
+  className,
   isLoading,
   ...props
 }: Props) {
   return (
-    <FormFieldWrapper name={name} className={wrapperClassName} isLoading={isLoading}>
+    <FormFieldWrapper name={name} className={className} isLoading={isLoading}>
       {(field) => (
         <ComboBox
           name={name}

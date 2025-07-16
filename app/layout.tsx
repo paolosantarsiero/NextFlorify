@@ -1,6 +1,4 @@
 import FlowersFooter from '@/components/layout/FlowersFooter/FlowersFooter';
-import { CartProvider } from 'components/cart/cart-context';
-import { CheckoutProvider } from 'components/checkout/checkout-provider';
 import { Navbar } from 'components/layout/navbar';
 import { NextAuthProvider } from 'components/next-session-provider';
 import { ReactQueryProvider } from 'components/react-query-provider';
@@ -55,16 +53,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <ReactQueryProvider>
           <NextIntlClientProvider messages={messages}>
             <NextAuthProvider>
-              <CartProvider>
-                <CheckoutProvider>
                   <Navbar />
                   <FlowersFooter />
                   <main className="h-screen w-screen flex flex-col overflow-hidden">
                     {children}
                     <Toaster closeButton />
                   </main>
-                </CheckoutProvider>
-              </CartProvider>
               {/* TODO: Remove footer */}
               {/* <Footer /> */}
             </NextAuthProvider>

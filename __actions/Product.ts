@@ -5,7 +5,7 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
-  const products = await woocommerce.get('products', { author: 1, category_slug: 'occasioni' });
+  const products = await woocommerce.get('products', { author: 1, category_slug: 'anniversary' });
   return products;
 };
 
@@ -34,6 +34,8 @@ const pianta: Partial<Product> = {
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
 ): Promise<CompatibleProductsResponse> => {
+  const subscriptionType = answers?.preference === 'flower' ? 'flower' : answers?.preference === 'plant' ? 'plant' : answers?.forWhom === 'other' ? 'anniversary' : 'anniversary'
+  const productsBySubscription = await woocommerce.post('product-subscription', { subscription_type: subscriptionType, quantity: 1 }) as {products: Product[], related_products: Product[], variants: [], answers: []};
   if (answers?.path === 'myself') {
     if (answers?.preference === 'flower') {
       return {
