@@ -15,10 +15,10 @@ export default function FlowersFooter() {
 
   return (
     <div className="fixed bottom-0 left-0 w-full flex flex-row justify-between translate-y-1/6 items-end px-3">
-      <Flowers className="w-1/3 hidden md:flex" />
+      <Flowers className="w-1/3 hidden sm:flex" />
       <svg
         id="Livello_1"
-        className={`flower-spinner w-full md:w-auto ${currentState?.cssClass}`}
+        className={`flower-spinner w-full sm:w-auto ${currentState?.cssClass}`}
         xmlns="http://www.w3.org/2000/svg"
         width="420"
         viewBox="0 0 445 320"
@@ -132,7 +132,7 @@ export default function FlowersFooter() {
           />
         </g>
       </svg>
-      <Flowers className="w-1/3 hidden md:flex" />
+      <Flowers className="w-1/3 hidden sm:flex" />
     </div>
   );
 }
