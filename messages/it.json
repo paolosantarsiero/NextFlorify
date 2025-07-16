@@ -259,7 +259,7 @@
         },
         "frequency": {
           "weekly": "Settimanale",
-          "bi-weekly": "Ogni 2 settimane",
+          "biweekly": "Ogni 2 settimane",
           "monthly": "Mensile",
           "yearly": "Annuale"
         },
@@ -333,7 +333,7 @@
     "subscription": {
       "frequency": {
         "weekly": "Settimanale",
-        "bi-weekly": "Ogni 2 settimane",
+        "biweekly": "Ogni 2 settimane",
         "monthly": "Mensile",
         "yearly": "Annuale"
       }

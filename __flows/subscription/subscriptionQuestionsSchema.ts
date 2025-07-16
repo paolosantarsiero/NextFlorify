@@ -36,7 +36,7 @@ export const PackagingSchema = z.object({
 });
 export type PackagingType = z.infer<typeof PackagingSchema>;
 
-export const FrequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly']);
+export const FrequencyEnum = z.enum(['weekly', 'biweekly', 'monthly']);
 export const FrequencySchema = z.object({
   frequency: FrequencyEnum
 });

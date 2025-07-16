@@ -1,5 +1,6 @@
 'use server';
 
+import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import axios, { AxiosInstance } from 'axios';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/config';
@@ -17,7 +18,7 @@ export const customApiClient: AxiosInstance = axios.create({
 
 // Esempio: crea una sessione di checkout Stripe
 export type CreateStripeCheckoutSessionDataType = {
-  subscription_type: 'flower' | 'plant' | 'anniversary';
+  subscription_type: SubscriptionFlowDataType['preference'] | 'anniversary';
   product_id?: number;
   quantity: number;
   variants?: Array<{
@@ -41,6 +42,8 @@ export async function createStripeCheckoutSession(
   if (!session?.user?.token) {
     throw new Error('User not authenticated');
   }
+  console.log(data);
+  console.log(session);
 
   return customApiClient
     .post('/stripe/create-checkout-session', data, {
@@ -49,8 +52,12 @@ export async function createStripeCheckoutSession(
         Authorization: `Bearer ${session.user.token}`
       }
     })
-    .then((res) => {
-      return res.data.responseObject as CreateStripeCheckoutSessionResponse;
+    .then((res: { data: { responseObject: CreateStripeCheckoutSessionResponse } }) => {
+      return res.data.responseObject;
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      throw err;
     });
 }
 

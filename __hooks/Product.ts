@@ -1,5 +1,6 @@
 'use client';
 
+import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
 import { useQuery } from '@tanstack/react-query';
 import { getCompatibleProducts, getProducts } from '../__actions/Product';
 
@@ -20,7 +21,7 @@ export const useProducts = () => {
   };
 };
 
-export const useGetCompatibleProducts = (answers: any) => {
+export const useGetCompatibleProducts = (answers: SubscriptionFlowDataType) => {
   const query = useQuery({
     queryKey: [COMPATIBLE_PRODUCTS_QUERY_KEY, answers],
     queryFn: () => getCompatibleProducts(answers)

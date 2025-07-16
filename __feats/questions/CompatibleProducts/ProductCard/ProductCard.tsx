@@ -1,48 +1,21 @@
+import { productsValuableAnswers } from '@/__types/product';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CompatibleProduct } from '__actions/Product';
-
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { useStripeCheckoutSession } from '__hooks/stripe';
 import { FlowInstances } from '__store/flowsStore';
 import { buildStripeCheckoutBody } from '__utils/stripe';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { getLipsum } from 'lib/utils';
+import { Product } from 'lib/woocomerce/models/product';
 import { X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 
 type Props = {
   flowName: keyof FlowInstances;
-  product: CompatibleProduct;
+  product: Product;
   answers: SubscriptionFlowDataType;
   onRemove: () => void;
   onNoThanks: () => void;
-};
-
-const mockData = {
-  customer_id: 4,
-  customer_email: 'user@example.com',
-  changeEveryTime: false,
-  product: {
-    product_id: 539,
-    quantity: 1
-  },
-  variants: [
-    {
-      slug: 'size',
-      value: 'small'
-    },
-    {
-      slug: 'packaging',
-      value: 'foliage'
-    },
-    {
-      slug: 'frequency',
-      value: 'weekly'
-    }
-  ],
-  selected_days: [],
-  note: 'string'
 };
 
 export const CompatibleProductCard = ({
@@ -57,10 +30,9 @@ export const CompatibleProductCard = ({
   const { data: session } = useSession();
   const handleBuy = async () => {
     const body = await buildStripeCheckoutBody(
-      product?.product?.id ?? 0,
+      product?.id ?? 0,
       answers,
-      product.valuableAnswers,
-      session ?? null
+      productsValuableAnswers[answers.preference].valuableAnswers
     );
 
     createStripeCheckoutSession(body);
@@ -73,12 +45,12 @@ export const CompatibleProductCard = ({
     <Card className="w-full sm:w-1/2">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          {product.product.name}
+          {product.name}
           <Button variant={'ghost'} onClick={onRemove}>
             <X className="w-4 h-4" />
           </Button>
         </CardTitle>
-        <CardDescription>{getLipsum()}</CardDescription>
+        <CardDescription>{product.description}</CardDescription>
       </CardHeader>
       <CardContent>
         {isLoadingStripeCheckoutSession ? (
