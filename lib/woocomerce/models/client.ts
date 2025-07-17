@@ -354,7 +354,11 @@ export default class WooCommerceRestApi<T extends WooRestApiOptions> {
     // Allow set and override Axios options.
     options = { ...options, ...this._opt.axiosConfig };
 
-    return axios(options).then((response) => response.data as WooCommerceResponse<T, P>);
+    return axios(options)
+      .then((response) => response.data as WooCommerceResponse<T, P>)
+      .catch((error) => {
+        throw error.response?.data || error.message;
+      });
   }
 
   /**
