@@ -36,6 +36,7 @@ import {
   SpecificDaySchema,
   SpecificDayType,
   SubscriptionFlowDataType,
+  SurpriseEnum,
   SurpriseSchema,
   SurpriseType,
   VaseEnum,
@@ -178,7 +179,8 @@ const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   resolver: zodResolver(SurpriseSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: SubscriptionFlowDataType) => NOTES_NODE,
-  inputType: 'boolean'
+  inputType: 'buttonSelect',
+  answers: SurpriseEnum
 };
 
 const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {

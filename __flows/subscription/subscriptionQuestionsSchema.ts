@@ -56,8 +56,9 @@ export const VaseSchema = z.object({
 });
 export type VaseType = z.infer<typeof VaseSchema>;
 
+export const SurpriseEnum = z.enum(['yes', 'no']);
 export const SurpriseSchema = z.object({
-  surprise: z.boolean()
+  surprise: SurpriseEnum
 });
 export type SurpriseType = z.infer<typeof SurpriseSchema>;
 

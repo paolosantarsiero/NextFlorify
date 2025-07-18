@@ -276,7 +276,10 @@
           "yes": "Si",
           "no": "No"
         },
-        "surprise": {},
+        "surprise": {
+          "yes": "Si",
+          "no": "No"
+        },
         "for": {
           "her": "Per lei",
           "him": "Per lui",
