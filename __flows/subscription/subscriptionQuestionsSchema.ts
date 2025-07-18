@@ -63,21 +63,13 @@ export type SurpriseType = z.infer<typeof SurpriseSchema>;
 
 //forOthers
 
-export const ForWhomEnum = z.enum([
-  'spouse',
-  'parent',
-  'grandparent',
-  'friend',
-  'partner',
-  'special',
-  'other'
-]);
-export const ForWhomSchema = z.object({
-  forWhom: ForWhomEnum
+export const ForEnum = z.enum(['her', 'him', 'friends', 'family', 'colleagues', 'customers']);
+export const ForSchema = z.object({
+  for: ForEnum
 });
-export type ForWhomType = z.infer<typeof ForWhomSchema>;
+export type ForType = z.infer<typeof ForSchema>;
 
-export const OccasionEnum = z.enum([
+export const AnniversaryEnum = z.enum([
   'birthday',
   'anniversary',
   'mothersDay',
@@ -88,10 +80,10 @@ export const OccasionEnum = z.enum([
   'valentinesDay',
   'other'
 ]);
-export const OccasionSchema = z.object({
-  occasion: OccasionEnum
+export const AnniversarySchema = z.object({
+  anniversaries: AnniversaryEnum
 });
-export type OccasionType = z.infer<typeof OccasionSchema>;
+export type AnniversaryType = z.infer<typeof AnniversarySchema>;
 
 export const NotesSchema = z.object({
   notes: z.string().optional()
@@ -114,7 +106,7 @@ export type SubscriptionFlowDataType = PathType &
   DayType &
   VaseType &
   SurpriseType &
-  ForWhomType &
-  OccasionType &
+  ForType &
+  AnniversaryType &
   SpecificDayType &
   NotesType;

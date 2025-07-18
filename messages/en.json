@@ -53,8 +53,8 @@
         "day": "On which day do you want to receive the flowers?",
         "vase": "Do you want a bouquet of flowers?",
         "surprise": "Do you want a surprise bouquet of flowers?",
-        "forWhom": "Who are you buying the flowers for?",
-        "occasion": "For what occasion are you buying the flowers?",
+        "for": "Who are you buying the flowers for?",
+        "anniversaries": "For what occasion are you buying the flowers?",
         "specificDay": "On which day do you want to receive the flowers?",
         "notes": "Do you have any other requests?"
       },
@@ -100,16 +100,15 @@
         },
         "vase": {},
         "surprise": {},
-        "forWhom": {
-          "spouse": "Spouse",
-          "parent": "Parent",
-          "grandparent": "Grandparent",
-          "friend": "Friend",
-          "partner": "Partner",
-          "special": "A special person",
-          "other": "Other"
+        "for": {
+          "her": "Spouse",
+          "him": "Partner",
+          "friends": "Friends",
+          "family": "Family",
+          "colleagues": "Colleagues",
+          "customers": "Customers"
         },
-        "occasion": {
+        "anniversaries": {
           "birthday": "Birthday",
           "anniversary": "Anniversary",
           "mothersDay": "Mother's Day",

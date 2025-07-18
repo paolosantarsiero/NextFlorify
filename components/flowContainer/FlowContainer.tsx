@@ -58,7 +58,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         }
       }
       updateData(flowName, answer);
-      const nextKey = currentNode?.next(answer) as keyof typeof flow.steps | null;
+      const nextKey = currentNode?.next(getData(flowName)) as keyof typeof flow.steps | null;
       if (nextKey && flow.steps[nextKey]) {
         setCurrentNodeId(flowName, nextKey);
       } else if (nextKey === 'end') {

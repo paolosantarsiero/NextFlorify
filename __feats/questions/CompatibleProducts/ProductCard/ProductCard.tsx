@@ -1,4 +1,5 @@
 import { productsValuableAnswers } from '@/__types/product';
+import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
@@ -32,7 +33,8 @@ export const CompatibleProductCard = ({
     const body = await buildStripeCheckoutBody(
       product?.id ?? 0,
       answers,
-      productsValuableAnswers[answers.preference].valuableAnswers
+      productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
+        .valuableAnswers
     );
 
     createStripeCheckoutSession(body);
@@ -50,7 +52,12 @@ export const CompatibleProductCard = ({
             <X className="w-4 h-4" />
           </Button>
         </CardTitle>
-        <CardDescription>{product.description}</CardDescription>
+        <CardDescription>
+          <Prose
+            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+            html={product?.description}
+          />
+        </CardDescription>
       </CardHeader>
       <CardContent>
         {isLoadingStripeCheckoutSession ? (

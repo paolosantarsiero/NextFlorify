@@ -227,8 +227,8 @@
         "day": "In quale giorno vuoi ricevere i fiori?",
         "vase": "Vuoi un caspo?",
         "surprise": "Vuoi che sia una sorpresa?",
-        "forWhom": "Per chi vuoi comprare i fiori?",
-        "occasion": "Per quale occasione vuoi comprare i fiori?",
+        "for": "Per chi vuoi comprare i fiori?",
+        "anniversaries": "Per quale occasione vuoi comprare i fiori?",
         "specificDay": "In quale giorno vuoi ricevere i fiori?",
         "notes": "Hai altre richieste?"
       },
@@ -277,16 +277,15 @@
           "no": "No"
         },
         "surprise": {},
-        "forWhom": {
-          "spouse": "Marito/moglie",
-          "parent": "Genitore",
-          "grandparent": "Nonno/nonna",
-          "friend": "Amico",
-          "partner": "Partner",
-          "special": "Una persona speciale",
-          "other": "Altro"
+        "for": {
+          "her": "Per lei",
+          "him": "Per lui",
+          "friends": "Per amici",
+          "family": "Per famiglia",
+          "colleagues": "Per colleghi",
+          "customers": "Per clienti"
         },
-        "occasion": {
+        "anniversaries": {
           "birthday": "Compleanno",
           "anniversary": "Anniversario",
           "mothersDay": "Festa della Mamma",

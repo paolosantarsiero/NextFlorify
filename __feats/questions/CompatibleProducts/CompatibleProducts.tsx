@@ -24,6 +24,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
       {compatibleProducts &&
         compatibleProducts.products.map((product) => (
           <CompatibleProductCard
+            key={product.id}
             flowName={flowName}
             answers={getData(flowName) as SubscriptionFlowDataType}
             product={product}

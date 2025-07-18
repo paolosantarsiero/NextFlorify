@@ -15,6 +15,6 @@ export type FlowNode<T extends FieldValues, D extends FieldValues> = {
   }[];
   riveState?: (data: D) => string;
   resolver: Resolver<T>;
-  next: (data: T) => string | null;
+  next: (flowData: D) => string | null;
   inputType: InputType;
 };

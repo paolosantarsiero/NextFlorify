@@ -1,3 +1,4 @@
+import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import { getLipsum } from 'lib/utils';
 import { Product } from 'lib/woocomerce/models/product';
 import { InfoIcon } from 'lucide-react';
 
@@ -29,7 +29,11 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{product.name}</DialogTitle>
-          <DialogDescription>{getLipsum()}</DialogDescription>
+          <DialogDescription></DialogDescription>
+          <Prose
+            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+            html={product?.description}
+          />
         </DialogHeader>
       </DialogContent>
     </Dialog>

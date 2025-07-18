@@ -1,3 +1,4 @@
+import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -7,7 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { cn, getLipsum } from 'lib/utils';
+import { cn } from 'lib/utils';
 import { Product } from 'lib/woocomerce/models/product';
 import ProductDialog from '../ProductDialog/ProductDialog';
 
@@ -26,7 +27,12 @@ export default function ProductCard({ product, className }: Props) {
     >
       <CardHeader>
         <CardTitle className="text-lg line-clamp-1">{product?.name}</CardTitle>
-        <CardDescription className="line-clamp-4">{getLipsum()}</CardDescription>
+        <CardDescription className="line-clamp-4">
+          <Prose
+            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+            html={product?.description}
+          />
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <p className="text-sm font-semibold">Tipo di fiore</p>

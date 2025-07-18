@@ -25,8 +25,12 @@ export type CreateStripeCheckoutSessionDataType = {
     slug: string;
     value: string;
   }>;
-  selected_days?: number[]; // default []
-  answers?: Record<string, any>;
+  answers?: Array<{
+    slug: string;
+    value: string[];
+  }>;
+  selected_days?: number[];
+  anniversary_date?: Date;
   note?: string;
 };
 
@@ -42,8 +46,6 @@ export async function createStripeCheckoutSession(
   if (!session?.user?.token) {
     throw new Error('User not authenticated');
   }
-  console.log(data);
-  console.log(session);
 
   return customApiClient
     .post('/stripe/create-checkout-session', data, {

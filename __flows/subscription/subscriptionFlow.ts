@@ -3,23 +3,23 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
+  AnniversaryEnum,
+  AnniversarySchema,
+  AnniversaryType,
   ColorEnum,
   ColorSchema,
   ColorType,
   DayEnum,
   DaySchema,
   DayType,
-  ForWhomEnum,
-  ForWhomSchema,
-  ForWhomType,
+  ForEnum,
+  ForSchema,
+  ForType,
   FrequencyEnum,
   FrequencySchema,
   FrequencyType,
   NotesSchema,
   NotesType,
-  OccasionEnum,
-  OccasionSchema,
-  OccasionType,
   PackagingEnum,
   PackagingSchema,
   PackagingType,
@@ -51,8 +51,8 @@ export const FREQUENCY_NODE = 'frequency';
 export const DAY_NODE = 'day';
 export const VASE_NODE = 'vase';
 export const SURPRISE_NODE = 'surprise';
-export const FOR_WHOM_NODE = 'forWhom';
-export const OCCASION_NODE = 'occasion';
+export const FOR_WHOM_NODE = 'for';
+export const ANNIVERSARIES_NODE = 'anniversaries';
 export const SPECIFIC_DAY_NODE = 'specificDay';
 export const NOTES_NODE = 'notes';
 
@@ -64,7 +64,12 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
     return 'watching';
   },
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: PathType) => (data.path === 'myself' ? PREFERENCE_NODE : FOR_WHOM_NODE),
+  next: (data: PathType) =>
+    data.path === 'myself'
+      ? PREFERENCE_NODE
+      : data.path === 'other'
+        ? FOR_WHOM_NODE
+        : FOR_WHOM_NODE,
   inputType: 'buttonSelect',
   answers: PathEnum
 };
@@ -75,7 +80,7 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
   resolver: zodResolver(PreferenceSchema),
   riveState: (data: SubscriptionFlowDataType) => 'idle',
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: PreferenceType) => (data.preference === 'flower' ? SIZE_NODE : VASE_NODE),
+  next: (data: SubscriptionFlowDataType) => (data.preference === 'flower' ? SIZE_NODE : VASE_NODE),
   inputType: 'buttonSelect',
   answers: PreferenceEnum
 };
@@ -95,7 +100,8 @@ const sizeNode: FlowNode<SizeType, SubscriptionFlowDataType> = {
   },
   resolver: zodResolver(SizeSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: SizeType) => COLOR_NODE,
+  next: (flowData: SubscriptionFlowDataType) =>
+    flowData.path === 'other' ? NOTES_NODE : COLOR_NODE,
   inputType: 'buttonSelect',
   answers: SizeEnum
 };
@@ -117,7 +123,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
   },
   resolver: zodResolver(ColorSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: ColorType) => PACKAGING_NODE,
+  next: (flowData: SubscriptionFlowDataType) => PACKAGING_NODE,
   inputType: 'buttonSelect',
   answers: ColorEnum
 };
@@ -128,7 +134,7 @@ const packagingNode: FlowNode<PackagingType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => 'packaging',
   resolver: zodResolver(PackagingSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: PackagingType) => FREQUENCY_NODE,
+  next: (flowData: SubscriptionFlowDataType) => FREQUENCY_NODE,
   inputType: 'buttonSelect',
   answers: PackagingEnum
 };
@@ -139,7 +145,7 @@ const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => 'calendar',
   resolver: zodResolver(FrequencySchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: FrequencyType) => DAY_NODE,
+  next: (flowData: SubscriptionFlowDataType) => DAY_NODE,
   inputType: 'buttonSelect',
   answers: FrequencyEnum
 };
@@ -160,7 +166,7 @@ const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(VaseSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: VaseType) => SURPRISE_NODE,
+  next: (data: SubscriptionFlowDataType) => SURPRISE_NODE,
   inputType: 'buttonSelect',
   answers: VaseEnum
 };
@@ -170,29 +176,31 @@ const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(SurpriseSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: SurpriseType) => NOTES_NODE,
+  next: (data: SubscriptionFlowDataType) => NOTES_NODE,
   inputType: 'boolean'
 };
 
-const forWhomNode: FlowNode<ForWhomType, SubscriptionFlowDataType> = {
+const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {
   id: FOR_WHOM_NODE,
   component: undefined,
-  resolver: zodResolver(ForWhomSchema),
+  resolver: zodResolver(ForSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: ForWhomType) => OCCASION_NODE,
+  next: (flowData: SubscriptionFlowDataType) => ANNIVERSARIES_NODE,
   inputType: 'buttonSelect',
-  answers: ForWhomEnum
+  answers: ForEnum
 };
 
-const occasionNode: FlowNode<OccasionType, SubscriptionFlowDataType> = {
-  id: OCCASION_NODE,
+const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
+  id: ANNIVERSARIES_NODE,
   component: undefined,
-  resolver: zodResolver(OccasionSchema),
+  resolver: zodResolver(AnniversarySchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: OccasionType) =>
-    data.occasion === 'other' || data.occasion === 'birthday' ? SPECIFIC_DAY_NODE : NOTES_NODE,
+  next: (flowData: SubscriptionFlowDataType) =>
+    flowData.anniversaries === 'other' || flowData.anniversaries === 'birthday'
+      ? SPECIFIC_DAY_NODE
+      : SIZE_NODE,
   inputType: 'buttonSelect',
-  answers: OccasionEnum
+  answers: AnniversaryEnum
 };
 
 const specificDayNode: FlowNode<SpecificDayType, SubscriptionFlowDataType> = {
@@ -200,7 +208,7 @@ const specificDayNode: FlowNode<SpecificDayType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(SpecificDaySchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: SpecificDayType) => NOTES_NODE,
+  next: (flowData: SubscriptionFlowDataType) => SIZE_NODE,
   inputType: 'date'
 };
 
@@ -209,7 +217,7 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(NotesSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: NotesType) => 'end', // TODO: change to end
+  next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
   inputType: 'text'
 };
 
@@ -226,8 +234,8 @@ export const questionsFlow: Flow = {
     [DAY_NODE]: dayNode,
     [VASE_NODE]: vaseNode,
     [SURPRISE_NODE]: surpriseNode,
-    [FOR_WHOM_NODE]: forWhomNode,
-    [OCCASION_NODE]: occasionNode,
+    [FOR_WHOM_NODE]: forNode,
+    [ANNIVERSARIES_NODE]: anniversariesNode,
     [SPECIFIC_DAY_NODE]: specificDayNode,
     [NOTES_NODE]: notesNode
   }

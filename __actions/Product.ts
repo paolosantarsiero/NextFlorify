@@ -27,13 +27,12 @@ export const getCompatibleProducts = async (
   if (!answers) {
     throw new Error('Answers are required');
   }
-  const productType = answers.path === 'myself' ? answers.preference : 'anniversary';
+  const subscriptionType = answers.path === 'other' ? 'anniversary' : answers.preference;
   const body = await buildGetCompatibleProductsBody(
     answers,
-    productsValuableAnswers[productType].valuableAnswers
+    productsValuableAnswers[subscriptionType].valuableAnswers
   );
-  console.log(body);
   const response = await woocommerce.post('product-subscription', body);
-  console.log(response);
+
   return response;
 };
