@@ -288,12 +288,12 @@
         "anniversaries": {
           "birthday": "Compleanno",
           "anniversary": "Anniversario",
-          "mothersDay": "Festa della Mamma",
-          "fathersDay": "Festa del Papà",
-          "womenDay": "Festa della Donna",
+          "mothers-day": "Festa della Mamma",
+          "fathers-day": "Festa del Papà",
+          "womens-day": "Festa della Donna",
           "christmas": "Natale",
           "easter": "Pasqua",
-          "valentinesDay": "San Valentino",
+          "saint-valentine": "San Valentino",
           "other": "Altro"
         },
         "specificDay": {},

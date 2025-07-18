@@ -1,4 +1,5 @@
 import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
+import { getSpecificDayByAnniversary } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
@@ -195,10 +196,13 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   component: undefined,
   resolver: zodResolver(AnniversarySchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (flowData: SubscriptionFlowDataType) =>
-    flowData.anniversaries === 'other' || flowData.anniversaries === 'birthday'
+  next: (flowData: SubscriptionFlowDataType) => {
+    flowData.specificDay = getSpecificDayByAnniversary(flowData.anniversaries) as Date;
+
+    return flowData.anniversaries === 'other' || flowData.anniversaries === 'birthday'
       ? SPECIFIC_DAY_NODE
-      : SIZE_NODE,
+      : SIZE_NODE;
+  },
   inputType: 'buttonSelect',
   answers: AnniversaryEnum
 };

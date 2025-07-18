@@ -32,6 +32,7 @@ export const getCompatibleProducts = async (
     answers,
     productsValuableAnswers[subscriptionType].valuableAnswers
   );
+  console.log(JSON.stringify(body));
   const response = await woocommerce.post('product-subscription', body);
 
   return response;

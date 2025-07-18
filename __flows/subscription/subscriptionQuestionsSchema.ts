@@ -72,12 +72,12 @@ export type ForType = z.infer<typeof ForSchema>;
 export const AnniversaryEnum = z.enum([
   'birthday',
   'anniversary',
-  'mothersDay',
-  'fathersDay',
-  'womenDay',
+  'mothers-day',
+  'fathers-day',
+  'womens-day',
   'christmas',
   'easter',
-  'valentinesDay',
+  'saint-valentine',
   'other'
 ]);
 export const AnniversarySchema = z.object({
