@@ -50,6 +50,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
     const intervalCount = subscription?.items?.data[0]?.plan?.interval_count;
     if (interval === 'day' && intervalCount === 14) return 'biweekly';
     if (interval === 'day' && intervalCount === 7) return 'weekly';
+    if (interval === 'week' && intervalCount === 1) return 'weekly';
     if (interval === 'month' && intervalCount === 1) return 'monthly';
     if (interval === 'year' && intervalCount === 1) return 'yearly';
     return `unknown`;
