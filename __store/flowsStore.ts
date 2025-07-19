@@ -37,7 +37,7 @@ export const useFlowsStore = create<FlowsStore>()(
     (set, get) => ({
       flows: {
         subscription: {
-          currentNodeId: null,
+          currentNodeId: questionsFlow.startingNodeId,
           data: {},
           flow: questionsFlow,
           history: []
