@@ -31,8 +31,10 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
     }
   });
   const handleStart = () => {
-    start('subscription'); // @todo: fix this when local storage is empty
-    router.push('/questions');
+    // @todo: fix this when local storage is empty
+    start('subscription', () => {
+      router.push('/questions');
+    });
   };
 
   return (
