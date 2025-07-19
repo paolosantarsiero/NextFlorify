@@ -34,6 +34,8 @@ export const CompatibleProductCard = ({
       product?.id ?? 0,
       answers,
       productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
+        .valuableVariants,
+      productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
         .valuableAnswers
     );
 

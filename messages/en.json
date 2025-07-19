@@ -50,7 +50,7 @@
         "color": "What color do you want?",
         "packaging": "Do you want natural packaging or packaging without leaves?",
         "frequency": "How often do you want to receive the flowers?",
-        "day": "On which day do you want to receive the flowers?",
+        "selected_days": "On which day do you want to receive the flowers?",
         "vase": "Do you want a bouquet of flowers?",
         "surprise": "Do you want a surprise bouquet of flowers?",
         "for": "Who are you buying the flowers for?",
@@ -89,14 +89,14 @@
           "monthly": "Monthly",
           "yearly": "Yearly"
         },
-        "day": {
-          "monday": "Monday",
-          "tuesday": "Tuesday",
-          "wednesday": "Wednesday",
-          "thursday": "Thursday",
-          "friday": "Friday",
-          "saturday": "Saturday",
-          "sunday": "Sunday"
+        "selected_days": {
+          "0": "Monday",
+          "1": "Tuesday",
+          "2": "Wednesday",
+          "3": "Thursday",
+          "4": "Friday",
+          "5": "Saturday",
+          "6": "Sunday"
         },
         "vase": {},
         "surprise": {},

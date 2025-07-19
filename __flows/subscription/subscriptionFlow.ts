@@ -50,7 +50,7 @@ export const SIZE_NODE = 'size';
 export const COLOR_NODE = 'color';
 export const PACKAGING_NODE = 'packaging';
 export const FREQUENCY_NODE = 'frequency';
-export const DAY_NODE = 'day';
+export const DAY_NODE = 'selected_days';
 export const VASE_NODE = 'vase';
 export const SURPRISE_NODE = 'surprise';
 export const FOR_WHOM_NODE = 'for';
@@ -201,7 +201,7 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   next: (flowData: SubscriptionFlowDataType) => {
     flowData.specificDay = getSpecificDayByAnniversary(flowData.anniversaries) as Date;
 
-    return flowData.anniversaries === 'other' || flowData.anniversaries === 'birthday'
+    return ['other', 'birthday', 'anniversary'].includes(flowData.anniversaries)
       ? SPECIFIC_DAY_NODE
       : SIZE_NODE;
   },

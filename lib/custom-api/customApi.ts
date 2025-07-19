@@ -29,7 +29,7 @@ export type CreateStripeCheckoutSessionDataType = {
     slug: string;
     value: string[];
   }>;
-  selected_days?: number[];
+  selected_days: string[];
   anniversary_date?: Date;
   note?: string;
 };

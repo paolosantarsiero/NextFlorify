@@ -30,6 +30,7 @@ export const getCompatibleProducts = async (
   const subscriptionType = answers.path === 'other' ? 'anniversary' : answers.preference;
   const body = await buildGetCompatibleProductsBody(
     answers,
+    productsValuableAnswers[subscriptionType].valuableVariants,
     productsValuableAnswers[subscriptionType].valuableAnswers
   );
   console.log(JSON.stringify(body));

@@ -21,7 +21,8 @@ export default function FlowersFooter() {
         className={`flower-spinner w-full sm:w-auto ${currentState?.cssClass}`}
         xmlns="http://www.w3.org/2000/svg"
         width="420"
-        viewBox="0 0 445 320"
+        height="245"
+        viewBox="0 0 445 245"
       >
         <g>
           <path

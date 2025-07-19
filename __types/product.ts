@@ -12,6 +12,7 @@ export type getCompatibleProductsBody = {
 
 export type productValuableAnswersType = {
   productType: SubscriptionFlowDataType['preference'] | 'anniversary';
+  valuableVariants: (keyof SubscriptionFlowDataType)[];
   valuableAnswers: (keyof SubscriptionFlowDataType)[];
 };
 
@@ -21,14 +22,17 @@ export const productsValuableAnswers: Record<
 > = {
   flower: {
     productType: 'flower',
-    valuableAnswers: ['size', 'frequency', 'packaging']
+    valuableVariants: ['size', 'frequency', 'packaging'],
+    valuableAnswers: ['color']
   },
   plant: {
     productType: 'plant',
-    valuableAnswers: ['vase']
+    valuableVariants: ['vase'],
+    valuableAnswers: []
   },
   anniversary: {
     productType: 'anniversary',
-    valuableAnswers: ['size']
+    valuableVariants: ['size'],
+    valuableAnswers: ['for', 'anniversaries', 'specificDay', 'color']
   }
 };
