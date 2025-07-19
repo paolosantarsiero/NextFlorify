@@ -1,3 +1,4 @@
+import { useFlowsStore } from '@/__store/flowsStore';
 import { Button } from '@/components/ui/button';
 import { useScrollListener } from '__hooks/ScrollListener';
 import { Cloud } from 'assets/images/Cloud';
@@ -12,6 +13,7 @@ type Props = {
 
 export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
   const router = useRouter();
+  const { start } = useFlowsStore();
   const handleScrollToBottom = () => {
     bottomSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -29,6 +31,7 @@ export default function TopSection({ topSectionRef, bottomSectionRef }: Props) {
     }
   });
   const handleStart = () => {
+    start('subscription'); // @todo: fix this when local storage is empty
     router.push('/questions');
   };
 
