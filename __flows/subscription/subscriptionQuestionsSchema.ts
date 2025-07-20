@@ -24,9 +24,19 @@ export const SizeSchema = z.object({
 });
 export type SizeType = z.infer<typeof SizeSchema>;
 
-export const ColorEnum = z.enum(['red', 'white', 'any']);
+export const ColorEnum = z.enum([
+  'blue',
+  'green',
+  'orange',
+  'pink',
+  'red',
+  'violet',
+  'white',
+  'yellow',
+  'any'
+]);
 export const ColorSchema = z.object({
-  color: ColorEnum
+  primary_color: z.array(ColorEnum)
 });
 export type ColorType = z.infer<typeof ColorSchema>;
 
@@ -86,6 +96,47 @@ export const AnniversarySchema = z.object({
 });
 export type AnniversaryType = z.infer<typeof AnniversarySchema>;
 
+export const StyleEnum = z.enum([
+  'autumnal',
+  'carefree',
+  'classic',
+  'elegant',
+  'hot',
+  'joyful',
+  'light',
+  'lively',
+  'minimalist',
+  'modern',
+  'natural',
+  'rich',
+  'romantic',
+  'rustic',
+  'simple',
+  'solar',
+  'spring',
+  'sunny',
+  'traditional'
+]);
+export const StyleSchema = z.object({
+  style: z.array(StyleEnum)
+});
+export type StyleType = z.infer<typeof StyleSchema>;
+
+export const PerfumeEnum = z.enum([
+  'balsamic',
+  'delicate',
+  'flowery',
+  'fresh',
+  'light',
+  'mixed',
+  'spicy',
+  'sweet'
+]);
+export const PerfumeSchema = z.object({
+  perfume: z.array(PerfumeEnum)
+});
+export type PerfumeType = z.infer<typeof PerfumeSchema>;
+
 export const NotesSchema = z.object({
   notes: z.string().optional()
 });
@@ -94,7 +145,21 @@ export type NotesType = z.infer<typeof NotesSchema>;
 // specific day
 
 export const SpecificDaySchema = z.object({
-  specificDay: z.date()
+  specificDay: z
+    .string()
+    .nullish()
+    .refine(
+      (val) => {
+        if (!val) return true; // Allow null or undefined values
+        const date = new Date(val);
+        const now = new Date();
+        // Confronta solo la data, non l'orario
+        date.setHours(0, 0, 0, 0);
+        now.setHours(0, 0, 0, 0);
+        return date >= now;
+      },
+      { message: 'Date cannot be in the past' }
+    )
 });
 export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
 
@@ -109,5 +174,7 @@ export type SubscriptionFlowDataType = PathType &
   SurpriseType &
   ForType &
   AnniversaryType &
+  StyleType &
+  PerfumeType &
   SpecificDayType &
   NotesType;

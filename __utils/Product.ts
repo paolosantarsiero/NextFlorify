@@ -36,22 +36,6 @@ export const buildGetCompatibleProductsBody = async (
     [] as { slug: string; value: any }[]
   );
 
-  //@todo: remove mock data
-  if (answers.path === 'other') {
-    answersSummary.push({
-      slug: 'primary_color',
-      value: ['pink', 'red']
-    });
-    answersSummary.push({
-      slug: 'style',
-      value: ['classic', 'romantic']
-    });
-    answersSummary.push({
-      slug: 'perfume',
-      value: ['light']
-    });
-  }
-
   const body: getCompatibleProductsBody = {
     subscription_type: subscriptionType,
     variants: variants,

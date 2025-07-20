@@ -36,24 +36,6 @@ export const buildStripeCheckoutBody = async (
     [] as { slug: string; value: any }[]
   );
 
-  console.log('Stripe Checkout Body:', JSON.stringify(answers, null, 2));
-
-  //@todo: remove mock data
-  if (answers.path === 'other') {
-    answersSummary.push({
-      slug: 'primary_color',
-      value: ['pink', 'red']
-    });
-    answersSummary.push({
-      slug: 'style',
-      value: ['classic', 'romantic']
-    });
-    answersSummary.push({
-      slug: 'perfume',
-      value: ['light']
-    });
-  }
-
   const body: CreateStripeCheckoutSessionDataType = {
     subscription_type: subscriptionType,
     product_id: productId,
@@ -64,7 +46,6 @@ export const buildStripeCheckoutBody = async (
     anniversary_date: answers.specificDay,
     note: answers.notes || ''
   };
-  console.log('Stripe Checkout Body:', JSON.stringify(body, null, 2));
 
   return body;
 };

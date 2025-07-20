@@ -45,9 +45,8 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
     }
 
     try {
-      const resolver = currentNode.resolver;
-      if (resolver && typeof resolver === 'function') {
-        const schema = (resolver as any).schema;
+      const schema = currentNode.schema;
+      if (schema) {
         if (schema) {
           const validationResult = schema.safeParse(answer);
           if (!validationResult.success) {

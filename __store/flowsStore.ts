@@ -144,7 +144,7 @@ export const useFlowsStore = create<FlowsStore>()(
           const currentNodeId = flow.currentNodeId;
 
           const currentStep = flowDef.steps[currentNodeId ?? ''];
-          const key = (currentStep?.resolver as any)?.schema?._def?.shape?.key || currentNodeId;
+          const key = currentStep?.id || currentNodeId;
 
           const updatedData = { ...data };
           if (key && updatedData[key]) {

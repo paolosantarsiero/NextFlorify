@@ -17,6 +17,7 @@ export const DateInput = ({ node, onAnswer }: DateInputProps) => {
         type="date"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        min={new Date().toISOString().split('T')[0]} // Prevent past dates
         className="border px-2 py-1 rounded-md"
       />
       <Button

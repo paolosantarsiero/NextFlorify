@@ -30,7 +30,7 @@ export type CreateStripeCheckoutSessionDataType = {
     value: string[];
   }>;
   selected_days: string[];
-  anniversary_date?: Date;
+  anniversary_date?: string | undefined | null;
   note?: string;
 };
 

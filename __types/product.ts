@@ -23,7 +23,7 @@ export const productsValuableAnswers: Record<
   flower: {
     productType: 'flower',
     valuableVariants: ['size', 'frequency', 'packaging'],
-    valuableAnswers: ['color']
+    valuableAnswers: ['primary_color']
   },
   plant: {
     productType: 'plant',
@@ -33,6 +33,6 @@ export const productsValuableAnswers: Record<
   anniversary: {
     productType: 'anniversary',
     valuableVariants: ['size'],
-    valuableAnswers: ['for', 'anniversaries', 'specificDay', 'color']
+    valuableAnswers: ['for', 'anniversaries', 'specificDay', 'primary_color', 'style', 'perfume']
   }
 };

@@ -52,22 +52,22 @@ const getEasterDate = (year: number) => {
 
 export const getSpecificDayByAnniversary = (
   anniversary: SubscriptionFlowDataType['anniversaries']
-): Date | undefined => {
+) => {
   switch (anniversary) {
     case 'mothers-day':
-      return new Date(new Date().getFullYear(), 4, 14);
+      return new Date(new Date().getFullYear(), 4, 14).toLocaleDateString();
     case 'fathers-day':
-      return new Date(new Date().getFullYear(), 5, 19);
+      return new Date(new Date().getFullYear(), 5, 19).toLocaleDateString();
     case 'womens-day':
-      return new Date(new Date().getFullYear(), 2, 8);
+      return new Date(new Date().getFullYear(), 2, 8).toLocaleDateString();
     case 'christmas':
-      return new Date(new Date().getFullYear(), 11, 25);
+      return new Date(new Date().getFullYear(), 11, 25).toLocaleDateString();
     case 'easter':
-      return getEasterDate(new Date().getFullYear());
+      return getEasterDate(new Date().getFullYear()).toLocaleDateString();
     case 'saint-valentine':
-      return new Date(new Date().getFullYear(), 1, 14);
+      return new Date(new Date().getFullYear(), 1, 14).toLocaleDateString();
     default:
-      return undefined;
+      return null;
   }
 };
 

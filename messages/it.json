@@ -233,15 +233,17 @@
         "path": "Per chi vuoi comprare i fiori?",
         "preference": "Vuoi fiori o piante?",
         "size": "Quale dimensione vuoi?",
-        "color": "Quale colore vuoi?",
+        "primary_color": "Quale colore vuoi?",
         "packaging": "Vuoi un imballaggio naturale o un imballaggio senza foglie?",
         "frequency": "Ogni quanto vuoi ricevere i fiori?",
         "selected_days": "In quale giorno vuoi ricevere i fiori?",
-        "vase": "Vuoi un caspo?",
+        "vase": "Vuoi il vaso?",
         "surprise": "Vuoi che sia una sorpresa?",
         "for": "Per chi vuoi comprare i fiori?",
         "anniversaries": "Per quale occasione vuoi comprare i fiori?",
         "specificDay": "In quale giorno vuoi ricevere i fiori?",
+        "style": "Quale stile preferisci?",
+        "perfume": "Quale profumo preferisci?",
         "notes": "Hai altre richieste?"
       },
       "answers": {
@@ -258,10 +260,16 @@
           "medium": "Medio",
           "large": "Grande"
         },
-        "color": {
+        "primary_color": {
+          "blue": "Blu",
+          "green": "Verde",
+          "orange": "Arancione",
+          "pink": "Rosa",
           "red": "Rosso",
+          "violet": "Viola",
           "white": "Bianco",
-          "any": "Fai da te"
+          "yellow": "Giallo",
+          "any": "Qualunque"
         },
         "packaging": {
           "natural": "Naturale",
@@ -312,10 +320,50 @@
           "other": "Altro"
         },
         "specificDay": {},
+        "style": {
+          "autumnal": "Autunnale",
+          "carefree": "Spensierato",
+          "classic": "Classico",
+          "elegant": "Elegante",
+          "hot": "Caldo",
+          "joyful": "Gioioso",
+          "light": "Leggero",
+          "lively": "Vivace",
+          "minimalist": "Minimalista",
+          "modern": "Moderno",
+          "natural": "Naturale",
+          "rich": "Ricco",
+          "romantic": "Romantico",
+          "rustic": "Rustico",
+          "simple": "Semplice",
+          "solar": "Solare",
+          "spring": "Primaverile",
+          "sunny": "Soleggiato",
+          "traditional": "Tradizionale"
+        },
+        "perfume": {
+          "balsamic": "Balsamico",
+          "delicate": "Delicato",
+          "flowery": "Fiorito",
+          "fresh": "Fresco",
+          "light": "Leggero",
+          "mixed": "Misto",
+          "spicy": "Speziato",
+          "sweet": "Dolce"
+        },
         "notes": {}
       },
       "node-specific": {
+        "primary_color": {
+          "submit": "Continua"
+        },
         "selected_days": {
+          "submit": "Continua"
+        },
+        "style": {
+          "submit": "Continua"
+        },
+        "perfume": {
           "submit": "Continua"
         }
       },

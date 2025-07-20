@@ -34,7 +34,13 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
           </Toggle>
         ))}
       </div>
-      <Button variant="gradient" onClick={() => onAnswer({ [node.id]: selected })}>
+      <Button
+        variant="gradient"
+        onClick={() => {
+          onAnswer({ [node.id]: selected });
+          setSelected([]);
+        }}
+      >
         {t(`node-specific.${node.id}.submit` as MessageKeys<IntlMessages, 'flows'>)}
       </Button>
     </div>
