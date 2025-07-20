@@ -136,7 +136,7 @@ export default function Floro({ state, flowName, navigation, onGoHome }: Props) 
         console.log('[DEBUG] Tipo sconosciuto:', state);
       //prevAnimation();
     }
-  }, [state]);
+  }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
 
   return (
     <div className="w-3/4 h-full z-10 relative m-auto">

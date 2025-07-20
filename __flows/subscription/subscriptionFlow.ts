@@ -210,6 +210,7 @@ const specificDayNode: FlowNode<SpecificDayType, SubscriptionFlowDataType> = {
 const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'watching',
   resolver: zodResolver(NotesSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
