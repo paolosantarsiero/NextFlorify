@@ -1,6 +1,7 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
+import { castStripeIntervalToFrequency } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import { Calendar, CreditCardIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -45,16 +46,10 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
 
   const product = subscription?.items?.data[0]?.price.product as Stripe.Product;
   const nextRenewalDate = new Date((subscription.items?.data?.[0]?.current_period_end ?? 0) * 1000);
-  const interval = (): 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'unknown' => {
-    const interval = subscription?.items?.data[0]?.plan?.interval;
-    const intervalCount = subscription?.items?.data[0]?.plan?.interval_count;
-    if (interval === 'day' && intervalCount === 14) return 'biweekly';
-    if (interval === 'day' && intervalCount === 7) return 'weekly';
-    if (interval === 'week' && intervalCount === 1) return 'weekly';
-    if (interval === 'month' && intervalCount === 1) return 'monthly';
-    if (interval === 'year' && intervalCount === 1) return 'yearly';
-    return `unknown`;
-  };
+  const frequency = castStripeIntervalToFrequency(
+    subscription?.items?.data[0]?.plan.interval,
+    subscription?.items?.data[0]?.plan.interval_count
+  );
   const plan = subscription?.items?.data[0]?.plan as Stripe.Plan;
   const price = (plan?.amount ?? 0) / 100;
   const paymentMethod = subscription?.default_payment_method as Stripe.PaymentMethod;
@@ -68,7 +63,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2">
             <Badge variant={'gray'} key={subscription.id}>
-              {t(`planInterval.${interval()}`)}
+              {t(`planInterval.${frequency}`)}
             </Badge>
           </div>
           <div className="flex flex-col gap-1">
@@ -88,7 +83,14 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
               {paymentMethod.card?.brand} **{paymentMethod.card?.last4}
             </span>
           </p>
-          <DetailsDialog />
+          <DetailsDialog
+            subscription={subscription}
+            product={product}
+            plan={plan}
+            frequency={frequency}
+            paymentMethod={paymentMethod}
+            nextRenewalDate={nextRenewalDate}
+          />
         </div>
       </div>
     </div>

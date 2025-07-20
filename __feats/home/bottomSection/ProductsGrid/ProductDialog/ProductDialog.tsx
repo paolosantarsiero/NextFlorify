@@ -35,6 +35,14 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
             html={product?.description}
           />
         </DialogHeader>
+        <div>
+          {product.attributes?.map((attribute) => (
+            <div key={attribute.id} className="mb-4">
+              <p className="text-sm font-semibold">{attribute.name}</p>
+              <p className="text-sm text-muted-foreground">{attribute.options?.join(', ')}</p>
+            </div>
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );

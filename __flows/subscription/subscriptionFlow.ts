@@ -62,9 +62,7 @@ const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   id: PATH_NODE,
   component: undefined,
   resolver: zodResolver(PathSchema),
-  riveState: (data: SubscriptionFlowDataType) => {
-    return 'watching';
-  },
+  riveState: (data: SubscriptionFlowDataType) => 'watching',
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: PathType) =>
     data.path === 'myself'
@@ -90,16 +88,7 @@ const preferenceNode: FlowNode<PreferenceType, SubscriptionFlowDataType> = {
 const sizeNode: FlowNode<SizeType, SubscriptionFlowDataType> = {
   id: SIZE_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => {
-    switch (data?.preference) {
-      case 'flower':
-        return 'flower';
-      case 'plant':
-        return 'plant';
-      default:
-        return 'flower';
-    }
-  },
+  riveState: (data: SubscriptionFlowDataType) => 'flower',
   resolver: zodResolver(SizeSchema),
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) =>
@@ -120,7 +109,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
       case 'large':
         return 'flowerLarge';
       default:
-        return 'grande';
+        return 'flowerLarge';
     }
   },
   resolver: zodResolver(ColorSchema),

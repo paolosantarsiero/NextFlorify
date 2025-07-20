@@ -58,7 +58,12 @@
           "unknown": "Sconosciuto"
         },
         "nextPayment": "Prossimo addebito",
-        "details": "Dettagli"
+        "details": "Dettagli",
+        "dialogs": {
+          "shippingAddress": "Indirizzo di spedizione",
+          "orders": "Ordini",
+          "cancel": "Annulla abbonamento"
+        }
       }
     },
     "AccountPage": {
@@ -256,7 +261,7 @@
         "color": {
           "red": "Rosso",
           "white": "Bianco",
-          "diy": "Fai da te"
+          "any": "Fai da te"
         },
         "packaging": {
           "natural": "Naturale",

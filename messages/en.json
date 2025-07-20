@@ -75,13 +75,13 @@
         "color": {
           "red": "Red",
           "white": "White",
-          "diy": "DIY"
+          "any": "any"
         },
         "packaging": {
           "natural": "Natural",
           "withoutLeaves": "Without leaves",
           "withLeaves": "With leaves",
-          "diy": "DIY"
+          "any": "any"
         },
         "frequency": {
           "weekly": "Weekly",

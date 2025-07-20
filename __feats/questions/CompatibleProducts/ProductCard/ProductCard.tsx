@@ -26,8 +26,11 @@ export const CompatibleProductCard = ({
   answers,
   onNoThanks
 }: Props) => {
-  const { createStripeCheckoutSession, isLoadingStripeCheckoutSession } =
-    useStripeCheckoutSession();
+  const {
+    createStripeCheckoutSession,
+    isLoadingStripeCheckoutSession,
+    errorStripeCheckoutSession
+  } = useStripeCheckoutSession();
   const { data: session } = useSession();
   const handleBuy = async () => {
     const body = await buildStripeCheckoutBody(
@@ -46,7 +49,7 @@ export const CompatibleProductCard = ({
   };
 
   return (
-    <Card className="w-full sm:w-1/2">
+    <Card className="w-full sm:w-1/2 mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           {product.name}
@@ -82,6 +85,11 @@ export const CompatibleProductCard = ({
               Acquista
             </Button>
           </div>
+        )}
+        {errorStripeCheckoutSession && (
+          <p className="text-red-500 mt-2">
+            {errorStripeCheckoutSession.message || 'Errore durante il processo di acquisto.'}
+          </p>
         )}
       </CardContent>
     </Card>

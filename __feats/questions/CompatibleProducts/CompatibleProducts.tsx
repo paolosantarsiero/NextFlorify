@@ -19,7 +19,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     useGetCompatibleProducts(getData(flowName) as SubscriptionFlowDataType);
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center gap-3 px-3 overflow-y-auto sm:overflow-x-auto flex-col sm:flex-row sm:gap-6 justify-start">
       {isGetCompatibleProductsLoading && <LoadingDataScreen />}
       {compatibleProducts &&
         compatibleProducts.products.map((product) => (

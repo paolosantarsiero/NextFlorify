@@ -10,7 +10,7 @@ export const buildGetCompatibleProductsBody = async (
 ): Promise<getCompatibleProductsBody> => {
   let subscriptionType: getCompatibleProductsBody['subscription_type'] =
     answers.path === 'other' ? 'anniversary' : answers.preference;
-  const variants = valuableVariants.reduce(
+  const variants = (valuableVariants || []).reduce(
     (acc, variant) => {
       if (answers[variant]) {
         acc.push({
@@ -23,7 +23,7 @@ export const buildGetCompatibleProductsBody = async (
     [] as { slug: string; value: any }[]
   );
 
-  const answersSummary = valuableAnswers.reduce(
+  const answersSummary = (valuableAnswers || []).reduce(
     (acc, answer) => {
       if (answers[answer]) {
         acc.push({

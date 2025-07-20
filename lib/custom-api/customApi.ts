@@ -59,7 +59,7 @@ export async function createStripeCheckoutSession(
     })
     .catch((err) => {
       console.log(err.response.data);
-      throw err;
+      throw err.response.data.message;
     });
 }
 

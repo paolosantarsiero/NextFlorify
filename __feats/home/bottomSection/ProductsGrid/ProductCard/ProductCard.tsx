@@ -36,7 +36,7 @@ export default function ProductCard({ product, className }: Props) {
       </CardHeader>
       <CardContent>
         <p className="text-sm font-semibold">Tipo di fiore</p>
-        <p className="text-sm text-muted-foreground">{product?.categories[0]?.name}</p>
+        <p className="text-sm text-muted-foreground">{product?.categories?.[0]?.name}</p>
       </CardContent>
       <CardFooter className="items-end justify-end pb-0">
         <ProductDialog

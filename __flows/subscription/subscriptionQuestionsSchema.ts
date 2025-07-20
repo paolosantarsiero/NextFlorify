@@ -24,7 +24,7 @@ export const SizeSchema = z.object({
 });
 export type SizeType = z.infer<typeof SizeSchema>;
 
-export const ColorEnum = z.enum(['red', 'white', 'diy']);
+export const ColorEnum = z.enum(['red', 'white', 'any']);
 export const ColorSchema = z.object({
   color: ColorEnum
 });

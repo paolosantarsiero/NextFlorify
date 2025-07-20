@@ -70,3 +70,15 @@ export const getSpecificDayByAnniversary = (
       return undefined;
   }
 };
+
+export const castStripeIntervalToFrequency = (
+  interval: string | undefined,
+  intervalCount: number | undefined
+): 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'unknown' => {
+  if (interval === 'day' && intervalCount === 7) return 'weekly';
+  if (interval === 'week' && intervalCount === 1) return 'weekly';
+  if (interval === 'day' && intervalCount === 14) return 'biweekly';
+  if (interval === 'month' && intervalCount === 1) return 'monthly';
+  if (interval === 'year' && intervalCount === 1) return 'yearly';
+  return `unknown`;
+};

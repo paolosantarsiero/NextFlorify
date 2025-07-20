@@ -1,3 +1,4 @@
+import { FloroRiveState } from '@/components/rive/floro';
 import { Resolver } from 'react-hook-form';
 
 import { FieldValues } from 'react-hook-form';
@@ -13,7 +14,7 @@ export type FlowNode<T extends FieldValues, D extends FieldValues> = {
     component: string;
     state: string;
   }[];
-  riveState?: (data: D) => string;
+  riveState?: (data: D) => FloroRiveState;
   resolver: Resolver<T>;
   next: (flowData: D) => string | null;
   inputType: InputType;
