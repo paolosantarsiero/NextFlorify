@@ -144,8 +144,8 @@ export type NotesType = z.infer<typeof NotesSchema>;
 
 // specific day
 
-export const SpecificDaySchema = z.object({
-  specificDay: z
+export const AnniversayDateSchema = z.object({
+  anniversary_date: z
     .string()
     .nullish()
     .refine(
@@ -161,7 +161,7 @@ export const SpecificDaySchema = z.object({
       { message: 'Date cannot be in the past' }
     )
 });
-export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
+export type AnniversayDateType = z.infer<typeof AnniversayDateSchema>;
 
 export type SubscriptionFlowDataType = PathType &
   PreferenceType &
@@ -176,5 +176,5 @@ export type SubscriptionFlowDataType = PathType &
   AnniversaryType &
   StyleType &
   PerfumeType &
-  SpecificDayType &
+  AnniversayDateType &
   NotesType;

@@ -33,6 +33,13 @@ export const productsValuableAnswers: Record<
   anniversary: {
     productType: 'anniversary',
     valuableVariants: ['size'],
-    valuableAnswers: ['for', 'anniversaries', 'specificDay', 'primary_color', 'style', 'perfume']
+    valuableAnswers: [
+      'for',
+      'anniversaries',
+      'anniversary_date',
+      'primary_color',
+      'style',
+      'perfume'
+    ]
   }
 };

@@ -241,7 +241,7 @@
         "surprise": "Vuoi che sia una sorpresa?",
         "for": "Per chi vuoi comprare i fiori?",
         "anniversaries": "Per quale occasione vuoi comprare i fiori?",
-        "specificDay": "In quale giorno vuoi ricevere i fiori?",
+        "anniversary_date": "In quale giorno vuoi ricevere i fiori?",
         "style": "Quale stile preferisci?",
         "perfume": "Quale profumo preferisci?",
         "notes": "Hai altre richieste?"
@@ -319,7 +319,7 @@
           "saint-valentine": "San Valentino",
           "other": "Altro"
         },
-        "specificDay": {},
+        "anniversary_date": {},
         "style": {
           "autumnal": "Autunnale",
           "carefree": "Spensierato",

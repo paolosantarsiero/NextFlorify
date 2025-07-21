@@ -43,7 +43,7 @@ export const buildStripeCheckoutBody = async (
     variants: variants,
     answers: answersSummary,
     selected_days: answers.selected_days || [],
-    anniversary_date: answers.specificDay,
+    anniversary_date: answers.anniversary_date,
     note: answers.notes || ''
   };
 

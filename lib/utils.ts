@@ -50,22 +50,26 @@ const getEasterDate = (year: number) => {
   return new Date(year, month - 1, day);
 };
 
-export const getSpecificDayByAnniversary = (
+export const getAnniversayDateByAnniversary = (
   anniversary: SubscriptionFlowDataType['anniversaries']
 ) => {
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  const formatDate = (date: Date) =>
+    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+
   switch (anniversary) {
     case 'mothers-day':
-      return new Date(new Date().getFullYear(), 4, 14).toLocaleDateString();
+      return formatDate(new Date(new Date().getFullYear(), 4, 14));
     case 'fathers-day':
-      return new Date(new Date().getFullYear(), 5, 19).toLocaleDateString();
+      return formatDate(new Date(new Date().getFullYear(), 5, 19));
     case 'womens-day':
-      return new Date(new Date().getFullYear(), 2, 8).toLocaleDateString();
+      return formatDate(new Date(new Date().getFullYear(), 2, 8));
     case 'christmas':
-      return new Date(new Date().getFullYear(), 11, 25).toLocaleDateString();
+      return formatDate(new Date(new Date().getFullYear(), 11, 25));
     case 'easter':
-      return getEasterDate(new Date().getFullYear()).toLocaleDateString();
+      return formatDate(getEasterDate(new Date().getFullYear()));
     case 'saint-valentine':
-      return new Date(new Date().getFullYear(), 1, 14).toLocaleDateString();
+      return formatDate(new Date(new Date().getFullYear(), 1, 14));
     default:
       return null;
   }

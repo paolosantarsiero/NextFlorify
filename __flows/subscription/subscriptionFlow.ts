@@ -1,11 +1,13 @@
 import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
-import { getSpecificDayByAnniversary } from '@/lib/utils';
+import { getAnniversayDateByAnniversary } from '@/lib/utils';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
   AnniversaryEnum,
   AnniversarySchema,
   AnniversaryType,
+  AnniversayDateSchema,
+  AnniversayDateType,
   ColorEnum,
   ColorSchema,
   ColorType,
@@ -35,8 +37,6 @@ import {
   SizeEnum,
   SizeSchema,
   SizeType,
-  SpecificDaySchema,
-  SpecificDayType,
   StyleEnum,
   StyleSchema,
   StyleType,
@@ -62,7 +62,7 @@ export const FOR_WHOM_NODE = 'for';
 export const ANNIVERSARIES_NODE = 'anniversaries';
 export const STYLE_NODE = 'style';
 export const PERFUME_NODE = 'perfume';
-export const SPECIFIC_DAY_NODE = 'specificDay';
+export const ANNIVERSARY_DATE_NODE = 'anniversary_date';
 export const NOTES_NODE = 'notes';
 
 const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
@@ -196,10 +196,10 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   schema: AnniversarySchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => {
-    flowData.specificDay = getSpecificDayByAnniversary(flowData.anniversaries);
+    flowData.anniversary_date = getAnniversayDateByAnniversary(flowData.anniversaries);
 
     return ['other', 'birthday', 'anniversary'].includes(flowData.anniversaries)
-      ? SPECIFIC_DAY_NODE
+      ? ANNIVERSARY_DATE_NODE
       : COLOR_NODE;
   },
   inputType: 'buttonSelect',
@@ -226,10 +226,10 @@ const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
   answers: PerfumeEnum
 };
 
-const specificDayNode: FlowNode<SpecificDayType, SubscriptionFlowDataType> = {
-  id: SPECIFIC_DAY_NODE,
+const anniversaryDate: FlowNode<AnniversayDateType, SubscriptionFlowDataType> = {
+  id: ANNIVERSARY_DATE_NODE,
   component: undefined,
-  schema: SpecificDaySchema,
+  schema: AnniversayDateSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => SIZE_NODE,
   inputType: 'date'
@@ -262,7 +262,7 @@ export const questionsFlow: Flow = {
     [ANNIVERSARIES_NODE]: anniversariesNode,
     [STYLE_NODE]: styleNode,
     [PERFUME_NODE]: perfumeNode,
-    [SPECIFIC_DAY_NODE]: specificDayNode,
+    [ANNIVERSARY_DATE_NODE]: anniversaryDate,
     [NOTES_NODE]: notesNode
   }
 };

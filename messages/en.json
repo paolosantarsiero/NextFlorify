@@ -55,7 +55,7 @@
         "surprise": "Do you want a surprise bouquet of flowers?",
         "for": "Who are you buying the flowers for?",
         "anniversaries": "For what occasion are you buying the flowers?",
-        "specificDay": "On which day do you want to receive the flowers?",
+        "anniversary_date": "On which day do you want to receive the flowers?",
         "notes": "Do you have any other requests?"
       },
       "answers": {
@@ -119,7 +119,7 @@
           "saint-valentine": "Valentine's Day",
           "other": "Other"
         },
-        "specificDay": {},
+        "anniversary_date": {},
         "notes": {}
       }
     },
