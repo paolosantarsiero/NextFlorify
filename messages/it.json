@@ -399,6 +399,11 @@
         "monthly": "Mensile",
         "yearly": "Annuale"
       }
+    },
+    "notFound": {
+      "title": "Pagina non trovata",
+      "description": "La pagina che stai cercando non esiste. Per favore, controlla l'URL e prova di nuovo.",
+      "button": "Torna alla home"
     }
   }
 }
