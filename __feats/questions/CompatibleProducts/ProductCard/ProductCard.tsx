@@ -18,10 +18,13 @@ import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { Product } from 'lib/woocomerce/models/product';
 import { X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import Stripe from 'stripe';
 
 type Props = {
   flowName: keyof FlowInstances;
   products: Product[];
+  relatedProducts: Product[];
+  subscription: Stripe.Product;
   answers: SubscriptionFlowDataType;
   onRemove: () => void;
   onNoThanks: () => void;
@@ -29,6 +32,8 @@ type Props = {
 
 export const CompatibleProductsCard = ({
   products,
+  relatedProducts,
+  subscription,
   onRemove,
   flowName,
   answers,
@@ -60,13 +65,13 @@ export const CompatibleProductsCard = ({
     <Card className="w-full sm:w-1/2 mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          'wewe'
+          <span className="text-sm font-medium">{subscription?.name}</span>
           <Button variant={'ghost'} onClick={onRemove}>
             <X className="w-4 h-4" />
           </Button>
         </CardTitle>
         <CardDescription className="flex flex-row gap-4">
-          <Prose className="mb-6 text-sm leading-tight dark:text-white/[60%]" html={'wewe'} />
+          <span>{subscription.description}</span>
           <Carousel className="w-full max-w-xs" plugins={[WheelGesturesPlugin({})]}>
             <CarouselContent>
               {products.map((product, index) => (

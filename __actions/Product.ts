@@ -1,6 +1,7 @@
 'use server';
 
 import { buildGetCompatibleProductsBody } from '@/__utils/Product';
+import { getProductsBySubscriptionType } from '@/lib/custom-api/customApi';
 import { woocommerce } from '@/lib/woocomerce/woocommerce';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { productsValuableAnswers } from '__types/product';
@@ -21,9 +22,7 @@ export type getCompatibleProductsBody = {
   quantity: number;
 };
 
-export const getCompatibleProducts = async (
-  answers?: SubscriptionFlowDataType
-): Promise<{ products: Product[]; related_products: Product[] }> => {
+export const getCompatibleProducts = async (answers?: SubscriptionFlowDataType) => {
   if (!answers) {
     throw new Error('Answers are required');
   }
@@ -33,7 +32,8 @@ export const getCompatibleProducts = async (
     productsValuableAnswers[subscriptionType]?.valuableVariants,
     productsValuableAnswers[subscriptionType]?.valuableAnswers
   );
-  const response = await woocommerce.post('product-subscription', body);
-  console.log(response);
+
+  const response = await getProductsBySubscriptionType(body);
+
   return response;
 };

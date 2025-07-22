@@ -1,8 +1,10 @@
 'use server';
 
+import { getCompatibleProductsBody } from '@/__types/product';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import axios, { AxiosInstance } from 'axios';
 import { getServerSession } from 'next-auth';
+import Stripe from 'stripe';
 import { authOptions } from '../auth/config';
 
 const API_BASE_URL = process.env.CUSTOM_API_URL || 'http://localhost:8080';
@@ -38,6 +40,14 @@ export type CreateStripeCheckoutSessionResponse = {
   id: string;
   url: string;
 };
+
+export async function getProductsBySubscriptionType(
+  data: getCompatibleProductsBody
+): Promise<{ products: any[]; related_products: any[]; subscription: Stripe.Product }> {
+  return customApiClient
+    .post('/woocommerce/product-subscription', data)
+    .then((res) => res.data.responseObject);
+}
 
 export async function createStripeCheckoutSession(
   data: CreateStripeCheckoutSessionDataType

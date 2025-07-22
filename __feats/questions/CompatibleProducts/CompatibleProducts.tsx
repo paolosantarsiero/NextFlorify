@@ -35,6 +35,8 @@ export const CompatibleProducts = ({ flowName }: Props) => {
           flowName={flowName}
           answers={getData(flowName) as SubscriptionFlowDataType}
           products={compatibleProducts.products}
+          relatedProducts={compatibleProducts.related_products}
+          subscription={compatibleProducts.subscription}
           onRemove={() => {
             reset(flowName);
             router.push('/');

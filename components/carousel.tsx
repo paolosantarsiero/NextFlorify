@@ -3,7 +3,7 @@ import { woocommerce } from 'lib/woocomerce/woocommerce';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
-export async function Carousel() {
+export async function HomeCarousel() {
   const products: Product[] = await woocommerce.get('products', { author: 1 });
 
   if (!products?.length) return null;
