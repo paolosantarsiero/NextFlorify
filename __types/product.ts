@@ -28,7 +28,7 @@ export const productsValuableAnswers: Record<
   plant: {
     productType: 'plant',
     valuableVariants: ['vase'],
-    valuableAnswers: []
+    valuableAnswers: ['surprise']
   },
   anniversary: {
     productType: 'anniversary',
