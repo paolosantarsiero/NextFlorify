@@ -2,25 +2,33 @@ import { productsValuableAnswers } from '@/__types/product';
 import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { useStripeCheckoutSession } from '__hooks/stripe';
 import { FlowInstances } from '__store/flowsStore';
 import { buildStripeCheckoutBody } from '__utils/stripe';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { Product } from 'lib/woocomerce/models/product';
 import { X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 
 type Props = {
   flowName: keyof FlowInstances;
-  product: Product;
+  products: Product[];
   answers: SubscriptionFlowDataType;
   onRemove: () => void;
   onNoThanks: () => void;
 };
 
-export const CompatibleProductCard = ({
-  product,
+export const CompatibleProductsCard = ({
+  products,
   onRemove,
   flowName,
   answers,
@@ -34,7 +42,7 @@ export const CompatibleProductCard = ({
   const { data: session } = useSession();
   const handleBuy = async () => {
     const body = await buildStripeCheckoutBody(
-      product?.id ?? 0,
+      products[0]?.id ?? 0,
       answers,
       productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
         .valuableVariants,
@@ -52,16 +60,36 @@ export const CompatibleProductCard = ({
     <Card className="w-full sm:w-1/2 mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          {product.name}
+          'wewe'
           <Button variant={'ghost'} onClick={onRemove}>
             <X className="w-4 h-4" />
           </Button>
         </CardTitle>
-        <CardDescription>
-          <Prose
-            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-            html={product?.description}
-          />
+        <CardDescription className="flex flex-row gap-4">
+          <Prose className="mb-6 text-sm leading-tight dark:text-white/[60%]" html={'wewe'} />
+          <Carousel className="w-full max-w-xs" plugins={[WheelGesturesPlugin({})]}>
+            <CarouselContent>
+              {products.map((product, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>{product.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <Prose
+                          className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+                          html={product.description}
+                        />
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </CardDescription>
       </CardHeader>
       <CardContent>
