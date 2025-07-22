@@ -1,4 +1,3 @@
-import { heroui } from '@heroui/react';
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -15,7 +14,6 @@ const config: Config = {
     './__feats/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
     './@/components/ui/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
@@ -143,7 +141,6 @@ const config: Config = {
         }
       );
     }),
-    heroui(),
     require('tailwindcss-animate')
   ]
 };
