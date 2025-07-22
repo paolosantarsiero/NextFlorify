@@ -62,7 +62,7 @@ export const CompatibleProductsCard = ({
   };
 
   return (
-    <Card className="w-full sm:w-1/2 mx-auto">
+    <Card className="w-full sm:w-3/4 mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span className="text-sm font-medium">{subscription?.name}</span>
@@ -70,31 +70,38 @@ export const CompatibleProductsCard = ({
             <X className="w-4 h-4" />
           </Button>
         </CardTitle>
-        <CardDescription className="flex flex-row gap-4">
-          <span>{subscription.description}</span>
-          <Carousel className="w-full max-w-xs" plugins={[WheelGesturesPlugin({})]}>
-            <CarouselContent>
-              {products.map((product, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{product.name}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="flex aspect-square items-center justify-center p-6">
-                        <Prose
-                          className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-                          html={product.description}
-                        />
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+        <CardDescription className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
+            <span className="sm:w-1/2">
+              {subscription.description} fewfewfew e ewf ewf f ew f wef we f we f ew f ewf ewf wef w
+              e
+            </span>
+            <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
+              <Carousel className="w-full h-72" plugins={[WheelGesturesPlugin()]}>
+                <CarouselContent className="h-full">
+                  {products.map((product, index) => (
+                    <CarouselItem key={index} className="h-full">
+                      <div className="p-1 h-full">
+                        <Card className="h-full flex flex-col">
+                          <CardHeader>
+                            <CardTitle>{product.name}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="flex-1 flex items-center justify-center p-6">
+                            <Prose
+                              className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+                              html={product.description}
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
+          </div>
         </CardDescription>
       </CardHeader>
       <CardContent>
