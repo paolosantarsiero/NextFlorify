@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 // tailwind.config.js
 
 const spacing = Object.fromEntries(
-  Array.from({ length: 201 }, (_, i) => {
+  Array.from({ length: 300 }, (_, i) => {
     return [String(i), `${i * 0.25}rem`];
   })
 );

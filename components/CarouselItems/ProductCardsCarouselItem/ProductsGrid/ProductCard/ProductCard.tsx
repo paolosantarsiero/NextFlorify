@@ -21,7 +21,7 @@ export default function ProductCard({ product, className }: Props) {
   return (
     <Card
       className={cn(
-        'relative bg-transparent backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50 px-1',
+        'relative bg-transparent backdrop-blur-sm rounded-2xl shadow-md p-6  flex flex-col justify-between z-50 px-1 h-80',
         className ?? ''
       )}
     >
