@@ -36,7 +36,7 @@ export const ColorEnum = z.enum([
   'any'
 ]);
 export const ColorSchema = z.object({
-  primary_color: z.array(ColorEnum)
+  primary_color: z.array(ColorEnum).nonempty(),
 });
 export type ColorType = z.infer<typeof ColorSchema>;
 
@@ -118,7 +118,7 @@ export const StyleEnum = z.enum([
   'traditional'
 ]);
 export const StyleSchema = z.object({
-  style: z.array(StyleEnum)
+  style: z.array(StyleEnum).nonempty()
 });
 export type StyleType = z.infer<typeof StyleSchema>;
 
@@ -133,7 +133,7 @@ export const PerfumeEnum = z.enum([
   'sweet'
 ]);
 export const PerfumeSchema = z.object({
-  perfume: z.array(PerfumeEnum)
+  perfume: z.array(PerfumeEnum).nonempty()
 });
 export type PerfumeType = z.infer<typeof PerfumeSchema>;
 
