@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -17,7 +18,7 @@ import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { Product } from 'lib/woocomerce/models/product';
 import { X } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import Stripe from 'stripe';
 
 type Props = {
@@ -42,17 +43,34 @@ export const CompatibleProductsCard = ({
     isLoadingStripeCheckoutSession,
     errorStripeCheckoutSession
   } = useStripeCheckoutSession();
-  const { data: session } = useSession();
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  // Aggiorna selectedIndex quando cambia slide
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on('select', () => {
+      console.log('Selected index:', api.selectedScrollSnap());
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   const handleBuy = async () => {
+    const selectedProduct = products[current];
+    if (!selectedProduct) return;
     const body = await buildStripeCheckoutBody(
-      products[0]?.id ?? 0,
+      selectedProduct.id,
       answers,
       productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
         .valuableVariants,
       productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
         .valuableAnswers
     );
-
     createStripeCheckoutSession(body);
   };
 
@@ -70,7 +88,7 @@ export const CompatibleProductsCard = ({
             <span className="sm:w-1/2">{subscription.description}</span>
             {answers.preference !== 'flower' && (
               <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
-                <Carousel className="w-full h-72" plugins={[WheelGesturesPlugin()]}>
+                <Carousel className="w-full h-72" setApi={setApi} plugins={[WheelGesturesPlugin()]}>
                   <CarouselContent className="h-full">
                     {products.map((product, index) => (
                       <CarouselItem key={index} className="h-full">
