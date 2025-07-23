@@ -73,8 +73,7 @@ export const CompatibleProductsCard = ({
         <CardDescription className="flex flex-col sm:flex-row gap-4">
           <div className="flex flex-col sm:flex-row gap-2 w-full">
             <span className="sm:w-1/2">
-              {subscription.description} fewfewfew e ewf ewf f ew f wef we f we f ew f ewf ewf wef w
-              e
+              {subscription.description}
             </span>
             <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
               <Carousel className="w-full h-72" plugins={[WheelGesturesPlugin()]}>
