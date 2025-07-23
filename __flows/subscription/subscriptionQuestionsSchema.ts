@@ -36,7 +36,7 @@ export const ColorEnum = z.enum([
   'any'
 ]);
 export const ColorSchema = z.object({
-  primary_color: z.array(ColorEnum).nonempty(),
+  primary_color: z.array(ColorEnum).nonempty()
 });
 export type ColorType = z.infer<typeof ColorSchema>;
 

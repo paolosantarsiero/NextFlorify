@@ -16,12 +16,13 @@ type ButtonMultiInputProps = {
 export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMultiInputProps) => {
   const t = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
   const [selected, setSelected] = useState<string[]>([]);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-2 justify-center">
         {node.answers?.options?.map((opt: string) => (
           <Toggle
-            key={String(opt)}
+            key={`${node.id}-${opt}`}
             variant="outline"
             className="rounded-md"
             onClick={() =>
