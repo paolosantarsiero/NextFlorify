@@ -1,10 +1,21 @@
 {
   "Navbar": {
     "menu": {
+      "hello": "Ciao",
       "title": "Menu",
-      "subtitle": "Esplora la nostra azienda"
+      "subtitle": "Esplora la nostra azienda",
+      "profile": "Profilo",
+      "logout": "Esci"
     },
     "links": {
+      "login": {
+        "label": "Accedi",
+        "href": "/login"
+      },
+      "signup": {
+        "label": "Registrati",
+        "href": "/signup"
+      },
       "about": {
         "label": "Chi siamo",
         "href": "https://www.florify.it/chi-siamo/"

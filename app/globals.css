@@ -18,6 +18,8 @@
   :root {
     --dark-gray-1: 0, 0%, 61%, 1;
     --gray-2: 0, 0%, 84%, 1;
+    --dark-violet: 254, 49%, 28%, 1;
+    --faded-dark-violet: 254, 49%, 28%, 0.5;
     --violetRose: 317 96% 31%;
     --faded-violetRose: 319 45% 82%;
     --extra-faded-violetRose: 324 45% 98%;
