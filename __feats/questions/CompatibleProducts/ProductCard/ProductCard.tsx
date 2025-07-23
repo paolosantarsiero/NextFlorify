@@ -27,7 +27,6 @@ type Props = {
   subscription: Stripe.Product;
   answers: SubscriptionFlowDataType;
   onRemove: () => void;
-  onNoThanks: () => void;
 };
 
 export const CompatibleProductsCard = ({
@@ -36,8 +35,7 @@ export const CompatibleProductsCard = ({
   subscription,
   onRemove,
   flowName,
-  answers,
-  onNoThanks
+  answers
 }: Props) => {
   const {
     createStripeCheckoutSession,
@@ -57,9 +55,6 @@ export const CompatibleProductsCard = ({
 
     createStripeCheckoutSession(body);
   };
-  const handleNoThanks = () => {
-    onNoThanks();
-  };
 
   return (
     <Card className="w-full sm:w-3/4 mx-auto">
@@ -72,34 +67,34 @@ export const CompatibleProductsCard = ({
         </CardTitle>
         <CardDescription className="flex flex-col sm:flex-row gap-4">
           <div className="flex flex-col sm:flex-row gap-2 w-full">
-            <span className="sm:w-1/2">
-              {subscription.description}
-            </span>
-            <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
-              <Carousel className="w-full h-72" plugins={[WheelGesturesPlugin()]}>
-                <CarouselContent className="h-full">
-                  {products.map((product, index) => (
-                    <CarouselItem key={index} className="h-full">
-                      <div className="p-1 h-full">
-                        <Card className="h-full flex flex-col">
-                          <CardHeader>
-                            <CardTitle>{product.name}</CardTitle>
-                          </CardHeader>
-                          <CardContent className="flex-1 flex items-center justify-center p-6">
-                            <Prose
-                              className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-                              html={product.description}
-                            />
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-            </div>
+            <span className="sm:w-1/2">{subscription.description}</span>
+            {answers.preference !== 'flower' && (
+              <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
+                <Carousel className="w-full h-72" plugins={[WheelGesturesPlugin()]}>
+                  <CarouselContent className="h-full">
+                    {products.map((product, index) => (
+                      <CarouselItem key={index} className="h-full">
+                        <div className="p-1 h-full">
+                          <Card className="h-full flex flex-col">
+                            <CardHeader>
+                              <CardTitle>{product.name}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex-1 flex items-center justify-center p-6">
+                              <Prose
+                                className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+                                html={product.description}
+                              />
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
+            )}
           </div>
         </CardDescription>
       </CardHeader>
@@ -108,14 +103,6 @@ export const CompatibleProductsCard = ({
           <LoadingDataScreen />
         ) : (
           <div className="flex flex-row gap-2 justify-end w-full">
-            <Button
-              variant={'destructive'}
-              className="rounded-full"
-              disabled={isLoadingStripeCheckoutSession}
-              onClick={handleNoThanks}
-            >
-              No, grazie Riproviamoci
-            </Button>
             <Button
               variant={'gradient'}
               disabled={isLoadingStripeCheckoutSession}

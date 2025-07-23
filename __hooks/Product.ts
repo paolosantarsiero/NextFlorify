@@ -24,7 +24,8 @@ export const useProducts = () => {
 export const useGetCompatibleProducts = (answers: SubscriptionFlowDataType) => {
   const query = useQuery({
     queryKey: [COMPATIBLE_PRODUCTS_QUERY_KEY, answers],
-    queryFn: () => getCompatibleProducts(answers)
+    queryFn: () => getCompatibleProducts(answers),
+    enabled: !!answers && Object.keys(answers).length > 0
   });
 
   return {
