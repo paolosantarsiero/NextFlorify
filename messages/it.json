@@ -46,6 +46,10 @@
       "size": "Dimensione"
     }
   },
+  "ProductCard": {
+    "type": "Tipo di fiore",
+    "info": "Info"
+  },
   "ProfilePage": {
     "ProfileNavigation": {
       "header": {

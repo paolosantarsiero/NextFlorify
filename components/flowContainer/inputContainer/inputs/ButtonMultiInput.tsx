@@ -24,7 +24,7 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
           <Toggle
             key={`${node.id}-${opt}`}
             variant="outline"
-            className="rounded-md"
+            className="rounded-md bg-background"
             onClick={() =>
               setSelected((prev) =>
                 prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]

@@ -1,11 +1,4 @@
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel';
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { useNativeEvent } from '__hooks/nativeEvent';
 import { Product } from 'lib/woocomerce/models/product';
 import { useRef } from 'react';
@@ -96,17 +89,17 @@ export default function ProductsGrid({ products, carouselApi }: Props) {
         <div className="h-32 col-span-1 md:col-span-2 lg:col-span-3" />
       </div>
       <Carousel className="w-full overflow-visible sm:hidden">
-        <CarouselContent>
-          {products?.map((product, index) => (
-            <CarouselItem key={product.id}>
-              <div className="p-2">
+        <CarouselContent className="pl-[15%]">
+          {products?.map((product) => (
+            <CarouselItem key={product.id} className="basis-[85%]">
+              <div className="flex p-2 items-center justify-center">
                 <ProductCard product={product} />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* <CarouselPrevious className="-left-2" /> */}
+        {/* <CarouselNext className="-right-2" /> */}
       </Carousel>
     </>
   );
