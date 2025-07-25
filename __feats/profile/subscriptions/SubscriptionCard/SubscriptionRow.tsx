@@ -76,7 +76,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row items-center justify-between">
           <p className="flex flex-row gap-2 text-gray-2 items-center">
             <CreditCardIcon className="w-3 h-3" />
             <span className="text-xs">
