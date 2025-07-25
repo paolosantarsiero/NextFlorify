@@ -27,13 +27,16 @@ export const getCompatibleProducts = async (answers?: SubscriptionFlowDataType) 
     throw new Error('Answers are required');
   }
   const subscriptionType = answers.path === 'other' ? 'anniversary' : answers.preference;
-  const body = await buildGetCompatibleProductsBody(
-    answers,
-    productsValuableAnswers[subscriptionType]?.valuableVariants,
-    productsValuableAnswers[subscriptionType]?.valuableAnswers
-  );
-
-  const response = await getProductsBySubscriptionType(body);
-
-  return response;
+  try {
+    const body = await buildGetCompatibleProductsBody(
+      answers,
+      productsValuableAnswers[subscriptionType]?.valuableVariants,
+      productsValuableAnswers[subscriptionType]?.valuableAnswers
+    );
+    const response = await getProductsBySubscriptionType(body);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };

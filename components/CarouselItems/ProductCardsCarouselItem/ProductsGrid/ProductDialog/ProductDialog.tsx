@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -28,8 +27,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{product.name}</DialogTitle>
-          <DialogDescription></DialogDescription>
+          <DialogTitle>{product.name}</DialogTitle>\
           <Prose
             className="mb-6 text-sm leading-tight dark:text-white/[60%]"
             html={product?.description}

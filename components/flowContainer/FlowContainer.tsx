@@ -9,7 +9,7 @@ import Floro, { FloroRiveState } from '@/components/rive/floro';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { PendingFlowDialog } from './pendingFlowDialog/PendongFlowDialog';
+import { PendingFlowDialog } from './pendingFlowDialog/PendingFlowDialog';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
