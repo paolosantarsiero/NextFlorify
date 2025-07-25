@@ -38,6 +38,7 @@ const config: Config = {
         engravedCard: 'hsl(var(--engravedCard))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'faded-foreground': 'hsl(var(--faded-foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'

@@ -98,7 +98,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="relative w-full h-34 mt-6">
+      <div className="relative w-full h-34 mt-3">
         {/* gradient blur top */}
         <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent z-10" />
 
@@ -106,7 +106,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent z-10" />
 
         {/* scrollable content */}
-        <div className="h-full overflow-y-auto scrollbar-hide py-2 px-3 bg-background">
+        <div className="h-full overflow-y-auto scrollbar-hide py-2 px-3 bg-background pt-4">
           {currentNode && (
             <InputContainer
               node={currentNode}

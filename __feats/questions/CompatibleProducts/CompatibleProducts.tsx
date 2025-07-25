@@ -7,14 +7,14 @@ import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { CompatibleProductsCard } from './CompatibleProductsCard/CompatibleProductsCard';
+import { CompatibleProductsCarouselItem } from './CompatibleProductsCarouselItem/CompatibleProductsCarouselItem';
 
 type Props = {
   flowName: keyof FlowInstances;
 };
 
 export const CompatibleProducts = ({ flowName }: Props) => {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>(undefined);
   const { getData, reset } = useFlowsStore();
   const router = useRouter();
 
@@ -44,11 +44,12 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     >
       <CarouselContent className="-mt-1 h-dvh">
         <CarouselItem>
-          <div className="flex w-full h-full items-center justify-center">
+          <div className="flex w-full h-full justify-center">
             {isGetCompatibleProductsLoading && <LoadingDataScreen />}
             {isGetCompatibleProductsError && <ErrorDataScreen />}
             {compatibleProducts && (
-              <CompatibleProductsCard
+              <CompatibleProductsCarouselItem
+                carouselApi={carouselApi}
                 flowName={flowName}
                 answers={answers}
                 products={compatibleProducts.products}

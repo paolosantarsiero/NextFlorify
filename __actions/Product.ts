@@ -30,7 +30,7 @@ const mockCompatibleProducts: GetCompatibleProductsResponse = {
       description:
         '<p>Porta il sole tra le mani con il nostro fascio di girasoli! Questi fiori radiosi e imponenti simboleggiano gioia, energia e vitalità. Un regalo che illumina la giornata e trasmette un messaggio di positività e calore</p>',
       price: '100'
-    }
+    },
   ],
   related_products: [
     {
@@ -90,7 +90,11 @@ const mockCompatibleProducts: GetCompatibleProductsResponse = {
       type: 'subscription'
     }
   ],
-  subscription: undefined
+  subscription: {
+    name: 'Subscription 1',
+    description:
+      '<p>Porta il sole tra le mani con il nostro fascio di girasoli! Questi fiori radiosi e imponenti simboleggiano gioia, energia e vitalità. Un regalo che illumina la giornata e trasmette un messaggio di positività e calore</p>'
+  }
 };
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType

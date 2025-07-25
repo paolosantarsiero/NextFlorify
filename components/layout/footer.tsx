@@ -38,7 +38,10 @@ export default async function Footer() {
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
         <div>
-          <Link className="flex items-center gap-2 text-black dark:text-white md:pt-1" href="/">
+          <Link
+            className="flex items-center gap-2 text-foreground dark:text-white md:pt-1"
+            href="/"
+          >
             <LogoSquare size="sm" />
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
@@ -59,7 +62,7 @@ export default async function Footer() {
         </Suspense>
         <div className="md:ml-auto">
           <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
+            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-foreground dark:border-neutral-700 dark:bg-black dark:text-white"
             aria-label="Deploy on Vercel"
             href="https://vercel.com/templates/next.js/nextjs-commerce"
           >
@@ -80,7 +83,7 @@ export default async function Footer() {
             <a href="https://github.com/vercel/commerce">View the source</a>
           </p>
           <p className="md:ml-auto">
-            <a href="https://vercel.com" className="text-black dark:text-white">
+            <a href="https://vercel.com" className="text-foreground dark:text-white">
               Created by ▲ Vercel
             </a>
           </p>

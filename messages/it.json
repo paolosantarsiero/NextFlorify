@@ -40,7 +40,14 @@
     "description": "Descrizione",
     "specifications": "Specifiche",
     "reviews": "Recensioni",
+    "whatWeChoose": "Cosa ho scelto per te!",
+    "chosenForYou": "Scelto per te:",
+    "compatibility": "Affinità",
+    "discoverRelatedProducts": "Scopri le piante",
     "relatedProducts": "Prodotti correlati",
+    "deliveryDay": "Giorno di consegna",
+    "frequency": "Frequenza",
+    "includedVat": "iva incl.",
     "variants": {
       "color": "Colore",
       "size": "Dimensione"

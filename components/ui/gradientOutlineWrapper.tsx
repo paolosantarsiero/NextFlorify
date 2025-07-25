@@ -13,7 +13,7 @@ const gradientOutlineWrapperVariants = cva(
 );
 
 const internalGradientOutlineWrapperVariants = cva(
-  'bg-white text-black rounded-full z-30 h-full w-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground',
+  'bg-white text-foreground rounded-full z-30 h-full w-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground',
   {
     variants: {
       variant: {

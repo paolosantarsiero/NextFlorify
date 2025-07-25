@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
 type Props = {
-  products: Product[];
+  products: Partial<Product>[];
   carouselApi?: CarouselApi | null;
 };
 
