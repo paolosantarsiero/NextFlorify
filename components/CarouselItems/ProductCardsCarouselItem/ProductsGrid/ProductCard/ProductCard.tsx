@@ -26,7 +26,7 @@ export default function ProductCard({ product, className }: Props) {
       <div className="flex flex-col gap-0">
         <p className="text-[28px] font-bold">{product.name}</p>
         <Prose
-          className="text-sm font-normal line-clamp-3 leading-6 h-18"
+          className="text-sm font-normal line-clamp-3 leading-6 h-20"
           html={product.description ?? ''}
         />
       </div>

@@ -1,6 +1,7 @@
 import { productsValuableAnswers } from '@/__types/product';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { CarouselApi } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { useStripeCheckoutSession } from '__hooks/stripe';
 import { FlowInstances } from '__store/flowsStore';
@@ -33,6 +34,7 @@ export const CompatibleProductsCard = ({
   } = useStripeCheckoutSession();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const isMultiProduct = products.length > 1;
 
   // Aggiorna selectedIndex quando cambia slide
   useEffect(() => {
@@ -63,10 +65,8 @@ export const CompatibleProductsCard = ({
   };
 
   return (
-    <Card className="w-full sm:w-171 bg-red-500">
-      <CardHeader>
-        <CardTitle>Compatible Products</CardTitle>
-      </CardHeader>
-    </Card>
+    <div className={cn('flex flex-col w-full items-center justify-center p-4')}>
+      <Card className={cn('w-full sm:w-171', isMultiProduct ? 'h-89' : 'h-107')}></Card>
+    </div>
   );
 };
