@@ -2,6 +2,7 @@
 
 import { Avatar } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { PopoverClose } from '@radix-ui/react-popover';
 import { FloriAvatar } from 'assets/images/FloriAvatar';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -27,15 +28,19 @@ export default function AvatarPopover() {
             {t('menu.hello')}{' '}
             <span className="font-bold">{session.data?.user?.user_display_name}</span>
           </p>
-          <Link href={'/profile'} className="text-sm text-faded-dark-violet">
-            {t('menu.profile')}
-          </Link>
-          <p
-            onClick={() => signOut({ callbackUrl: '/' })}
-            className="text-sm text-faded-dark-violet cursor-pointer"
-          >
-            {t('menu.logout')}
-          </p>
+          <PopoverClose asChild>
+            <Link href={'/profile'} className="text-sm text-faded-dark-violet">
+              {t('menu.profile')}
+            </Link>
+          </PopoverClose>
+          <PopoverClose asChild>
+            <p
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className="text-sm text-faded-dark-violet cursor-pointer"
+            >
+              {t('menu.logout')}
+            </p>
+          </PopoverClose>
         </div>
       </PopoverContent>
     </Popover>

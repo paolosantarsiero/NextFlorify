@@ -20,7 +20,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     useGetCompatibleProducts(answers);
 
   return (
-    <div className="flex w-full items-center gap-3 px-3 overflow-y-auto sm:overflow-x-auto flex-col sm:flex-row sm:gap-6 justify-start">
+    <div className="flex w-full h-full items-center gap-3 px-3 overflow-y-auto sm:overflow-x-auto flex-col sm:flex-row sm:gap-6 justify-start">
       {isGetCompatibleProductsLoading && <LoadingDataScreen />}
       {isGetCompatibleProductsError && <ErrorDataScreen />}
       {compatibleProducts && (

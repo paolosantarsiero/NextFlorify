@@ -390,6 +390,9 @@
             "continue": "Continua",
             "reset": "Resetta"
           }
+        },
+        "error": {
+          "required": "Il campo è obbligatorio"
         }
       }
     },
