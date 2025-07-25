@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import ProductDialog from '../ProductDialog/ProductDialog';
 
 type Props = {
-  product: Product;
+  product: Partial<Product>;
   className?: string;
 };
 

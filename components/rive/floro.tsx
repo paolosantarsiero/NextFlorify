@@ -5,6 +5,7 @@ import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import { useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 
 export type FloroRiveState =
@@ -23,10 +24,11 @@ type Props = {
   state: FloroRiveState;
   flowName: keyof FlowInstances;
   navigation: boolean;
+  className?: string;
   onGoHome?: () => void;
 };
 
-export default function Floro({ state, flowName, navigation, onGoHome }: Props) {
+export default function Floro({ state, flowName, navigation, onGoHome, className }: Props) {
   const { goBack, reset, getData, getCurrentNodeId, getFlow } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
@@ -139,17 +141,19 @@ export default function Floro({ state, flowName, navigation, onGoHome }: Props) 
   }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
 
   return (
-    <div className="w-full h-[300px] z-10">
+    <div className={cn('w-full h-[300px] z-10 ', className)}>
       <div className="w-full flex flex-row justify-between z-20">
         {typeof navigation === 'boolean' && navigation && (
-          <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
-            <ArrowLeft />
-          </Button>
-        )}
+          <>
+            <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
+              <ArrowLeft />
+            </Button>
 
-        <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
-          <RotateCcw />
-        </Button>
+            <Button variant="ghost" className="rounded-full" onClick={resetFlow}>
+              <RotateCcw />
+            </Button>
+          </>
+        )}
       </div>
       <RiveComponent />
     </div>

@@ -11,7 +11,7 @@ import { Product } from 'lib/woocomerce/models/product';
 import { InfoIcon } from 'lucide-react';
 
 type Props = {
-  product: Product;
+  product: Partial<Product>;
   dialogTrigger?: React.ReactNode;
 };
 
@@ -30,7 +30,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           <DialogTitle>{product.name}</DialogTitle>\
           <Prose
             className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-            html={product?.description}
+            html={product?.description ?? ''}
           />
         </DialogHeader>
         <div>
