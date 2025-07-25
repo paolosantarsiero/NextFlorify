@@ -22,7 +22,7 @@ export default function FlowersFooter() {
         xmlns="http://www.w3.org/2000/svg"
         width="420"
         height="345"
-        viewBox="0 0 445 345"
+        viewBox="0 0 445 245"
       >
         <g>
           <path

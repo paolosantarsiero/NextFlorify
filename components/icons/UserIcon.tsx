@@ -2,15 +2,20 @@
 
 import { useSession } from 'next-auth/react';
 
+import { useIsMobile } from '@/__hooks/IsMobile';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Avatar, AvatarFallback } from '../ui/avatar';
+import { useState } from 'react';
 import { Button } from '../ui/button';
 import GradientOutlineWrapper from '../ui/gradientOutlineWrapper';
+import AvatarDrawer from './AvatarDrawer/AvatarDrawer';
+import AvatarPopover from './AvatarPopover/AvatarPopover';
 
 export default function UserIcon() {
   const session = useSession();
   const t = useTranslations('Navbar');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   // Handle loading state to prevent hydration mismatch
   if (session.status === 'loading') {
@@ -23,16 +28,12 @@ export default function UserIcon() {
     );
   }
 
-  if (session.status === 'authenticated') {
-    return (
-      <Link href={'/profile'} className="ms-2" aria-label="profile">
-        <Avatar>
-          <AvatarFallback className="text-white text-lg bg-gradient-to-r from-tiffanyGreen to-violetRose">
-            {session.data?.user?.user_display_name?.slice(0, 1).toUpperCase()}
-          </AvatarFallback>
-        </Avatar>
-      </Link>
-    );
+  if (session.status === 'authenticated' && !isMobile) {
+    return <AvatarPopover />;
+  }
+
+  if (isMobile) {
+    return <AvatarDrawer />;
   }
 
   return (

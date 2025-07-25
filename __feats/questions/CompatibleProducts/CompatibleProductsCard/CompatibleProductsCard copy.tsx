@@ -86,33 +86,37 @@ export const CompatibleProductsCard = ({
         <CardDescription className="flex flex-col sm:flex-row gap-4">
           <div className="flex flex-col sm:flex-row gap-2 w-full">
             <span className="sm:w-1/2">{subscription.description}</span>
-            {answers.preference !== 'flower' && (
-              <div className="sm:w-1/2 w-full mt-4 sm:mt-0">
-                <Carousel className="w-full h-72" setApi={setApi} plugins={[WheelGesturesPlugin()]}>
-                  <CarouselContent className="h-full">
-                    {products.map((product, index) => (
-                      <CarouselItem key={index} className="h-full">
-                        <div className="p-1 h-full">
-                          <Card className="h-full flex flex-col">
-                            <CardHeader>
-                              <CardTitle>{product.name}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex-1 flex items-center justify-center p-6">
+            <div className="sm:w-1/2 w-full mt-4 sm:mt-0 flex flex-col">
+              <Carousel
+                className="w-full max-h-64 h-64"
+                setApi={setApi}
+                plugins={[WheelGesturesPlugin()]}
+              >
+                <CarouselContent className="max-h-64 h-64 overflow-hidden">
+                  {products.map((product, index) => (
+                    <CarouselItem key={index} className="max-h-64 h-64">
+                      <div className="p-1 max-h-64 h-64">
+                        <Card className="max-h-64 h-64 flex flex-col">
+                          <CardHeader>
+                            <CardTitle>{product.name}</CardTitle>
+                          </CardHeader>
+                          <CardContent className="flex-1 flex px-4 overflow-hidden">
+                            <div className="w-full">
                               <Prose
-                                className="mb-6 text-sm leading-tight dark:text-white/[60%]"
+                                className="mb-6 text-sm leading-tight dark:text-white/[60%] line-clamp-6"
                                 html={product.description}
                               />
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
           </div>
         </CardDescription>
       </CardHeader>

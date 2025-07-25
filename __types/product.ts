@@ -1,4 +1,6 @@
 import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
+import { Product } from 'lib/woocomerce/models/product';
+import Stripe from 'stripe';
 
 export type getCompatibleProductsBody = {
   subscription_type?: SubscriptionFlowDataType['preference'] | 'anniversary';
@@ -42,4 +44,10 @@ export const productsValuableAnswers: Record<
       'perfume'
     ]
   }
+};
+
+export type GetCompatibleProductsResponse = {
+  products: Partial<Product>[];
+  related_products: Partial<Product>[];
+  subscription?: Partial<Stripe.Product>;
 };

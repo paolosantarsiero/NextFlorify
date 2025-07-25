@@ -1,16 +1,20 @@
+import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
 import ErrorDataScreen from '@/components/DataFetching/ErrorDataScreen';
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { useRouter } from 'next/navigation';
-import { CompatibleProductsCard } from './ProductCard/ProductCard';
+import { useEffect, useState } from 'react';
+import { CompatibleProductsCard } from './CompatibleProductsCard/CompatibleProductsCard';
 
 type Props = {
   flowName: keyof FlowInstances;
 };
 
 export const CompatibleProducts = ({ flowName }: Props) => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const { getData, reset } = useFlowsStore();
   const router = useRouter();
 
@@ -19,23 +23,56 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   const { compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError } =
     useGetCompatibleProducts(answers);
 
+  useEffect(() => {
+    if (carouselApi) {
+      carouselApi.on('select', () => {
+        console.log('selected');
+      });
+    }
+  }, [carouselApi]);
+
   return (
-    <div className="flex w-full items-center gap-3 px-3 overflow-y-auto sm:overflow-x-auto flex-col sm:flex-row sm:gap-6 justify-start">
-      {isGetCompatibleProductsLoading && <LoadingDataScreen />}
-      {isGetCompatibleProductsError && <ErrorDataScreen />}
-      {compatibleProducts && (
-        <CompatibleProductsCard
-          flowName={flowName}
-          answers={answers}
-          products={compatibleProducts.products}
-          relatedProducts={compatibleProducts.related_products}
-          subscription={compatibleProducts.subscription}
-          onRemove={() => {
-            reset(flowName);
-            router.push('/');
-          }}
-        />
-      )}
-    </div>
+    <Carousel
+      opts={{
+        watchDrag: true,
+        containScroll: 'trimSnaps',
+        align: 'start'
+      }}
+      orientation="vertical"
+      className="w-full h-dvh"
+      setApi={setCarouselApi}
+    >
+      <CarouselContent className="-mt-1 h-dvh">
+        <CarouselItem>
+          <div className="flex w-full h-full items-center justify-center">
+            {isGetCompatibleProductsLoading && <LoadingDataScreen />}
+            {isGetCompatibleProductsError && <ErrorDataScreen />}
+            {compatibleProducts && (
+              <CompatibleProductsCard
+                flowName={flowName}
+                answers={answers}
+                products={compatibleProducts.products}
+                relatedProducts={compatibleProducts.related_products}
+                subscription={compatibleProducts.subscription}
+                onRemove={() => {
+                  reset(flowName);
+                  router.push('/');
+                }}
+              />
+            )}
+          </div>
+        </CarouselItem>
+        {compatibleProducts?.related_products && compatibleProducts.related_products.length && (
+          <ProductCardsCarouselItem
+            title="Le nostre composizioni"
+            shouldPrev
+            products={compatibleProducts.related_products}
+            isLoading={isGetCompatibleProductsLoading}
+            isError={isGetCompatibleProductsError}
+            carouselApi={carouselApi}
+          />
+        )}
+      </CarouselContent>
+    </Carousel>
   );
 };

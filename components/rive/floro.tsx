@@ -139,8 +139,8 @@ export default function Floro({ state, flowName, navigation, onGoHome }: Props) 
   }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
 
   return (
-    <div className="w-3/4 h-full z-10 relative m-auto">
-      <div className="w-full flex flex-row justify-between z-20 translate-y-[90px]">
+    <div className="w-full h-[300px] relative z-10">
+      <div className="max-w-[360px] flex flex-row justify-between z-20 mx-auto">
         {typeof navigation === 'boolean' && navigation && (
           <Button variant="ghost" className="rounded-full" onClick={goBackFlow}>
             <ArrowLeft />

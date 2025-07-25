@@ -8,7 +8,8 @@ import { InputContainer } from '@/components/flowContainer/inputContainer/InputC
 import Floro, { FloroRiveState } from '@/components/rive/floro';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { PendingFlowDialog } from './pendingFlowDialog/PendongFlowDialog';
+import { toast } from 'sonner';
+import { PendingFlowDialog } from './pendingFlowDialog/PendingFlowDialog';
 
 type FlowContainerProps<T> = {
   flowName: keyof FlowInstances;
@@ -50,7 +51,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         if (schema) {
           const validationResult = schema.safeParse(answer);
           if (!validationResult.success) {
-            console.error('Validation failed:', validationResult.error);
+            toast.error(tFlow(`dialogs.error.required` as MessageKeys<IntlMessages, 'flows'>));
             return;
           }
           answer = validationResult.data;
@@ -78,8 +79,8 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
   }
 
   return (
-    <div className="flex flex-col h-full w-full sm:max-w-[500px] items-center justify-start z-10">
-      <div className="flex flex-col w-full justify-start items-center">
+    <div className="flex flex-col h-full w-full sm:max-w-[440px] items-center justify-start z-10">
+      <div className="flex flex-col w-full justify-start items-center mt-[72px]">
         <div className="w-full max-h-[360px] md:h-[340px] overflow-hidden relative">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-12 z-0" />
           <Floro
@@ -91,21 +92,29 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
             onGoHome={onGoHome} // TODO: remove this
           />
         </div>
-
-        <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold backdrop-blur-sm text-lg opacity-75">
+        <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg opacity-75">
           {currentNode &&
             tFlow(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>
       </div>
 
-      <div className="w-full mt-6">
-        {currentNode && (
-          <InputContainer
-            node={currentNode}
-            onAnswer={handleAnswer}
-            flowTranslations={flow.translations}
-          />
-        )}
+      <div className="relative w-full h-34 mt-6">
+        {/* gradient blur top */}
+        <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent z-10" />
+
+        {/* gradient blur bottom */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent z-10" />
+
+        {/* scrollable content */}
+        <div className="h-full overflow-y-auto scrollbar-hide py-2 px-3 bg-background">
+          {currentNode && (
+            <InputContainer
+              node={currentNode}
+              onAnswer={handleAnswer}
+              flowTranslations={flow.translations}
+            />
+          )}
+        </div>
       </div>
       <PendingFlowDialog
         flowTranslations={flow.translations as NamespaceKeys<IntlMessages, 'flows'>}

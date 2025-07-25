@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 // tailwind.config.js
 
 const spacing = Object.fromEntries(
-  Array.from({ length: 201 }, (_, i) => {
+  Array.from({ length: 300 }, (_, i) => {
     return [String(i), `${i * 0.25}rem`];
   })
 );
@@ -24,6 +24,8 @@ const config: Config = {
       colors: {
         'dark-gray-1': 'hsl(var(--dark-gray-1))',
         'gray-2': 'hsl(var(--gray-2))',
+        'dark-violet': 'hsl(var(--dark-violet))',
+        'faded-dark-violet': 'hsl(var(--faded-dark-violet))',
         tiffanyGreen: 'hsl(var(--tiffanyGreen))',
         'faded-tiffanyGreen': 'hsl(var(--faded-tiffanyGreen))',
         'extra-faded-tiffanyGreen': 'hsl(var(--extra-faded-tiffanyGreen))',

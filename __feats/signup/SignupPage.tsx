@@ -37,7 +37,7 @@ export default function SignupPage() {
           <p className="text-red-500">{searchParams.get('message')}</p>
         )}
         <h1 className="text-2xl font-bold">{tPage('title')}</h1>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
           <Form {...form}>
             <FormInput
               name="first_name"

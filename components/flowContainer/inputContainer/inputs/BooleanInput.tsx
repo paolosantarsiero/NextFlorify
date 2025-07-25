@@ -10,17 +10,17 @@ type BooleanInputProps = {
 
 export const BooleanInput = ({ node, onAnswer }: BooleanInputProps) => {
   return (
-    <div className="flex gap-2 w-full justify-center">
+    <div className="flex gap-6 w-full justify-center">
       <Button
         variant="secondary"
-        className="rounded-md"
+        className="rounded-xl font-light px-8 py-3"
         onClick={() => onAnswer({ [node.id]: true })}
       >
         Si
       </Button>
       <Button
         variant="secondary"
-        className="rounded-md"
+        className="rounded-xl font-light px-8 py-3"
         onClick={() => onAnswer({ [node.id]: false })}
       >
         No

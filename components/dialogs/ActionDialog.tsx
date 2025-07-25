@@ -54,7 +54,7 @@ export const ActionDialog = ({
         </DialogHeader>
         {contentString && <DialogDescription>{contentString}</DialogDescription>}
         {contentComponent && contentComponent}
-        <DialogFooter>
+        <DialogFooter className="gap-3">
           {actions.map((action) => (
             <DialogClose asChild key={action.label}>
               <Button onClick={action.action} variant={action.buttonVariant ?? 'default'}>

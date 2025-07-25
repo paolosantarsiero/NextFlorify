@@ -1,12 +1,12 @@
 'use client';
 
+import TopSection from '@/__feats/home/topSection/TopSection';
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
 import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel';
 import { useProducts } from '__hooks/Product';
 import { useState } from 'react';
-import TopSection from './topSection/TopSection';
 
-export default function HomePage() {
+export default function Test() {
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   return (
