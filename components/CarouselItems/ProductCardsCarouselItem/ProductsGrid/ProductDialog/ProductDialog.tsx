@@ -38,19 +38,19 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
       </DialogTrigger>
       <DialogContent className="max-w-4xl w-[80vw]">
         <div className="flex flex-col md:flex-row gap-8 items-start w-full">
-          <div className="flex-shrink-0 flex justify-center items-center w-full md:w-auto">
+          <div className="flex-shrink-0 flex w-full md:w-auto">
             <img
               src={product.images?.[0]?.src}
               alt={product.name}
-              className="w-60 h-60 rounded-lg object-cover"
+              className="w-full h-80 rounded-lg object-cover"
             />
           </div>
           <div className="flex flex-col flex-1 min-w-0">
-            <DialogHeader className="p-0">
-              <DialogTitle className="truncate text-xl">{product.name}</DialogTitle>
-              <div className="max-w-full">
+            <DialogHeader className="p-0 items-start text-left">
+              <DialogTitle className="truncate text-xl text-left">{product.name}</DialogTitle>
+              <div className="max-w-full w-full text-left">
                 <Prose
-                  className="mb-6 text-lg leading-tight dark:text-white/[60%]"
+                  className="mb-6 text-lg leading-tight dark:text-white/[60%] text-left"
                   html={product?.description ?? ''}
                 />
               </div>
