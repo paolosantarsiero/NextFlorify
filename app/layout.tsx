@@ -1,4 +1,3 @@
-import FlowersFooter from '@/components/layout/FlowersFooter/FlowersFooter';
 import { Navbar } from '@/components/layout/navbar/NavBar';
 import { NextAuthProvider } from 'components/next-session-provider';
 import { ReactQueryProvider } from 'components/react-query-provider';
@@ -54,13 +53,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <NextIntlClientProvider messages={messages}>
             <NextAuthProvider>
               <Navbar />
-              <FlowersFooter />
               <main className="h-dvh w-screen flex flex-col overflow-hidden text-foreground">
                 {children}
                 <Toaster closeButton />
               </main>
               {/* TODO: Remove footer */}
               {/* <Footer /> */}
+              {/* <FlowersFooter /> */}
             </NextAuthProvider>
           </NextIntlClientProvider>
         </ReactQueryProvider>

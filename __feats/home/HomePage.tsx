@@ -9,6 +9,7 @@ import TopSection from './topSection/TopSection';
 export default function HomePage() {
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+
   return (
     <div className="w-full h-dvh flex items-center justify-center">
       <Carousel

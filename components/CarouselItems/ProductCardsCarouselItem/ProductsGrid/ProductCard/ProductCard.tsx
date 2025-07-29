@@ -1,4 +1,4 @@
-import { Tulipano } from '@/assets/images/tulipano';
+import { Tulipano } from '@/assets/images/flowers/tulipano';
 import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
