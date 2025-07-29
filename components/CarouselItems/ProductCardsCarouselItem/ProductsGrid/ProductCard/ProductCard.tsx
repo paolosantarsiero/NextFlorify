@@ -33,12 +33,14 @@ export default function ProductCard({ product, className }: Props) {
           html={product.description ?? ''}
         />
       </div>
-      <div className="flex flex-col gap-0">
-        <p className="text-[15px] font-bold">{t('type')}</p>
-        <p className="text-sm font-normal">
-          {tProduct(`flower_type.${flowerType?.toLowerCase()}` as any)}
-        </p>
-      </div>
+      {flowerType && (
+        <div className="flex flex-col gap-0">
+          <p className="text-[15px] font-bold">{t('type')}</p>
+          <p className="text-sm font-normal">
+            {tProduct(`flower_type.${flowerType?.toLowerCase()}` as any)}
+          </p>
+        </div>
+      )}
       <div className="flex flex-row w-full justify-end">
         <ProductDialog
           product={product}

@@ -51,7 +51,8 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         if (schema) {
           const validationResult = schema.safeParse(answer);
           if (!validationResult.success) {
-            toast.error(tFlow(`dialogs.error.required` as MessageKeys<IntlMessages, 'flows'>));
+            const errorMessage = validationResult.error.errors.map((e) => e.message).join(', ');
+            toast.error(errorMessage);
             return;
           }
           answer = validationResult.data;
