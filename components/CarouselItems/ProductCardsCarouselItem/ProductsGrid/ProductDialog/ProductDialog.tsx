@@ -7,15 +7,26 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import { Product } from 'lib/woocomerce/models/product';
+import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 import { InfoIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type Props = {
-  product: Partial<Product>;
+  product: Product;
   dialogTrigger?: React.ReactNode;
 };
 
 export default function ProductDialog({ product, dialogTrigger }: Props) {
+  const t = useTranslations('ProductDialog');
+  const tProduct = useTranslations('flows.subscriptionFlow.answers');
+  const flowerType = getProductAttributes(product, 'pa_flower_type').shift();
+  const style = getProductAttributes(product, 'pa_style').map((attr) =>
+    tProduct(`style.${attr.toLowerCase()}` as any)
+  );
+  const perfume = getProductAttributes(product, 'pa_perfume').map((attr) =>
+    tProduct(`perfume.${attr.toLowerCase()}` as any)
+  );
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -25,21 +36,48 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{product.name}</DialogTitle>\
-          <Prose
-            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-            html={product?.description ?? ''}
-          />
-        </DialogHeader>
-        <div>
-          {product.attributes?.map((attribute) => (
-            <div key={attribute.id} className="mb-4">
-              <p className="text-sm font-semibold">{attribute.name}</p>
-              <p className="text-sm text-muted-foreground">{attribute.options?.join(', ')}</p>
+      <DialogContent className="max-w-4xl w-[80vw]">
+        <div className="flex flex-col md:flex-row gap-8 items-start w-full">
+          <div className="flex-shrink-0 flex justify-center items-center w-full md:w-auto">
+            <img
+              src={product.images?.[0]?.src}
+              alt={product.name}
+              className="w-60 h-60 rounded-lg object-cover"
+            />
+          </div>
+          <div className="flex flex-col flex-1 min-w-0">
+            <DialogHeader className="p-0">
+              <DialogTitle className="truncate text-xl">{product.name}</DialogTitle>
+              <div className="max-w-full">
+                <Prose
+                  className="mb-6 text-lg leading-tight dark:text-white/[60%]"
+                  html={product?.description ?? ''}
+                />
+              </div>
+            </DialogHeader>
+            <div className="flex flex-row flex-wrap gap-8 mt-4">
+              {flowerType && (
+                <div className="flex flex-col gap-2 min-w-0">
+                  <p className="text-md font-semibold">{t('flowerType')}</p>
+                  <p className="text-base text-muted-foreground truncate">
+                    {tProduct(`flower_type.${flowerType.toLowerCase()}` as any)}
+                  </p>
+                </div>
+              )}
+              {style.length > 0 && (
+                <div className="flex flex-col gap-2 min-w-0">
+                  <p className="text-md font-semibold">{t('style')}</p>
+                  <p className="text-base text-muted-foreground truncate">{style.join(', ')}</p>
+                </div>
+              )}
+              {perfume.length > 0 && (
+                <div className="flex flex-col gap-2 min-w-0">
+                  <p className="text-md font-semibold">{t('perfume')}</p>
+                  <p className="text-base text-muted-foreground truncate">{perfume.join(', ')}</p>
+                </div>
+              )}
             </div>
-          ))}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

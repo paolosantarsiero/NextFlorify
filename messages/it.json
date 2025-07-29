@@ -57,6 +57,11 @@
     "type": "Tipo di fiore",
     "info": "Info"
   },
+  "ProductDialog": {
+    "flowerType": "Tipo di fiore",
+    "style": "Stile",
+    "perfume": "Profumo"
+  },
   "ProfilePage": {
     "ProfileNavigation": {
       "header": {
@@ -372,6 +377,17 @@
           "mixed": "Misto",
           "spicy": "Speziato",
           "sweet": "Dolce"
+        },
+        "flower_type": {
+          "carnation": "Garofano",
+          "daisy": "Margherita",
+          "girasole": "Girasole",
+          "mimosa": "Mimosa",
+          "rose": "Rosa",
+          "tulip": "Tulipano",
+          "peonies": "Peonie",
+          "mixed": "Misto",
+          "sunflower": "Girasole"
         },
         "notes": {}
       },

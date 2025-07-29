@@ -1,10 +1,10 @@
-import { Tulipano } from '@/assets/images/flowers/tulipano';
 import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn, getProductIcon } from 'lib/utils';
-import { Product } from 'lib/woocomerce/models/product';
+import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 import { useTranslations } from 'next-intl';
+import { createElement } from 'react';
 import ProductDialog from '../ProductDialog/ProductDialog';
 
 type Props = {
@@ -14,6 +14,8 @@ type Props = {
 
 export default function ProductCard({ product, className }: Props) {
   const t = useTranslations('ProductCard');
+  const tProduct = useTranslations('flows.subscriptionFlow.answers');
+  const flowerType = getProductAttributes(product, 'pa_flower_type').shift();
   const icon = getProductIcon(product);
 
   return (
@@ -23,7 +25,7 @@ export default function ProductCard({ product, className }: Props) {
         className ?? ''
       )}
     >
-      <Tulipano className="absolute top-0 right-0" />
+      {createElement(icon, { className: 'absolute top-0 right-0' })}
       <div className="flex flex-col gap-0">
         <p className="text-[28px] font-bold">{product.name}</p>
         <Prose
@@ -33,7 +35,9 @@ export default function ProductCard({ product, className }: Props) {
       </div>
       <div className="flex flex-col gap-0">
         <p className="text-[15px] font-bold">{t('type')}</p>
-        <p className="text-sm font-normal">{product.type}</p>
+        <p className="text-sm font-normal">
+          {tProduct(`flower_type.${flowerType?.toLowerCase()}` as any)}
+        </p>
       </div>
       <div className="flex flex-row w-full justify-end">
         <ProductDialog

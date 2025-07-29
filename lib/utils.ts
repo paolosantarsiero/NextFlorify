@@ -1,4 +1,10 @@
 import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
+import { Carnation } from '@/assets/images/flowers/Carnation';
+import { Daisy } from '@/assets/images/flowers/Daisy';
+import { Mimosa } from '@/assets/images/flowers/Mimosa';
+import { Rose } from '@/assets/images/flowers/Rose';
+import { Girasole } from '@/assets/images/flowers/Sunflower';
+import { Tulip } from '@/assets/images/flowers/Tulip';
 import clsx, { ClassValue } from 'clsx';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
@@ -93,23 +99,23 @@ export const getProductIcon = (product: Product) => {
 
   switch (flowerType?.toLowerCase()) {
     case 'carnation':
-      return '🌸';
+      return Carnation;
     case 'daisy':
-      return '🌼';
+      return Daisy;
     case 'mimosa':
-      return '💛';
+      return Mimosa;
     case 'mixed':
-      return '💐';
+      return Daisy;
     case 'peonies':
     case 'peony':
-      return '🌷';
+      return Daisy;
     case 'rose':
-      return '🌹';
+      return Rose;
     case 'sunflower':
-      return '🌻';
+      return Girasole;
     case 'tulip':
-      return '🌷';
+      return Tulip;
     default:
-      return '🌼';
+      return Daisy;
   }
 };

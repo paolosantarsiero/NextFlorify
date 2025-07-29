@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-export const Tulipano = (props: SVGProps<SVGSVGElement>) => {
+export const Tulip = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="174"

@@ -136,10 +136,12 @@ export interface ProductVariations {
   meta_data: Partial<Meta_Data>[];
 }
 
+/** @todo: add all important attributes */
+export type FlorifyAttribute = 'pa_flower_type' | 'pa_style' | 'pa_perfume';
 export interface ProductAttributes {
   id: number;
   name: string;
-  slug: string;
+  slug: FlorifyAttribute;
   type: string;
   order_by: string;
   has_archives: boolean;
@@ -212,5 +214,5 @@ export type ProductMainParams =
   | ProductTagsParams
   | ProductReviewsParams;
 
-export const getProductAttributes = (product: Product, slug: string): string[] =>
+export const getProductAttributes = (product: Product, slug: FlorifyAttribute): string[] =>
   ((product.attributes || []).find((attr) => attr.slug === slug)?.options || []).filter(Boolean);

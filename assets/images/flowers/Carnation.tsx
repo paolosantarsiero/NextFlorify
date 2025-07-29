@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-export const Sottobosco = (props: SVGProps<SVGSVGElement>) => {
+export const Carnation = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="174"

@@ -5,6 +5,11 @@
     "latestPosts": "Latest Articles",
     "viewAll": "View All"
   },
+  "ProductDialog": {
+    "flowerType": "Flower Type",
+    "style": "Style",
+    "perfume": "Perfume"
+  },
   "ProductPage": {
     "buy": "Buy",
     "addToCart": "Add to Cart",
