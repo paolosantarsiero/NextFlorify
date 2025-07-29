@@ -3,6 +3,7 @@ import clsx, { ClassValue } from 'clsx';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import countries from '../types/countries.json';
+import { getProductAttributes, Product } from './woocomerce/models/product';
 
 export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
   const paramsString = params.toString();
@@ -85,4 +86,30 @@ export const castStripeIntervalToFrequency = (
   if (interval === 'month' && intervalCount === 1) return 'monthly';
   if (interval === 'year' && intervalCount === 1) return 'yearly';
   return `unknown`;
+};
+
+export const getProductIcon = (product: Product) => {
+  const flowerType = getProductAttributes(product, 'pa_flower_type').shift();
+
+  switch (flowerType?.toLowerCase()) {
+    case 'carnation':
+      return '🌸';
+    case 'daisy':
+      return '🌼';
+    case 'mimosa':
+      return '💛';
+    case 'mixed':
+      return '💐';
+    case 'peonies':
+    case 'peony':
+      return '🌷';
+    case 'rose':
+      return '🌹';
+    case 'sunflower':
+      return '🌻';
+    case 'tulip':
+      return '🌷';
+    default:
+      return '🌼';
+  }
 };

@@ -10,7 +10,7 @@ type Props = {
   shouldNext?: boolean;
   shouldPrev?: boolean;
   title: string;
-  products?: Partial<Product>[];
+  products?: Product[];
   isLoading: boolean;
   isError: boolean;
   carouselApi: CarouselApi | null;

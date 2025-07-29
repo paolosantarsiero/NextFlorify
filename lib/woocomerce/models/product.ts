@@ -211,3 +211,6 @@ export type ProductMainParams =
   | ProductShippingClassesParams
   | ProductTagsParams
   | ProductReviewsParams;
+
+export const getProductAttributes = (product: Product, slug: string): string[] =>
+  ((product.attributes || []).find((attr) => attr.slug === slug)?.options || []).filter(Boolean);

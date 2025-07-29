@@ -47,7 +47,7 @@ export const productsValuableAnswers: Record<
 };
 
 export type GetCompatibleProductsResponse = {
-  products: Partial<Product>[];
-  related_products: Partial<Product>[];
-  subscription?: Partial<Stripe.Product>;
+  products: Product[];
+  related_products: Product[];
+  subscription?: Stripe.Product;
 };

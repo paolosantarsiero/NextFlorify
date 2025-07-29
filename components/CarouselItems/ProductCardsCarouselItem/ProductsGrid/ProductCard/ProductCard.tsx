@@ -2,18 +2,19 @@ import { Tulipano } from '@/assets/images/tulipano';
 import Prose from '@/components/prose';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { cn } from 'lib/utils';
+import { cn, getProductIcon } from 'lib/utils';
 import { Product } from 'lib/woocomerce/models/product';
 import { useTranslations } from 'next-intl';
 import ProductDialog from '../ProductDialog/ProductDialog';
 
 type Props = {
-  product: Partial<Product>;
+  product: Product;
   className?: string;
 };
 
 export default function ProductCard({ product, className }: Props) {
   const t = useTranslations('ProductCard');
+  const icon = getProductIcon(product);
 
   return (
     <Card
