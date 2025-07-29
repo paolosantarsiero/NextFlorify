@@ -1,6 +1,5 @@
 import { cancelSubscription } from '@/__actions/user/subscriptions';
 import { useSubscriptionOrders } from '@/__hooks/user/subscriptions';
-import LoadingDataScreen from '@/components/DataFetching/LoadingDataScreen';
 import { Button } from '@/components/ui/button';
 
 import {
@@ -57,32 +56,37 @@ export const DetailsDialog = ({
         <DialogDescription></DialogDescription>
         <div>
           <p className="text-normal font-bold">{product.name}</p>
-          <p>{(plan.amount ?? 0) / 100} €</p>
-          {isLoadingSubscriptionOrders && <LoadingDataScreen />}
-          {isErrorSubscriptionOrders && <p>{'Error loading orders'}</p>}
-          {subscriptionOrders?.map((order, index) => (
-            <div key={order.id} className="mb-4">
-              {index === 0 && (
+          <p className="text-normal font-bold">{tCard(`planInterval.${frequency}` as any)}</p>
+          <p className="text-normal font-bold">{tCard('nextPayment')}</p>
+          <span>
+            {nextRenewalDate.toLocaleDateString()} {(plan.amount ?? 0) / 100} €
+          </span>
+          <p className="text-normal font-bold">{tCard('paymentMethod')}</p>
+          <span>
+            {paymentMethod.card?.brand} •••• {paymentMethod.card?.last4}
+          </span>
+          {subscriptionOrders && subscriptionOrders.length > 0 && (
+            <div>
+              <p className="text-normal font-bold">{tCard('dialogs.shippingAddress')}</p>
+              <div className="text-sm">
                 <div>
-                  <span className="text-sm font-semibold">{tCard('nextPayment')}</span>
-                  <div>{nextRenewalDate.toLocaleDateString()}</div>
-                  <span className="text-sm font-semibold mt-2">{tDialog('shippingAddress')}</span>
-                  <div>
-                    {order.shipping.first_name} {order.shipping.last_name}
-                  </div>
-                  <div>
-                    {order.shipping.address_1}, {order.shipping.city}, {order.shipping.postcode}
-                  </div>
-                  <span className="text-sm font-semibold mt-2">{tDialog('orders')}</span>
+                  {subscriptionOrders[0]?.shipping?.first_name}{' '}
+                  {subscriptionOrders[0]?.shipping?.last_name}
                 </div>
-              )}
-              {order.line_items.map((item) => (
-                <div key={item.id} className="flex flex-col gap-1">
-                  {metadata.subscription_type !== 'flower' && <span>{item.name}</span>}
+                <div>
+                  {subscriptionOrders[0]?.shipping?.address_1}
+                  {subscriptionOrders[0]?.shipping?.address_2
+                    ? `, ${subscriptionOrders[0]?.shipping?.address_2}`
+                    : ''}
                 </div>
-              ))}
+                <div>
+                  {subscriptionOrders[0]?.shipping?.postcode}{' '}
+                  {subscriptionOrders[0]?.shipping?.city}
+                </div>
+                <div>{subscriptionOrders[0]?.shipping?.country}</div>
+              </div>
             </div>
-          ))}
+          )}
         </div>
         <DialogFooter>
           <Button

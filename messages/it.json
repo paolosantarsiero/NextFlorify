@@ -85,6 +85,8 @@
           "unknown": "Sconosciuto"
         },
         "nextPayment": "Prossimo addebito",
+        "nextDelivery": "Prossima consegna",
+        "paymentMethod": "Metodo di pagamento",
         "details": "Dettagli",
         "dialogs": {
           "shippingAddress": "Indirizzo di spedizione",
