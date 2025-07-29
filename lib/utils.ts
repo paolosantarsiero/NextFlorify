@@ -85,7 +85,8 @@ export const getAnniversayDateByAnniversary = (
 export const castStripeIntervalToFrequency = (
   interval: string | undefined,
   intervalCount: number | undefined
-): 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'unknown' => {
+): 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'yearly' | 'unknown' => {
+  if (interval === 'day' && intervalCount === 1) return 'daily';
   if (interval === 'day' && intervalCount === 7) return 'weekly';
   if (interval === 'week' && intervalCount === 1) return 'weekly';
   if (interval === 'day' && intervalCount === 14) return 'biweekly';

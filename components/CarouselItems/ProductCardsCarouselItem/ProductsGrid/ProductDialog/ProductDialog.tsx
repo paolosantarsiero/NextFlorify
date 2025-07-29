@@ -36,13 +36,13 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl w-[80vw]">
+      <DialogContent className="max-w-4xl w-[95vw] md:w-[80vw] max-h-[90vh]">
         <div className="flex flex-col md:flex-row gap-8 items-start w-full">
           <div className="flex-shrink-0 flex w-full md:w-auto">
             <img
               src={product.images?.[0]?.src}
               alt={product.name}
-              className="w-full h-80 rounded-lg object-cover"
+              className="w-full md:w-auto h-60 md:h-80 rounded-lg object-cover"
             />
           </div>
           <div className="flex flex-col flex-1 min-w-0">

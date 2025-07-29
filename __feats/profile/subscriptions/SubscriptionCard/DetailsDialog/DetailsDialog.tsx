@@ -2,16 +2,15 @@ import { cancelSubscription } from '@/__actions/user/subscriptions';
 import { useSubscriptionOrders } from '@/__hooks/user/subscriptions';
 import { Button } from '@/components/ui/button';
 
+import subscriptionLogo from '@/assets/images/subscription-logo.png';
+import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from '@/components/ui/dialog';
-
-import { DialogTrigger } from '@/components/ui/dialog';
-import { DialogDescription } from '@radix-ui/react-dialog';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import Stripe from 'stripe';
@@ -49,46 +48,64 @@ export const DetailsDialog = ({
           <span>{tCard('details')}</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-lg w-[95vw]">
         <DialogHeader>
-          <DialogTitle>{tCard('details')}</DialogTitle>
+          <DialogTitle className="text-lg font-bold">{tCard('details')}</DialogTitle>
         </DialogHeader>
-        <DialogDescription></DialogDescription>
-        <div>
-          <p className="text-normal font-bold">{product.name}</p>
-          <p className="text-normal font-bold">{tCard(`planInterval.${frequency}` as any)}</p>
-          <p className="text-normal font-bold">{tCard('nextPayment')}</p>
-          <span>
-            {nextRenewalDate.toLocaleDateString()} {(plan.amount ?? 0) / 100} €
-          </span>
-          <p className="text-normal font-bold">{tCard('paymentMethod')}</p>
-          <span>
+        <div className="w-full h-28 bg-faded-violetRose flex items-center justify-center rounded-t-lg">
+          <img
+            src={subscriptionLogo.src}
+            alt={product?.name ?? ''}
+            className="w-16 h-16 object-contain opacity-50"
+          />
+        </div>
+
+        <div className="p-4 flex flex-col gap-2">
+          <div className="flex flex-row gap-1 justify-between">
+            <p className="text-base font-bold">{product.name}</p>
+            <Badge variant={'gray'}>{tCard(`planInterval.${frequency}` as any)}</Badge>
+          </div>
+
+          <p className="text-xs">Descrizione</p>
+
+          <div className="mt-2">
+            <p className="text-xs font-semibold">{tCard('nextPayment')}</p>
+            <span className="text-xs">
+              {nextRenewalDate.toLocaleDateString()} {(plan.amount ?? 0) / 100} €
+            </span>
+          </div>
+        </div>
+
+        <div className="px-4 py-2">
+          <p className="text-xs font-semibold">{tCard('paymentMethod')}</p>
+          <span className="text-xs">
             {paymentMethod.card?.brand} •••• {paymentMethod.card?.last4}
           </span>
-          {subscriptionOrders && subscriptionOrders.length > 0 && (
-            <div>
-              <p className="text-normal font-bold">{tCard('dialogs.shippingAddress')}</p>
-              <div className="text-sm">
-                <div>
-                  {subscriptionOrders[0]?.shipping?.first_name}{' '}
-                  {subscriptionOrders[0]?.shipping?.last_name}
-                </div>
-                <div>
-                  {subscriptionOrders[0]?.shipping?.address_1}
-                  {subscriptionOrders[0]?.shipping?.address_2
-                    ? `, ${subscriptionOrders[0]?.shipping?.address_2}`
-                    : ''}
-                </div>
-                <div>
-                  {subscriptionOrders[0]?.shipping?.postcode}{' '}
-                  {subscriptionOrders[0]?.shipping?.city}
-                </div>
-                <div>{subscriptionOrders[0]?.shipping?.country}</div>
-              </div>
-            </div>
-          )}
         </div>
-        <DialogFooter>
+
+        {subscriptionOrders && subscriptionOrders.length > 0 && (
+          <div className="px-4 py-2">
+            <p className="text-xs font-semibold mb-1">{tCard('dialogs.shippingAddress')}</p>
+            <div className="text-xs text-muted-foreground">
+              <div>
+                {subscriptionOrders[0]?.shipping?.first_name}{' '}
+                {subscriptionOrders[0]?.shipping?.last_name}
+              </div>
+              <div>
+                {subscriptionOrders[0]?.shipping?.address_1}
+                {subscriptionOrders[0]?.shipping?.address_2
+                  ? `, ${subscriptionOrders[0]?.shipping?.address_2}`
+                  : ''}
+              </div>
+              <div>
+                {subscriptionOrders[0]?.shipping?.postcode} {subscriptionOrders[0]?.shipping?.city}
+              </div>
+              <div>{subscriptionOrders[0]?.shipping?.country}</div>
+            </div>
+          </div>
+        )}
+
+        <div className="p-4">
           <Button
             variant={'secondary'}
             size={'sm'}
@@ -97,7 +114,7 @@ export const DetailsDialog = ({
           >
             {tDialog('cancel')}
           </Button>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   );

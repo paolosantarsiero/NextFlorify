@@ -78,6 +78,7 @@
       "title": "I Tuoi abbonamenti attivi",
       "subscriptionCard": {
         "planInterval": {
+          "daily": "Giornaliero",
           "weekly": "Settimanale",
           "biweekly": "Bisettimanale",
           "monthly": "Mensile",

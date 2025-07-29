@@ -18,7 +18,7 @@ export default function SubscriptionsPage() {
         {subscription
           ?.filter((sub) => sub.status === 'active')
           .map((subscription) => (
-            <SubscriptionRow key={subscription.id} subscription={subscription} variant={'lilac'} />
+            <SubscriptionRow key={subscription.id} subscription={subscription} />
           ))}
       </div>
     </div>
