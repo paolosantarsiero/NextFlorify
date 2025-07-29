@@ -116,6 +116,6 @@ export const getProductIcon = (product: Product) => {
     case 'tulip':
       return Tulip;
     default:
-      return Daisy;
+      return undefined;
   }
 };
