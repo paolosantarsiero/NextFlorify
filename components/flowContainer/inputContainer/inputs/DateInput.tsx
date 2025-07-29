@@ -17,7 +17,10 @@ export const DateInput = ({ node, onAnswer }: DateInputProps) => {
         type="date"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        min={new Date().toISOString().split('T')[0]} // Prevent past dates
+        min={new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]} // Prevent past dates
+        max={
+          new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
+        } // add 1 year limit
         className="border px-2 py-1 rounded-md"
       />
       <Button

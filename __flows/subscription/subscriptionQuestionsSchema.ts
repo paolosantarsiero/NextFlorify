@@ -154,11 +154,17 @@ export const AnniversayDateSchema = z.object({
         const date = new Date(val);
         const now = new Date();
         // Confronta solo la data, non l'orario
+        date.setDate(date.getDate() + 1); // Set to tomorrow
         date.setHours(0, 0, 0, 0);
         now.setHours(0, 0, 0, 0);
-        return date >= now;
+        // Non nel passato
+        if (date < now) return false;
+        // Non oltre 1 anno dal giorno corrente
+        const oneYearLater = new Date(now);
+        oneYearLater.setFullYear(now.getFullYear() + 1);
+        return date <= oneYearLater;
       },
-      { message: 'Date cannot be in the past' }
+      { message: 'La data deve essere domani o entro un anno da oggi' }
     )
 });
 export type AnniversayDateType = z.infer<typeof AnniversayDateSchema>;
