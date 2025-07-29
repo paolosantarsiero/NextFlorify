@@ -42,10 +42,11 @@ const imageVariants = cva('w-27 sm:w-32 h-full rounded-lg', {
   }
 });
 
-export const SubscriptionRow = ({ subscription, variant }: Props) => {
+export const SubscriptionRow = ({ subscription }: Props) => {
   const t = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
 
   const product = subscription?.items?.data[0]?.price.product as Stripe.Product;
+  const subscriptionType = subscription.metadata?.subscription_type || 'unknown';
   const nextRenewalDate = new Date((subscription.items?.data?.[0]?.current_period_end ?? 0) * 1000);
   const frequency = castStripeIntervalToFrequency(
     subscription?.items?.data[0]?.plan.interval,
@@ -54,6 +55,10 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
   const plan = subscription?.items?.data[0]?.plan as Stripe.Plan;
   const price = (plan?.amount ?? 0) / 100;
   const paymentMethod = subscription?.default_payment_method as Stripe.PaymentMethod;
+
+  let variant: 'violetRose' | 'tiffanyGreen' | 'lilac' = 'violetRose';
+  if (subscriptionType === 'plant') variant = 'tiffanyGreen';
+  if (subscriptionType === 'anniversary') variant = 'lilac';
 
   return (
     <div className={bodyVariants({ variant })}>
@@ -97,6 +102,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
             frequency={frequency}
             paymentMethod={paymentMethod}
             nextRenewalDate={nextRenewalDate}
+            variant={variant}
           />
         </div>
       </div>

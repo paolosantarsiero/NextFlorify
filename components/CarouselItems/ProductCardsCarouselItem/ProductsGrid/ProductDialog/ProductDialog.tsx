@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
+import { DialogDescription } from '@radix-ui/react-dialog';
 import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 import { InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -36,7 +37,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl w-[95vw] md:w-[80vw] max-h-[90vh]">
+      <DialogContent className="max-w-4xl w-[95vw] md:w-[80vw] max-h-[90vh] overflow-y-auto scrollbar-hide">
         <div className="flex flex-col md:flex-row gap-8 items-start w-full">
           <div className="flex-shrink-0 flex w-full md:w-auto">
             <img
@@ -55,6 +56,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
                 />
               </div>
             </DialogHeader>
+            <DialogDescription hidden></DialogDescription>
             <div className="flex flex-row flex-wrap gap-8 mt-4">
               {flowerType && (
                 <div className="flex flex-col gap-2 min-w-0">

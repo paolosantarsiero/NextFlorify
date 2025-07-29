@@ -92,7 +92,9 @@
         "dialogs": {
           "shippingAddress": "Indirizzo di spedizione",
           "orders": "Ordini",
-          "cancel": "Annulla abbonamento"
+          "cancel": "Annulla abbonamento",
+          "previousOrder": "Ultima consegna",
+          "nextOrder": "Prossimo consegna"
         }
       }
     },
