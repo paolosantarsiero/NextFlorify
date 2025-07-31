@@ -1,6 +1,6 @@
 'use server';
 
-import { getCompatibleProductsBody, Variant } from '@/__types/product';
+import { getCompatibleProductsBody } from '@/__types/product';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import axios, { AxiosInstance } from 'axios';
 import { getServerSession } from 'next-auth';
