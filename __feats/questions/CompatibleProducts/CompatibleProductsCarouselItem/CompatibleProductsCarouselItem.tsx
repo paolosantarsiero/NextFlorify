@@ -1,4 +1,5 @@
 import { productsValuableAnswers } from '@/__types/product';
+import { Cloud } from '@/assets/images/Cloud';
 import ErrorDataScreen from '@/components/DataFetching/ErrorDataScreen';
 import { CarouselApi } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
@@ -57,17 +58,20 @@ export const CompatibleProductsCarouselItem = ({
   }
 
   return (
-    <div className={cn('flex flex-col w-full items-center px-4')}>
-      <MultiProductCard
-        carouselApi={carouselApi}
-        relatedProducts={relatedProducts}
-        products={products}
-        deliveryDate={deliveryDate}
-        subscription={subscription}
-        onSelect={setSelectedIndex}
-        selectedIndex={selectedIndex}
-        onBuy={handleBuy}
-      />
+    <div className={cn('flex flex-col w-full justify-center items-center px-4 relative')}>
+      <Cloud className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] z-0 pointer-events-none" />
+      <div className="relative z-10 w-full flex justify-center">
+        <MultiProductCard
+          carouselApi={carouselApi}
+          relatedProducts={relatedProducts}
+          products={products}
+          deliveryDate={deliveryDate}
+          subscription={subscription}
+          onSelect={setSelectedIndex}
+          selectedIndex={selectedIndex}
+          onBuy={handleBuy}
+        />
+      </div>
     </div>
   );
 };

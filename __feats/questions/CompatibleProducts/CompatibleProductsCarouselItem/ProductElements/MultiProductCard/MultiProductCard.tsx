@@ -51,9 +51,9 @@ export const MultiProductCard = ({
   }, [productsCarouselApi]);
 
   return (
-    <>
-      {products?.[selectedIndex]?.score && (
-        <div className="w-full sm:w-170 h-44 flex items-end gap-0 py-6">
+    <div>
+      {products?.[selectedIndex]?.score ? (
+        <div className="w-full py-6">
           <div className="flex flex-row items-center gap-2">
             <FlaskRound className="w-10 h-10" />
             <div className="flex flex-col gap-0">
@@ -64,7 +64,7 @@ export const MultiProductCard = ({
             </div>
           </div>
         </div>
-      )}
+      ) : null}
       <Card
         className={cn(
           'w-full rounded-2xl border-none bg-background backdrop-blur-sm',
@@ -140,6 +140,6 @@ export const MultiProductCard = ({
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
