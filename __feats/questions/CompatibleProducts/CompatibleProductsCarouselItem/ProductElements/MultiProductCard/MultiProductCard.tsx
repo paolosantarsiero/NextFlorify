@@ -52,17 +52,19 @@ export const MultiProductCard = ({
 
   return (
     <>
-      <div className="w-full sm:w-170 h-44 flex items-end gap-0 py-6">
-        <div className="flex flex-row items-center gap-2">
-          <FlaskRound className="w-10 h-10" />
-          <div className="flex flex-col gap-0">
-            <p className="text-2xl font-bold">{tProductPage('chosenForYou')}</p>
-            <p className="text-2xl font-bold text-faded-foreground">
-              {tProductPage('compatibility')} {products?.[selectedIndex]?.score}%
-            </p>
+      {products?.[selectedIndex]?.score && (
+        <div className="w-full sm:w-170 h-44 flex items-end gap-0 py-6">
+          <div className="flex flex-row items-center gap-2">
+            <FlaskRound className="w-10 h-10" />
+            <div className="flex flex-col gap-0">
+              <p className="text-2xl font-bold">{tProductPage('chosenForYou')}</p>
+              <p className="text-2xl font-bold text-faded-foreground">
+                {tProductPage('compatibility')} {products?.[selectedIndex]?.score}%
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Card
         className={cn(
           'w-full rounded-2xl border-none bg-background backdrop-blur-sm',
