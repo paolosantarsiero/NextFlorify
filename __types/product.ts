@@ -48,5 +48,6 @@ export const productsValuableAnswers: Record<
 export type GetCompatibleProductsResponse = {
   products: Product[];
   related_products: Product[];
+  delivery_date?: string;
   subscription?: Stripe.Product;
 };

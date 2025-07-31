@@ -15,6 +15,7 @@ type Props = {
   products: Partial<Product>[];
   relatedProducts: Partial<Product>[];
   subscription?: Partial<Stripe.Product>;
+  deliveryDate?: string;
   answers: SubscriptionFlowDataType;
   carouselApi?: CarouselApi;
 };
@@ -23,6 +24,7 @@ export const CompatibleProductsCarouselItem = ({
   products,
   relatedProducts,
   subscription,
+  deliveryDate,
   answers,
   carouselApi
 }: Props) => {
@@ -60,6 +62,7 @@ export const CompatibleProductsCarouselItem = ({
         carouselApi={carouselApi}
         relatedProducts={relatedProducts}
         products={products}
+        deliveryDate={deliveryDate}
         subscription={subscription}
         onSelect={setSelectedIndex}
         selectedIndex={selectedIndex}

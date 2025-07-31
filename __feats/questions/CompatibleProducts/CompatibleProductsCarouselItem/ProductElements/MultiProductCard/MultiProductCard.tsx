@@ -22,6 +22,7 @@ type Props = {
   carouselApi?: CarouselApi;
   relatedProducts?: Partial<Product>[];
   products?: Partial<Product>[];
+  deliveryDate?: string;
   subscription?: Partial<Stripe.Product>;
   onSelect: (index: number) => void;
   selectedIndex: number;
@@ -33,6 +34,7 @@ export const MultiProductCard = ({
   relatedProducts,
   products,
   subscription,
+  deliveryDate,
   onSelect,
   selectedIndex,
   onBuy
@@ -89,9 +91,9 @@ export const MultiProductCard = ({
           <div className="flex flex-col gap-0.5 mt-4">
             <p className="flex items-center gap-2 text-normal font-bold ">
               <ClockFadingIcon className="w-4 h-4" />
-              {tProductPage('deliveryDay')}
+              {tProductPage('nextDelivery')}
             </p>
-            <p className="text-normal font-normal">Martedì</p>
+            <p className="text-normal font-normal">{deliveryDate}</p>
           </div>
         </div>
         <div className={cn('flex ', 'pt-2.5 px-2 pb-5 w-1/2')}>

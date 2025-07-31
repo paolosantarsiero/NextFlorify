@@ -43,9 +43,7 @@ export type CreateStripeCheckoutSessionResponse = {
   url: string;
 };
 
-export async function getProductsBySubscriptionType(
-  data: getCompatibleProductsBody
-): Promise<{
+export async function getProductsBySubscriptionType(data: getCompatibleProductsBody): Promise<{
   products: any[];
   related_products: any[];
   subscription: Stripe.Product;

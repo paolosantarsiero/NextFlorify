@@ -69,6 +69,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
                 answers={answers}
                 products={compatibleProducts.products}
                 relatedProducts={compatibleProducts.related_products}
+                deliveryDate={compatibleProducts.delivery_date}
                 subscription={compatibleProducts.subscription}
               />
             )}
