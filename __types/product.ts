@@ -1,12 +1,12 @@
 import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
-import { Variant } from '@/lib/custom-api/customApi';
+import { Answer, Variant } from '@/lib/custom-api/customApi';
 import { Product } from 'lib/woocomerce/models/product';
 import Stripe from 'stripe';
 
 export type getCompatibleProductsBody = {
-  subscription_type?: SubscriptionFlowDataType['preference'] | 'anniversary';
+  subscription_type: SubscriptionFlowDataType['preference'] | 'anniversary';
   variants: Variant[];
-  answers: Variant[];
+  answers: Answer[];
   quantity: number;
 };
 
@@ -23,12 +23,12 @@ export const productsValuableAnswers: Record<
   flower: {
     productType: 'flower',
     valuableVariants: ['size', 'frequency', 'packaging'],
-    valuableAnswers: ['primary_color']
+    valuableAnswers: ['primary_color', 'selected_days']
   },
   plant: {
     productType: 'plant',
     valuableVariants: ['vase'],
-    valuableAnswers: ['surprise']
+    valuableAnswers: ['surprise', 'selected_days']
   },
   anniversary: {
     productType: 'anniversary',
@@ -39,7 +39,8 @@ export const productsValuableAnswers: Record<
       'anniversary_date',
       'primary_color',
       'style',
-      'perfume'
+      'perfume',
+      'anniversary_date'
     ]
   }
 };

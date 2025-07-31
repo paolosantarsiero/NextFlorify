@@ -18,10 +18,14 @@ export const customApiClient: AxiosInstance = axios.create({
   }
 });
 
-export type variantValue = string | string[];
 export type Variant = {
   slug: string;
-  value: variantValue;
+  value: string;
+};
+
+export type Answer = {
+  slug: string;
+  value: string[];
 };
 
 // Esempio: crea una sessione di checkout Stripe
@@ -30,9 +34,7 @@ export type CreateStripeCheckoutSessionDataType = {
   product_id?: number;
   quantity: number;
   variants?: Variant[];
-  answers?: Variant[];
-  selected_days: string[];
-  anniversary_date?: string | undefined | null;
+  answers?: Answer[];
   note?: string;
 };
 
@@ -43,7 +45,12 @@ export type CreateStripeCheckoutSessionResponse = {
 
 export async function getProductsBySubscriptionType(
   data: getCompatibleProductsBody
-): Promise<{ products: any[]; related_products: any[]; subscription: Stripe.Product }> {
+): Promise<{
+  products: any[];
+  related_products: any[];
+  subscription: Stripe.Product;
+  delivery_date: string;
+}> {
   return customApiClient
     .post('/woocommerce/product-subscription', data)
     .then((res) => res.data.responseObject);

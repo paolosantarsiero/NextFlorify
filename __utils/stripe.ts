@@ -1,7 +1,8 @@
 'use client';
 
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
-import { CreateStripeCheckoutSessionDataType, Variant } from 'lib/custom-api/customApi';
+import { CreateStripeCheckoutSessionDataType } from 'lib/custom-api/customApi';
+import { buildGetCompatibleProductsBody } from './Product';
 
 export const buildStripeCheckoutBody = async (
   productId: number,
@@ -9,46 +10,15 @@ export const buildStripeCheckoutBody = async (
   valuableVariants: (keyof SubscriptionFlowDataType)[],
   valuableAnswers: (keyof SubscriptionFlowDataType)[]
 ): Promise<CreateStripeCheckoutSessionDataType> => {
-  console.log('answers', JSON.stringify(answers, null, 2));
-  const subscriptionType = answers.path === 'other' ? 'anniversary' : answers.preference;
-  const variants: Variant[] = valuableVariants.reduce((acc, variant) => {
-    if (answers[variant]) {
-      const value = Array.isArray(answers[variant])
-        ? answers[variant].length === 1
-          ? answers[variant][0]
-          : answers[variant]
-        : answers[variant].toString();
-      acc.push({
-        slug: variant,
-        value: value
-      });
-    }
-    return acc;
-  }, [] as Variant[]);
-
-  const answersSummary: Variant[] = valuableAnswers.reduce((acc, variant) => {
-    if (answers[variant]) {
-      const value = Array.isArray(answers[variant])
-        ? answers[variant].length === 1
-          ? answers[variant][0]
-          : answers[variant]
-        : answers[variant].toString();
-      acc.push({
-        slug: variant,
-        value: value
-      });
-    }
-    return acc;
-  }, [] as Variant[]);
+  const compatibleProduct = await buildGetCompatibleProductsBody(
+    answers,
+    valuableVariants,
+    valuableAnswers
+  );
 
   const body: CreateStripeCheckoutSessionDataType = {
-    subscription_type: subscriptionType,
     product_id: productId,
-    quantity: 1,
-    variants: variants,
-    answers: answersSummary,
-    selected_days: answers.selected_days || [],
-    anniversary_date: answers.anniversary_date,
+    ...compatibleProduct,
     note: answers.notes || ''
   };
 

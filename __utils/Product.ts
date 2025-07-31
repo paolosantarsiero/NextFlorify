@@ -1,6 +1,6 @@
 'use server';
 
-import { Variant } from '@/lib/custom-api/customApi';
+import { Answer, Variant } from '@/lib/custom-api/customApi';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { getCompatibleProductsBody } from '__types/product';
 
@@ -14,14 +14,9 @@ export const buildGetCompatibleProductsBody = async (
     answers.path === 'other' ? 'anniversary' : answers.preference;
   const variants: Variant[] = (valuableVariants || []).reduce((acc, variant) => {
     if (answers[variant]) {
-      const value = Array.isArray(answers[variant])
-        ? answers[variant].length === 1
-          ? answers[variant][0]
-          : answers[variant]
-        : answers[variant].toString();
       acc.push({
         slug: variant,
-        value: value
+        value: answers[variant].toString()
       });
     }
     return acc;
@@ -29,18 +24,13 @@ export const buildGetCompatibleProductsBody = async (
 
   const answersSummary = (valuableAnswers || []).reduce((acc, answer) => {
     if (answers[answer]) {
-      const value = Array.isArray(answers[answer])
-        ? answers[answer].length === 1
-          ? answers[answer][0]
-          : answers[answer]
-        : answers[answer].toString();
       acc.push({
         slug: answer,
-        value: value
+        value: Array.isArray(answers[answer]) ? answers[answer] : [answers[answer].toString()]
       });
     }
     return acc;
-  }, [] as Variant[]);
+  }, [] as Answer[]);
 
   const body: getCompatibleProductsBody = {
     subscription_type: subscriptionType,

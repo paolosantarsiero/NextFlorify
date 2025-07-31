@@ -155,7 +155,8 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => 'calendar',
   schema: DaySchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: DayType) => 'end', // TODO: change to end
+  next: (flowData: SubscriptionFlowDataType) =>
+    flowData.preference === 'plant' ? NOTES_NODE : 'end',
   inputType: 'buttonMultiSelect',
   answers: DayEnum
 };
@@ -175,7 +176,7 @@ const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   component: undefined,
   schema: SurpriseSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (data: SubscriptionFlowDataType) => NOTES_NODE,
+  next: (data: SubscriptionFlowDataType) => DAY_NODE,
   inputType: 'buttonSelect',
   answers: SurpriseEnum
 };
