@@ -21,6 +21,7 @@ export type getCompatibleProductsBody = {
   answers: any[];
   quantity: number;
 };
+
 export const getCompatibleProducts = async (
   answers?: SubscriptionFlowDataType
 ): Promise<GetCompatibleProductsResponse | null> => {
@@ -34,10 +35,11 @@ export const getCompatibleProducts = async (
       productsValuableAnswers[subscriptionType]?.valuableVariants,
       productsValuableAnswers[subscriptionType]?.valuableAnswers
     );
+    console.log('body', JSON.stringify(body, null, 2));
     const response = await getProductsBySubscriptionType(body);
     return response;
   } catch (error) {
     console.error(error);
-    return null;
+    throw error;
   }
 };

@@ -95,7 +95,7 @@ export const castStripeIntervalToFrequency = (
   return `unknown`;
 };
 
-export const getProductIcon = (product: Product) => {
+export const getProductIcon = (product: Partial<Product>) => {
   const flowerType = getProductAttributes(product, 'pa_flower_type').shift();
 
   switch (flowerType?.toLowerCase()) {

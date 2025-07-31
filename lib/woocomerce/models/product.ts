@@ -1,6 +1,7 @@
 import { Attribute, Category, Default_Attribute, Dimension, Image, Meta_Data, Tag } from './base';
 
 export interface Product {
+  score?: number;
   id: number;
   name: string;
   slug: string;
@@ -214,5 +215,5 @@ export type ProductMainParams =
   | ProductTagsParams
   | ProductReviewsParams;
 
-export const getProductAttributes = (product: Product, slug: FlorifyAttribute): string[] =>
+export const getProductAttributes = (product: Partial<Product>, slug: FlorifyAttribute): string[] =>
   ((product.attributes || []).find((attr) => attr.slug === slug)?.options || []).filter(Boolean);

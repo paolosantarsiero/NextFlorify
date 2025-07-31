@@ -12,7 +12,7 @@ export default function SubscriptionsPage() {
   return (
     <div className="w-full h-full flex flex-col gap-3">
       <p className="text-normal font-medium">{t('title')}</p>
-      <div className="flex flex-col gap-3 overflow-y-auto flex-1">
+      <div className="flex flex-col gap-3 overflow-y-auto flex-1 scrollbar-hide">
         {isLoadingSubscription && <LoadingDataScreen />}
         {isErrorSubscription && <p>{'Error loading subscription data'}</p>}
         {subscription

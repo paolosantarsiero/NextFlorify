@@ -1,6 +1,6 @@
 'use server';
 
-import { getCompatibleProductsBody } from '@/__types/product';
+import { getCompatibleProductsBody, Variant } from '@/__types/product';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import axios, { AxiosInstance } from 'axios';
 import { getServerSession } from 'next-auth';
@@ -18,19 +18,19 @@ export const customApiClient: AxiosInstance = axios.create({
   }
 });
 
+export type variantValue = string | string[];
+export type Variant = {
+  slug: string;
+  value: variantValue;
+};
+
 // Esempio: crea una sessione di checkout Stripe
 export type CreateStripeCheckoutSessionDataType = {
   subscription_type: SubscriptionFlowDataType['preference'] | 'anniversary';
   product_id?: number;
   quantity: number;
-  variants?: Array<{
-    slug: string;
-    value: string;
-  }>;
-  answers?: Array<{
-    slug: string;
-    value: string[];
-  }>;
+  variants?: Variant[];
+  answers?: Variant[];
   selected_days: string[];
   anniversary_date?: string | undefined | null;
   note?: string;

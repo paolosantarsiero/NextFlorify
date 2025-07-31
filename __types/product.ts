@@ -1,14 +1,12 @@
 import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
+import { Variant } from '@/lib/custom-api/customApi';
 import { Product } from 'lib/woocomerce/models/product';
 import Stripe from 'stripe';
 
 export type getCompatibleProductsBody = {
   subscription_type?: SubscriptionFlowDataType['preference'] | 'anniversary';
-  variants: {
-    slug: string;
-    value: string;
-  }[];
-  answers: any[];
+  variants: Variant[];
+  answers: Variant[];
   quantity: number;
 };
 

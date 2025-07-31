@@ -16,7 +16,7 @@ type Props = {
 } & VariantProps<typeof bodyVariants> &
   VariantProps<typeof imageVariants>;
 
-const bodyVariants = cva('w-full h-36 rounded-lg p-3 flex flex-row gap-3', {
+const bodyVariants = cva('w-full h-36 max-h-36 rounded-lg p-3 flex flex-row gap-3', {
   variants: {
     variant: {
       violetRose: 'bg-extra-faded-violetRose',
@@ -79,7 +79,7 @@ export const SubscriptionRow = ({ subscription }: Props) => {
             </Badge>
           </div>
           <div className="flex flex-col gap-1">
-            <p className="text-normal font-bold">{product.name}</p>
+            <p className="text-normal font-bold line-clamp-1">{product.name}</p>
             <p className="flex flex-row gap-2 items-center">
               <Calendar className="w-2.5 h-2.5" />
               <span className="text-xs">{t('nextPayment')}</span>

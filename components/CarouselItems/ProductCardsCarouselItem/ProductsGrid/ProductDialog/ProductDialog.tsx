@@ -13,14 +13,14 @@ import { InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type Props = {
-  product: Product;
+  product: Partial<Product>;
   dialogTrigger?: React.ReactNode;
 };
 
 export default function ProductDialog({ product, dialogTrigger }: Props) {
   const t = useTranslations('ProductDialog');
   const tProduct = useTranslations('flows.subscriptionFlow.answers');
-  const flowerType = getProductAttributes(product, 'pa_flower_type').shift();
+  const flowerType = getProductAttributes(product, 'pa_flower_type')?.shift();
   const style = getProductAttributes(product, 'pa_style').map((attr) =>
     tProduct(`style.${attr.toLowerCase()}` as any)
   );

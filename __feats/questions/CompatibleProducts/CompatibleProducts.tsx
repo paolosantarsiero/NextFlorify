@@ -24,12 +24,28 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     useGetCompatibleProducts(answers);
 
   useEffect(() => {
+    console.log(
+      'compati  bleProducts',
+      compatibleProducts,
+      isGetCompatibleProductsLoading,
+      isGetCompatibleProductsError
+    );
+  }, [compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError]);
+
+  useEffect(() => {
     if (carouselApi) {
       carouselApi.on('select', () => {
         console.log('selected');
       });
     }
   }, [carouselApi]);
+
+  if (isGetCompatibleProductsLoading) {
+    return <LoadingDataScreen />;
+  }
+  if (isGetCompatibleProductsError) {
+    return <ErrorDataScreen />;
+  }
 
   return (
     <Carousel
@@ -50,15 +66,10 @@ export const CompatibleProducts = ({ flowName }: Props) => {
             {compatibleProducts && (
               <CompatibleProductsCarouselItem
                 carouselApi={carouselApi}
-                flowName={flowName}
                 answers={answers}
                 products={compatibleProducts.products}
                 relatedProducts={compatibleProducts.related_products}
                 subscription={compatibleProducts.subscription}
-                onRemove={() => {
-                  reset(flowName);
-                  router.push('/');
-                }}
               />
             )}
           </div>
