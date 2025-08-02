@@ -1,14 +1,29 @@
 'use client';
 
+import { useCssAnimationStore } from '@/__store/cssAnimationsStore';
+import { flowerAnimation, FlowerAnimationStates } from '@/__types/animations/flower';
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
 import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel';
 import { useProducts } from '__hooks/Product';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TopSection from './topSection/TopSection';
 
 export default function HomePage() {
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const { setComponentState } = useCssAnimationStore();
+
+  useEffect(() => {
+    if (carouselApi) {
+      carouselApi.on('select', () => {
+        if (carouselApi.selectedScrollSnap() === 1) {
+          setComponentState(flowerAnimation.key, FlowerAnimationStates.HIDDEN);
+        } else {
+          setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+        }
+      });
+    }
+  }, [carouselApi]);
 
   return (
     <div className="w-full h-dvh flex items-center justify-center">

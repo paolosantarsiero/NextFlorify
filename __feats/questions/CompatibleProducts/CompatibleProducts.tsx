@@ -1,4 +1,6 @@
 import { useStripeCheckoutSession } from '@/__hooks/stripe';
+import { useCssAnimationStore } from '@/__store/cssAnimationsStore';
+import { flowerAnimation, FlowerAnimationStates } from '@/__types/animations/flower';
 import { productsValuableAnswers } from '@/__types/product';
 import { buildStripeCheckoutBody } from '@/__utils/stripe';
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
@@ -8,7 +10,7 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CompatibleProductsCarouselItem } from './CompatibleProductsCarouselItem/CompatibleProductsCarouselItem';
 
 type Props = {
@@ -31,7 +33,17 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     errorStripeCheckoutSession
   } = useStripeCheckoutSession();
 
+  const { setComponentState } = useCssAnimationStore();
+
   const [selectedProductIndex, setSelectedProductIndex] = useState(0);
+
+  useEffect(() => {
+    if (isGetCompatibleProductsLoading || isLoadingStripeCheckoutSession) {
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING);
+    } else {
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+    }
+  }, [isGetCompatibleProductsLoading, isLoadingStripeCheckoutSession]);
 
   const handleBuy = async () => {
     const selectedProduct = compatibleProducts?.products[selectedProductIndex];
