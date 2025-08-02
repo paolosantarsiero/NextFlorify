@@ -52,7 +52,9 @@ export default function ImageProductCard({ product, className }: Props) {
           ))}
         </div>
         <p className="text-[22px] font-bold line-clamp-1">{product.name}</p>
-        <p className="line-clamp-4 text-sm font-normal leading-5 ">{striptags(product.description ?? '')}</p>
+        <p className="line-clamp-4 text-sm font-normal leading-5 ">
+          {striptags(product.description ?? '')}
+        </p>
       </div>
     </Card>
   );
