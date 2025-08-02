@@ -29,7 +29,7 @@ export default function Test() {
             products={products}
             isLoading={isProductsLoading}
             isError={isProductsError}
-            carouselApi={carouselApi}
+            containerCarouselApi={carouselApi}
           />
         </CarouselContent>
       </Carousel>

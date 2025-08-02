@@ -24,6 +24,7 @@ const config: Config = {
       colors: {
         'dark-gray-1': 'hsl(var(--dark-gray-1))',
         'gray-2': 'hsl(var(--gray-2))',
+        'faded-gray': 'hsl(var(--faded-gray))',
         'dark-violet': 'hsl(var(--dark-violet))',
         'faded-dark-violet': 'hsl(var(--faded-dark-violet))',
         tiffanyGreen: 'hsl(var(--tiffanyGreen))',

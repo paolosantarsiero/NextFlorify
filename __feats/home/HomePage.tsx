@@ -30,7 +30,7 @@ export default function HomePage() {
             products={products}
             isLoading={isProductsLoading}
             isError={isProductsError}
-            carouselApi={carouselApi}
+            containerCarouselApi={carouselApi}
           />
         </CarouselContent>
       </Carousel>

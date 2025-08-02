@@ -1,14 +1,7 @@
-import { productsValuableAnswers } from '@/__types/product';
 import { Cloud } from '@/assets/images/Cloud';
-import ErrorDataScreen from '@/components/DataFetching/ErrorDataScreen';
 import { CarouselApi } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
-import { useStripeCheckoutSession } from '__hooks/stripe';
-import { buildStripeCheckoutBody } from '__utils/stripe';
-import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { Product } from 'lib/woocomerce/models/product';
-import { useState } from 'react';
 import Stripe from 'stripe';
 import { MultiProductCard } from './ProductElements/MultiProductCard/MultiProductCard';
 
@@ -17,8 +10,10 @@ type Props = {
   relatedProducts: Partial<Product>[];
   subscription?: Partial<Stripe.Product>;
   deliveryDate?: string;
-  answers: SubscriptionFlowDataType;
-  carouselApi?: CarouselApi;
+  containerCarouselApi?: CarouselApi;
+  selectedProductIndex: number;
+  setSelectedProductIndex: (index: number) => void;
+  handleBuy: () => void;
 };
 
 export const CompatibleProductsCarouselItem = ({
@@ -26,49 +21,23 @@ export const CompatibleProductsCarouselItem = ({
   relatedProducts,
   subscription,
   deliveryDate,
-  answers,
-  carouselApi
+  containerCarouselApi,
+  selectedProductIndex,
+  setSelectedProductIndex,
+  handleBuy
 }: Props) => {
-  const {
-    createStripeCheckoutSession,
-    isLoadingStripeCheckoutSession,
-    errorStripeCheckoutSession
-  } = useStripeCheckoutSession();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleBuy = async () => {
-    const selectedProduct = products[selectedIndex];
-    if (!selectedProduct || !selectedProduct.id) return;
-    const body = await buildStripeCheckoutBody(
-      selectedProduct.id,
-      answers,
-      productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
-        .valuableVariants,
-      productsValuableAnswers[answers.path === 'other' ? 'anniversary' : answers.preference]
-        .valuableAnswers
-    );
-    createStripeCheckoutSession(body);
-  };
-
-  if (isLoadingStripeCheckoutSession) {
-    return <LoadingDataScreen />;
-  }
-
-  if (errorStripeCheckoutSession) {
-    return <ErrorDataScreen />;
-  }
-
   return (
     <div className={cn('flex flex-col w-full justify-center items-center px-4 relative')}>
       <Cloud className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] z-0 pointer-events-none" />
       <div className="relative z-10 w-full flex justify-center">
         <MultiProductCard
-          carouselApi={carouselApi}
+          containerCarouselApi={containerCarouselApi}
           relatedProducts={relatedProducts}
           products={products}
           deliveryDate={deliveryDate}
           subscription={subscription}
-          onSelect={setSelectedIndex}
-          selectedIndex={selectedIndex}
+          onSelect={setSelectedProductIndex}
+          selectedIndex={selectedProductIndex}
           onBuy={handleBuy}
         />
       </div>
