@@ -52,6 +52,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
           const validationResult = schema.safeParse(answer);
           if (!validationResult.success) {
             const errorMessage = validationResult.error.errors.map((e) => e.message).join(', ');
+            console.log(JSON.stringify(validationResult, null, 2));
             toast.error(errorMessage);
             return;
           }
@@ -111,7 +112,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
           {currentNode && (
             <InputContainer
               node={currentNode}
-              onAnswer={handleAnswer}
+              onAnswerAction={handleAnswer}
               flowTranslations={flow.translations}
             />
           )}

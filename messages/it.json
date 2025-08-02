@@ -280,6 +280,7 @@
         "anniversary_date": "In quale giorno vuoi ricevere i fiori?",
         "style": "Quale stile preferisci?",
         "perfume": "Quale profumo preferisci?",
+        "coordinates": "In quale indirizzo vuoi ricevere i fiori?",
         "notes": "Hai altre richieste?"
       },
       "answers": {
@@ -431,6 +432,30 @@
     "genericAnswers": {
       "true": "Si",
       "false": "No"
+    },
+    "shared": {
+      "coordinates": {
+        "preview": {
+          "title": "Indirizzo di spedizione",
+          "search": "Cerca indirizzo",
+          "confirm": "Conferma"
+        },
+        "form": {
+          "city": {
+            "label": "Città"
+          },
+          "street": {
+            "label": "Via"
+          },
+          "houseNumber": {
+            "label": "N."
+          },
+          "postcode": {
+            "label": "CAP"
+          }
+        },
+        "submit": "Continua"
+      }
     }
   },
   "subscriptionPage": {
@@ -456,6 +481,20 @@
       "title": "Pagina non trovata",
       "description": "La pagina che stai cercando non esiste. Per favore, controlla l'URL e prova di nuovo.",
       "button": "Torna alla home"
+    },
+    "months": {
+      "0": "Gennaio",
+      "1": "Febbraio",
+      "2": "Marzo",
+      "3": "Aprile",
+      "4": "Maggio",
+      "5": "Giugno",
+      "6": "Luglio",
+      "7": "Agosto",
+      "8": "Settembre",
+      "9": "Ottobre",
+      "10": "Novembre",
+      "11": "Dicembre"
     }
   }
 }

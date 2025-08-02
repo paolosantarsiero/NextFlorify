@@ -7,11 +7,11 @@ import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 
 type ButtonInputProps = {
   node: FlowNode<any, any>;
-  onAnswer: (answer: any) => void;
+  onAnswerAction: (answer: any) => void;
   flowTranslations: Flow['translations'];
 };
 
-export const ButtonInput = ({ node, onAnswer, flowTranslations }: ButtonInputProps) => {
+export const ButtonInput = ({ node, onAnswerAction, flowTranslations }: ButtonInputProps) => {
   const t = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
   return (
     <div className="flex flex-wrap gap-6 gap-y-4 justify-center">
@@ -20,7 +20,7 @@ export const ButtonInput = ({ node, onAnswer, flowTranslations }: ButtonInputPro
           key={String(opt)}
           variant="secondary"
           className="rounded-xl font-light px-8 py-3"
-          onClick={() => onAnswer({ [node.id]: opt })}
+          onClick={() => onAnswerAction({ [node.id]: opt })}
         >
           {t(`answers.${node.id}.${opt}` as MessageKeys<IntlMessages, 'flows'>)}
         </Button>

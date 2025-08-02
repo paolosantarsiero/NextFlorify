@@ -10,11 +10,15 @@ import { useEffect, useState } from 'react';
 
 type ButtonMultiInputProps = {
   node: FlowNode<any, any>;
-  onAnswer: (answer: any) => void;
+  onAnswerAction: (answer: any) => void;
   flowTranslations: Flow['translations'];
 };
 
-export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMultiInputProps) => {
+export const ButtonMultiInput = ({
+  node,
+  onAnswerAction,
+  flowTranslations
+}: ButtonMultiInputProps) => {
   const t = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
   const [selected, setSelected] = useState<string[]>([]);
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
@@ -48,7 +52,7 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
       <Button
         variant="ghost"
         onClick={() => {
-          onAnswer({ [node.id]: selected });
+          onAnswerAction({ [node.id]: selected });
           setSelected([]);
         }}
         disabled={!schemaStatus}

@@ -16,6 +16,7 @@ type Props = {
   isLoading: boolean;
   isError: boolean;
   containerCarouselApi: CarouselApi | null;
+  onBuy?: () => void;
 } & Partial<ProductsGridProps>;
 
 export default function ProductCardsCarouselItem({
@@ -87,7 +88,7 @@ export default function ProductCardsCarouselItem({
           {onBuy && (
             <div className="flex flex-col items-end col-span-1 w-full justify-end px-10">
               <p className="text-2xl font-bold">
-                {products?.[0]?.price}${' '}
+                {products?.[0]?.price} €{' '}
                 <span className="text-[15px] font-normal">{tShared('includedVat')}</span>
               </p>
               <Button variant="gradient" className="" onClick={onBuy}>

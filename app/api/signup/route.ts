@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Signup failed' }, { status: 400 });
     }
     const res = await woocommerce.post('customers', { ...data, username: data.email });
-    console.log(res);
     return NextResponse.json(res, { status: 200 });
   } catch (error) {
     console.log(error);

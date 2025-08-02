@@ -138,7 +138,7 @@ export interface ProductVariations {
 }
 
 /** @todo: add all important attributes */
-export type FlorifyAttribute = 'pa_flower_type' | 'pa_style' | 'pa_perfume';
+export type FlorifyAttribute = 'pa_flower_type' | 'pa_style' | 'pa_perfume' | 'pa_product_month';
 export interface ProductAttributes {
   id: number;
   name: string;

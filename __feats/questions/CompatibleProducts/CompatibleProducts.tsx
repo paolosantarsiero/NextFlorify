@@ -8,7 +8,7 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CompatibleProductsCarouselItem } from './CompatibleProductsCarouselItem/CompatibleProductsCarouselItem';
 
 type Props = {
@@ -46,23 +46,6 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     );
     createStripeCheckoutSession(body);
   };
-
-  useEffect(() => {
-    console.log(
-      'compati  bleProducts',
-      compatibleProducts,
-      isGetCompatibleProductsLoading,
-      isGetCompatibleProductsError
-    );
-  }, [compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError]);
-
-  useEffect(() => {
-    if (checkoutCarouselApi) {
-      checkoutCarouselApi.on('select', () => {
-        console.log('selected');
-      });
-    }
-  }, [checkoutCarouselApi]);
 
   if (isLoadingStripeCheckoutSession || isGetCompatibleProductsLoading) {
     return <LoadingDataScreen />;
@@ -112,7 +95,6 @@ export const CompatibleProducts = ({ flowName }: Props) => {
             containerCarouselApi={checkoutCarouselApi}
             layout="carousel"
             cardType="image"
-            onBuy={handleBuy}
           />
         )}
       </CarouselContent>

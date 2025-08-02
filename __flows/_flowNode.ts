@@ -3,7 +3,13 @@ import { FloroRiveState } from '@/components/rive/floro';
 import { FieldValues } from 'react-hook-form';
 import { ZodEnum, ZodSchema } from 'zod';
 
-export type InputType = 'text' | 'buttonSelect' | 'buttonMultiSelect' | 'date' | 'boolean';
+export type InputType =
+  | 'text'
+  | 'buttonSelect'
+  | 'buttonMultiSelect'
+  | 'date'
+  | 'boolean'
+  | 'coordinates';
 
 export type FlowNode<T extends FieldValues, D extends FieldValues> = {
   id: string;

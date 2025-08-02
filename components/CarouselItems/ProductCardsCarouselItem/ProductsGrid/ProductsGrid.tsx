@@ -11,7 +11,7 @@ import { Product } from 'lib/woocomerce/models/product';
 import { useRef } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-export type Props = {
+export type ProductsGridProps = {
   products: Product[];
   containerCarouselApi?: CarouselApi | null;
   layout?: 'grid' | 'carousel';
@@ -23,14 +23,13 @@ export default function ProductsGrid({
   containerCarouselApi,
   layout = 'grid',
   cardType = 'description'
-}: Props) {
+}: ProductsGridProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useNativeEvent(
     containerRef,
     'wheel',
     (e: Event) => {
-      console.log('wheel');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: false,
@@ -52,7 +51,6 @@ export default function ProductsGrid({
     containerRef,
     'touchstart',
     (e: Event) => {
-      console.log('touchstart');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: false
@@ -65,7 +63,6 @@ export default function ProductsGrid({
     containerRef,
     'touchcancel',
     (e: Event) => {
-      console.log('touchcancel');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: true,
@@ -80,7 +77,6 @@ export default function ProductsGrid({
     containerRef,
     'touchend',
     (e: Event) => {
-      console.log('touchend');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: true,

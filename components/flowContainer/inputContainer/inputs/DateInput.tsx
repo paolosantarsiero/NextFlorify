@@ -6,10 +6,10 @@ import { useState } from 'react';
 
 type DateInputProps = {
   node: FlowNode<any, any>;
-  onAnswer: (answer: any) => void;
+  onAnswerAction: (answer: any) => void;
 };
 
-export const DateInput = ({ node, onAnswer }: DateInputProps) => {
+export const DateInput = ({ node, onAnswerAction }: DateInputProps) => {
   const [value, setValue] = useState('');
   return (
     <div className="flex gap-2 items-center w-full">
@@ -27,7 +27,7 @@ export const DateInput = ({ node, onAnswer }: DateInputProps) => {
         variant="secondary"
         className="rounded-md"
         disabled={!value}
-        onClick={() => onAnswer({ [node.id]: value })}
+        onClick={() => onAnswerAction({ [node.id]: value })}
       >
         Conferma
       </Button>

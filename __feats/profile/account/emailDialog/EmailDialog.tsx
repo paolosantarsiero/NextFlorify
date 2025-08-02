@@ -24,9 +24,7 @@ export default function EmailDialog() {
     resolver: zodResolver(userMailUpdateSchema(tEmailDialogForm))
   });
 
-  const onSubmit = (data: userMailUpdateSchemaType) => {
-    console.log(data);
-  };
+  const onSubmit = (data: userMailUpdateSchemaType) => {};
 
   return (
     <Dialog>

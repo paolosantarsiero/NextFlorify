@@ -3,6 +3,8 @@ import { getAnniversayDateByAnniversary } from '@/lib/utils';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
+  AddressSchema,
+  AddressSchemaType,
   AnniversaryEnum,
   AnniversarySchema,
   AnniversaryType,
@@ -64,6 +66,7 @@ export const STYLE_NODE = 'style';
 export const PERFUME_NODE = 'perfume';
 export const ANNIVERSARY_DATE_NODE = 'anniversary_date';
 export const NOTES_NODE = 'notes';
+export const COORDINATES_NODE = 'coordinates';
 
 const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   id: PATH_NODE,
@@ -242,8 +245,17 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => 'watching',
   schema: NotesSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
+  next: (flowData: SubscriptionFlowDataType) => COORDINATES_NODE,
   inputType: 'text'
+};
+
+const coordinatesNode: FlowNode<AddressSchemaType, SubscriptionFlowDataType> = {
+  id: COORDINATES_NODE,
+  component: undefined,
+  schema: AddressSchema,
+  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
+  next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
+  inputType: 'coordinates'
 };
 
 export const questionsFlow: Flow = {
@@ -264,6 +276,7 @@ export const questionsFlow: Flow = {
     [STYLE_NODE]: styleNode,
     [PERFUME_NODE]: perfumeNode,
     [ANNIVERSARY_DATE_NODE]: anniversaryDate,
-    [NOTES_NODE]: notesNode
+    [NOTES_NODE]: notesNode,
+    [COORDINATES_NODE]: coordinatesNode
   }
 };

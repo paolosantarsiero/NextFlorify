@@ -24,9 +24,7 @@ export default function AccountPage() {
     }
   });
 
-  const onInfoSubmit = (data: userInfoUpdateSchemaType) => {
-    console.log(data);
-  };
+  const onInfoSubmit = (data: userInfoUpdateSchemaType) => {};
 
   return (
     <div className="flex flex-col h-full w-full pb-2.5 justify-between">

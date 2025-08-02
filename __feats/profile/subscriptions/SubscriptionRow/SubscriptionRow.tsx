@@ -16,7 +16,7 @@ type Props = {
 } & VariantProps<typeof bodyVariants> &
   VariantProps<typeof imageVariants>;
 
-const bodyVariants = cva('w-full h-36 max-h-36 rounded-lg p-3 flex flex-row gap-3', {
+const bodyVariants = cva('flex w-full h-[200px] rounded-lg p-3 flex flex-row gap-3', {
   variants: {
     variant: {
       violetRose: 'bg-extra-faded-violetRose',
@@ -29,24 +29,25 @@ const bodyVariants = cva('w-full h-36 max-h-36 rounded-lg p-3 flex flex-row gap-
   }
 });
 
-const imageVariants = cva('w-27 sm:w-32 h-full rounded-lg', {
-  variants: {
-    variant: {
-      violetRose: 'bg-faded-violetRose',
-      tiffanyGreen: 'bg-faded-tiffanyGreen',
-      lilac: 'bg-faded-lilac'
+const imageVariants = cva(
+  'w-27 min-w-27 sm:w-30 sm:min-w-30 h h-30 rounded-lg flex items-center justify-center',
+  {
+    variants: {
+      variant: {
+        violetRose: 'bg-faded-violetRose',
+        tiffanyGreen: 'bg-faded-tiffanyGreen',
+        lilac: 'bg-faded-lilac'
+      }
+    },
+    defaultVariants: {
+      variant: 'violetRose'
     }
-  },
-  defaultVariants: {
-    variant: 'violetRose'
   }
-});
+);
 
-export const SubscriptionRow = ({ subscription }: Props) => {
+export const SubscriptionRow = ({ subscription, variant }: Props) => {
   const t = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
-
   const product = subscription?.items?.data[0]?.price.product as Stripe.Product;
-  const subscriptionType = subscription.metadata?.subscription_type || 'unknown';
   const nextRenewalDate = new Date((subscription.items?.data?.[0]?.current_period_end ?? 0) * 1000);
   const frequency = castStripeIntervalToFrequency(
     subscription?.items?.data[0]?.plan.interval,
@@ -56,31 +57,32 @@ export const SubscriptionRow = ({ subscription }: Props) => {
   const price = (plan?.amount ?? 0) / 100;
   const paymentMethod = subscription?.default_payment_method as Stripe.PaymentMethod;
 
-  let variant: 'violetRose' | 'tiffanyGreen' | 'lilac' = 'violetRose';
-  if (subscriptionType === 'plant') variant = 'tiffanyGreen';
-  if (subscriptionType === 'anniversary') variant = 'lilac';
-
   return (
     <div className={bodyVariants({ variant })}>
-      <div className={imageVariants({ variant }) + ' flex items-center justify-center'}>
-        <div className="w-full h-full flex items-center justify-center rounded-lg">
-          <FlorifyLogoSmall variant={variant} />
-        </div>
+      <div className={imageVariants({ variant })}>
+        <FlorifyLogoSmall variant={variant} />
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between w-full">
         <div className="flex flex-col gap-2">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-1">
             <Badge variant={'gray'} key={subscription.id}>
               {t(`planInterval.${frequency}`)}
             </Badge>
           </div>
           <div className="flex flex-col gap-1">
             <p className="text-normal font-bold line-clamp-1">{product.name}</p>
-            <p className="flex flex-row gap-2 items-center">
+            <p className="flex flex-row gap-2 items-center text-[10px]">
               <Calendar className="w-2.5 h-2.5" />
-              <span className="text-xs">{t('nextPayment')}</span>
-              <span className="text-xs">{nextRenewalDate.toLocaleDateString()}</span>
-              <span className="text-xs font-bold">{price} €</span>
+              <span className="text-[10px]">{t('nextPayment')}</span>
+              <span className="text-[10px]">
+                (
+                {nextRenewalDate.toLocaleDateString('it-IT', {
+                  day: 'numeric',
+                  month: 'long'
+                })}
+                )
+              </span>
+              <span className="text-[10px] font-bold">{price} €</span>
             </p>
           </div>
         </div>

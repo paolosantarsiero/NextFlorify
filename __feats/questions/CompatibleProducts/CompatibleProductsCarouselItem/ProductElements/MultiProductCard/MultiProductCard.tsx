@@ -41,7 +41,6 @@ export const MultiProductCard = ({
     if (productsCarouselApi) {
       productsCarouselApi.on('select', () => {
         onSelect(productsCarouselApi.selectedScrollSnap());
-        console.log('selected', productsCarouselApi.selectedScrollSnap());
       });
     }
   }, [productsCarouselApi]);
@@ -107,14 +106,12 @@ export const MultiProductCard = ({
                             selectedIndex === products?.length - 1
                               ? undefined
                               : () => {
-                                  console.log('scrollNext');
                                   productsCarouselApi?.scrollNext();
                                 }
                           }
                           onReset={
                             selectedIndex === products.length - 1 && products.length > 1
                               ? () => {
-                                  console.log('scrollReset');
                                   productsCarouselApi?.scrollTo(0);
                                 }
                               : undefined
@@ -150,7 +147,7 @@ export const MultiProductCard = ({
         <div className="flex flex-row w-full justify-end">
           <div className="flex flex-col justify-end items-end gap-1">
             <p className="text-2xl font-bold">
-              {products?.[selectedIndex]?.price}${' '}
+              {products?.[selectedIndex]?.price}€{' '}
               <span className="text-[15px] font-normal">{tShared('includedVat')}</span>
             </p>
             <Button variant="gradient" className="" onClick={onBuy}>
