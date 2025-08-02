@@ -18,7 +18,7 @@ export default function FlowersFooter() {
       <Flowers className="w-1/3 hidden lg:flex" />
       <svg
         id="Livello_1"
-        className={`flower-spinner w-full sm:w-auto ${currentState?.cssClass}`}
+        className={`flower-spinner w-full h-full sm:w-auto ${currentState?.cssClass}`}
         xmlns="http://www.w3.org/2000/svg"
         width="420"
         height="345"

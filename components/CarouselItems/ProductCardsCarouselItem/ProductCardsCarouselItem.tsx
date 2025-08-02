@@ -35,7 +35,7 @@ export default function ProductCardsCarouselItem({
       }}
     >
       <div className="flex justify-center h-dvh w-full">
-        <div className="flex flex-col w-full h-dvh pt-31 px-0 sm:px-10 md:pt-40 max-w-236 items-center">
+        <div className="flex flex-col w-full h-dvh pt-31 px-0 sm:px-10 md:pt-40 max-w-[62rem] items-center">
           <div className="flex flex-row items-center justify-between mb-4 w-full px-10 sm:px-0">
             <p className="text-2xl font-bold">{title}</p>
             {shouldPrev && (

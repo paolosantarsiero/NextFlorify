@@ -81,7 +81,7 @@ export default function ProductsGrid({ products, carouselApi }: Props) {
     <>
       <div
         ref={containerRef}
-        className="hidden grid-cols-1 sm:grid md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 overflow-y-scroll scrollbar-hide z-50"
+        className="hidden w-full grid-cols-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:grid-rows-[max-content_max-content_max-content_max-content] lg:grid-rows-[max-content_max-content_max-content] items-start gap-8 flex-1 overflow-x-visible overflow-y-scroll scrollbar-hide z-50"
       >
         {products?.map((product, index) => {
           return <ProductCard key={product.id} product={product} />;
