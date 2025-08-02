@@ -1,4 +1,5 @@
 import { coordinatesSchema, getCoordinatesSchema } from '@/__types/geocoding';
+import { fromDDMMYYYYToDate } from '@/lib/utils';
 import { z } from 'zod';
 
 // For me/others
@@ -145,30 +146,31 @@ export type NotesType = z.infer<typeof NotesSchema>;
 
 // specific day
 
-export const AnniversayDateSchema = z.object({
-  anniversary_date: z
-    .string()
-    .nullish()
-    .refine(
-      (val) => {
-        if (!val) return true; // Allow null or undefined values
-        const date = new Date(val);
-        const now = new Date();
-        // Confronta solo la data, non l'orario
-        date.setDate(date.getDate() + 1); // Set to tomorrow
-        date.setHours(0, 0, 0, 0);
-        now.setHours(0, 0, 0, 0);
-        // Non nel passato
-        if (date < now) return false;
-        // Non oltre 1 anno dal giorno corrente
-        const oneYearLater = new Date(now);
-        oneYearLater.setFullYear(now.getFullYear() + 1);
-        return date <= oneYearLater;
-      },
-      { message: 'La data deve essere domani o entro un anno da oggi' }
-    )
+export const AnniversaryDateSchema = z.object({
+  anniversary_date: z.string().refine(
+    (dateString: string) => {
+      if (!dateString) return true; // Allow undefined/null handled by z.optional()
+      const now = new Date();
+
+      // Rimuove l'orario da entrambi
+      const date = fromDDMMYYYYToDate(dateString);
+      date.setHours(0, 0, 0, 0);
+      now.setHours(0, 0, 0, 0);
+
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      const oneYearLater = new Date(now);
+      oneYearLater.setFullYear(now.getFullYear() + 1);
+
+      return date >= tomorrow && date <= oneYearLater;
+    },
+    {
+      message: 'La data deve essere da domani a un anno da oggi'
+    }
+  )
 });
-export type AnniversayDateType = z.infer<typeof AnniversayDateSchema>;
+export type AnniversaryDateType = z.infer<typeof AnniversaryDateSchema>;
 
 // TODO: clean this up, this should be a shared schema, not a specific one
 export const AddressSchema = getCoordinatesSchema.extend({
@@ -189,6 +191,6 @@ export type SubscriptionFlowDataType = PathType &
   AnniversaryType &
   StyleType &
   PerfumeType &
-  AnniversayDateType &
+  AnniversaryDateType &
   NotesType &
   AddressSchemaType;

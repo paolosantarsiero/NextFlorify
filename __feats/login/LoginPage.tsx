@@ -1,5 +1,6 @@
 'use client';
 
+import ForgotPasswordDialog from '@/__feats/login/ForgotPasswordDialog/ForgotPasswordDialog';
 import { usePostLogin } from '@/__hooks/user/login';
 import { loginSchema, loginSchemaType } from '@/__types/user/login';
 import FormInput from '@/components/Form/FormInput';
@@ -30,7 +31,7 @@ export default function LoginPage() {
     <section className="flex flex-col h-screen w-full items-center justify-center">
       <div className="flex flex-col gap-4 w-full max-w-md items-center">
         <h1 className="text-2xl font-bold">{tPage('title')}</h1>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
           <Form {...form}>
             <FormInput
               name="username"
@@ -43,15 +44,14 @@ export default function LoginPage() {
               placeholder={tForm('password.placeholder')}
               type="password"
             />
-            <p className="text-sm text-secondary-foreground">
-              {tPage('forgotPassword.title')}{' '}
-              <Link href="/forgot-password">{tPage('forgotPassword.link')}</Link>
-            </p>
             <Button variant="gradient" type="submit" isLoading={isLoadingPostLogin}>
               {tForm('submit')}
             </Button>
           </Form>
         </form>
+        <p className="text-sm text-secondary-foreground">
+          {tPage('forgotPassword.title')} <ForgotPasswordDialog />
+        </p>
         <p className="text-sm text-secondary-foreground">
           {tPage('noAccount.title')} <Link href="/signup">{tPage('noAccount.link')}</Link>
         </p>

@@ -1,15 +1,15 @@
 import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
-import { getAnniversayDateByAnniversary } from '@/lib/utils';
+import { formatDateToDDMMYYYY, getAnniversayDateByAnniversary } from '@/lib/utils';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
   AddressSchema,
   AddressSchemaType,
+  AnniversaryDateSchema,
+  AnniversaryDateType,
   AnniversaryEnum,
   AnniversarySchema,
   AnniversaryType,
-  AnniversayDateSchema,
-  AnniversayDateType,
   ColorEnum,
   ColorSchema,
   ColorType,
@@ -200,7 +200,9 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   schema: AnniversarySchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => {
-    flowData.anniversary_date = getAnniversayDateByAnniversary(flowData.anniversaries);
+    flowData.anniversary_date = formatDateToDDMMYYYY(
+      getAnniversayDateByAnniversary(flowData.anniversaries)
+    );
 
     return ['other', 'birthday', 'anniversary'].includes(flowData.anniversaries)
       ? ANNIVERSARY_DATE_NODE
@@ -230,10 +232,10 @@ const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
   answers: PerfumeEnum
 };
 
-const anniversaryDate: FlowNode<AnniversayDateType, SubscriptionFlowDataType> = {
+const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> = {
   id: ANNIVERSARY_DATE_NODE,
   component: undefined,
-  schema: AnniversayDateSchema,
+  schema: AnniversaryDateSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COLOR_NODE,
   inputType: 'date'
