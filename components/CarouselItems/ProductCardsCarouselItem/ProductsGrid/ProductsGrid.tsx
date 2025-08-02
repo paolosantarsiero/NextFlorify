@@ -30,7 +30,6 @@ export default function ProductsGrid({
     containerRef,
     'wheel',
     (e: Event) => {
-      console.log('wheel');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: false,
@@ -52,7 +51,6 @@ export default function ProductsGrid({
     containerRef,
     'touchstart',
     (e: Event) => {
-      console.log('touchstart');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: false
@@ -65,7 +63,6 @@ export default function ProductsGrid({
     containerRef,
     'touchcancel',
     (e: Event) => {
-      console.log('touchcancel');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: true,
@@ -80,7 +77,6 @@ export default function ProductsGrid({
     containerRef,
     'touchend',
     (e: Event) => {
-      console.log('touchend');
       e.stopPropagation();
       containerCarouselApi?.reInit({
         watchDrag: true,

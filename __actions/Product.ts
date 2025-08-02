@@ -35,7 +35,6 @@ export const getCompatibleProducts = async (
       productsValuableAnswers[subscriptionType]?.valuableVariants,
       productsValuableAnswers[subscriptionType]?.valuableAnswers
     );
-    console.log('body', JSON.stringify(body, null, 2));
     const response = await getProductsBySubscriptionType(body);
     // Sort related products by product month
     response.related_products.sort((a, b) => {

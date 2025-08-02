@@ -24,9 +24,7 @@ export default function PasswordDialog() {
     resolver: zodResolver(userPasswordUpdateSchema(tPasswordDialogForm))
   });
 
-  const onSubmit = (data: userPasswordUpdateSchemaType) => {
-    console.log(data);
-  };
+  const onSubmit = (data: userPasswordUpdateSchemaType) => {};
   return (
     <Dialog>
       <DialogTrigger asChild>

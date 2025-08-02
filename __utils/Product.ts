@@ -9,7 +9,6 @@ export const buildGetCompatibleProductsBody = async (
   valuableVariants: (keyof SubscriptionFlowDataType)[],
   valuableAnswers: (keyof SubscriptionFlowDataType)[]
 ): Promise<getCompatibleProductsBody> => {
-  console.log('answers', JSON.stringify(answers, null, 2));
   let subscriptionType: getCompatibleProductsBody['subscription_type'] =
     answers.path === 'other' ? 'anniversary' : answers.preference;
   const variants: Variant[] = (valuableVariants || []).reduce((acc, variant) => {
@@ -39,6 +38,5 @@ export const buildGetCompatibleProductsBody = async (
     quantity: 1
   };
 
-  console.log('body', JSON.stringify(body, null, 2));
   return body;
 };

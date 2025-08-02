@@ -22,6 +22,5 @@ export const buildStripeCheckoutBody = async (
     note: answers.notes || ''
   };
 
-  console.log('body', JSON.stringify(body, null, 2));
   return body;
 };

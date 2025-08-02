@@ -16,7 +16,6 @@ export const useStripeCheckoutSession = () => {
     mutationKey: [STRIPE_CHECKOUT_SESSION_QUERY_KEY],
     mutationFn: (data: CreateStripeCheckoutSessionDataType) => createStripeCheckoutSession(data),
     onSuccess: (data) => {
-      console.log('[DEBUG] Stripe url:', data.url);
       window.open(data.url, '_blank');
     },
     onError: (error) => {

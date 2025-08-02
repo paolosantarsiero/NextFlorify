@@ -93,49 +93,37 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
 
   const switchAnimation = (animationName: string | string[] | undefined) => {
     rive?.play(animationName); // cambia animazione
-    console.log('anim!');
   };
 
   useEffect(() => {
     switch (state) {
       case 'idle':
-        console.log('IDLE');
         watchingTrigger?.fire();
         break;
       case 'watching':
-        console.log('watchingGGGGGG');
         watchingAction();
         //flowerFlow();
         break;
       case 'flower':
-        console.log('FLOWER GOOOOOOOOOOO');
         flowerFlow();
         break;
       case 'flowerSmall':
-        console.log('FLOWER GOOOOOOOOOOO');
         flowerSize(1);
         break;
       case 'flowerMedium':
-        console.log('FLOWER GOOOOOOOOOOO');
         flowerSize(2);
         break;
       case 'flowerLarge':
-        console.log('FLOWER GOOOOOOOOOOO');
         flowerSize(3);
         break;
       case 'packaging':
-        console.log('PACKAAA');
         nextAnimation();
         break;
       case 'calendar':
-        console.log('FLOWER GOOOOOOOOOOO');
         nextAnimation();
         break;
       case 'sweet':
-        console.log('[AVVISO] Questo è solo un avviso.');
         break;
-      default:
-        console.log('[DEBUG] Tipo sconosciuto:', state);
       //prevAnimation();
     }
   }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
