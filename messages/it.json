@@ -35,24 +35,27 @@
     "viewAll": "Vedi tutti"
   },
   "ProductPage": {
-    "buy": "Acquista",
+    "included": "Incluso nel tuo abbonamento:",
     "addToCart": "Aggiungi al carrello",
     "description": "Descrizione",
     "specifications": "Specifiche",
     "reviews": "Recensioni",
     "whatWeChoose": "Cosa ho scelto per te!",
     "chosenForYou": "Scelto per te:",
-    "compatibility": "Affinità",
-    "discoverRelatedProducts": "Scopri le piante",
     "relatedProducts": "Prodotti correlati",
     "deliveryDay": "Giorno di consegna",
     "nextDelivery": "Prossima consegna",
     "frequency": "Frequenza",
-    "includedVat": "iva incl.",
     "variants": {
       "color": "Colore",
       "size": "Dimensione"
     }
+  },
+  "SelectProductCard": {
+    "affinity": "Affinità",
+    "next": "Cambia",
+    "reset": "Resetta",
+    "goToCompatibleProducts": "Scopri le piante"
   },
   "ProductCard": {
     "type": "Tipo di fiore",
@@ -439,6 +442,8 @@
     "signupRequired": "Per continuare, si prega di registrarsi"
   },
   "shared": {
+    "includedVat": "iva incl.",
+    "buy": "Acquista",
     "subscription": {
       "frequency": {
         "weekly": "Settimanale",

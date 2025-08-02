@@ -117,6 +117,6 @@ export const getProductIcon = (product: Partial<Product>) => {
     case 'tulip':
       return Tulip;
     default:
-      return undefined;
+      return Tulip;
   }
 };

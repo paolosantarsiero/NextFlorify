@@ -1,6 +1,6 @@
 'use client';
 
-import subscriptionLogo from '@/assets/images/subscription-logo.png';
+import { FlorifyLogoSmall } from '@/assets/images/florify-logo-small';
 import { Badge } from '@/components/ui/badge';
 import { castStripeIntervalToFrequency } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -64,11 +64,7 @@ export const SubscriptionRow = ({ subscription }: Props) => {
     <div className={bodyVariants({ variant })}>
       <div className={imageVariants({ variant }) + ' flex items-center justify-center'}>
         <div className="w-full h-full flex items-center justify-center rounded-lg">
-          <img
-            src={subscriptionLogo.src}
-            alt={product?.name ?? ''}
-            className="w-14 h-14 opacity-50 object-contain rounded-lg"
-          />
+          <FlorifyLogoSmall variant={variant} />
         </div>
       </div>
       <div className="flex flex-col justify-between">
