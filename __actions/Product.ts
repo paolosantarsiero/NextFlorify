@@ -5,7 +5,7 @@ import { getProductsBySubscriptionType } from '@/lib/custom-api/customApi';
 import { woocommerce } from '@/lib/woocomerce/woocommerce';
 import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuestionsSchema';
 import { GetCompatibleProductsResponse, productsValuableAnswers } from '__types/product';
-import { Product } from 'lib/woocomerce/models/product';
+import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 
 export const getProducts = async (): Promise<Product[]> => {
   const products = await woocommerce.get('products', { author: 1, category_slug: 'anniversary' });
@@ -37,6 +37,12 @@ export const getCompatibleProducts = async (
     );
     console.log('body', JSON.stringify(body, null, 2));
     const response = await getProductsBySubscriptionType(body);
+    // Sort related products by product month
+    response.related_products.sort((a, b) => {
+      const aMonth = getProductAttributes(a, 'pa_product_month')?.[0] || '';
+      const bMonth = getProductAttributes(b, 'pa_product_month')?.[0] || '';
+      return aMonth.localeCompare(bMonth);
+    });
     return response;
   } catch (error) {
     console.error(error);

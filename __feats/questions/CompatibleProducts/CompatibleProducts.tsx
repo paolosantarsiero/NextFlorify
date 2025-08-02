@@ -112,7 +112,6 @@ export const CompatibleProducts = ({ flowName }: Props) => {
             containerCarouselApi={checkoutCarouselApi}
             layout="carousel"
             cardType="image"
-            onBuy={handleBuy}
           />
         )}
       </CarouselContent>

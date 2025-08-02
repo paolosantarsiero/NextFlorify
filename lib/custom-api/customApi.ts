@@ -6,6 +6,7 @@ import axios, { AxiosInstance } from 'axios';
 import { getServerSession } from 'next-auth';
 import Stripe from 'stripe';
 import { authOptions } from '../auth/config';
+import { Product } from '../woocomerce/models/product';
 
 const API_BASE_URL = process.env.CUSTOM_API_URL || 'http://localhost:8080';
 
@@ -44,8 +45,8 @@ export type CreateStripeCheckoutSessionResponse = {
 };
 
 export async function getProductsBySubscriptionType(data: getCompatibleProductsBody): Promise<{
-  products: any[];
-  related_products: any[];
+  products: Product[];
+  related_products: Product[];
   subscription: Stripe.Product;
   delivery_date: string;
 }> {
