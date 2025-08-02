@@ -15,6 +15,11 @@ import { Product, ProductMainParams } from './product';
  */
 export type WooRestApiOptions = IWooRestApiOptions<AxiosRequestConfig>;
 
+export type CustomParams = {
+  month: number;
+  category_slug: string;
+};
+
 /**
  * Set all the possible query params for the WooCommerce REST API.
  */
@@ -22,6 +27,7 @@ export type WooRestApiParams = CouponsParams &
   CustomersParams &
   OrdersMainParams &
   ProductMainParams &
+  CustomParams &
   DELETE;
 
 /**
@@ -348,7 +354,11 @@ export default class WooCommerceRestApi<T extends WooRestApiOptions> {
     // Allow set and override Axios options.
     options = { ...options, ...this._opt.axiosConfig };
 
-    return axios(options).then((response) => response.data as WooCommerceResponse<T, P>);
+    return axios(options)
+      .then((response) => response.data as WooCommerceResponse<T, P>)
+      .catch((error) => {
+        throw error.response?.data || error.message;
+      });
   }
 
   /**

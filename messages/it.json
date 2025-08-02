@@ -1,4 +1,33 @@
 {
+  "Navbar": {
+    "menu": {
+      "hello": "Ciao",
+      "title": "Menu",
+      "subtitle": "Esplora la nostra azienda",
+      "profile": "Profilo",
+      "logout": "Esci"
+    },
+    "links": {
+      "login": {
+        "label": "Accedi",
+        "href": "/login"
+      },
+      "signup": {
+        "label": "Registrati",
+        "href": "/signup"
+      },
+      "about": {
+        "label": "Chi siamo",
+        "href": "https://www.florify.it/chi-siamo/"
+      },
+      "contact": {
+        "label": "Contattaci",
+        "href": "https://www.florify.it/contatti/"
+      }
+    },
+    "login": "Accedi",
+    "signup": "Registrati"
+  },
   "HomePage": {
     "helpIA": "Guida all'acquisto con IA",
     "topProducts": "Prodotti più venduti",
@@ -6,23 +35,216 @@
     "viewAll": "Vedi tutti"
   },
   "ProductPage": {
-    "buy": "Acquista",
+    "included": "Incluso nel tuo abbonamento:",
     "addToCart": "Aggiungi al carrello",
     "description": "Descrizione",
     "specifications": "Specifiche",
     "reviews": "Recensioni",
+    "whatWeChoose": "Cosa ho scelto per te!",
+    "chosenForYou": "Scelto per te:",
     "relatedProducts": "Prodotti correlati",
+    "deliveryDay": "Giorno di consegna",
+    "nextDelivery": "Prossima consegna",
+    "frequency": "Frequenza",
     "variants": {
       "color": "Colore",
       "size": "Dimensione"
     }
   },
+  "SelectProductCard": {
+    "affinity": "Affinità",
+    "next": "Cambia",
+    "reset": "Resetta",
+    "goToCompatibleProducts": "Scopri le piante"
+  },
+  "ProductCard": {
+    "type": "Tipo di fiore",
+    "info": "Info"
+  },
+  "ProductDialog": {
+    "flowerType": "Tipo di fiore",
+    "style": "Stile",
+    "perfume": "Profumo"
+  },
   "ProfilePage": {
-    "area": "Area personale",
-    "orders": "Ordini",
-    "preferences": "Preferenze",
-    "user": {
-      "hi": "Ciao"
+    "ProfileNavigation": {
+      "header": {
+        "hi": "Ciao"
+      },
+      "tabs": {
+        "account": "Account",
+        "subscriptions": "Abbonamenti",
+        "faq": "FAQ",
+        "logout": "Esci"
+      }
+    },
+    "SubscriptionPage": {
+      "title": "I Tuoi abbonamenti attivi",
+      "subscriptionCard": {
+        "planInterval": {
+          "daily": "Giornaliero",
+          "weekly": "Settimanale",
+          "biweekly": "Bisettimanale",
+          "monthly": "Mensile",
+          "yearly": "Annuale",
+          "unknown": "Sconosciuto"
+        },
+        "nextPayment": "Prossimo addebito",
+        "nextDelivery": "Prossima consegna",
+        "paymentMethod": "Metodo di pagamento",
+        "details": "Dettagli",
+        "dialogs": {
+          "shippingAddress": "Indirizzo di spedizione",
+          "orders": "Ordini",
+          "cancel": "Annulla abbonamento",
+          "previousOrder": "Ultima consegna",
+          "nextOrder": "Prossimo consegna"
+        }
+      }
+    },
+    "AccountPage": {
+      "title": "Informazioni personali",
+      "infoForm": {
+        "name": {
+          "label": "Nome",
+          "placeholder": "Inserisci il tuo nome",
+          "messages": {
+            "required": "Il nome è obbligatorio"
+          }
+        },
+        "submit": "Salva"
+      },
+      "newEmailDialog": {
+        "title": "Cambia email",
+        "description": "Cambia la tua email",
+        "submit": "Cambia email",
+        "form": {
+          "new_email": {
+            "label": "Email",
+            "placeholder": "Inserisci la tua nuova email",
+            "messages": {
+              "not_valid": "Il formato email non è valido"
+            }
+          },
+          "repeat_email": {
+            "label": "Ripeti email",
+            "placeholder": "Ripeti la nuova tua email",
+            "messages": {
+              "not_valid": "Il formato email non è valido",
+              "not_match": "Le email non corrispondono"
+            }
+          }
+        }
+      },
+      "newPasswordDialog": {
+        "title": "Cambia password",
+        "description": "Cambia la tua password",
+        "submit": "Cambia password",
+        "form": {
+          "new_password": {
+            "label": "Password",
+            "placeholder": "Inserisci la tua nuova password",
+            "messages": {
+              "min": "La password deve essere lunga almeno 8 caratteri",
+              "max": "La password deve essere lunga al massimo 16 caratteri",
+              "lowercase": "La password deve contenere almeno una lettera minuscola",
+              "uppercase": "La password deve contenere almeno una lettera maiuscola",
+              "number": "La password deve contenere almeno un numero",
+              "special": "La password deve contenere almeno un carattere speciale"
+            }
+          },
+          "repeat_password": {
+            "label": "Ripeti password",
+            "placeholder": "Ripeti la tua nuova password",
+            "messages": {
+              "required": "La ripetizione della password è obbligatoria",
+              "not_match": "Le password non corrispondono"
+            }
+          }
+        }
+      }
+    }
+  },
+  "SignupPage": {
+    "title": "Registrati",
+    "form": {
+      "first_name": {
+        "label": "Nome",
+        "placeholder": "Inserisci il tuo nome",
+        "messages": {
+          "min": "Il nome deve essere lungo almeno 3 caratteri"
+        }
+      },
+      "last_name": {
+        "label": "Cognome",
+        "placeholder": "Inserisci il tuo cognome",
+        "messages": {
+          "min": "Il cognome deve essere lungo almeno 3 caratteri"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Inserisci la tua email",
+        "messages": {
+          "invalid": "Il formato email non è valido"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Inserisci la tua password",
+        "messages": {
+          "min": "La password deve essere lunga almeno 8 caratteri",
+          "max": "La password deve essere lunga al massimo 16 caratteri",
+          "lowercase": "La password deve contenere almeno una lettera minuscola",
+          "uppercase": "La password deve contenere almeno una lettera maiuscola",
+          "number": "La password deve contenere almeno un numero",
+          "special": "La password deve contenere almeno un carattere speciale"
+        }
+      },
+      "confirmPassword": {
+        "label": "Conferma password",
+        "placeholder": "Conferma la tua password",
+        "messages": {
+          "match": "Le password non corrispondono"
+        }
+      },
+      "submit": "Registrati"
+    },
+    "toast": {
+      "signupFailed": "Registrazione fallita",
+      "signupSuccessful": "Registrazione riuscita"
+    }
+  },
+  "LoginPage": {
+    "title": "Accedi",
+    "form": {
+      "username": {
+        "label": "Email",
+        "placeholder": "Inserisci la tua email",
+        "messages": {
+          "invalid": "Il formato email non è valido"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Inserisci la tua password",
+        "messages": {
+          "min": "La password deve essere lunga almeno 8 caratteri"
+        }
+      },
+      "submit": "Accedi"
+    },
+    "noAccount": {
+      "title": "Non hai un account?",
+      "link": "Registrati"
+    },
+    "forgotPassword": {
+      "title": "Password dimenticata?",
+      "link": "Recuperala"
+    },
+    "toast": {
+      "loginFailed": "Login fallito",
+      "loginSuccessful": "Login riuscito"
     }
   },
   "Cart": {
@@ -46,16 +268,18 @@
       "questions": {
         "path": "Per chi vuoi comprare i fiori?",
         "preference": "Vuoi fiori o piante?",
-        "length": "Quale dimensione vuoi?",
-        "color": "Quale colore vuoi?",
+        "size": "Quale dimensione vuoi?",
+        "primary_color": "Quale colore vuoi?",
         "packaging": "Vuoi un imballaggio naturale o un imballaggio senza foglie?",
         "frequency": "Ogni quanto vuoi ricevere i fiori?",
-        "day": "In quale giorno vuoi ricevere i fiori?",
-        "caspo": "Vuoi un caspo?",
+        "selected_days": "In quale giorno vuoi ricevere i fiori?",
+        "vase": "Vuoi il vaso?",
         "surprise": "Vuoi che sia una sorpresa?",
-        "forWhom": "Per chi vuoi comprare i fiori?",
-        "occasion": "Per quale occasione vuoi comprare i fiori?",
-        "specificDay": "In quale giorno vuoi ricevere i fiori?",
+        "for": "Per chi vuoi comprare i fiori?",
+        "anniversaries": "Per quale occasione vuoi comprare i fiori?",
+        "anniversary_date": "In quale giorno vuoi ricevere i fiori?",
+        "style": "Quale stile preferisci?",
+        "perfume": "Quale profumo preferisci?",
         "notes": "Hai altre richieste?"
       },
       "answers": {
@@ -67,66 +291,185 @@
           "flower": "Fiori",
           "plant": "Piante"
         },
-        "length": {
+        "size": {
           "small": "Piccolo",
           "medium": "Medio",
           "large": "Grande"
         },
-        "color": {
+        "primary_color": {
+          "blue": "Blu",
+          "green": "Verde",
+          "orange": "Arancione",
+          "pink": "Rosa",
           "red": "Rosso",
+          "violet": "Viola",
           "white": "Bianco",
-          "diy": "Fai da te"
+          "yellow": "Giallo",
+          "any": "Qualunque"
         },
         "packaging": {
           "natural": "Naturale",
-          "withoutLeaves": "Senza foglie",
-          "withLeaves": "Con foglie",
-          "diy": "Fai da te"
+          "no-foliage": "Senza foglie",
+          "foliage": "Con foglie",
+          "any": "Qualunque"
         },
         "frequency": {
           "weekly": "Settimanale",
-          "bi-weekly": "Ogni 2 settimane",
+          "biweekly": "Ogni 2 settimane",
           "monthly": "Mensile",
           "yearly": "Annuale"
         },
-        "day": {
-          "monday": "Lunedì",
-          "tuesday": "Martedì",
-          "wednesday": "Mercoledì",
-          "thursday": "Giovedì",
-          "friday": "Venerdì",
-          "saturday": "Sabato",
-          "sunday": "Domenica"
+        "selected_days": {
+          "0": "Lunedì",
+          "1": "Martedì",
+          "2": "Mercoledì",
+          "3": "Giovedì",
+          "4": "Venerdì",
+          "5": "Sabato",
+          "6": "Domenica"
         },
-        "caspo": {},
-        "surprise": {},
-        "forWhom": {
-          "spouse": "Marito/moglie",
-          "parent": "Genitore",
-          "grandparent": "Nonno/nonna",
-          "friend": "Amico",
-          "partner": "Partner",
-          "special": "Una persona speciale",
-          "other": "Altro"
+        "vase": {
+          "yes": "Si",
+          "no": "No"
         },
-        "occasion": {
+        "surprise": {
+          "yes": "Si",
+          "no": "No"
+        },
+        "for": {
+          "her": "Per lei",
+          "him": "Per lui",
+          "friends": "Per amici",
+          "family": "Per famiglia",
+          "colleagues": "Per colleghi",
+          "customers": "Per clienti"
+        },
+        "anniversaries": {
           "birthday": "Compleanno",
           "anniversary": "Anniversario",
-          "mothersDay": "Festa della Mamma",
-          "fathersDay": "Festa del Papà",
-          "womenDay": "Festa della Donna",
+          "mothers-day": "Festa della Mamma",
+          "fathers-day": "Festa del Papà",
+          "womens-day": "Festa della Donna",
           "christmas": "Natale",
           "easter": "Pasqua",
-          "valentinesDay": "San Valentino",
+          "saint-valentine": "San Valentino",
           "other": "Altro"
         },
-        "specificDay": {},
+        "anniversary_date": {},
+        "style": {
+          "autumnal": "Autunnale",
+          "carefree": "Spensierato",
+          "classic": "Classico",
+          "elegant": "Elegante",
+          "hot": "Caldo",
+          "joyful": "Gioioso",
+          "light": "Leggero",
+          "lively": "Vivace",
+          "minimalist": "Minimalista",
+          "modern": "Moderno",
+          "natural": "Naturale",
+          "rich": "Ricco",
+          "romantic": "Romantico",
+          "rustic": "Rustico",
+          "simple": "Semplice",
+          "solar": "Solare",
+          "spring": "Primaverile",
+          "sunny": "Soleggiato",
+          "traditional": "Tradizionale"
+        },
+        "perfume": {
+          "balsamic": "Balsamico",
+          "delicate": "Delicato",
+          "flowery": "Fiorito",
+          "fresh": "Fresco",
+          "light": "Leggero",
+          "mixed": "Misto",
+          "spicy": "Speziato",
+          "sweet": "Dolce"
+        },
+        "flower_type": {
+          "carnation": "Garofano",
+          "daisy": "Margherita",
+          "girasole": "Girasole",
+          "mimosa": "Mimosa",
+          "rose": "Rosa",
+          "tulip": "Tulipano",
+          "peonies": "Peonie",
+          "mixed": "Misto",
+          "sunflower": "Girasole"
+        },
         "notes": {}
+      },
+      "node-specific": {
+        "primary_color": {
+          "submit": "Continua"
+        },
+        "selected_days": {
+          "submit": "Continua"
+        },
+        "style": {
+          "submit": "Continua"
+        },
+        "perfume": {
+          "submit": "Continua"
+        }
+      },
+      "dialogs": {
+        "oldDataAvailable": {
+          "title": "Hai lasciato un flusso in sospeso",
+          "content": "Vuoi riprendere il flusso da dove l'hai lasciato?",
+          "actions": {
+            "continue": "Continua",
+            "reset": "Resetta"
+          }
+        },
+        "error": {
+          "required": "Il campo è obbligatorio"
+        }
       }
     },
     "genericAnswers": {
       "true": "Si",
       "false": "No"
+    }
+  },
+  "subscriptionPage": {
+    "toast": {
+      "stripeError": "Errore durante la creazione della sessione di pagamento"
+    }
+  },
+  "QuestionsPage": {
+    "signupRequired": "Per continuare, si prega di registrarsi"
+  },
+  "shared": {
+    "includedVat": "iva incl.",
+    "buy": "Acquista",
+    "subscription": {
+      "frequency": {
+        "weekly": "Settimanale",
+        "biweekly": "Ogni 2 settimane",
+        "monthly": "Mensile",
+        "yearly": "Annuale"
+      }
+    },
+    "notFound": {
+      "title": "Pagina non trovata",
+      "description": "La pagina che stai cercando non esiste. Per favore, controlla l'URL e prova di nuovo.",
+      "button": "Torna alla home"
+    },
+    "months": {
+      "0": "Gennaio",
+      "1": "Febbraio",
+      "2": "Marzo",
+      "3": "Aprile",
+      "4": "Maggio",
+      "5": "Giugno",
+      "6": "Luglio",
+      "7": "Agosto",
+      "8": "Settembre",
+      "9": "Ottobre",
+      "10": "Novembre",
+      "11": "Dicembre"
     }
   }
 }

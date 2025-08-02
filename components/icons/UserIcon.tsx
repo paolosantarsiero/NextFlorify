@@ -1,12 +1,48 @@
-import { UserCircleIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+'use client';
 
-export default async function UserIcon() {
+import { useSession } from 'next-auth/react';
+
+import { useIsMobile } from '@/__hooks/IsMobile';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
+import { Button } from '../ui/button';
+import GradientOutlineWrapper from '../ui/gradientOutlineWrapper';
+import AvatarDrawer from './AvatarDrawer/AvatarDrawer';
+import AvatarPopover from './AvatarPopover/AvatarPopover';
+
+export default function UserIcon() {
+  const session = useSession();
+  const t = useTranslations('Navbar');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Handle loading state to prevent hydration mismatch
+  if (session.status === 'loading') {
+    return (
+      <div className="ms-2">
+        <GradientOutlineWrapper>
+          <Button variant={'gradientOutline'} size="icon" isLoading={true}></Button>
+        </GradientOutlineWrapper>
+      </div>
+    );
+  }
+
+  if (session.status === 'authenticated' && !isMobile) {
+    return <AvatarPopover />;
+  }
+
+  if (isMobile) {
+    return <AvatarDrawer />;
+  }
+
   return (
     <Link href={'/login'} className="ms-2" aria-label="login">
-      <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
-        <UserCircleIcon className="h-4 transition-all ease-in-out hover:scale-110" />
-      </div>
+      <GradientOutlineWrapper>
+        <Button variant={'gradientOutline'} size="icon">
+          {t('login')}
+        </Button>
+      </GradientOutlineWrapper>
     </Link>
   );
 }

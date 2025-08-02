@@ -18,87 +18,124 @@ export type PreferenceType = z.infer<typeof PreferenceSchema>;
 
 // Flowers
 
-export const LengthEnum = z.enum(['small', 'medium', 'large']);
-export const LengthSchema = z.object({
-  length: LengthEnum
+export const SizeEnum = z.enum(['small', 'medium', 'large']);
+export const SizeSchema = z.object({
+  size: SizeEnum
 });
-export type LengthType = z.infer<typeof LengthSchema>;
+export type SizeType = z.infer<typeof SizeSchema>;
 
-export const ColorEnum = z.enum(['red', 'white', 'diy']);
+export const ColorEnum = z.enum([
+  'blue',
+  'green',
+  'orange',
+  'pink',
+  'red',
+  'violet',
+  'white',
+  'yellow',
+  'any'
+]);
 export const ColorSchema = z.object({
-  color: ColorEnum
+  primary_color: z.array(ColorEnum).nonempty()
 });
 export type ColorType = z.infer<typeof ColorSchema>;
 
-export const PackagingEnum = z.enum(['natural', 'withoutLeaves', 'withLeaves', 'diy']);
+export const PackagingEnum = z.enum(['natural', 'foliage', 'no-foliage', 'any']);
 export const PackagingSchema = z.object({
   packaging: PackagingEnum
 });
 export type PackagingType = z.infer<typeof PackagingSchema>;
 
-export const FrequencyEnum = z.enum(['weekly', 'bi-weekly', 'monthly', 'yearly']);
+export const FrequencyEnum = z.enum(['weekly', 'biweekly', 'monthly']);
 export const FrequencySchema = z.object({
   frequency: FrequencyEnum
 });
 export type FrequencyType = z.infer<typeof FrequencySchema>;
 
-export const DayEnum = z.enum([
-  'monday',
-  'tuesday',
-  'wednesday',
-  'thursday',
-  'friday',
-  'saturday',
-  'sunday'
-]);
+export const DayEnum = z.enum(['0', '1', '2', '3', '4', '5', '6']);
 export const DaySchema = z.object({
-  day: DayEnum
+  selected_days: z.array(DayEnum).nonempty()
 });
 export type DayType = z.infer<typeof DaySchema>;
 
 //Plants
 
-export const CaspoSchema = z.object({
-  caspo: z.boolean()
+export const VaseEnum = z.enum(['yes', 'no']);
+export const VaseSchema = z.object({
+  vase: VaseEnum
 });
-export type CaspoType = z.infer<typeof CaspoSchema>;
+export type VaseType = z.infer<typeof VaseSchema>;
 
+export const SurpriseEnum = z.enum(['yes', 'no']);
 export const SurpriseSchema = z.object({
-  surprise: z.boolean()
+  surprise: SurpriseEnum
 });
 export type SurpriseType = z.infer<typeof SurpriseSchema>;
 
 //forOthers
 
-export const ForWhomEnum = z.enum([
-  'spouse',
-  'parent',
-  'grandparent',
-  'friend',
-  'partner',
-  'special',
-  'other'
-]);
-export const ForWhomSchema = z.object({
-  forWhom: ForWhomEnum
+export const ForEnum = z.enum(['her', 'him', 'friends', 'family', 'colleagues', 'customers']);
+export const ForSchema = z.object({
+  for: ForEnum
 });
-export type ForWhomType = z.infer<typeof ForWhomSchema>;
+export type ForType = z.infer<typeof ForSchema>;
 
-export const OccasionEnum = z.enum([
+export const AnniversaryEnum = z.enum([
   'birthday',
   'anniversary',
-  'mothersDay',
-  'fathersDay',
-  'womenDay',
+  'mothers-day',
+  'fathers-day',
+  'womens-day',
   'christmas',
   'easter',
-  'valentinesDay',
+  'saint-valentine',
   'other'
 ]);
-export const OccasionSchema = z.object({
-  occasion: OccasionEnum
+export const AnniversarySchema = z.object({
+  anniversaries: AnniversaryEnum
 });
-export type OccasionType = z.infer<typeof OccasionSchema>;
+export type AnniversaryType = z.infer<typeof AnniversarySchema>;
+
+export const StyleEnum = z.enum([
+  'autumnal',
+  'carefree',
+  'classic',
+  'elegant',
+  'hot',
+  'joyful',
+  'light',
+  'lively',
+  'minimalist',
+  'modern',
+  'natural',
+  'rich',
+  'romantic',
+  'rustic',
+  'simple',
+  'solar',
+  'spring',
+  'sunny',
+  'traditional'
+]);
+export const StyleSchema = z.object({
+  style: z.array(StyleEnum).nonempty()
+});
+export type StyleType = z.infer<typeof StyleSchema>;
+
+export const PerfumeEnum = z.enum([
+  'balsamic',
+  'delicate',
+  'flowery',
+  'fresh',
+  'light',
+  'mixed',
+  'spicy',
+  'sweet'
+]);
+export const PerfumeSchema = z.object({
+  perfume: z.array(PerfumeEnum).nonempty()
+});
+export type PerfumeType = z.infer<typeof PerfumeSchema>;
 
 export const NotesSchema = z.object({
   notes: z.string().optional()
@@ -107,7 +144,43 @@ export type NotesType = z.infer<typeof NotesSchema>;
 
 // specific day
 
-export const SpecificDaySchema = z.object({
-  specificDay: z.date()
+export const AnniversayDateSchema = z.object({
+  anniversary_date: z
+    .string()
+    .nullish()
+    .refine(
+      (val) => {
+        if (!val) return true; // Allow null or undefined values
+        const date = new Date(val);
+        const now = new Date();
+        // Confronta solo la data, non l'orario
+        date.setDate(date.getDate() + 1); // Set to tomorrow
+        date.setHours(0, 0, 0, 0);
+        now.setHours(0, 0, 0, 0);
+        // Non nel passato
+        if (date < now) return false;
+        // Non oltre 1 anno dal giorno corrente
+        const oneYearLater = new Date(now);
+        oneYearLater.setFullYear(now.getFullYear() + 1);
+        return date <= oneYearLater;
+      },
+      { message: 'La data deve essere domani o entro un anno da oggi' }
+    )
 });
-export type SpecificDayType = z.infer<typeof SpecificDaySchema>;
+export type AnniversayDateType = z.infer<typeof AnniversayDateSchema>;
+
+export type SubscriptionFlowDataType = PathType &
+  PreferenceType &
+  SizeType &
+  ColorType &
+  PackagingType &
+  FrequencyType &
+  DayType &
+  VaseType &
+  SurpriseType &
+  ForType &
+  AnniversaryType &
+  StyleType &
+  PerfumeType &
+  AnniversayDateType &
+  NotesType;

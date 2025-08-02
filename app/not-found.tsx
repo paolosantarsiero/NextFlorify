@@ -1,12 +1,15 @@
+import { Button } from '@/components/ui/button';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations('shared.notFound');
   return (
-    <div className="p-4">
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
+    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+      <p className="text-2xl font-bold">{t('title')}</p>
+      <p className="text-sm text-muted-foreground">{t('description')}</p>
       <Link href="/" className="hover:text-indigo-500">
-        Return Home
+        <Button variant={'gradient'}>{t('button')}</Button>
       </Link>
     </div>
   );

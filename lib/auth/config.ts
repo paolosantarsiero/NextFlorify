@@ -33,13 +33,11 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User }) {
       if (user) {
-        console.debug('Set token user', user);
         token.user = user;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
-      console.debug('Set session token', token.user);
       session.user = token.user;
       return session;
     }

@@ -16,10 +16,26 @@
 
 @layer base {
   :root {
+    --dark-gray-1: 0, 0%, 61%, 1;
+    --gray-2: 0, 0%, 84%, 1;
+    --faded-gray: 165, 11%, 93%, 1;
+    --dark-violet: 254, 49%, 28%, 1;
+    --faded-dark-violet: 254, 49%, 28%, 0.5;
+    --violetRose: 317 96% 31%;
+    --faded-violetRose: 319 45% 82%;
+    --extra-faded-violetRose: 324 45% 98%;
+    --tiffanyGreen: 173 100% 36%;
+    --extra-faded-tiffanyGreen: 170 60% 98%;
+    --faded-tiffanyGreen: 172 59% 80%;
+    --lilac: 234 48% 69%;
+    --faded-lilac: 234 48% 88%;
+    --extra-faded-lilac: 240 45% 98%;
+    --engravedCard: 0 0% 99%;
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 0 0% 31%;
+    --faded-foreground: 173, 100%, 36%, 1;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 0 0% 31%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
     --primary: 0 0% 9%;
@@ -60,4 +76,88 @@
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+main {
+  interpolate-size: allow-keywords;
+}
+
+.flower-spinner {
+  g:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+  g:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  g:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  g:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  g:nth-child(5) {
+    animation-delay: 0.1s;
+  }
+}
+
+.flower-spinner {
+  overflow: visible;
+  g {
+    -webkit-filter: saturate(0);
+    filter: saturate(0);
+    opacity: 0.5;
+  }
+}
+
+.flower-spinner.animated {
+  overflow: visible;
+  g {
+    animation-name: flowerMoving;
+    animation-duration: 0.4s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+.flower-spinner.loader {
+  overflow: visible;
+  g {
+    animation-name: flowerMovingInfinite;
+    animation-duration: 0.35s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@keyframes flowerMoving {
+  0% {
+    transform: translateY(0px);
+    -webkit-filter: saturate(0);
+    filter: saturate(0);
+    opacity: 0.5;
+  }
+  55% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(-80px);
+    -webkit-filter: saturate(1);
+    filter: saturate(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flowerMovingInfinite {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-80px);
+  }
+}
+
+[data-radix-scroll-lock] {
+  padding-right: 0 !important;
 }

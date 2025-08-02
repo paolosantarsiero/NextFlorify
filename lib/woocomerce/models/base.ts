@@ -37,6 +37,7 @@ export type Image = {
 export type Attribute = {
   id: number;
   name: string;
+  slug: string;
   position: number;
   visible: boolean;
   variation: boolean;

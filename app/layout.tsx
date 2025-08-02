@@ -1,15 +1,12 @@
-import { CartProvider } from 'components/cart/cart-context';
-import { CheckoutProvider } from 'components/checkout/checkout-provider';
-import { Navbar } from 'components/layout/navbar';
+import { Navbar } from '@/components/layout/navbar/NavBar';
 import { NextAuthProvider } from 'components/next-session-provider';
 import { ReactQueryProvider } from 'components/react-query-provider';
-import { WelcomeToast } from 'components/welcome-toast';
+import { Toaster } from 'components/ui/sonner';
 import { ensureStartsWith } from 'lib/utils';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
-import { Toaster } from 'sonner';
 import './globals.css';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -51,23 +48,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang={locale} className={poppins.className}>
-      <body className="text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white h-screen w-screen flex flex-col overflow-hidden max-w-[1440px] mx-auto">
+      <body>
         <ReactQueryProvider>
           <NextIntlClientProvider messages={messages}>
             <NextAuthProvider>
-              <CartProvider>
-                <CheckoutProvider>
-                  <Navbar />
-                  <main>
-                    {children}
-                    <Toaster closeButton />
-                    <WelcomeToast />
-                    {/* <Subscriptions /> */}
-                  </main>
-                </CheckoutProvider>
-              </CartProvider>
+              <Navbar />
+              <main className="h-dvh w-screen flex flex-col overflow-hidden text-foreground">
+                {children}
+                <Toaster closeButton />
+              </main>
               {/* TODO: Remove footer */}
               {/* <Footer /> */}
+              {/* <FlowersFooter /> */}
             </NextAuthProvider>
           </NextIntlClientProvider>
         </ReactQueryProvider>

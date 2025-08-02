@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "@": ["/"]
+      "@": ["/"],
+      "@/*": ["./*"]
     },
     "plugins": [
       {

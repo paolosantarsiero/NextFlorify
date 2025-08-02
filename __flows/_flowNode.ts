@@ -1,15 +1,20 @@
-import { Resolver } from 'react-hook-form';
+import { FloroRiveState } from '@/components/rive/floro';
 
 import { FieldValues } from 'react-hook-form';
-import { ZodEnum } from 'zod';
+import { ZodEnum, ZodSchema } from 'zod';
 
-export type InputType = 'text' | 'buttonSelect' | 'date' | 'boolean';
+export type InputType = 'text' | 'buttonSelect' | 'buttonMultiSelect' | 'date' | 'boolean';
 
-export type FlowNode<T extends FieldValues> = {
+export type FlowNode<T extends FieldValues, D extends FieldValues> = {
   id: string;
   answers?: ZodEnum<any>;
   component?: React.FC;
-  resolver: Resolver<T>;
-  next: (data: T) => string | null;
+  cssAnimations?: {
+    component: string;
+    state: string;
+  }[];
+  riveState?: (data: D) => FloroRiveState;
+  schema: ZodSchema<T>;
+  next: (flowData: D) => string | null;
   inputType: InputType;
 };

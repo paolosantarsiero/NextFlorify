@@ -21,3 +21,26 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: JSON.stringify(error) }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.stripe_id) {
+      return NextResponse.json({ error: 'User not authorized' }, { status: 401 });
+    }
+
+    const subscriptionId = req.nextUrl.searchParams.get('subscriptionId');
+    if (!subscriptionId) {
+      return NextResponse.json({ error: 'Subscription ID is required' }, { status: 400 });
+    }
+
+    await customApiClient.delete(
+      `/customers/${session.user.stripe_id}/subscriptions/${subscriptionId}`
+    );
+
+    return NextResponse.json({ message: 'Subscription cancelled successfully' }, { status: 200 });
+  } catch (error) {
+    console.error('Error cancelling subscription', error);
+    return NextResponse.json({ error: JSON.stringify(error) }, { status: 500 });
+  }
+}

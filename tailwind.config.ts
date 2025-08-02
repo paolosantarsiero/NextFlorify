@@ -1,22 +1,45 @@
-import { heroui } from '@heroui/react';
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+
+// tailwind.config.js
+
+const spacing = Object.fromEntries(
+  Array.from({ length: 300 }, (_, i) => {
+    return [String(i), `${i * 0.25}rem`];
+  })
+);
 
 const config: Config = {
   content: [
     './__feats/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
     './@/components/ui/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
+      spacing: {
+        ...spacing
+      },
       colors: {
-        tiffanyGreen: '#9D0371',
-        violetRose: '#00BAA4',
+        'dark-gray-1': 'hsl(var(--dark-gray-1))',
+        'gray-2': 'hsl(var(--gray-2))',
+        'faded-gray': 'hsl(var(--faded-gray))',
+        'dark-violet': 'hsl(var(--dark-violet))',
+        'faded-dark-violet': 'hsl(var(--faded-dark-violet))',
+        tiffanyGreen: 'hsl(var(--tiffanyGreen))',
+        'faded-tiffanyGreen': 'hsl(var(--faded-tiffanyGreen))',
+        'extra-faded-tiffanyGreen': 'hsl(var(--extra-faded-tiffanyGreen))',
+        violetRose: 'hsl(var(--violetRose))',
+        'faded-violetRose': 'hsl(var(--faded-violetRose))',
+        'extra-faded-violetRose': 'hsl(var(--extra-faded-violetRose))',
+        lilac: 'hsl(var(--lilac))',
+        'faded-lilac': 'hsl(var(--faded-lilac))',
+        'extra-faded-lilac': 'hsl(var(--extra-faded-lilac))',
+        engravedCard: 'hsl(var(--engravedCard))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'faded-foreground': 'hsl(var(--faded-foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
@@ -122,7 +145,6 @@ const config: Config = {
         }
       );
     }),
-    heroui(),
     require('tailwindcss-animate')
   ]
 };

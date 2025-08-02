@@ -100,3 +100,11 @@ export type OrderRefundsParams = Partial<OrderRefunds>;
  * Union type for all possible params for Orders
  */
 export type OrdersMainParams = OrderParams & OrderNotesParams & OrderRefundsParams;
+
+export const getDeliveryDate = (order: Order): Date | null => {
+  const deliveryDateMeta = order.meta_data.find((meta) => meta.key === 'delivery_date');
+  if (deliveryDateMeta && deliveryDateMeta.value) {
+    return new Date(deliveryDateMeta.value);
+  }
+  return null;
+};

@@ -1,6 +1,7 @@
 import { Attribute, Category, Default_Attribute, Dimension, Image, Meta_Data, Tag } from './base';
 
 export interface Product {
+  score?: number;
   id: number;
   name: string;
   slug: string;
@@ -136,10 +137,12 @@ export interface ProductVariations {
   meta_data: Partial<Meta_Data>[];
 }
 
+/** @todo: add all important attributes */
+export type FlorifyAttribute = 'pa_flower_type' | 'pa_style' | 'pa_perfume' | 'pa_product_month';
 export interface ProductAttributes {
   id: number;
   name: string;
-  slug: string;
+  slug: FlorifyAttribute;
   type: string;
   order_by: string;
   has_archives: boolean;
@@ -211,3 +214,6 @@ export type ProductMainParams =
   | ProductShippingClassesParams
   | ProductTagsParams
   | ProductReviewsParams;
+
+export const getProductAttributes = (product: Partial<Product>, slug: FlorifyAttribute): string[] =>
+  ((product.attributes || []).find((attr) => attr.slug === slug)?.options || []).filter(Boolean);
