@@ -82,6 +82,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      pigeon-maps:
+        specifier: ^0.22.1
+        version: 0.22.1(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -2148,6 +2151,11 @@ packages:
       }
     engines: { node: '>=0.10.0' }
 
+  pigeon-maps@0.22.1:
+    resolution: {integrity: sha512-mVWxgpIyhAekITeJvDGlFAo/Ytm6Fg7prpDiAuQ0Z6cJ/LwpnS8F0sF+0TDqyJu7C/DDHupkstFTNoIRqhdP5A==}
+    peerDependencies:
+      react: '*'
+
   pirates@4.0.7:
     resolution:
       {
@@ -4026,6 +4034,10 @@ snapshots:
   picomatch@2.3.1: {}
 
   pify@2.3.0: {}
+
+  pigeon-maps@0.22.1(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   pirates@4.0.7: {}
 

@@ -7,10 +7,10 @@ import { useState } from 'react';
 
 type TextInputProps = {
   node: FlowNode<any, any>;
-  onAnswer: (answer: any) => void;
+  onAnswerAction: (answer: any) => void;
 };
 
-export const TextInput = ({ node, onAnswer }: TextInputProps) => {
+export const TextInput = ({ node, onAnswerAction }: TextInputProps) => {
   const [value, setValue] = useState('');
   return (
     <div className="flex gap-2 items-center w-full">
@@ -23,7 +23,7 @@ export const TextInput = ({ node, onAnswer }: TextInputProps) => {
       <Button
         variant="secondary"
         className="rounded-md"
-        onClick={() => onAnswer({ [node.id]: value })}
+        onClick={() => onAnswerAction({ [node.id]: value })}
       >
         Conferma
       </Button>

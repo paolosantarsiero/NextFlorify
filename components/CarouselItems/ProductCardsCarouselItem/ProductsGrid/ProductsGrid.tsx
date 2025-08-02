@@ -11,7 +11,7 @@ import { Product } from 'lib/woocomerce/models/product';
 import { useRef } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-export type Props = {
+export type ProductsGridProps = {
   products: Product[];
   containerCarouselApi?: CarouselApi | null;
   layout?: 'grid' | 'carousel';
@@ -23,7 +23,7 @@ export default function ProductsGrid({
   containerCarouselApi,
   layout = 'grid',
   cardType = 'description'
-}: Props) {
+}: ProductsGridProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useNativeEvent(

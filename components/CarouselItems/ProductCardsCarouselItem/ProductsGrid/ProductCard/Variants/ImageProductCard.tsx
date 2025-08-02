@@ -1,8 +1,8 @@
+import { FlorifyLogoSmall } from '@/assets/images/florify-logo-small';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { cn } from 'lib/utils';
-import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
-import { useTranslations } from 'next-intl';
+import { Product } from 'lib/woocomerce/models/product';
 import Image from 'next/image';
 import striptags from 'striptags';
 
@@ -12,9 +12,6 @@ type Props = {
 };
 
 export default function ImageProductCard({ product, className }: Props) {
-  const tShared = useTranslations('shared');
-  const tags = getProductAttributes(product, 'pa_product_month');
-
   return (
     <Card
       className={cn(
@@ -22,21 +19,28 @@ export default function ImageProductCard({ product, className }: Props) {
         className ?? ''
       )}
     >
-      <Image
-        src={
-          product.images?.[0]?.src ??
-          'https://www.sncf-voyageurs.com/medias-publics/styles/original/public/2023-08/ter-mer-header.jpg.webp?VersionId=jvQZS.KBS_Csfxq0TtOzp1AG2ux.XYBn&itok=mYpwrde1'
-        }
-        alt={product.name ?? ''}
-        width={221}
-        height={270}
-        className="w-full h-[270px] object-cover rounded-lg"
-      />
+      {product.images?.[0]?.src ? (
+        <Image
+          src={
+            product.images?.[0]?.src ??
+            'https://www.sncf-voyageurs.com/medias-publics/styles/original/public/2023-08/ter-mer-header.jpg.webp?VersionId=jvQZS.KBS_Csfxq0TtOzp1AG2ux.XYBn&itok=mYpwrde1'
+          }
+          alt={product.name ?? ''}
+          width={221}
+          height={270}
+          className="w-full h-[270px] object-cover rounded-lg"
+        />
+      ) : (
+        <div className="w-full h-[270px] bg-faded-violetRose rounded-lg flex items-center justify-center">
+          <FlorifyLogoSmall variant={'violetRose'} className="w-20 h-20" />
+        </div>
+      )}
+
       <div className="flex flex-col gap-0 h-40">
         <div className="flex flex-row gap-2">
-          {tags.map((tag, index) => (
-            <Badge variant={'bulky'} key={tag + index} className="text-xs">
-              {tShared(`months.${tag.toLowerCase()}` as any) ?? tag}
+          {product.tags?.map((tag) => (
+            <Badge variant={'bulky'} key={tag.id}>
+              {tag.name}
             </Badge>
           ))}
         </div>

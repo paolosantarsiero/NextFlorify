@@ -19,7 +19,9 @@ export const buildStripeCheckoutBody = async (
   const body: CreateStripeCheckoutSessionDataType = {
     product_id: productId,
     ...compatibleProduct,
-    note: answers.notes || ''
+    note: answers.notes || '',
+    customer_lat: answers.coordinates?.latitude,
+    customer_lng: answers.coordinates?.longitude
   };
 
   return body;

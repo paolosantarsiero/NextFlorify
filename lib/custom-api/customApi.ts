@@ -37,6 +37,8 @@ export type CreateStripeCheckoutSessionDataType = {
   variants?: Variant[];
   answers?: Answer[];
   note?: string;
+  customer_lat?: number;
+  customer_lng?: number;
 };
 
 export type CreateStripeCheckoutSessionResponse = {

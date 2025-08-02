@@ -6,7 +6,7 @@ import ErrorDataScreen from 'components/DataFetching/ErrorDataScreen';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { Product } from 'lib/woocomerce/models/product';
 import { useTranslations } from 'next-intl';
-import ProductsGrid, { Props as ProductsGridProps } from './ProductsGrid/ProductsGrid';
+import ProductsGrid, { ProductsGridProps } from './ProductsGrid/ProductsGrid';
 
 type Props = {
   shouldNext?: boolean;
