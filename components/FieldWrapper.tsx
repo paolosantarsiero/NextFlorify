@@ -10,7 +10,7 @@ const fieldWrapperVariants = cva('flex flex-col', {
   variants: {
     variant: {
       clean: '',
-      outline: 'border border-gray-200 rounded-lg py-3 px-4'
+      outline: 'border border-gray-200 rounded-lg py-3 px-4 bg-white'
     }
   },
   defaultVariants: {
