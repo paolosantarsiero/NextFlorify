@@ -70,7 +70,7 @@ export const DetailsDialog = ({
         <DialogHeader>
           <DialogTitle className="text-lg font-bold">{tCard('details')}</DialogTitle>
         </DialogHeader>
-        <DialogDescription hidden></DialogDescription>
+        <DialogDescription hidden>{tDialog('description')}</DialogDescription>
         {isLoadingSubscriptionOrders && <LoadingDataScreen />}
         {!isLoadingSubscriptionOrders && !isErrorSubscriptionOrders && (
           <>

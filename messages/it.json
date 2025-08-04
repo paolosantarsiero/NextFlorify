@@ -64,7 +64,8 @@
   "ProductDialog": {
     "flowerType": "Tipo di fiore",
     "style": "Stile",
-    "perfume": "Profumo"
+    "perfume": "Profumo",
+    "description": "Dettagli prodotto"
   },
   "ProfilePage": {
     "ProfileNavigation": {
@@ -94,6 +95,7 @@
         "paymentMethod": "Metodo di pagamento",
         "details": "Dettagli",
         "dialogs": {
+          "description": "Dettagli abbonamento",
           "shippingAddress": "Indirizzo di spedizione",
           "orders": "Ordini",
           "cancel": "Annulla abbonamento",
@@ -163,6 +165,22 @@
           }
         }
       }
+    }
+  },
+  "ForgotPasswordDialog": {
+    "trigger": "Recuperala",
+    "title": "Password dimenticata?",
+    "description": "Inserisci la tua email per ricevere un link per reimpostare la password",
+    "submit": "Invia email",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Inserisci la tua email"
+      }
+    },
+    "toast": {
+      "success": "Email inviata",
+      "error": "Errore invio email"
     }
   },
   "SignupPage": {
@@ -438,7 +456,8 @@
         "preview": {
           "title": "Indirizzo di spedizione",
           "search": "Cerca indirizzo",
-          "confirm": "Conferma"
+          "confirm": "Conferma",
+          "description": "Indirizzo di spedizione"
         },
         "form": {
           "city": {
@@ -455,7 +474,9 @@
           }
         },
         "submit": "Continua"
-      }
+      },
+      "writeHere": "Scrivi qui...",
+      "submit": "Continua"
     }
   },
   "subscriptionPage": {

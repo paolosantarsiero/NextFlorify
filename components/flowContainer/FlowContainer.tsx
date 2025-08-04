@@ -120,8 +120,8 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
       </div>
       <PendingFlowDialog
         flowTranslations={flow.translations as NamespaceKeys<IntlMessages, 'flows'>}
-        onStart={() => start(flowName)}
-        onReset={() => reset(flowName)}
+        onStartAction={() => start(flowName)}
+        onResetAction={() => reset(flowName)}
         open={isPendingFlowDialogOpen}
         onOpenChange={(open) => {
           if (!open) {

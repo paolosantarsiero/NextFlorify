@@ -62,7 +62,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               </main>
               {/* TODO: Remove footer */}
               {/* <Footer /> */}
-              
             </NextAuthProvider>
           </NextIntlClientProvider>
         </ReactQueryProvider>

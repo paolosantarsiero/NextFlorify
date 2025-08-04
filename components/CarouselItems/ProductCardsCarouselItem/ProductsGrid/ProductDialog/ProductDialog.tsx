@@ -56,7 +56,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
                 />
               </div>
             </DialogHeader>
-            <DialogDescription hidden></DialogDescription>
+            <DialogDescription hidden>{t('description')}</DialogDescription>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               {flowerType && (
                 <div className="flex flex-col gap-2 min-w-0">

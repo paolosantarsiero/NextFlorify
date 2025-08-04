@@ -44,7 +44,7 @@ export default function ProductCardsCarouselItem({
       <div className="flex justify-center h-dvh w-full">
         <div
           className={cn(
-            'flex flex-col w-full h-dvh pt-31 px-0 sm:px-10 md:pt-40 max-w-[62rem] items-center',
+            'flex flex-col w-full h-dvh pt-31 px-0 sm:px-10 max-w-[62rem] items-center',
             layout === 'carousel' && 'md:pt-31'
           )}
         >

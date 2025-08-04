@@ -60,26 +60,49 @@ const getEasterDate = (year: number) => {
 export const getAnniversayDateByAnniversary = (
   anniversary: SubscriptionFlowDataType['anniversaries']
 ) => {
-  const pad = (n: number) => n.toString().padStart(2, '0');
-  const formatDate = (date: Date) =>
-    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-
   switch (anniversary) {
     case 'mothers-day':
-      return formatDate(new Date(new Date().getFullYear(), 4, 14));
+      return new Date(new Date().getFullYear(), 4, 14);
     case 'fathers-day':
-      return formatDate(new Date(new Date().getFullYear(), 5, 19));
+      return new Date(new Date().getFullYear(), 5, 19);
     case 'womens-day':
-      return formatDate(new Date(new Date().getFullYear(), 2, 8));
+      return new Date(new Date().getFullYear(), 2, 8);
     case 'christmas':
-      return formatDate(new Date(new Date().getFullYear(), 11, 25));
+      return new Date(new Date().getFullYear(), 11, 25);
     case 'easter':
-      return formatDate(getEasterDate(new Date().getFullYear()));
+      return getEasterDate(new Date().getFullYear());
     case 'saint-valentine':
-      return formatDate(new Date(new Date().getFullYear(), 1, 14));
+      return new Date(new Date().getFullYear(), 1, 14);
     default:
-      return null;
+      return new Date(new Date().getFullYear(), 0, 1);
   }
+};
+
+export const formatDateToDDMMYYYY = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+
+export const fromDDMMYYYYToDate = (dateString: string): Date => {
+  const [dayStr, monthStr, yearStr] = dateString.split('-');
+  const day = parseInt(dayStr ?? '0', 10);
+  const month = parseInt(monthStr ?? '0', 10);
+  const year = parseInt(yearStr ?? '0', 10);
+
+  if (!day || !month || !year) {
+    throw new Error('Data non valida: usa il formato dd-mm-yyyy');
+  }
+
+  const date = new Date(year, month - 1, day);
+
+  // Verifica che la data creata sia coerente con l’input
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    throw new Error('Data non valida: giorno, mese o anno non esistenti');
+  }
+
+  return date;
 };
 
 export const castStripeIntervalToFrequency = (

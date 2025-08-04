@@ -92,7 +92,7 @@ export default function ProductsGrid({
       {layout === 'grid' && (
         <div
           ref={containerRef}
-          className="hidden w-full grid-cols-1 px-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:grid-rows-[max-content_max-content_max-content_max-content] lg:grid-rows-[max-content_max-content_max-content] items-start gap-8 flex-1 overflow-x-visible overflow-y-scroll scrollbar-hide z-50"
+          className="hidden w-full grid-cols-1 px-4 sm:grid sm:grid-cols-2  sm:pb-[4rem] lg:grid-cols-3 sm:grid-rows-[max-content_max-content_max-content_max-content] lg:grid-rows-[max-content_max-content_max-content] items-start gap-8 flex-1 overflow-x-visible overflow-y-scroll scrollbar-hide z-50"
         >
           {products?.map((product, index) => {
             return <ProductCard key={product.id} product={product} />;

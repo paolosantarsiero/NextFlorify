@@ -2,6 +2,7 @@ import { AddressSchemaType } from '@/__flows/subscription/subscriptionQuestionsS
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -11,6 +12,7 @@ import { Map, Marker } from 'pigeon-maps';
 import ErrorDataScreen from '@/components/DataFetching/ErrorDataScreen';
 import LoadingDataScreen from '@/components/DataFetching/LoadingDataScreen';
 import { Button } from '@/components/ui/button';
+import { SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type AddressPreviewDialogProps = {
@@ -38,12 +40,14 @@ export const AddressPreviewDialog = ({
           className="absolute bottom-0 right-0 rounded-full z-50 translate-y-10"
           disabled={disabled}
         >
-          {t('preview.confirm')}
+          <SearchIcon className="w-4 h-4" />
+          {t('preview.search')}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t('preview.title')}</DialogTitle>
+          <DialogDescription hidden>{t('preview.description')}</DialogDescription>
         </DialogHeader>
         <div className="flex h-76 flex-col gap-4">
           {loading && <LoadingDataScreen />}

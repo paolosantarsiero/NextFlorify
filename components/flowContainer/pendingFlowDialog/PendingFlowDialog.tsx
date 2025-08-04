@@ -5,11 +5,16 @@ import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 
 type Props = {
   flowTranslations: NamespaceKeys<IntlMessages, 'flows'>;
-  onStart: () => void;
-  onReset: () => void;
+  onStartAction: () => void;
+  onResetAction: () => void;
 } & Partial<ActionDialogProps>;
 
-export const PendingFlowDialog = ({ flowTranslations, onStart, onReset, ...props }: Props) => {
+export const PendingFlowDialog = ({
+  flowTranslations,
+  onStartAction,
+  onResetAction,
+  ...props
+}: Props) => {
   const tFlow = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
   return (
     <ActionDialog
@@ -20,7 +25,7 @@ export const PendingFlowDialog = ({ flowTranslations, onStart, onReset, ...props
             `dialogs.oldDataAvailable.actions.continue` as MessageKeys<IntlMessages, 'flows'>
           ),
           action: () => {
-            onStart();
+            onStartAction();
           },
           buttonVariant: 'outline'
         },
@@ -29,7 +34,7 @@ export const PendingFlowDialog = ({ flowTranslations, onStart, onReset, ...props
             `dialogs.oldDataAvailable.actions.reset` as MessageKeys<IntlMessages, 'flows'>
           ),
           action: () => {
-            onReset();
+            onResetAction();
           },
           buttonVariant: 'destructive'
         }
