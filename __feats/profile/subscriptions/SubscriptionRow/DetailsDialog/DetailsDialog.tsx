@@ -19,6 +19,7 @@ import { DialogDescription } from '@radix-ui/react-dialog';
 import { cva, VariantProps } from 'class-variance-authority';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import Stripe from 'stripe';
 
 type Props = {
@@ -55,12 +56,33 @@ export const DetailsDialog = ({
   const tCard = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
   const tDialog = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard.dialogs');
   const [open, setOpen] = useState(false);
+  const [showCancelSubscription, setShowCancelSubscription] = useState(false);
 
   const { subscriptionOrders, isLoadingSubscriptionOrders, isErrorSubscriptionOrders } =
     useSubscriptionOrders(subscription.id, { enabled: open });
 
+  const handleCancelSubscription = async () => {
+    try {
+      await cancelSubscription(subscription.id);
+      setShowCancelSubscription(false);
+      setOpen(false);
+      toast.success(tDialog('cancelSuccess'));
+    } catch (error) {
+      console.error(error);
+      toast.error(tDialog('cancelError'));
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(open) => {
+        setOpen(open);
+        if (!open) {
+          setShowCancelSubscription(false);
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant={'gray-outline'} size={'sm'}>
           <span>{tCard('details')}</span>
@@ -71,8 +93,21 @@ export const DetailsDialog = ({
           <DialogTitle className="text-lg font-bold">{tCard('details')}</DialogTitle>
         </DialogHeader>
         <DialogDescription hidden>{tDialog('description')}</DialogDescription>
+        {showCancelSubscription && (
+          <div className="flex flex-col gap-2">
+            <p className="text-sm">{tDialog('cancelConfirmation')}</p>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setShowCancelSubscription(false)}>
+                {tDialog('cancel')}
+              </Button>
+              <Button variant="destructive" onClick={handleCancelSubscription}>
+                {tDialog('confirm')}
+              </Button>
+            </div>
+          </div>
+        )}
         {isLoadingSubscriptionOrders && <LoadingDataScreen />}
-        {!isLoadingSubscriptionOrders && !isErrorSubscriptionOrders && (
+        {!showCancelSubscription && !isLoadingSubscriptionOrders && !isErrorSubscriptionOrders && (
           <>
             <div className={bodyVariants({ variant })}>
               <img
@@ -167,7 +202,7 @@ export const DetailsDialog = ({
               <GradientOutlineWrapper>
                 <Button
                   variant="gradientOutline"
-                  onClick={() => cancelSubscription(subscription.id)}
+                  onClick={() => setShowCancelSubscription(true)}
                   className="w-full"
                 >
                   {tDialog('cancel')}

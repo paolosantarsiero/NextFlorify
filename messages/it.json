@@ -100,7 +100,11 @@
           "orders": "Ordini",
           "cancel": "Annulla abbonamento",
           "previousOrder": "Ultima consegna",
-          "nextOrder": "Prossimo consegna"
+          "nextOrder": "Prossima consegna",
+          "cancelConfirmation": "Sei sicuro di voler annullare l'abbonamento?",
+          "confirm": "Conferma",
+          "cancelSuccess": "Abbonamento annullato con successo.",
+          "cancelError": "Si è verificato un errore durante l'annullamento dell'abbonamento."
         }
       }
     },
@@ -456,7 +460,9 @@
         "placeholder": "Inserisci l'indirizzo di spedizione"
       },
       "writeHere": "Scrivi qui...",
-      "submit": "Continua"
+      "submit": "Continua",
+      "loadingSubscription": "Stiamo selezionando l'abbonamento giusto per te...",
+      "loadingCheckout": "Stiamo cercando il venditore giusto per te..."
     }
   },
   "subscriptionPage": {

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { DatePicker } from '@/components/ui/datePicker';
 import { formatDateToDDMMYYYY } from '@/lib/utils';
 import { FlowNode } from '__flows/_flowNode';
+import { addYears } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -26,7 +27,11 @@ export const DateInput = ({ node, onAnswerAction }: DateInputProps) => {
 
   return (
     <div className="flex gap-2 items-center w-full">
-      <DatePicker onSelect={(date) => setValue(date)} />
+      <DatePicker
+        onSelect={(date) => setValue(date)}
+        minDate={new Date()}
+        maxDate={addYears(new Date(), 1)}
+      />
       <Button
         type="submit"
         variant="ghost"

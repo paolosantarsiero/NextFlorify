@@ -157,7 +157,7 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   riveState: (data: SubscriptionFlowDataType) => 'calendar',
   schema: DaySchema,
   cssAnimations: [
-    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
+    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_STATIC }
   ],
   next: (flowData: SubscriptionFlowDataType) =>
     flowData.preference === 'plant' ? NOTES_NODE : 'end',

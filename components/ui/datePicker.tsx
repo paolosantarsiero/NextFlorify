@@ -11,9 +11,11 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 type DatePickerProps = {
   label?: string;
   onSelect: (date: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
 };
 
-export function DatePicker({ label, onSelect }: DatePickerProps) {
+export function DatePicker({ label, onSelect, minDate, maxDate }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(undefined);
 
@@ -43,6 +45,12 @@ export function DatePicker({ label, onSelect }: DatePickerProps) {
                 onSelect(date);
               }
             }}
+            startMonth={minDate}
+            endMonth={maxDate}
+            disabled={[
+              ...(minDate ? [{ before: minDate }] : []),
+              ...(maxDate ? [{ after: maxDate }] : [])
+            ]}
           />
         </PopoverContent>
       </Popover>
