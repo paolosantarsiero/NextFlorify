@@ -56,7 +56,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               <Navbar />
               <FlowersFooter />
               
-              <main className="h-dvh w-screen flex flex-col overflow-hidden text-foreground">
+              <main className="h-dvh w-screen flex flex-col overflow-hidden text-foreground relative z-10">
                 {children}
                 <Toaster closeButton />
               </main>
