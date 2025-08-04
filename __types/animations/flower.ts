@@ -3,6 +3,7 @@ import { CssAnimationComponent, CssAnimationState } from '@/__store/cssAnimation
 export enum FlowerAnimationStates {
   LOADING = 'flowerLoading',
   LOADING_STATIC = 'flowerLoadingStatic',
+  LOADING_INFINITE = 'flowerLoadingInfinite',
   HIDDEN = 'flowerHidden'
 }
 
@@ -23,9 +24,14 @@ export const flowerLoading: CssAnimationState = {
   resetTo: 'flowerLoadingStatic'
 };
 
+export const flowerInfiniteLoading: CssAnimationState = {
+  name: FlowerAnimationStates.LOADING_INFINITE,
+  cssClass: 'loader'
+};
+
 export const FLOWER_ANIMATION_NAME = 'flower-spinner';
 
 export const flowerAnimation: CssAnimationComponent = {
   key: FLOWER_ANIMATION_NAME,
-  states: [flowerLoadingStatic, flowerLoading, flowerHidden]
+  states: [flowerLoadingStatic, flowerLoading, flowerHidden, flowerInfiniteLoading]
 };

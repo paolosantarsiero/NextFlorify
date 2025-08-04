@@ -1,4 +1,4 @@
-import { coordinatesSchema, getCoordinatesSchema } from '@/__types/geocoding';
+import { CoordinatesType } from '@/__types/geocoding';
 import { fromDDMMYYYYToDate } from '@/lib/utils';
 import { z } from 'zod';
 
@@ -172,12 +172,6 @@ export const AnniversaryDateSchema = z.object({
 });
 export type AnniversaryDateType = z.infer<typeof AnniversaryDateSchema>;
 
-// TODO: clean this up, this should be a shared schema, not a specific one
-export const AddressSchema = getCoordinatesSchema.extend({
-  coordinates: coordinatesSchema
-});
-export type AddressSchemaType = z.infer<typeof AddressSchema>;
-
 export type SubscriptionFlowDataType = PathType &
   PreferenceType &
   SizeType &
@@ -193,4 +187,4 @@ export type SubscriptionFlowDataType = PathType &
   PerfumeType &
   AnniversaryDateType &
   NotesType &
-  AddressSchemaType;
+  CoordinatesType;

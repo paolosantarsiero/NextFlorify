@@ -161,3 +161,13 @@ main {
 [data-radix-scroll-lock] {
   padding-right: 0 !important;
 }
+
+/** Geoapify Autocomplete Style https://github.com/geoapify/geocoder-autocomplete/blob/master/README.md#styling */
+.geocoder-container {
+  display: flex;
+  justify-content: center;
+}
+.geoapify-autocomplete-input {
+  background-color: white;
+  width: 100% !important;
+}

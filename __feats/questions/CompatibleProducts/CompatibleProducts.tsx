@@ -39,7 +39,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
 
   useEffect(() => {
     if (isGetCompatibleProductsLoading || isLoadingStripeCheckoutSession) {
-      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING);
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_INFINITE);
     } else {
       setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
     }
@@ -60,7 +60,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   };
 
   if (isLoadingStripeCheckoutSession || isGetCompatibleProductsLoading) {
-    return <LoadingDataScreen />;
+    return <LoadingDataScreen message="Loading..." />;
   }
 
   if (errorStripeCheckoutSession || isGetCompatibleProductsError) {

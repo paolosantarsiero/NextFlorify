@@ -453,27 +453,7 @@
     },
     "shared": {
       "coordinates": {
-        "preview": {
-          "title": "Indirizzo di spedizione",
-          "search": "Cerca indirizzo",
-          "confirm": "Conferma",
-          "description": "Indirizzo di spedizione"
-        },
-        "form": {
-          "city": {
-            "label": "Città"
-          },
-          "street": {
-            "label": "Via"
-          },
-          "houseNumber": {
-            "label": "N."
-          },
-          "postcode": {
-            "label": "CAP"
-          }
-        },
-        "submit": "Continua"
+        "placeholder": "Inserisci l'indirizzo di spedizione"
       },
       "writeHere": "Scrivi qui...",
       "submit": "Continua"
