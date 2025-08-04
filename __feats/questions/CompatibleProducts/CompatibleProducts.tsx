@@ -111,7 +111,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
             shouldPrev
             products={compatibleProducts.related_products}
             isLoading={isGetCompatibleProductsLoading}
-            isError={errorGetCompatibleProducts !== undefined}
+            isError={errorGetCompatibleProducts ? true : false}
             containerCarouselApi={checkoutCarouselApi}
             layout="carousel"
             cardType="image"
