@@ -81,7 +81,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
   }
 
   return (
-    <div className="flex flex-col h-full w-full sm:max-w-[440px] items-center justify-start z-10">
+    <div className="flex flex-col h-full w-full sm:max-w-[500px] items-center justify-start z-10">
       <div className="flex flex-col w-full justify-start items-center mt-[72px]">
         <div className="w-full max-h-[360px] md:h-[316px] overflow-hidden relative">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-12 z-0" />
@@ -100,7 +100,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="relative w-full h-36 mt-3">
+      <div className="relative w-full bg-white min-h-[5rem] max-h-[9rem] mt-3">
         {/* gradient blur top */}
         <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent z-10" />
 

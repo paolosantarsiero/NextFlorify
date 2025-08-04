@@ -14,11 +14,11 @@ export default function FlowersFooter() {
   }, [registerComponent]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full flex flex-row justify-center lg:justify-between items-end px-3">
-      <Flowers className="w-1/3 hidden lg:flex" />
+    <div className="fixed bottom-0 left-0 w-full flex flex-row justify-center items-end px-3">
+      <Flowers className="w-1/3 hidden" />
       <svg
         id="Livello_1"
-        className={`flower-spinner w-full h-full sm:w-auto ${currentState?.cssClass}`}
+        className={`flower-spinner w-full h-full max-w-[300px] sm:w-1/2 sm:max-w-[260px] md:w-1/2 xl:max-w-[400px] ${currentState?.cssClass}`}
         xmlns="http://www.w3.org/2000/svg"
         width="420"
         height="345"
@@ -133,7 +133,7 @@ export default function FlowersFooter() {
           />
         </g>
       </svg>
-      <Flowers className="w-1/3 hidden lg:flex" />
+      <Flowers className="w-1/3 hidden" />
     </div>
   );
 }

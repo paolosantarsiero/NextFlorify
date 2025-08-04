@@ -15,9 +15,9 @@ export async function Navbar() {
           <FlorifyLogo className="" />
         </Link>
       </div>
-      <div className="flex justify-end items-center col-span-1 gap-4">
+      <div className="flex justify-end items-center col-span-1 text-dark-violet gap-8">
         {linkKeys.map((key) => (
-          <Link className="text-md hidden sm:block" href={t(`links.${key}.href`)} key={key}>
+          <Link className="text-lg hidden font-semibold md:block" href={t(`links.${key}.href`)} key={key}>
             {t(`links.${key}.label`)}
           </Link>
         ))}
