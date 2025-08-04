@@ -94,7 +94,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
             onGoHome={onGoHome} // TODO: remove this
           />
         </div>
-        <div className="min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg opacity-75">
+        <div className="backdrop-blur-md min-h-20 max-w-[400px] p-6 z-30 -mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background/70 text-md font-bold text-lg">
           {currentNode &&
             tFlow(`questions.${currentNode?.id}` as MessageKeys<IntlMessages, 'flows'>)}
         </div>

@@ -19,7 +19,7 @@ export const ButtonInput = ({ node, onAnswerAction, flowTranslations }: ButtonIn
         <Button
           key={String(opt)}
           variant="secondary"
-          className="rounded-xl font-light px-8 py-3"
+          className="rounded-xl font-medium px-8 py-3"
           onClick={() => onAnswerAction({ [node.id]: opt })}
         >
           {t(`answers.${node.id}.${opt}` as MessageKeys<IntlMessages, 'flows'>)}
