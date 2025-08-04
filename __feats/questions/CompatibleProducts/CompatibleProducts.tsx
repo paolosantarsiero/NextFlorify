@@ -60,7 +60,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   };
 
   if (isLoadingStripeCheckoutSession || isGetCompatibleProductsLoading) {
-    return <LoadingDataScreen />;
+    return <LoadingDataScreen message="Loading..." />;
   }
 
   if (errorStripeCheckoutSession || isGetCompatibleProductsError) {

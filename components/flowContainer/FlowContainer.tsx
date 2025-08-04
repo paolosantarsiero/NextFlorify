@@ -6,6 +6,7 @@ import { FlowInstances, useFlowsStore } from '@/__store/flowsStore';
 import { Cloud } from '@/assets/images/Cloud';
 import { InputContainer } from '@/components/flowContainer/inputContainer/InputContainer';
 import Floro, { FloroRiveState } from '@/components/rive/floro';
+import clsx from 'clsx';
 import { MessageKeys, NamespaceKeys, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -108,7 +109,11 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent z-10" />
 
         {/* scrollable content */}
-        <div className="h-full overflow-y-auto scrollbar-hide py-2 px-3 pt-4">
+        <div
+          className={clsx('h-full py-2 px-3 pt-4', {
+            'overflow-y-auto scrollbar-hide': currentNode.inputType !== 'coordinates'
+          })}
+        >
           {currentNode && (
             <InputContainer
               node={currentNode}
