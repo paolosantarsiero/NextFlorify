@@ -1,10 +1,10 @@
 import { getCoordinates } from '@/__actions/geocoding';
-import { GetCoordinatesType } from '@/__types/geocoding';
+import { CoordinatesType } from '@/__types/geocoding';
 import { useMutation } from '@tanstack/react-query';
 
 export const useGetCoordinates = () => {
   const query = useMutation({
-    mutationFn: (address: GetCoordinatesType) => getCoordinates(address)
+    mutationFn: (coordinates: CoordinatesType) => getCoordinates(coordinates)
   });
 
   return {

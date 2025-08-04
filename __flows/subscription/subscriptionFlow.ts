@@ -1,10 +1,9 @@
 import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
+import { CoordinatesSchema, CoordinatesType } from '@/__types/geocoding';
 import { formatDateToDDMMYYYY, getAnniversayDateByAnniversary } from '@/lib/utils';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
-  AddressSchema,
-  AddressSchemaType,
   AnniversaryDateSchema,
   AnniversaryDateType,
   AnniversaryEnum,
@@ -157,7 +156,9 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   component: undefined,
   riveState: (data: SubscriptionFlowDataType) => 'calendar',
   schema: DaySchema,
-  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
+  cssAnimations: [
+    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
+  ],
   next: (flowData: SubscriptionFlowDataType) =>
     flowData.preference === 'plant' ? NOTES_NODE : 'end',
   inputType: 'buttonMultiSelect',
@@ -251,11 +252,13 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   inputType: 'text'
 };
 
-const coordinatesNode: FlowNode<AddressSchemaType, SubscriptionFlowDataType> = {
+const coordinatesNode: FlowNode<CoordinatesType, SubscriptionFlowDataType> = {
   id: COORDINATES_NODE,
   component: undefined,
-  schema: AddressSchema,
-  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
+  schema: CoordinatesSchema,
+  cssAnimations: [
+    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
+  ],
   next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
   inputType: 'coordinates'
 };
