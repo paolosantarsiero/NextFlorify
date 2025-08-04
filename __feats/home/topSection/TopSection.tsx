@@ -49,7 +49,7 @@ export default function TopSection({ carouselApi }: Props) {
 
           <Button
             variant="ghost"
-            className="rounded-full z-50"
+            className="rounded-full z-50 mt-2"
             onClick={(e) => {
               e.stopPropagation();
               carouselApi?.scrollNext();
