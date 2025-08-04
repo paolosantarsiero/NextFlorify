@@ -28,7 +28,7 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="flex flex-col h-screen w-full items-center justify-center">
+    <section className="flex flex-col h-screen w-full items-center justify-center px-3">
       <div className="flex flex-col gap-4 w-full max-w-md items-center">
         <h1 className="text-2xl font-bold">{tPage('title')}</h1>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">

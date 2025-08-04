@@ -17,8 +17,8 @@ export const useForgotPassword = () => {
       toast.success('Email sent');
       queryClient.invalidateQueries({ queryKey: FORGOT_PASSWORD_QUERY_KEY });
     },
-    onError: () => {
-      toast.error('Error sending email');
+    onError: (error) => {
+      toast.error(error.message);
     }
   });
 

@@ -31,7 +31,7 @@ export default function SignupPage() {
   };
 
   return (
-    <section className="flex flex-col h-screen w-full items-center justify-center">
+    <section className="flex flex-col h-screen w-full items-center justify-center px-3">
       <div className="flex flex-col gap-4 w-full max-w-md items-center">
         {searchParams.get('message') && (
           <p className="text-red-500">{searchParams.get('message')}</p>
