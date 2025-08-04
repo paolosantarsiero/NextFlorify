@@ -102,7 +102,7 @@ export default function ProductsGrid({
       )}
       {layout === 'carousel' && (
         <Carousel className="w-full overflow-visible hidden sm:block">
-          <CarouselContent className="pl-[15%]">
+          <CarouselContent>
             {products?.map((product) => (
               <CarouselItem key={product.id} className="basis-[300px] p-2">
                 <div className="flex items-center justify-center">
@@ -115,12 +115,12 @@ export default function ProductsGrid({
           <CarouselNext className="-right-12" />
         </Carousel>
       )}
-      <Carousel className="w-full overflow-visible sm:hidden">
-        <CarouselContent className="pl-[15%]">
+      <Carousel className="w-full overflow-visible sm:hidden px-10">
+        <CarouselContent>
           {products?.map((product) => (
-            <CarouselItem key={product.id} className="basis-[85%]">
-              <div className="flex p-2 items-center justify-center">
-                <ProductCard product={product} />
+            <CarouselItem key={product.id} className="basis-[300px] p-2">
+              <div className="p-2">
+                <ProductCard product={product} cardType={cardType} />
               </div>
             </CarouselItem>
           ))}

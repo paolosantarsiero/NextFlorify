@@ -69,7 +69,7 @@ export const MultiProductCard = ({
           )}
         >
           {/* TOP SECTION */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3">
             <div className="flex flex-col">
               <p className="text-2xl font-bold line-clamp-1">{subscription?.name ?? ''}</p>
               <p className="text-sm leading-5 h-20 line-clamp-4 font-light">
@@ -139,8 +139,7 @@ export const MultiProductCard = ({
                 <Clock10 className="w-4 h-4" />
                 {tProductPage('deliveryDay')}
               </p>
-              {/* TODO: fix delivery date */}
-              <p className="text-sm font-bold">{deliveryDate}</p>
+              <p className="text-sm">{deliveryDate}</p>
             </div>
           </div>
         </Card>

@@ -258,7 +258,7 @@ const coordinatesNode: FlowNode<CoordinatesType, SubscriptionFlowDataType> = {
   cssAnimations: [
     { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
   ],
-  next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
+  next: (flowData: SubscriptionFlowDataType) => 'end',
   inputType: 'coordinates'
 };
 
