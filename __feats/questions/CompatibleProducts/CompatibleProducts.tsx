@@ -10,6 +10,7 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { CompatibleProductsCarouselItem } from './CompatibleProductsCarouselItem/CompatibleProductsCarouselItem';
 
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export const CompatibleProducts = ({ flowName }: Props) => {
+  const tShared = useTranslations('flows.shared');
   const [checkoutCarouselApi, setCheckoutCarouselApi] = useState<CarouselApi | undefined>(
     undefined
   );
@@ -25,7 +27,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
 
   const answers = getData(flowName) as SubscriptionFlowDataType;
 
-  const { compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError } =
+  const { compatibleProducts, isGetCompatibleProductsLoading, errorGetCompatibleProducts } =
     useGetCompatibleProducts(answers);
   const {
     createStripeCheckoutSession,
@@ -60,11 +62,17 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   };
 
   if (isLoadingStripeCheckoutSession || isGetCompatibleProductsLoading) {
-    return <LoadingDataScreen message="Loading..." />;
+    const loadingMessage = isLoadingStripeCheckoutSession
+      ? tShared('loadingCheckout')
+      : tShared('loadingSubscription');
+    return <LoadingDataScreen message={loadingMessage} />;
   }
 
-  if (errorStripeCheckoutSession || isGetCompatibleProductsError) {
-    return <ErrorDataScreen />;
+  if (errorStripeCheckoutSession || errorGetCompatibleProducts) {
+    const errorMessage = errorStripeCheckoutSession
+      ? errorStripeCheckoutSession?.message
+      : errorGetCompatibleProducts?.message;
+    return <ErrorDataScreen message={errorMessage} />;
   }
 
   return (
@@ -82,7 +90,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
         <CarouselItem>
           <div className="flex w-full h-full justify-center">
             {isGetCompatibleProductsLoading && <LoadingDataScreen />}
-            {isGetCompatibleProductsError && <ErrorDataScreen />}
+            {errorGetCompatibleProducts && <ErrorDataScreen />}
             {compatibleProducts && (
               <CompatibleProductsCarouselItem
                 containerCarouselApi={checkoutCarouselApi}
@@ -103,7 +111,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
             shouldPrev
             products={compatibleProducts.related_products}
             isLoading={isGetCompatibleProductsLoading}
-            isError={isGetCompatibleProductsError}
+            isError={errorGetCompatibleProducts !== undefined}
             containerCarouselApi={checkoutCarouselApi}
             layout="carousel"
             cardType="image"
