@@ -118,7 +118,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
       case 'large':
         return 'flowerLarge';
       default:
-        return 'flowerLarge';
+        return 'color';
     }
   },
   schema: ColorSchema,
@@ -219,6 +219,7 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
 const styleNode: FlowNode<StyleType, SubscriptionFlowDataType> = {
   id: STYLE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'style',
   schema: StyleSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => PERFUME_NODE,
@@ -239,6 +240,7 @@ const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
 const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> = {
   id: ANNIVERSARY_DATE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
   schema: AnniversaryDateSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COLOR_NODE,
