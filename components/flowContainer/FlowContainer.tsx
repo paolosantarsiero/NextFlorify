@@ -35,7 +35,10 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
   useEffect(() => {
     start(flowName, (wasAlreadyStarted) => {
       if (wasAlreadyStarted) {
-        setIsPendingFlowDialogOpen(true);
+        // @todo: implement pending flow dialog with fix rive handle state
+        //setIsPendingFlowDialogOpen(true);
+        // @todo: remove force reset to avoid problem with rive state
+        reset(flowName);
       }
     });
   }, []);

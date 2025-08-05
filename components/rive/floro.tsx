@@ -182,10 +182,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'surprise':
         nextAnimation();
-      break;
+        break;
       case 'next':
         nextAnimation();
-      break;
+        break;
       case 'packaging':
         nextAnimation();
         break;
