@@ -13,14 +13,14 @@ export const BooleanInput = ({ node, onAnswerAction }: BooleanInputProps) => {
     <div className="flex gap-6 w-full justify-center">
       <Button
         variant="secondary"
-        className="rounded-xl font-light px-8 py-3"
+        className="rounded-xl font-light px-5 py-3"
         onClick={() => onAnswerAction({ [node.id]: true })}
       >
         Si
       </Button>
       <Button
         variant="secondary"
-        className="rounded-xl font-light px-8 py-3"
+        className="rounded-xl font-light px-5 py-3"
         onClick={() => onAnswerAction({ [node.id]: false })}
       >
         No

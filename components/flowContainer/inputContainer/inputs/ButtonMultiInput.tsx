@@ -38,7 +38,7 @@ export const ButtonMultiInput = ({
           <Toggle
             key={`${node.id}-${opt}`}
             variant="outline"
-            className="rounded-xl bg-background px-8 py-3"
+            className="rounded-xl bg-background px-5 py-3"
             onClick={() =>
               setSelected((prev) =>
                 prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]

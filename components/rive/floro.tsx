@@ -15,10 +15,14 @@ export type FloroRiveState =
   | 'flowerSmall'
   | 'flowerMedium'
   | 'flowerLarge'
+  | 'plant'
   | 'packaging'
   | 'calendar'
   | 'sweet'
-  | 'custom';
+  | 'lookingDown'
+  | 'custom'
+  | 'surprise'
+  | 'next';
 
 type Props = {
   state: FloroRiveState;
@@ -36,8 +40,8 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Watching', 'Sweet', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, watchingTrigger, sweetTrigger, backTrigger, nextTrigger] =
+  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
+  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
@@ -50,6 +54,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
       prevAnimation();
     }
   };
+
   const resetFlow = () => {
     reset(flowName);
   };
@@ -58,6 +63,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     backTrigger?.fire();
     flowerSize(0);
   };
+
   const nextAnimation = () => {
     nextTrigger?.fire();
   };
@@ -68,8 +74,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
   };
 
   const plantFlow = () => {
-    //flowerTrigger?.fire();
-    //sweetTrigger!.value = true;
+    plantTrigger?.fire();
   };
 
   const loveFlow = () => {
@@ -83,8 +88,16 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     }
   };
 
+  const calendar = () => {
+    calendarTrigger?.fire();
+  };
+
   const watchingAction = () => {
     watchingTrigger?.fire();
+  };
+
+  const lookingDownAction = () => {
+    lookingDownTrigger?.fire();
   };
 
   const sweetAction = () => {
@@ -116,11 +129,23 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
       case 'flowerLarge':
         flowerSize(3);
         break;
+      case 'plant':
+        plantFlow();
+        break;
+      case 'surprise':
+        nextAnimation();
+      break;
+      case 'next':
+        nextAnimation();
+      break;
       case 'packaging':
         nextAnimation();
         break;
       case 'calendar':
-        nextAnimation();
+        calendar();
+        break;
+      case 'lookingDown':
+        lookingDownAction();
         break;
       case 'sweet':
         break;

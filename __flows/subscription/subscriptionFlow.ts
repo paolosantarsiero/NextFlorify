@@ -168,6 +168,7 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
 const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
   id: VASE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'plant',
   schema: VaseSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: SubscriptionFlowDataType) => SURPRISE_NODE,
@@ -178,6 +179,7 @@ const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
 const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   id: SURPRISE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'surprise',
   schema: SurpriseSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: SubscriptionFlowDataType) => DAY_NODE,
@@ -245,7 +247,7 @@ const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> =
 const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'watching',
+  riveState: (data: SubscriptionFlowDataType) => 'next',
   schema: NotesSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COORDINATES_NODE,
@@ -255,6 +257,7 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
 const coordinatesNode: FlowNode<CoordinatesType, SubscriptionFlowDataType> = {
   id: COORDINATES_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'lookingDown',
   schema: CoordinatesSchema,
   cssAnimations: [
     { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
