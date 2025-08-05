@@ -252,9 +252,9 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
   riveState: (data: SubscriptionFlowDataType) => {
-    if(data?.preference === 'flower' && data?.path === 'myself') {
+    if (data?.preference === 'flower' && data?.path === 'myself') {
       return 'next';
-    } else if(data?.path === 'other') {
+    } else if (data?.path === 'other') {
       switch (data?.size) {
         case 'small':
           return 'flowerSmall';
@@ -264,9 +264,9 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
           return 'flowerLarge';
         default:
           return 'next';
-      } 
+      }
     } else {
-        return 'next';
+      return 'next';
     }
   },
   schema: NotesSchema,

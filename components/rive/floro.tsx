@@ -47,9 +47,42 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'CalendarDay', 'Romantic', 'Recurrence', 'Color', 'Style', 'Perfume', 'Shipping', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, calendarDayTrigger, romanticTrigger, recurrenceTrigger, colorTrigger, styleTrigger, perfumeTrigger, shippingTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
-    inputs.map((name) => useStateMachineInput(rive, 'State', name));
+  const inputs = [
+    'Flower',
+    'FlowerLength',
+    'Plant',
+    'Calendar',
+    'CalendarDay',
+    'Romantic',
+    'Recurrence',
+    'Color',
+    'Style',
+    'Perfume',
+    'Shipping',
+    'Watching',
+    'Sweet',
+    'LookingDown',
+    'backTrigger',
+    'nextTrigger'
+  ];
+  const [
+    flowerTrigger,
+    flowerLength,
+    plantTrigger,
+    calendarTrigger,
+    calendarDayTrigger,
+    romanticTrigger,
+    recurrenceTrigger,
+    colorTrigger,
+    styleTrigger,
+    perfumeTrigger,
+    shippingTrigger,
+    watchingTrigger,
+    sweetTrigger,
+    lookingDownTrigger,
+    backTrigger,
+    nextTrigger
+  ] = inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
 
@@ -202,7 +235,25 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       //prevAnimation();
     }
-  }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
+  }, [
+    state,
+    flowerTrigger,
+    flowerLength,
+    plantTrigger,
+    calendarTrigger,
+    calendarDayTrigger,
+    romanticTrigger,
+    recurrenceTrigger,
+    colorTrigger,
+    styleTrigger,
+    perfumeTrigger,
+    shippingTrigger,
+    watchingTrigger,
+    sweetTrigger,
+    lookingDownTrigger,
+    backTrigger,
+    nextTrigger
+  ]);
 
   return (
     <div className={cn('w-full h-[300px] relative z-10 ', className)}>
