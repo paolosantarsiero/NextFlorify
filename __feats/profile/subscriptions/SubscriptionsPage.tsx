@@ -15,6 +15,7 @@ export default function SubscriptionsPage() {
       <div className="flex flex-col gap-3 overflow-y-auto h-full scrollbar-hide">
         {isLoadingSubscription && <LoadingDataScreen />}
         {isErrorSubscription && <p>{'Error loading subscription data'}</p>}
+        {subscription?.length === 0 && <p>{t('noSubs')}</p>}
         {subscription
           ?.filter((sub) => sub.status === 'active')
           .map((subscription) => (

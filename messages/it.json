@@ -106,7 +106,8 @@
           "cancelSuccess": "Abbonamento annullato con successo.",
           "cancelError": "Si è verificato un errore durante l'annullamento dell'abbonamento."
         }
-      }
+      },
+      "noSubs": "Non hai abbonamenti attivi."
     },
     "AccountPage": {
       "title": "Informazioni personali",
