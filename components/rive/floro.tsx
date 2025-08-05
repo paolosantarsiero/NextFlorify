@@ -44,9 +44,36 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'Romantic', 'Recurrence', 'Color', 'Style', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, romanticTrigger, recurrenceTrigger, colorTrigger, styleTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
-    inputs.map((name) => useStateMachineInput(rive, 'State', name));
+  const inputs = [
+    'Flower',
+    'FlowerLength',
+    'Plant',
+    'Calendar',
+    'Romantic',
+    'Recurrence',
+    'Color',
+    'Style',
+    'Watching',
+    'Sweet',
+    'LookingDown',
+    'backTrigger',
+    'nextTrigger'
+  ];
+  const [
+    flowerTrigger,
+    flowerLength,
+    plantTrigger,
+    calendarTrigger,
+    romanticTrigger,
+    recurrenceTrigger,
+    colorTrigger,
+    styleTrigger,
+    watchingTrigger,
+    sweetTrigger,
+    lookingDownTrigger,
+    backTrigger,
+    nextTrigger
+  ] = inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
 
@@ -161,10 +188,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'surprise':
         nextAnimation();
-      break;
+        break;
       case 'next':
         nextAnimation();
-      break;
+        break;
       case 'packaging':
         nextAnimation();
         break;
