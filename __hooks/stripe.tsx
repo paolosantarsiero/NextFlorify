@@ -20,7 +20,6 @@ export const useStripeCheckoutSession = () => {
     },
     onError: (error) => {
       toast.error(t('stripeError'));
-      console.error(error);
     }
   });
 

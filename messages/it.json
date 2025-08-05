@@ -504,5 +504,10 @@
       "10": "Novembre",
       "11": "Dicembre"
     }
+  },
+  "errors": {
+    "unknown": "Si è verificato un errore sconosciuto. Per favore, riprova più tardi.",
+    "paymentFailed": "Si è verificato un errore durante il pagamento. Per favore, riprova più tardi.",
+    "No open vendor found within the specified distance": "Ci dispiace ma non abbiamo trovato un venditore aperto intorno a te. Per favore, prova a cercare in un'altra zona."
   }
 }
