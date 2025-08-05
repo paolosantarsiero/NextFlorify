@@ -189,6 +189,7 @@ const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
 const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {
   id: FOR_WHOM_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'romantic',
   schema: ForSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => ANNIVERSARIES_NODE,
@@ -199,6 +200,7 @@ const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {
 const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   id: ANNIVERSARIES_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'recurrence',
   schema: AnniversarySchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => {

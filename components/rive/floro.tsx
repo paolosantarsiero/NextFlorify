@@ -16,6 +16,8 @@ export type FloroRiveState =
   | 'flowerMedium'
   | 'flowerLarge'
   | 'plant'
+  | 'romantic'
+  | 'recurrence'
   | 'packaging'
   | 'calendar'
   | 'sweet'
@@ -40,8 +42,8 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
+  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'Romantic', 'Recurrence', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
+  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, romanticTrigger, recurrenceTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
@@ -77,9 +79,12 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     plantTrigger?.fire();
   };
 
-  const loveFlow = () => {
-    //flowerTrigger?.fire();
-    //sweetTrigger!.value = true;
+  const romanticFlow = () => {
+    romanticTrigger?.fire();
+  };
+
+  const recurrenceFlow = () => {
+    recurrenceTrigger?.fire();
   };
 
   const flowerSize = (size: number | boolean) => {
@@ -131,6 +136,12 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'plant':
         plantFlow();
+        break;
+      case 'romantic':
+        romanticFlow();
+        break;
+      case 'recurrence':
+        recurrenceFlow();
         break;
       case 'surprise':
         nextAnimation();
