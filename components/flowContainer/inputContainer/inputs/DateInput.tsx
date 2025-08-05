@@ -27,11 +27,7 @@ export const DateInput = ({ node, onAnswerAction }: DateInputProps) => {
 
   return (
     <div className="flex gap-2 items-center w-full">
-      <DatePicker
-        onSelect={(date) => setValue(date)}
-        minDate={new Date()}
-        maxDate={addYears(new Date(), 1)}
-      />
+      <DatePicker onSelect={(date) => setValue(date)} maxDate={addYears(new Date(), 1)} />
       <Button
         type="submit"
         variant="ghost"

@@ -157,16 +157,13 @@ export const AnniversaryDateSchema = z.object({
       date.setHours(0, 0, 0, 0);
       now.setHours(0, 0, 0, 0);
 
-      const tomorrow = new Date(now);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
       const oneYearLater = new Date(now);
       oneYearLater.setFullYear(now.getFullYear() + 1);
 
-      return date >= tomorrow && date <= oneYearLater;
+      return date <= oneYearLater;
     },
     {
-      message: 'La data deve essere da domani a un anno da oggi'
+      message: 'La data deve essere entro un anno da oggi'
     }
   )
 });
