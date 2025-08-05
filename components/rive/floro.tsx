@@ -20,8 +20,11 @@ export type FloroRiveState =
   | 'recurrence'
   | 'color'
   | 'style'
+  | 'perfume'
+  | 'shipping'
   | 'packaging'
   | 'calendar'
+  | 'calendarDay'
   | 'sweet'
   | 'lookingDown'
   | 'custom'
@@ -44,8 +47,8 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'Romantic', 'Recurrence', 'Color', 'Style', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, romanticTrigger, recurrenceTrigger, colorTrigger, styleTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
+  const inputs = ['Flower', 'FlowerLength', 'Plant', 'Calendar', 'CalendarDay', 'Romantic', 'Recurrence', 'Color', 'Style', 'Perfume', 'Shipping', 'Watching', 'Sweet', 'LookingDown', 'backTrigger', 'nextTrigger'];
+  const [flowerTrigger, flowerLength, plantTrigger, calendarTrigger, calendarDayTrigger, romanticTrigger, recurrenceTrigger, colorTrigger, styleTrigger, perfumeTrigger, shippingTrigger, watchingTrigger, sweetTrigger, lookingDownTrigger, backTrigger, nextTrigger] =
     inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
@@ -97,6 +100,14 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     styleTrigger?.fire();
   };
 
+  const perfumeAction = () => {
+    perfumeTrigger?.fire();
+  };
+
+  const shippingAction = () => {
+    shippingTrigger?.fire();
+  };
+
   const flowerSize = (size: number | boolean) => {
     if (flowerLength) {
       flowerLength.value = size;
@@ -105,6 +116,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
 
   const calendar = () => {
     calendarTrigger?.fire();
+  };
+
+  const calendarDayAction = () => {
+    calendarDayTrigger?.fire();
   };
 
   const watchingAction = () => {
@@ -159,6 +174,12 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
       case 'style':
         styleAction();
         break;
+      case 'perfume':
+        perfumeAction();
+        break;
+      case 'shipping':
+        shippingAction();
+        break;
       case 'surprise':
         nextAnimation();
       break;
@@ -170,6 +191,9 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'calendar':
         calendar();
+        break;
+      case 'calendarDay':
+        calendarDayAction();
         break;
       case 'lookingDown':
         lookingDownAction();

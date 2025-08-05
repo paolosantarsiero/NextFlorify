@@ -61,9 +61,9 @@ export const MultiProductCard = ({
         </div>
         <Card
           className={cn(
-            'w-full rounded-3xl border-none bg-background backdrop-blur-sm',
-            'h-120 sm:w-98',
-            'py-8 px-4',
+            'w-full rounded-3xl border-none bg-background/50 backdrop-blur-sm shadow-[0_4px_13px_rgba(0,0,0,0.15)]',
+            'sm:w-98',
+            'py-8 px-6',
             'flex flex-col',
             'justify-between'
           )}

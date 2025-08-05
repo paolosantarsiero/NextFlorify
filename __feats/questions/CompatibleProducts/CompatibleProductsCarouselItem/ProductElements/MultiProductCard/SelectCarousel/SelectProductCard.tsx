@@ -28,7 +28,7 @@ export default function SelectProductCard({
   return (
     <Card
       className={cn(
-        'relative bg-transparent backdrop-blur-sm rounded-3xl shadow-md flex flex-row z-50 w-full h-41 overflow-hidden p-5',
+        'relative bg-white backdrop-blur-sm rounded-3xl shadow-md flex flex-row z-50 w-full h-41 overflow-hidden p-5 mb-6',
         className ?? ''
       )}
     >

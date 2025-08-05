@@ -154,7 +154,7 @@ const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
 const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   id: DAY_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'calendar',
+  riveState: (data: SubscriptionFlowDataType) => 'calendarDay',
   schema: DaySchema,
   cssAnimations: [
     { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_STATIC }
@@ -230,6 +230,7 @@ const styleNode: FlowNode<StyleType, SubscriptionFlowDataType> = {
 const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
   id: PERFUME_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'perfume',
   schema: PerfumeSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => SIZE_NODE,
@@ -250,7 +251,24 @@ const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> =
 const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'next',
+  riveState: (data: SubscriptionFlowDataType) => {
+    if(data?.preference === 'flower' && data?.path === 'myself') {
+      return 'next';
+    } else if(data?.path === 'other') {
+      switch (data?.size) {
+        case 'small':
+          return 'flowerSmall';
+        case 'medium':
+          return 'flowerMedium';
+        case 'large':
+          return 'flowerLarge';
+        default:
+          return 'next';
+      } 
+    } else {
+        return 'next';
+    }
+  },
   schema: NotesSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COORDINATES_NODE,
@@ -260,7 +278,7 @@ const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
 const coordinatesNode: FlowNode<CoordinatesType, SubscriptionFlowDataType> = {
   id: COORDINATES_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'lookingDown',
+  riveState: (data: SubscriptionFlowDataType) => 'shipping',
   schema: CoordinatesSchema,
   cssAnimations: [
     { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }

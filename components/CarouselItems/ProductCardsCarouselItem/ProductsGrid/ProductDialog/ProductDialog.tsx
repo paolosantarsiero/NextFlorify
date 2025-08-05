@@ -37,7 +37,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl w-[95vw] md:w-[80vw] max-h-[90vh] overflow-y-auto scrollbar-hide">
+      <DialogContent className="max-w-3xl w-[95vw] md:w-[80vw] max-h-[90vh] overflow-y-auto scrollbar-hide">
         <div className="flex flex-col md:flex-row gap-8 items-start w-full">
           <div className="flex-shrink-0 flex w-full md:w-auto">
             <img
@@ -61,7 +61,7 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
               {flowerType && (
                 <div className="flex flex-col gap-2 min-w-0">
                   <p className="text-md font-semibold">{t('flowerType')}</p>
-                  <p className="text-base text-muted-foreground truncate">
+                  <p className="text-base truncate">
                     {tProduct(`flower_type.${flowerType.toLowerCase()}` as any)}
                   </p>
                 </div>
@@ -69,13 +69,13 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
               {style.length > 0 && (
                 <div className="flex flex-col gap-2 min-w-0">
                   <p className="text-md font-semibold">{t('style')}</p>
-                  <p className="text-base text-muted-foreground truncate">{style.join(', ')}</p>
+                  <p className="text-base truncate">{style.join(', ')}</p>
                 </div>
               )}
               {perfume.length > 0 && (
                 <div className="flex flex-col gap-2 min-w-0">
                   <p className="text-md font-semibold">{t('perfume')}</p>
-                  <p className="text-base text-muted-foreground truncate">{perfume.join(', ')}</p>
+                  <p className="text-base truncate">{perfume.join(', ')}</p>
                 </div>
               )}
             </div>
