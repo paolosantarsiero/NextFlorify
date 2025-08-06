@@ -245,7 +245,8 @@ const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> =
   schema: AnniversaryDateSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COLOR_NODE,
-  inputType: 'date'
+  inputType: 'date',
+  skipHistory: true
 };
 
 const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {

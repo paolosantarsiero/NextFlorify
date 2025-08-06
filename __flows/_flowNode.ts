@@ -23,4 +23,5 @@ export type FlowNode<T extends FieldValues, D extends FieldValues> = {
   schema: ZodSchema<T>;
   next: (flowData: D) => string | null;
   inputType: InputType;
+  skipHistory?: boolean;
 };
