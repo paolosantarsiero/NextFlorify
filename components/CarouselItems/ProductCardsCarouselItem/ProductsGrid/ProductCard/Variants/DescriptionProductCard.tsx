@@ -26,7 +26,10 @@ export default function ProductCard({ product, className }: Props) {
         className ?? ''
       )}
     >
-      {icon && createElement(icon, { className: 'grayscale group-hover:grayscale-0 absolute top-0 right-0' })}
+      {icon &&
+        createElement(icon, {
+          className: 'grayscale group-hover:grayscale-0 absolute top-0 right-0'
+        })}
       <div className="flex flex-col gap-0">
         <p className="text-[28px] font-bold">{product.name}</p>
         <Prose
