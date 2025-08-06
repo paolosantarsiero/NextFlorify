@@ -139,7 +139,15 @@ export const MultiProductCard = ({
                 <Clock10 className="w-4 h-4" />
                 {tProductPage('deliveryDay')}
               </p>
-              <p className="text-sm">{deliveryDate}</p>
+              <p className="text-sm">
+                {deliveryDate
+                  ? new Date(deliveryDate).toLocaleDateString('it-IT', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })
+                  : ''}
+              </p>
             </div>
           </div>
         </Card>

@@ -101,6 +101,7 @@
           "cancel": "Annulla abbonamento",
           "previousOrder": "Ultima consegna",
           "nextOrder": "Prossima consegna",
+          "nextOrderRenewal": "Calcolata al prossimo rinnovo",
           "cancelConfirmation": "Sei sicuro di voler annullare l'abbonamento?",
           "confirm": "Conferma",
           "cancelSuccess": "Abbonamento annullato con successo.",
@@ -460,7 +461,7 @@
       "coordinates": {
         "placeholder": "Inserisci l'indirizzo di spedizione"
       },
-      "writeHere": "Scrivi qui...",
+      "notes": "Scrivi qui eventuali indicazioni per il tuo ordine, ad esempio allergie, preferenze sui fiori o richieste particolari.",
       "submit": "Continua",
       "loadingSubscription": "Stiamo selezionando l'abbonamento giusto per te...",
       "loadingCheckout": "Stiamo cercando il venditore giusto per te..."

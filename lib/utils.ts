@@ -11,6 +11,7 @@ import clsx, { ClassValue } from 'clsx';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import countries from '../types/countries.json';
+import { getDeliveryDate, Order } from './woocomerce/models/orders';
 import { getProductAttributes, Product } from './woocomerce/models/product';
 
 export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
@@ -144,4 +145,34 @@ export const getProductIcon = (product: Partial<Product>) => {
     default:
       return Tulip;
   }
+};
+
+export const getLastNextDelivery = (
+  orders: Order[]
+): { lastDelivery: string | undefined; nextDelivery: string | undefined } => {
+  const nextOrder = orders && orders.length > 0 && orders[0] && getDeliveryDate(orders[0]);
+  const nextOrderDate = nextOrder
+    ? nextOrder > new Date()
+      ? nextOrder.toLocaleDateString('it-IT', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })
+      : undefined
+    : undefined;
+  const lastOrder =
+    orders && orders.length > 1 && orders[1] && getDeliveryDate(orders[1])
+      ? getDeliveryDate(orders[1])
+      : nextOrder;
+  const lastOrderDate = lastOrder
+    ? lastOrder < new Date()
+      ? lastOrder.toLocaleDateString('it-IT', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })
+      : undefined
+    : undefined;
+
+  return { lastDelivery: lastOrderDate, nextDelivery: nextOrderDate };
 };
