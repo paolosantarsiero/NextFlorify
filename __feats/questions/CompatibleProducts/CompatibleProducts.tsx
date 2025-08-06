@@ -103,6 +103,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
                 relatedProducts={compatibleProducts.related_products}
                 deliveryDate={compatibleProducts.delivery_date}
                 subscription={compatibleProducts.subscription}
+                price={compatibleProducts.price}
               />
             )}
           </div>

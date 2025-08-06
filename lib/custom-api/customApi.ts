@@ -51,6 +51,7 @@ export async function getProductsBySubscriptionType(data: getCompatibleProductsB
   related_products: Product[];
   subscription: Stripe.Product;
   delivery_date: string;
+  price: Stripe.Price;
 }> {
   return customApiClient
     .post('/woocommerce/product-subscription', data)

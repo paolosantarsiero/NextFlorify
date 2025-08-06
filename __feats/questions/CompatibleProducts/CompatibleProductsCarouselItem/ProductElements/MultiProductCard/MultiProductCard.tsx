@@ -1,7 +1,7 @@
 import Floro from '@/components/rive/floro';
 import { Card } from '@/components/ui/card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { cn } from '@/lib/utils';
+import { castStripeIntervalToFrequency, cn } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/woocomerce/models/product';
@@ -14,10 +14,11 @@ import SelectProductCard from './SelectCarousel/SelectProductCard';
 
 type Props = {
   containerCarouselApi?: CarouselApi;
-  relatedProducts?: Partial<Product>[];
-  products?: Partial<Product>[];
+  relatedProducts?: Product[];
+  products?: Product[];
   deliveryDate?: string;
-  subscription?: Partial<Stripe.Product>;
+  subscription?: Stripe.Product;
+  price?: Stripe.Price;
   onSelect: (index: number) => void;
   selectedIndex: number;
   onBuy: () => void;
@@ -28,6 +29,7 @@ export const MultiProductCard = ({
   relatedProducts,
   products,
   subscription,
+  price,
   deliveryDate,
   onSelect,
   selectedIndex,
@@ -35,7 +37,12 @@ export const MultiProductCard = ({
 }: Props) => {
   const tProductPage = useTranslations('ProductPage');
   const tShared = useTranslations('shared');
+  const tSubscription = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
   const [productsCarouselApi, setProductsCarouselApi] = useState<CarouselApi | null>(null);
+  const frequency = castStripeIntervalToFrequency(
+    price?.recurring?.interval,
+    price?.recurring?.interval_count
+  );
 
   useEffect(() => {
     if (productsCarouselApi) {
@@ -131,8 +138,7 @@ export const MultiProductCard = ({
                 <CalendarDaysIcon className="w-4 h-4" />
                 {tProductPage('frequency')}
               </p>
-              {/* TODO: add frequency */}
-              <p className="text-sm font-bold">{subscription?.metadata?.frequency ?? ''}</p>
+              <p className="text-sm">{tSubscription(`planInterval.${frequency}`)}</p>
             </div>
             <div className="flex flex-col items-end">
               <p className="text-sm font-bold flex flex-row  gap-2">

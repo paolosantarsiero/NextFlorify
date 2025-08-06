@@ -6,9 +6,10 @@ import Stripe from 'stripe';
 import { MultiProductCard } from './ProductElements/MultiProductCard/MultiProductCard';
 
 type Props = {
-  products: Partial<Product>[];
-  relatedProducts: Partial<Product>[];
-  subscription?: Partial<Stripe.Product>;
+  products: Product[];
+  relatedProducts: Product[];
+  subscription?: Stripe.Product;
+  price?: Stripe.Price;
   deliveryDate?: string;
   containerCarouselApi?: CarouselApi;
   selectedProductIndex: number;
@@ -20,6 +21,7 @@ export const CompatibleProductsCarouselItem = ({
   products,
   relatedProducts,
   subscription,
+  price,
   deliveryDate,
   containerCarouselApi,
   selectedProductIndex,
@@ -36,6 +38,7 @@ export const CompatibleProductsCarouselItem = ({
           products={products}
           deliveryDate={deliveryDate}
           subscription={subscription}
+          price={price}
           onSelect={setSelectedProductIndex}
           selectedIndex={selectedProductIndex}
           onBuy={handleBuy}
