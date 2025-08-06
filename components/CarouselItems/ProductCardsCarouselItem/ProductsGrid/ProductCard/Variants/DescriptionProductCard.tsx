@@ -5,6 +5,7 @@ import { cn, getProductIcon } from 'lib/utils';
 import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 import { useTranslations } from 'next-intl';
 import { createElement } from 'react';
+import striptags from 'striptags';
 import ProductDialog from '../../ProductDialog/ProductDialog';
 
 type Props = {
@@ -21,16 +22,16 @@ export default function ProductCard({ product, className }: Props) {
   return (
     <Card
       className={cn(
-        'relative bg-transparent backdrop-blur-sm border-0 overflow-hidden min-h-0 rounded-2xl shadow-[0_5px_16px_rgba(0,0,0,0.1)] flex flex-col z-50 pt-20 px-6 pb-6 gap-3',
+        'group relative bg-transparent backdrop-blur-sm border-0 overflow-hidden min-h-0 rounded-2xl shadow-[0_5px_16px_rgba(0,0,0,0.1)] flex flex-col z-50 pt-20 px-6 pb-6 gap-3',
         className ?? ''
       )}
     >
-      {icon && createElement(icon, { className: 'absolute top-0 right-0' })}
+      {icon && createElement(icon, { className: 'grayscale group-hover:grayscale-0 absolute top-0 right-0' })}
       <div className="flex flex-col gap-0">
         <p className="text-[28px] font-bold">{product.name}</p>
         <Prose
-          className="text-sm font-normal line-clamp-3 leading-6 h-20"
-          html={product.description ?? ''}
+          className="text-sm font-normal line-clamp-3 leading-5 h-20"
+          html={striptags(product.description ?? '')}
         />
       </div>
       {flowerType && (

@@ -1,7 +1,7 @@
+import Floro from '@/components/rive/floro';
 import { Button } from '@/components/ui/button';
 import { CarouselApi, CarouselItem } from '@/components/ui/carousel';
 import { Cloud } from 'assets/images/Cloud';
-import { Fioraio } from 'assets/images/fioraio_1';
 import { InfoIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -31,8 +31,8 @@ export default function TopSection({ carouselApi }: Props) {
           <div className="col-start-1 row-start-1 z-10">
             <Cloud className="" />
           </div>
-          <div className="col-start-1 row-start-1 z-20">
-            <Fioraio className="" />
+          <div className="col-start-1 row-start-1 z-20 w-full h-[300px]">
+            <Floro flowName={'subscription'} state={'watching'} navigation={false} />
           </div>
         </div>
         <div className="flex flex-col -translate-y-2/4 z-20">

@@ -2,6 +2,8 @@ import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQue
 import { Carnation } from '@/assets/images/flowers/Carnation';
 import { Daisy } from '@/assets/images/flowers/Daisy';
 import { Mimosa } from '@/assets/images/flowers/Mimosa';
+import { Mixed } from '@/assets/images/flowers/Mixed';
+import { Peonies } from '@/assets/images/flowers/Peonies';
 import { Rose } from '@/assets/images/flowers/Rose';
 import { Girasole } from '@/assets/images/flowers/Sunflower';
 import { Tulip } from '@/assets/images/flowers/Tulip';
@@ -129,10 +131,10 @@ export const getProductIcon = (product: Partial<Product>) => {
     case 'mimosa':
       return Mimosa;
     case 'mixed':
-      return Daisy;
+      return Mixed;
     case 'peonies':
     case 'peony':
-      return Daisy;
+      return Peonies;
     case 'rose':
       return Rose;
     case 'sunflower':

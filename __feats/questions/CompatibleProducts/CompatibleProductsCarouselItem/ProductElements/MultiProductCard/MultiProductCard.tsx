@@ -50,12 +50,12 @@ export const MultiProductCard = ({
       <div className="flex flex-col items-center gap-2">
         <div className="w-67 translate-y-4 z-10">
           <Floro
-            state="idle"
+            state="lookingDown"
             flowName="subscription"
             navigation={false}
             className="h-30 translate-y-5 z-0"
           />
-          <div className="z-10 h-14 p-6-mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg">
+          <div className="relative z-10 h-14 p-6-mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg">
             {tProductPage('whatWeChoose')}
           </div>
         </div>
