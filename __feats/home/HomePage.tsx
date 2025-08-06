@@ -5,6 +5,7 @@ import { flowerAnimation, FlowerAnimationStates } from '@/__types/animations/flo
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
 import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel';
 import { useProducts } from '__hooks/Product';
+import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import TopSection from './topSection/TopSection';
 
@@ -12,6 +13,15 @@ export default function HomePage() {
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const { setComponentState } = useCssAnimationStore();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    // Check if the session is expired
+    const expiresAt = new Date(session?.expires || 0);
+    if (expiresAt < new Date()) {
+      signOut({ redirect: false });
+    }
+  }, [session]);
 
   useEffect(() => {
     if (carouselApi) {
