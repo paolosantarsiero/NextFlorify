@@ -15,6 +15,11 @@ export default function HomePage() {
   const { setComponentState } = useCssAnimationStore();
   const { data: session } = useSession();
 
+  // Reset animation state in home page
+  useEffect(() => {
+    setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+  }, []);
+
   useEffect(() => {
     // Check if the session is expired
     if (session?.expires) {
