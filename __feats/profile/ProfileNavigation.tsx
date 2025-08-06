@@ -37,7 +37,9 @@ export const ProfileNavigation = ({ customer }: Props) => {
   return (
     <Card
       variant={'flat'}
-      className={cn('w-full sm:w-58 sm:h-106 bg-transparent sm:bg-engravedCard relative overflow-hidden')}
+      className={cn(
+        'w-full sm:w-58 sm:h-106 bg-transparent sm:bg-engravedCard relative overflow-hidden'
+      )}
     >
       <div className="w-[1px] absolute top-5 bottom-5 right-0 shadow-[-1px_0_12px_rgba(0,0,0,0.5)] rounded-[50%]"></div>
 

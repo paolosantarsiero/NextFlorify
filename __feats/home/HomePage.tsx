@@ -17,9 +17,11 @@ export default function HomePage() {
 
   useEffect(() => {
     // Check if the session is expired
-    const expiresAt = new Date(session?.expires || 0);
-    if (expiresAt < new Date()) {
-      signOut({ redirect: false });
+    if (session?.expires) {
+      const expiresAt = new Date(session.expires);
+      if (expiresAt < new Date()) {
+        signOut({ redirect: false });
+      }
     }
   }, [session]);
 

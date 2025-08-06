@@ -289,7 +289,7 @@
   "flows": {
     "subscriptionFlow": {
       "questions": {
-        "path": "Per chi vuoi comprare i fiori?",
+        "path": "Per chi vuoi comprare?",
         "preference": "Vuoi fiori o piante?",
         "size": "Quale dimensione vuoi?",
         "primary_color": "Quale colore vuoi?",
@@ -298,7 +298,7 @@
         "selected_days": "In quale giorno vuoi ricevere i fiori?",
         "vase": "Vuoi il vaso?",
         "surprise": "Vuoi che sia una sorpresa?",
-        "for": "Per chi vuoi comprare i fiori?",
+        "for": "Per chi vuoi comprare?",
         "anniversaries": "Per quale occasione vuoi comprare i fiori?",
         "anniversary_date": "In quale giorno vuoi ricevere i fiori?",
         "style": "Quale stile preferisci?",
