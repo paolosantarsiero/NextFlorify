@@ -20,6 +20,7 @@ type Props = {
 
 export const CompatibleProducts = ({ flowName }: Props) => {
   const tShared = useTranslations('flows.shared');
+  const tErrors = useTranslations('errors');
   const [checkoutCarouselApi, setCheckoutCarouselApi] = useState<CarouselApi | undefined>(
     undefined
   );
@@ -69,9 +70,10 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   }
 
   if (errorStripeCheckoutSession || errorGetCompatibleProducts) {
+    /** @todo: fix to show error throwed by server components */
     const errorMessage = errorStripeCheckoutSession
-      ? errorStripeCheckoutSession?.message
-      : errorGetCompatibleProducts?.message;
+      ? tErrors('No open vendor found within the specified distance')
+      : tErrors('noSubscription');
     return <ErrorDataScreen message={errorMessage} />;
   }
 

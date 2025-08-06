@@ -11,7 +11,7 @@ export default function ErrorDataScreen({ message }: ErrorDataScreenProps) {
     <div className="flex flex-col items-center justify-center h-full mx-auto">
       <Floro flowName={'subscription'} state={'idle'} navigation={false} />
       <p className="text-xl text-center font-bold text-card-foreground max-w-[200px]">
-        {message ? tError(message as any) : tError('unknown')}
+        {message ? message : tError('unknown')}
       </p>
     </div>
   );
