@@ -26,16 +26,16 @@ export const ButtonMultiInput = ({
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
 
   useEffect(() => {
+    setSelected(initialValue || []);
+  }, [initialValue, node.id]);
+
+  useEffect(() => {
     const schema = node.schema;
     if (schema) {
       const validationResult = schema.safeParse({ [node.id]: selected });
       setSchemaStatus(validationResult.success);
     }
-  }, [selected]);
-
-  useEffect(() => {
-    setSelected(initialValue || []);
-  }, [initialValue]);
+  }, [selected, node.id]);
 
   return (
     <div className="flex flex-col gap-2">
