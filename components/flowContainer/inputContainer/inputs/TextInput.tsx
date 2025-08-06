@@ -32,7 +32,7 @@ export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps
         onChange={(e) => setValue(e.target.value)}
         rows={3}
         className="py-4 px-4 resize-none"
-        placeholder={tShared('writeHere')}
+        placeholder={tShared('notes')}
       />
       <Button
         type="submit"
