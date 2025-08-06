@@ -29,9 +29,8 @@ export const CompatibleProductsCarouselItem = ({
 }: Props) => {
   return (
     <div className={cn('flex flex-col w-full justify-center items-center px-4 relative')}>
-      
       <img
-        src='/flower-bg.png'
+        src="/flower-bg.png"
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-auto z-0"
       />
       <div className="relative z-10 w-full flex justify-center">

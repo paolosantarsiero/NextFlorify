@@ -86,7 +86,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
 
   return (
     <div className="flex flex-col h-full w-full sm:max-w-[500px] items-center justify-start z-10">
-      <div className="flex flex-col w-full justify-start items-center mt-[72px]">
+      <div className="flex flex-col w-full justify-start items-center mt-[80px]">
         <div className="w-full max-h-[360px] md:h-[316px] overflow-hidden relative">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-12 z-0" />
           <Floro

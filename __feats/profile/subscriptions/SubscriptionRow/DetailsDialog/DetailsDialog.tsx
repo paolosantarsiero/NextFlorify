@@ -127,7 +127,7 @@ export const DetailsDialog = ({
                 </div>
 
                 <p className="text-xs">Descrizione</p>
-                
+
                 <div className="text-right">
                   <p className="text-xs font-semibold">{tCard('nextPayment')}</p>
                   <span className="text-xs">
@@ -141,8 +141,6 @@ export const DetailsDialog = ({
                 </div>
               </div>
             </div>
-
-            
 
             <div className="grid grid-cols-3 gap-2 mt-1">
               <div className="flex flex-col items-start opacity-60">

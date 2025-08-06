@@ -56,7 +56,7 @@ export default function AccountPage() {
         <Button
           variant={'gradient'}
           type="submit"
-          className=""
+          className="mt-2"
           onClick={() => infoForm.handleSubmit(onInfoSubmit)}
         >
           {tInfoForm('submit')}
