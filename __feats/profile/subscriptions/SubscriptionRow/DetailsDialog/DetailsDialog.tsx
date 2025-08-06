@@ -14,7 +14,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import GradientOutlineWrapper from '@/components/ui/gradientOutlineWrapper';
-import { getDeliveryDate } from '@/lib/woocomerce/models/orders';
+import { getLastNextDelivery } from '@/lib/utils';
 import { DialogDescription } from '@radix-ui/react-dialog';
 import { cva, VariantProps } from 'class-variance-authority';
 import { useTranslations } from 'next-intl';
@@ -73,6 +73,8 @@ export const DetailsDialog = ({
     }
   };
 
+  const { lastDelivery, nextDelivery } = getLastNextDelivery(subscriptionOrders || []);
+
   return (
     <Dialog
       open={open}
@@ -128,7 +130,13 @@ export const DetailsDialog = ({
 
             <div>
               <p className="text-xs font-semibold">{tCard('nextPayment')}</p>
-              <span className="text-xs">{nextRenewalDate.toLocaleDateString()}</span>
+              <span className="text-xs">
+                {nextRenewalDate.toLocaleDateString('it-IT', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                })}
+              </span>
               <span className="text-xs font-bold ml-4">{(plan.amount ?? 0) / 100} €</span>
             </div>
 
@@ -137,13 +145,7 @@ export const DetailsDialog = ({
                 {subscriptionOrders && (
                   <div className="flex flex-col">
                     <p className="text-xs font-semibold">{tCard('dialogs.previousOrder')}</p>
-                    <span className="text-xs">
-                      {subscriptionOrders && subscriptionOrders.length > 1
-                        ? subscriptionOrders[1]
-                          ? getDeliveryDate(subscriptionOrders[1])?.toLocaleDateString()
-                          : '--'
-                        : '--'}
-                    </span>
+                    <span className="text-xs">{lastDelivery || '--'}</span>
                   </div>
                 )}
               </div>
@@ -157,11 +159,7 @@ export const DetailsDialog = ({
                   <div className="flex flex-col">
                     <p className="text-xs font-semibold">{tCard('dialogs.nextOrder')}</p>
                     <span className="text-xs">
-                      {subscriptionOrders && subscriptionOrders.length > 0
-                        ? subscriptionOrders[0]
-                          ? getDeliveryDate(subscriptionOrders[0])?.toLocaleDateString()
-                          : '--'
-                        : '--'}
+                      {nextDelivery || tCard('dialogs.nextOrderRenewal')}
                     </span>
                   </div>
                 )}

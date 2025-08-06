@@ -101,6 +101,7 @@
           "cancel": "Annulla abbonamento",
           "previousOrder": "Ultima consegna",
           "nextOrder": "Prossima consegna",
+          "nextOrderRenewal": "Calcolata al prossimo rinnovo",
           "cancelConfirmation": "Sei sicuro di voler annullare l'abbonamento?",
           "confirm": "Conferma",
           "cancelSuccess": "Abbonamento annullato con successo.",

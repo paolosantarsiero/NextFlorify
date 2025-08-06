@@ -78,7 +78,8 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
                 (
                 {nextRenewalDate.toLocaleDateString('it-IT', {
                   day: 'numeric',
-                  month: 'long'
+                  month: 'long',
+                  year: 'numeric'
                 })}
                 )
               </span>
