@@ -110,7 +110,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
         </CarouselItem>
         {compatibleProducts?.related_products && compatibleProducts.related_products.length && (
           <ProductCardsCarouselItem
-            title="Le nostre composizioni"
+            title="Le nostre piante"
             shouldPrev
             products={compatibleProducts.related_products}
             isLoading={isGetCompatibleProductsLoading}
