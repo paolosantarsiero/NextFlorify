@@ -16,7 +16,7 @@ type Props = {
 } & VariantProps<typeof bodyVariants> &
   VariantProps<typeof imageVariants>;
 
-const bodyVariants = cva('flex w-full h-[200px] rounded-lg p-3 flex flex-row gap-3', {
+const bodyVariants = cva('flex w-full rounded-lg p-3 flex flex-row gap-3', {
   variants: {
     variant: {
       violetRose: 'bg-extra-faded-violetRose',
@@ -65,7 +65,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
       <div className="flex flex-col justify-between w-full">
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-1">
-            <Badge variant={'gray'} key={subscription.id}>
+            <Badge variant={'transparent'} key={subscription.id}>
               {t(`planInterval.${frequency}`)}
             </Badge>
           </div>
@@ -87,7 +87,7 @@ export const SubscriptionRow = ({ subscription, variant }: Props) => {
           </div>
         </div>
         <div className="flex flex-row items-center justify-between">
-          <p className="flex flex-row gap-2 text-gray-2 items-center">
+          <p className="flex flex-row gap-2 text-black/50 items-center">
             <CreditCardIcon className="w-3 h-3" />
             <span className="text-xs">
               {paymentMethod.card?.brand} **{paymentMethod.card?.last4}

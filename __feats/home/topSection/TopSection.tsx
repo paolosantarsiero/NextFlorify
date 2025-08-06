@@ -38,6 +38,7 @@ export default function TopSection({ carouselApi }: Props) {
         <div className="flex flex-col -translate-y-2/4 z-20">
           <Button
             variant="gradient"
+            size="lg"
             className="h-10 w-52 z-30"
             onClick={(e) => {
               e.stopPropagation();
