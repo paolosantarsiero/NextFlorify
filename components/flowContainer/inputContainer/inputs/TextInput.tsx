@@ -26,7 +26,7 @@ export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps
   }, [value]);
 
   return (
-    <div className="flex gap-2 items-center w-full">
+    <div className="flex gap-2 items-center w-full max-w-[400px] mx-auto">
       <Textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}

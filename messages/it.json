@@ -461,7 +461,7 @@
       "coordinates": {
         "placeholder": "Inserisci l'indirizzo di spedizione"
       },
-      "notes": "Scrivi qui eventuali indicazioni per il tuo ordine, ad esempio allergie, preferenze sui fiori o richieste particolari.",
+      "notes": "Scrivi qui eventuali indicazioni, ad esempio allergie, preferenze, ecc...",
       "submit": "Continua",
       "loadingSubscription": "Stiamo selezionando l'abbonamento giusto per te...",
       "loadingCheckout": "Stiamo cercando il venditore giusto per te..."

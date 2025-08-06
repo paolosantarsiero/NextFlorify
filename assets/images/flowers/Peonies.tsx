@@ -11,7 +11,7 @@ export const Peonies = (props: SVGProps<SVGSVGElement>) => {
       x="0px"
       y="0px"
       viewBox="0 0 243 217.2"
-      enable-background="new 0 0 243 217.2"
+      enableBackground="new 0 0 243 217.2"
       {...props}
     >
       <g>
@@ -28,7 +28,7 @@ export const Peonies = (props: SVGProps<SVGSVGElement>) => {
         <clipPath id="SVGID_00000087396520563284311300000004489101653029446581_">
           <use href="#SVGID_1_" overflow="visible" />
         </clipPath>
-        <g clip-path="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
+        <g clipPath="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
           <path
             fill="#FD6780"
             d="M173.4,58.3c-24.3,0-49.9-3.6-63.1-5.8c-1.9-0.3-3.6-1.5-4.5-3.2c-0.9-1.7-1.1-3.7-0.3-5.5l2.2-5.4
@@ -49,7 +49,7 @@ export const Peonies = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
+        <g clipPath="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
           <path
             fill="#FD6780"
             d="M230.4,164.5c-1.7,0-3.3-0.7-4.5-1.9c-1.2-1.2-1.8-2.8-1.8-4.5l0.1-5.8c0.1-4.5-3.1-8.4-7.4-9.3l-1-0.2
@@ -69,7 +69,7 @@ export const Peonies = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
+        <g clipPath="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
           <path
             fill="#FD6780"
             d="M152.8,85.7c-3.9,0-7.6-3.4-8-7.4l-0.6-6.2c-0.5-4.7-4.2-8.8-8.8-9.9l-1.1-0.2c-1.4-0.3-2.7-0.6-4.2-0.9
@@ -88,7 +88,7 @@ export const Peonies = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
+        <g clipPath="url(#SVGID_00000087396520563284311300000004489101653029446581_)">
           <path
             fill="#FD6780"
             d="M180.9,140.4c-4.5,0-9.3-4.6-9.8-9.5l-0.8-6.8c-0.5-5-4.4-9.8-9.2-11.5l-1.2-0.4c-1.5-0.5-2.9-1-4.5-1.5

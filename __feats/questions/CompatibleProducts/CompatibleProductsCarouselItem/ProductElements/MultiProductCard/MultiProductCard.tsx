@@ -160,7 +160,7 @@ export const MultiProductCard = ({
         <div className="flex flex-row w-full justify-end">
           <div className="flex flex-col justify-end items-end gap-1">
             <p className="text-2xl font-bold">
-              {products?.[selectedIndex]?.price}€{' '}
+              {(price?.unit_amount ?? 0) / 100}€{' '}
               <span className="text-[15px] font-normal">{tShared('includedVat')}</span>
             </p>
             <Button variant="gradient" className="" onClick={onBuy}>

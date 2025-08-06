@@ -10,7 +10,7 @@ export const Carnation = (props: SVGProps<SVGSVGElement>) => {
       x="0px"
       y="0px"
       viewBox="0 0 243.7 217.2"
-      enable-background="new 0 0 243.7 217.2"
+      enableBackground="new 0 0 243.7 217.2"
       {...props}
     >
       <g>
@@ -27,7 +27,7 @@ export const Carnation = (props: SVGProps<SVGSVGElement>) => {
         <clipPath id="SVGID_00000100375247905724284990000013564300215848850853_">
           <use href="#SVGID_1_" overflow="visible" />
         </clipPath>
-        <g clip-path="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
+        <g clipPath="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
           <path
             fill="#FC440F"
             d="M165.1,117.3l-1.3-0.2c-3-0.4-5.1-0.9-7.2-1.3c-2.8-0.6-5.5-1.2-9.9-1.5c0.1-1,0.3-2,0.4-3.1
@@ -45,7 +45,7 @@ export const Carnation = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
+        <g clipPath="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
           <path
             fill="#FC440F"
             d="M173.4,58.3c-30.3,0-63-5.7-70.9-7.2l8.3-20.1l-1.2-0.6c-2.6-1.4-4.5-2.6-6.2-3.8
@@ -64,7 +64,7 @@ export const Carnation = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
+        <g clipPath="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
           <path
             fill="#FC440F"
             d="M205.6,142.9l-1.3-0.2c-3-0.4-5.1-0.8-7.2-1.2c-2.8-0.6-5.6-1.2-9.9-1.4c0.1-1,0.2-2,0.4-3.1
@@ -82,7 +82,7 @@ export const Carnation = (props: SVGProps<SVGSVGElement>) => {
             />
           </g>
         </g>
-        <g clip-path="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
+        <g clipPath="url(#SVGID_00000100375247905724284990000013564300215848850853_)">
           <path
             fill="#FC440F"
             d="M127.3,74.8l-1.3-0.4c-2.9-0.9-4.9-1.7-6.9-2.5c-2.7-1.1-5.3-2.1-9.5-3.1c0.3-0.9,0.6-1.9,0.9-3

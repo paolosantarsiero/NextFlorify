@@ -41,7 +41,7 @@ export const AddressInput = ({ node, onAnswerAction }: AddressInputProps) => {
 
   return (
     <GeoapifyContext apiKey={geoapiKey}>
-      <div className="flex flex-col w-full justify-center">
+      <div className="flex flex-col w-full justify-center max-w-[360px] mx-auto">
         <GeoapifyGeocoderAutocomplete
           placeholder={tShared('coordinates.placeholder')}
           placeSelect={placeSelect}

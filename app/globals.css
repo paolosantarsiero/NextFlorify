@@ -10,7 +10,7 @@
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
   img[loading='lazy'] {
-    clip-path: inset(0.6px);
+    clippath: inset(0.6px);
   }
 }
 
@@ -173,4 +173,8 @@ main {
 .geoapify-autocomplete-input {
   background-color: white;
   width: 100% !important;
+}
+
+.geoapify-autocomplete-input:focus {
+  border-color: #9d0371;
 }

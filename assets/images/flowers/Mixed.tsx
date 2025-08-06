@@ -10,7 +10,7 @@ export const Mixed = (props: SVGProps<SVGSVGElement>) => {
       x="0px"
       y="0px"
       viewBox="0 0 275.1 298.9"
-      enable-background="new 0 0 275.1 298.9"
+      enableBackground="new 0 0 275.1 298.9"
       {...props}
     >
       <g>
@@ -27,7 +27,7 @@ export const Mixed = (props: SVGProps<SVGSVGElement>) => {
         <clipPath id="SVGID_00000165209801046864527580000009653431553220356278_">
           <use href="#SVGID_1_" overflow="visible" />
         </clipPath>
-        <g clip-path="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
+        <g clipPath="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
           <ellipse
             transform="matrix(0.2997 -0.954 0.954 0.2997 77.5138 292.1855)"
             fill="#FDE74C"
@@ -37,13 +37,13 @@ export const Mixed = (props: SVGProps<SVGSVGElement>) => {
             ry="41.7"
           />
         </g>
-        <g clip-path="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
+        <g clipPath="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
           <path
             fill="#FC440F"
             d="M155,49.1C203-4.2,255.9-35,273-19.6s-8,71.2-56.1,124.5s-118,68.8-118,68.8S106.9,102.5,155,49.1z"
           />
         </g>
-        <g clip-path="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
+        <g clipPath="url(#SVGID_00000165209801046864527580000009653431553220356278_)">
           <path
             fill="#FFFFFF"
             d="M58.7,93.7c-14.1,0-23.3-3.5-26.7-10.1c-4.8-9.4,2.6-24.8,20.3-42.4c18.2-18.1,45.2-36.8,76-52.6
