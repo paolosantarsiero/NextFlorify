@@ -9,11 +9,12 @@ import { useEffect, useState } from 'react';
 type TextInputProps = {
   node: FlowNode<any, any>;
   onAnswerAction: (answer: any) => void;
+  initialValue?: string;
 };
 
-export const TextInput = ({ node, onAnswerAction }: TextInputProps) => {
+export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps) => {
   const tShared = useTranslations('flows.shared');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue || '');
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
 
   useEffect(() => {

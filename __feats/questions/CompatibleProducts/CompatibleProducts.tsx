@@ -43,7 +43,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     if (isGetCompatibleProductsLoading || isLoadingStripeCheckoutSession) {
       setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_INFINITE);
     } else {
-      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.HIDDEN);
     }
   }, [isGetCompatibleProductsLoading, isLoadingStripeCheckoutSession]);
 

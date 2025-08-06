@@ -2,7 +2,8 @@ import { FlorifyLogoSmall } from '@/assets/images/florify-logo-small';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { cn } from 'lib/utils';
-import { Product } from 'lib/woocomerce/models/product';
+import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import striptags from 'striptags';
 
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export default function ImageProductCard({ product, className }: Props) {
+  const tShared = useTranslations('shared');
+  const tags = getProductAttributes(product, 'pa_product_month') || [];
   return (
     <Card
       className={cn(
@@ -38,9 +41,9 @@ export default function ImageProductCard({ product, className }: Props) {
 
       <div className="flex flex-col gap-0 h-40">
         <div className="flex flex-row gap-2">
-          {product.tags?.map((tag) => (
-            <Badge variant={'bulky'} key={tag.id}>
-              {tag.name}
+          {tags?.map((tag, index) => (
+            <Badge variant={'bulky'} key={index}>
+              {tShared(`months.${tag.toLowerCase()}` as any)}
             </Badge>
           ))}
         </div>

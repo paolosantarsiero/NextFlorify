@@ -33,9 +33,17 @@ export function DatePicker({ label, onSelect, minDate, maxDate }: DatePickerProp
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+        <PopoverContent
+          className="w-auto p-0"
+          align="start"
+          side="bottom"
+          sideOffset={0}
+          avoidCollisions={false}
+          forceMount
+        >
           <Calendar
             mode="single"
+            showOutsideDays={false}
             selected={date}
             captionLayout="dropdown"
             onSelect={(date) => {

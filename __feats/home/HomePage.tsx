@@ -15,11 +15,18 @@ export default function HomePage() {
   const { setComponentState } = useCssAnimationStore();
   const { data: session } = useSession();
 
+  // Reset animation state in home page
+  useEffect(() => {
+    setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+  }, []);
+
   useEffect(() => {
     // Check if the session is expired
-    const expiresAt = new Date(session?.expires || 0);
-    if (expiresAt < new Date()) {
-      signOut({ redirect: false });
+    if (session?.expires) {
+      const expiresAt = new Date(session.expires);
+      if (expiresAt < new Date()) {
+        signOut({ redirect: false });
+      }
     }
   }, [session]);
 
