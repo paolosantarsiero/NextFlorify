@@ -1,7 +1,7 @@
 import HomePage from '__feats/home/HomePage';
 
 export const metadata = {
-  description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
+  description: 'Florify, il primo shop online che trasforma il modo di vivere i fiori',
   openGraph: {
     type: 'website'
   }
