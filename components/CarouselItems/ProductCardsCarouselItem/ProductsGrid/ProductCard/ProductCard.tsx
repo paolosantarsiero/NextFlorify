@@ -6,11 +6,17 @@ type Props = {
   product: Partial<Product>;
   className?: string;
   cardType?: 'image' | 'description';
+  hovered?: boolean;
 };
 
-export default function ProductCard({ product, className, cardType = 'description' }: Props) {
+export default function ProductCard({
+  product,
+  className,
+  cardType = 'description',
+  hovered = false
+}: Props) {
   if (cardType === 'image') {
     return <ImageProductCard product={product} className={className} />;
   }
-  return <DescriptionProductCard product={product} className={className} />;
+  return <DescriptionProductCard product={product} className={className} hovered={hovered} />;
 }

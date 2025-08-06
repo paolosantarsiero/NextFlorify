@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/carousel';
 import { useNativeEvent } from '__hooks/nativeEvent';
 import { Product } from 'lib/woocomerce/models/product';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
 export type ProductsGridProps = {
@@ -25,6 +25,8 @@ export default function ProductsGrid({
   cardType = 'description'
 }: ProductsGridProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>(undefined);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useNativeEvent(
     containerRef,
@@ -87,6 +89,12 @@ export default function ProductsGrid({
     { passive: false }
   );
 
+  useEffect(() => {
+    carouselApi?.on('scroll', (e) => {
+      setCurrentIndex(e.selectedScrollSnap());
+    });
+  }, [carouselApi]);
+
   return (
     <>
       {layout === 'grid' && (
@@ -115,12 +123,16 @@ export default function ProductsGrid({
           <CarouselNext className="-right-12" />
         </Carousel>
       )}
-      <Carousel className="w-full overflow-visible sm:hidden px-10">
+      <Carousel className="w-full overflow-visible sm:hidden px-10" setApi={setCarouselApi}>
         <CarouselContent>
-          {products?.map((product) => (
+          {products?.map((product, index) => (
             <CarouselItem key={product.id} className="basis-[300px] p-2">
               <div className="p-2">
-                <ProductCard product={product} cardType={cardType} />
+                <ProductCard
+                  product={product}
+                  cardType={cardType}
+                  hovered={index === currentIndex}
+                />
               </div>
             </CarouselItem>
           ))}
