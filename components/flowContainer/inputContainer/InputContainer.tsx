@@ -1,5 +1,6 @@
 'use client';
 
+import { useFlowsStore } from '@/__store/flowsStore';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import { AddressInput } from './inputs/AddressInput/AddressInput';
@@ -16,6 +17,11 @@ type InputContainerProps = {
 };
 
 export const InputContainer = ({ node, onAnswerAction, flowTranslations }: InputContainerProps) => {
+  const { getData } = useFlowsStore();
+  const data = getData('subscription');
+
+  const value = data?.[node.id];
+
   switch (node.inputType) {
     case 'buttonSelect':
       return (
@@ -28,7 +34,7 @@ export const InputContainer = ({ node, onAnswerAction, flowTranslations }: Input
     case 'date':
       return <DateInput node={node} onAnswerAction={onAnswerAction} />;
     case 'text':
-      return <TextInput node={node} onAnswerAction={onAnswerAction} />;
+      return <TextInput node={node} onAnswerAction={onAnswerAction} initialValue={value} />;
     case 'boolean':
       return <BooleanInput node={node} onAnswerAction={onAnswerAction} />;
     case 'buttonMultiSelect':
@@ -37,6 +43,7 @@ export const InputContainer = ({ node, onAnswerAction, flowTranslations }: Input
           node={node}
           onAnswerAction={onAnswerAction}
           flowTranslations={flowTranslations}
+          initialValue={value}
         />
       );
     case 'coordinates':

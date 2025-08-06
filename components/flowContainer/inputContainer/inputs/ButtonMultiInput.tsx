@@ -12,15 +12,17 @@ type ButtonMultiInputProps = {
   node: FlowNode<any, any>;
   onAnswerAction: (answer: any) => void;
   flowTranslations: Flow['translations'];
+  initialValue?: string[];
 };
 
 export const ButtonMultiInput = ({
   node,
   onAnswerAction,
+  initialValue,
   flowTranslations
 }: ButtonMultiInputProps) => {
   const t = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>(initialValue || []);
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
 
   useEffect(() => {
@@ -31,6 +33,10 @@ export const ButtonMultiInput = ({
     }
   }, [selected]);
 
+  useEffect(() => {
+    setSelected(initialValue || []);
+  }, [initialValue]);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-6 gap-y-4 justify-center">
@@ -39,6 +45,7 @@ export const ButtonMultiInput = ({
             key={`${node.id}-${opt}`}
             variant="outline"
             className="rounded-xl bg-background px-5 py-3"
+            pressed={selected.includes(opt)}
             onClick={() =>
               setSelected((prev) =>
                 prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
@@ -53,7 +60,6 @@ export const ButtonMultiInput = ({
         variant="ghost"
         onClick={() => {
           onAnswerAction({ [node.id]: selected });
-          setSelected([]);
         }}
         disabled={!schemaStatus}
         className="absolute bottom-0 right-0 rounded-full z-50 translate-y-10"
