@@ -32,7 +32,7 @@ export default function TopSection({ carouselApi }: Props) {
             <Cloud className="" />
           </div>
           <div className="col-start-1 row-start-1 z-20 w-full h-[300px]">
-            <Floro flowName={'subscription'} state={'watching'} navigation={false} />
+            <Floro flowName={'subscription'} state={'watchingHome'} navigation={false} />
           </div>
         </div>
         <div className="flex flex-col -translate-y-2/4 z-20">

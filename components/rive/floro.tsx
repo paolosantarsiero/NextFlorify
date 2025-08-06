@@ -11,6 +11,7 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 export type FloroRiveState =
   | 'idle'
   | 'watching'
+  | 'watchingHome'
   | 'flower'
   | 'flowerSmall'
   | 'flowerMedium'
@@ -60,6 +61,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     'Perfume',
     'Shipping',
     'Watching',
+    'WatchingHome',
     'Sweet',
     'LookingDown',
     'backTrigger',
@@ -78,6 +80,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     perfumeTrigger,
     shippingTrigger,
     watchingTrigger,
+    watchingHomeTrigger,
     sweetTrigger,
     lookingDownTrigger,
     backTrigger,
@@ -159,6 +162,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     watchingTrigger?.fire();
   };
 
+  const watchingHomeAction = () => {
+    watchingHomeTrigger?.fire();
+  };
+
   const lookingDownAction = () => {
     lookingDownTrigger?.fire();
   };
@@ -178,6 +185,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'watching':
         watchingAction();
+        //flowerFlow();
+        break;
+      case 'watchingHome':
+        watchingHomeAction();
         //flowerFlow();
         break;
       case 'flower':

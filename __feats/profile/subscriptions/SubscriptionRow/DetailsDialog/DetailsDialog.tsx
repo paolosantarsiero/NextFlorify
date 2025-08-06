@@ -111,37 +111,41 @@ export const DetailsDialog = ({
         {isLoadingSubscriptionOrders && <LoadingDataScreen />}
         {!showCancelSubscription && !isLoadingSubscriptionOrders && !isErrorSubscriptionOrders && (
           <>
-            <div className={bodyVariants({ variant })}>
-              <img
-                src={subscriptionLogo.src}
-                alt={product?.name ?? ''}
-                className="w-16 h-16 object-contain opacity-50"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-row gap-1 justify-between">
-                <p className="text-base font-bold">{product.name}</p>
-                <Badge variant={'gray'}>{tCard(`planInterval.${frequency}` as any)}</Badge>
+            <div>
+              <div className={bodyVariants({ variant })}>
+                <img
+                  src={subscriptionLogo.src}
+                  alt={product?.name ?? ''}
+                  className="w-16 h-16 object-contain opacity-50"
+                />
               </div>
 
-              <p className="text-xs">Descrizione</p>
+              <div className="flex flex-col gap-2 bg-white p-4 rounded-b-lg">
+                <div className="flex flex-row gap-1 justify-between">
+                  <p className="text-base font-bold">{product.name}</p>
+                  <Badge variant={'gray'}>{tCard(`planInterval.${frequency}` as any)}</Badge>
+                </div>
+
+                <p className="text-xs">Descrizione</p>
+                
+                <div className="text-right">
+                  <p className="text-xs font-semibold">{tCard('nextPayment')}</p>
+                  <span className="text-xs">
+                    {nextRenewalDate.toLocaleDateString('it-IT', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })}
+                  </span>
+                  <span className="text-xs font-bold ml-4">{(plan.amount ?? 0) / 100} €</span>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <p className="text-xs font-semibold">{tCard('nextPayment')}</p>
-              <span className="text-xs">
-                {nextRenewalDate.toLocaleDateString('it-IT', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })}
-              </span>
-              <span className="text-xs font-bold ml-4">{(plan.amount ?? 0) / 100} €</span>
-            </div>
+            
 
             <div className="grid grid-cols-3 gap-2 mt-1">
-              <div className="flex flex-col items-start">
+              <div className="flex flex-col items-start opacity-60">
                 {subscriptionOrders && (
                   <div className="flex flex-col">
                     <p className="text-xs font-semibold">{tCard('dialogs.previousOrder')}</p>
@@ -167,16 +171,16 @@ export const DetailsDialog = ({
             </div>
 
             <div>
-              <p className="text-xs font-semibold">{tCard('paymentMethod')}</p>
-              <span className="text-xs">
+              <p className="text-md font-semibold">{tCard('paymentMethod')}</p>
+              <span className="text-md">
                 {paymentMethod.card?.brand} •••• {paymentMethod.card?.last4}
               </span>
             </div>
 
             {subscriptionOrders && subscriptionOrders.length > 0 && (
               <div>
-                <p className="text-xs font-semibold mb-1">{tCard('dialogs.shippingAddress')}</p>
-                <div className="text-xs text-muted-foreground">
+                <p className="text-md font-semibold mb-1">{tCard('dialogs.shippingAddress')}</p>
+                <div className="text-md text-muted-foreground">
                   <div>
                     {subscriptionOrders[0]?.shipping?.first_name}{' '}
                     {subscriptionOrders[0]?.shipping?.last_name}

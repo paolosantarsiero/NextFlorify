@@ -11,6 +11,7 @@ import { DialogDescription } from '@radix-ui/react-dialog';
 import { getProductAttributes, Product } from 'lib/woocomerce/models/product';
 import { InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import striptags from 'striptags';
 
 type Props = {
   product: Partial<Product>;
@@ -48,11 +49,11 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
           </div>
           <div className="flex flex-col flex-1 min-w-0">
             <DialogHeader className="p-0 items-start text-left">
-              <DialogTitle className="truncate text-xl text-left">{product.name}</DialogTitle>
+              <DialogTitle className="truncate text-2xl text-left">{product.name}</DialogTitle>
               <div className="max-w-full w-full text-left">
                 <Prose
-                  className="mb-6 text-lg leading-tight dark:text-white/[60%] text-left"
-                  html={product?.description ?? ''}
+                  className="mb-6 text-md  dark:text-white/[60%] text-left"
+                  html={striptags(product?.description ?? '')}
                 />
               </div>
             </DialogHeader>
@@ -60,22 +61,22 @@ export default function ProductDialog({ product, dialogTrigger }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               {flowerType && (
                 <div className="flex flex-col gap-2 min-w-0">
-                  <p className="text-md font-semibold">{t('flowerType')}</p>
-                  <p className="text-base truncate">
+                  <p className="text-lg font-semibold">{t('flowerType')}</p>
+                  <p className="text-base">
                     {tProduct(`flower_type.${flowerType.toLowerCase()}` as any)}
                   </p>
                 </div>
               )}
               {style.length > 0 && (
                 <div className="flex flex-col gap-2 min-w-0">
-                  <p className="text-md font-semibold">{t('style')}</p>
-                  <p className="text-base truncate">{style.join(', ')}</p>
+                  <p className="text-lg font-semibold">{t('style')}</p>
+                  <p className="text-base">{style.join(', ')}</p>
                 </div>
               )}
               {perfume.length > 0 && (
                 <div className="flex flex-col gap-2 min-w-0">
-                  <p className="text-md font-semibold">{t('perfume')}</p>
-                  <p className="text-base truncate">{perfume.join(', ')}</p>
+                  <p className="text-lg font-semibold">{t('perfume')}</p>
+                  <p className="text-base">{perfume.join(', ')}</p>
                 </div>
               )}
             </div>
