@@ -160,7 +160,7 @@ const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
     { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_STATIC }
   ],
   next: (flowData: SubscriptionFlowDataType) => NOTES_NODE,
-  inputType: 'buttonMultiSelect',
+  inputType: 'buttonSelect',
   answers: DayEnum
 };
 

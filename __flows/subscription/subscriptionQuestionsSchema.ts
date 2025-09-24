@@ -56,7 +56,7 @@ export type FrequencyType = z.infer<typeof FrequencySchema>;
 
 export const DayEnum = z.enum(['0', '1', '2', '3', '4', '5', '6']);
 export const DaySchema = z.object({
-  selected_days: z.array(DayEnum).nonempty()
+  selected_days: DayEnum
 });
 export type DayType = z.infer<typeof DaySchema>;
 
