@@ -1,3 +1,5 @@
+import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
+import { useFlowsStore } from '@/__store/flowsStore';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn, getProductIcon } from 'lib/utils';
@@ -25,6 +27,10 @@ export default function SelectProductCard({
   const t = useTranslations('SelectProductCard');
   const icon = getProductIcon(product);
 
+  const { getData } = useFlowsStore();
+  const answers = getData('subscription') as SubscriptionFlowDataType;
+  const isSurprise = answers.surprise === 'yes';
+
   return (
     <Card
       className={cn(
@@ -35,14 +41,18 @@ export default function SelectProductCard({
       {icon && createElement(icon, { className: 'absolute top-0 right-0' })}
       <div className="flex flex-col gap-2 w-52 z-50">
         <div className="flex flex-col gap-0">
-          <p className="text-2xl font-bold line-clamp-1">{product.name}</p>
+          <p className="text-2xl font-bold line-clamp-1">
+            {isSurprise ? 'Sorpresa' : product.name}
+          </p>
         </div>
         <p className="text-sm font-normal leading-[18px] line-clamp-3">
-          {striptags(
-            product.short_description && product.short_description.length > 0
-              ? striptags(product.short_description)
-              : striptags(product.description ?? '')
-          )}
+          {!isSurprise
+            ? striptags(
+                product.short_description && product.short_description.length > 0
+                  ? striptags(product.short_description)
+                  : striptags(product.description ?? '')
+              )
+            : ''}
         </p>
         {goToCompatibleProducts && (
           <Button
