@@ -506,6 +506,12 @@
       "11": "Dicembre"
     }
   },
+  "components": {
+    "datePicker": {
+      "placeholder": "Seleziona una data",
+      "label": "Data"
+    }
+  },
   "errors": {
     "unknown": "Si è verificato un errore sconosciuto. Per favore, riprova più tardi.",
     "noSubscription": "Ci dispiace, ma non siamo stati in grado di trovare un abbonamento. Per favore, contatta il nostro supporto clienti.",

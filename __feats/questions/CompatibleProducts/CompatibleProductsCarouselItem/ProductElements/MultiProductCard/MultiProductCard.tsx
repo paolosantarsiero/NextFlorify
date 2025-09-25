@@ -53,7 +53,7 @@ export const MultiProductCard = ({
   }, [productsCarouselApi]);
 
   return (
-    <div className="flex flex-col w-full justify-center items-center px-4 relative">
+    <div className="flex flex-col w-full justify-center px-4 relative">
       <div className="flex flex-col items-center gap-2">
         <div className="w-67 translate-y-4 z-10 hidden sm:block">
           <Floro
@@ -158,7 +158,7 @@ export const MultiProductCard = ({
             </div>
           </div>
         </Card>
-        <div className="flex flex-row w-full justify-end">
+        <div className="flex flex-row w-full justify-center">
           <div className="flex flex-col justify-end items-end gap-1">
             <p className="text-2xl font-bold">
               {(price?.unit_amount ?? 0) / 100}€{' '}
