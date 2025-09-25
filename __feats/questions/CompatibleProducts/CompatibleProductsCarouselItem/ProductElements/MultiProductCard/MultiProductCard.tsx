@@ -55,7 +55,7 @@ export const MultiProductCard = ({
   return (
     <div className="flex flex-col w-full justify-center items-center px-4 relative">
       <div className="flex flex-col items-center gap-2">
-        <div className="w-67 translate-y-4 z-10">
+        <div className="w-67 translate-y-4 z-10 hidden sm:block">
           <Floro
             state="lookingDown"
             flowName="subscription"
@@ -72,7 +72,8 @@ export const MultiProductCard = ({
             'sm:w-98',
             'py-8 px-6',
             'flex flex-col',
-            'justify-between'
+            'justify-between',
+            'mt-12 sm:mt-0'
           )}
         >
           {/* TOP SECTION */}
