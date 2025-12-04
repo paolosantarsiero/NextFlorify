@@ -18,7 +18,7 @@
       },
       "about": {
         "label": "Chi siamo",
-        "href": "https://www.florify.it/chi-siamo/"
+        "href": "/about"
       },
       "contact": {
         "label": "Contattaci",
@@ -270,6 +270,14 @@
       "loginFailed": "Login fallito",
       "loginSuccessful": "Login riuscito"
     }
+  },
+  "AboutPage": {
+    "title": "Chi siamo",
+    "content1": "<strong>Florify</strong> è una start-up innovativa che ti consente di perfezionare una formula acquisti su misura grazie ad un sistema di raccolta delle preferenze dell’utente e del destinatario per offrire la soluzione più adatta ad ogni occasione. Abbiamo digitalizzato l’intero processo di vendita proponendo una formula di abbonamento floreale basata su un <strong>algoritmo innovativo</strong> e integrato da un sistema di <strong>intelligenza artificiale</strong> per offrire un servizio floreale personalizzato. Un vero e proprio assistente virtuale al fianco di fioristi e clienti per ricordare eventi, ricorrenze e migliorare la propria vita a contatto con la natura.",
+    "content2": "La soluzione tecnologica sviluppata è un sistema di <strong>abbonamento floreale intelligente</strong> e interattivo che sfrutta le tecnologie abilitanti.",
+    "content3": "Attraverso l’utilizzo dell’IoT e stampa 3D abbiamo creato vasi floreali unici e personalizzati progettati con materiali sostenibili e ispirati alla natura, aggiungendo un tocco di design e originalità al servizio di abbonamento floreale in cui monitoriamo costantemente lo stato di qualità dell’aria e dell’ambiente circostante. L’IA ci permette di migliorare l’esperienza complessiva degli utenti che potranno seguire lo stato dei loro acquisti tramite un’app mobile intuitiva e ricevere notifiche tempestive per la cura.",
+    "content4": "Attraverso questa soluzione, raggiungeremo risultati innovativi nel settore floreale, combinando il fascino dei fiori con le potenzialità delle nuove tecnologie. Offriremo agli utenti un’esperienza interattiva, personalizzata e di alta qualità.",
+    "credits": "Progetto cofinanziato dall’Unione Europea, dallo Stato Italiano e dalla Regione Campania nell’ambito del PR CAMPANIA FESR 2021- 2027 – Asse I – Obiettivo Specifico 1.1 Azione 1.1.3 Avviso pubblico CAMPANIA STARTUP 2023 "
   },
   "Cart": {
     "title": "Carrello",
