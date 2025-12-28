@@ -1,3 +1,5 @@
+import { CoordinatesType } from '@/__types/geocoding';
+import { fromDDMMYYYYToDate } from '@/lib/utils';
 import { z } from 'zod';
 
 // For me/others
@@ -54,7 +56,7 @@ export type FrequencyType = z.infer<typeof FrequencySchema>;
 
 export const DayEnum = z.enum(['0', '1', '2', '3', '4', '5', '6']);
 export const DaySchema = z.object({
-  selected_days: z.array(DayEnum).nonempty()
+  selected_days: DayEnum
 });
 export type DayType = z.infer<typeof DaySchema>;
 
@@ -144,30 +146,28 @@ export type NotesType = z.infer<typeof NotesSchema>;
 
 // specific day
 
-export const AnniversayDateSchema = z.object({
-  anniversary_date: z
-    .string()
-    .nullish()
-    .refine(
-      (val) => {
-        if (!val) return true; // Allow null or undefined values
-        const date = new Date(val);
-        const now = new Date();
-        // Confronta solo la data, non l'orario
-        date.setDate(date.getDate() + 1); // Set to tomorrow
-        date.setHours(0, 0, 0, 0);
-        now.setHours(0, 0, 0, 0);
-        // Non nel passato
-        if (date < now) return false;
-        // Non oltre 1 anno dal giorno corrente
-        const oneYearLater = new Date(now);
-        oneYearLater.setFullYear(now.getFullYear() + 1);
-        return date <= oneYearLater;
-      },
-      { message: 'La data deve essere domani o entro un anno da oggi' }
-    )
+export const AnniversaryDateSchema = z.object({
+  anniversary_date: z.string().refine(
+    (dateString: string) => {
+      if (!dateString) return true; // Allow undefined/null handled by z.optional()
+      const now = new Date();
+
+      // Rimuove l'orario da entrambi
+      const date = fromDDMMYYYYToDate(dateString);
+      date.setHours(0, 0, 0, 0);
+      now.setHours(0, 0, 0, 0);
+
+      const oneYearLater = new Date(now);
+      oneYearLater.setFullYear(now.getFullYear() + 1);
+
+      return date <= oneYearLater;
+    },
+    {
+      message: 'La data deve essere entro un anno da oggi'
+    }
+  )
 });
-export type AnniversayDateType = z.infer<typeof AnniversayDateSchema>;
+export type AnniversaryDateType = z.infer<typeof AnniversaryDateSchema>;
 
 export type SubscriptionFlowDataType = PathType &
   PreferenceType &
@@ -182,5 +182,6 @@ export type SubscriptionFlowDataType = PathType &
   AnniversaryType &
   StyleType &
   PerfumeType &
-  AnniversayDateType &
-  NotesType;
+  AnniversaryDateType &
+  NotesType &
+  CoordinatesType;

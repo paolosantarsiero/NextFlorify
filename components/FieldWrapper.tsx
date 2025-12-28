@@ -4,12 +4,13 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
+import { FormItem } from './ui/form';
 
 const fieldWrapperVariants = cva('flex flex-col', {
   variants: {
     variant: {
       clean: '',
-      outline: 'border border-gray-200 rounded-lg py-3 px-4'
+      outline: 'border border-gray-200 rounded-lg py-3 px-4 bg-white'
     }
   },
   defaultVariants: {
@@ -36,13 +37,13 @@ export default function FieldWrapper({
   message
 }: FieldWrapperProps) {
   return (
-    <div className={cn(fieldWrapperVariants({ variant }), className)}>
+    <FormItem className={cn(fieldWrapperVariants({ variant }), className)}>
       {label && <Label>{label}</Label>}
       <div className="flex flex-row items-center">
         {children}
         {decorator}
       </div>
       {!isLoading && message}
-    </div>
+    </FormItem>
   );
 }

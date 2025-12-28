@@ -6,7 +6,7 @@ import ErrorDataScreen from 'components/DataFetching/ErrorDataScreen';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
 import { Product } from 'lib/woocomerce/models/product';
 import { useTranslations } from 'next-intl';
-import ProductsGrid, { Props as ProductsGridProps } from './ProductsGrid/ProductsGrid';
+import ProductsGrid, { ProductsGridProps } from './ProductsGrid/ProductsGrid';
 
 type Props = {
   shouldNext?: boolean;
@@ -44,11 +44,11 @@ export default function ProductCardsCarouselItem({
       <div className="flex justify-center h-dvh w-full">
         <div
           className={cn(
-            'flex flex-col w-full h-dvh pt-31 px-0 md:pt-40 max-w-236 items-center',
+            'flex flex-col w-full h-dvh pt-31 px-0 sm:px-10 max-w-[62rem] items-center',
             layout === 'carousel' && 'md:pt-31'
           )}
         >
-          <div className="flex flex-row items-center justify-between mb-4 w-full px-20 sm:px-10">
+          <div className="fflex flex-row items-center justify-between mb-4 w-full px-10 sm:px-0">
             <p className="text-2xl font-bold">{title}</p>
             {shouldPrev && (
               <Button

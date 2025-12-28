@@ -50,4 +50,5 @@ export type GetCompatibleProductsResponse = {
   related_products: Product[];
   delivery_date?: string;
   subscription?: Stripe.Product;
+  price?: Stripe.Price;
 };

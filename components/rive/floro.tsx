@@ -11,14 +11,26 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 export type FloroRiveState =
   | 'idle'
   | 'watching'
+  | 'watchingHome'
   | 'flower'
   | 'flowerSmall'
   | 'flowerMedium'
   | 'flowerLarge'
+  | 'plant'
+  | 'romantic'
+  | 'recurrence'
+  | 'color'
+  | 'style'
+  | 'perfume'
+  | 'shipping'
   | 'packaging'
   | 'calendar'
+  | 'calendarDay'
   | 'sweet'
-  | 'custom';
+  | 'lookingDown'
+  | 'custom'
+  | 'surprise'
+  | 'next';
 
 type Props = {
   state: FloroRiveState;
@@ -36,9 +48,44 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     autoplay: true
   });
 
-  const inputs = ['Flower', 'FlowerLength', 'Watching', 'Sweet', 'backTrigger', 'nextTrigger'];
-  const [flowerTrigger, flowerLength, watchingTrigger, sweetTrigger, backTrigger, nextTrigger] =
-    inputs.map((name) => useStateMachineInput(rive, 'State', name));
+  const inputs = [
+    'Flower',
+    'FlowerLength',
+    'Plant',
+    'Calendar',
+    'CalendarDay',
+    'Romantic',
+    'Recurrence',
+    'Color',
+    'Style',
+    'Perfume',
+    'Shipping',
+    'Watching',
+    'WatchingHome',
+    'Sweet',
+    'LookingDown',
+    'backTrigger',
+    'nextTrigger'
+  ];
+  const [
+    flowerTrigger,
+    flowerLength,
+    plantTrigger,
+    calendarTrigger,
+    calendarDayTrigger,
+    romanticTrigger,
+    recurrenceTrigger,
+    colorTrigger,
+    styleTrigger,
+    perfumeTrigger,
+    shippingTrigger,
+    watchingTrigger,
+    watchingHomeTrigger,
+    sweetTrigger,
+    lookingDownTrigger,
+    backTrigger,
+    nextTrigger
+  ] = inputs.map((name) => useStateMachineInput(rive, 'State', name));
 
   const shouldGoHome = getCurrentNodeId(flowName) === getFlow(flowName)?.startingNodeId;
 
@@ -50,6 +97,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
       prevAnimation();
     }
   };
+
   const resetFlow = () => {
     reset(flowName);
   };
@@ -58,6 +106,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     backTrigger?.fire();
     flowerSize(0);
   };
+
   const nextAnimation = () => {
     nextTrigger?.fire();
   };
@@ -68,13 +117,31 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
   };
 
   const plantFlow = () => {
-    //flowerTrigger?.fire();
-    //sweetTrigger!.value = true;
+    plantTrigger?.fire();
   };
 
-  const loveFlow = () => {
-    //flowerTrigger?.fire();
-    //sweetTrigger!.value = true;
+  const romanticFlow = () => {
+    romanticTrigger?.fire();
+  };
+
+  const recurrenceAction = () => {
+    recurrenceTrigger?.fire();
+  };
+
+  const colorAction = () => {
+    colorTrigger?.fire();
+  };
+
+  const styleAction = () => {
+    styleTrigger?.fire();
+  };
+
+  const perfumeAction = () => {
+    perfumeTrigger?.fire();
+  };
+
+  const shippingAction = () => {
+    shippingTrigger?.fire();
   };
 
   const flowerSize = (size: number | boolean) => {
@@ -83,8 +150,24 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     }
   };
 
+  const calendar = () => {
+    calendarTrigger?.fire();
+  };
+
+  const calendarDayAction = () => {
+    calendarDayTrigger?.fire();
+  };
+
   const watchingAction = () => {
     watchingTrigger?.fire();
+  };
+
+  const watchingHomeAction = () => {
+    watchingHomeTrigger?.fire();
+  };
+
+  const lookingDownAction = () => {
+    lookingDownTrigger?.fire();
   };
 
   const sweetAction = () => {
@@ -104,6 +187,10 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         watchingAction();
         //flowerFlow();
         break;
+      case 'watchingHome':
+        watchingHomeAction();
+        //flowerFlow();
+        break;
       case 'flower':
         flowerFlow();
         break;
@@ -116,17 +203,68 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
       case 'flowerLarge':
         flowerSize(3);
         break;
+      case 'plant':
+        plantFlow();
+        break;
+      case 'romantic':
+        romanticFlow();
+        break;
+      case 'recurrence':
+        recurrenceAction();
+        break;
+      case 'color':
+        colorAction();
+        break;
+      case 'style':
+        styleAction();
+        break;
+      case 'perfume':
+        perfumeAction();
+        break;
+      case 'shipping':
+        shippingAction();
+        break;
+      case 'surprise':
+        nextAnimation();
+        break;
+      case 'next':
+        nextAnimation();
+        break;
       case 'packaging':
         nextAnimation();
         break;
       case 'calendar':
-        nextAnimation();
+        calendar();
+        break;
+      case 'calendarDay':
+        calendarDayAction();
+        break;
+      case 'lookingDown':
+        lookingDownAction();
         break;
       case 'sweet':
         break;
       //prevAnimation();
     }
-  }, [state, watchingTrigger, flowerTrigger, flowerLength, nextTrigger, backTrigger]);
+  }, [
+    state,
+    flowerTrigger,
+    flowerLength,
+    plantTrigger,
+    calendarTrigger,
+    calendarDayTrigger,
+    romanticTrigger,
+    recurrenceTrigger,
+    colorTrigger,
+    styleTrigger,
+    perfumeTrigger,
+    shippingTrigger,
+    watchingTrigger,
+    sweetTrigger,
+    lookingDownTrigger,
+    backTrigger,
+    nextTrigger
+  ]);
 
   return (
     <div className={cn('w-full h-[300px] relative z-10 ', className)}>

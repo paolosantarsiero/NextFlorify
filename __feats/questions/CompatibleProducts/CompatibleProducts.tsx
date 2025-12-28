@@ -1,4 +1,6 @@
 import { useStripeCheckoutSession } from '@/__hooks/stripe';
+import { useCssAnimationStore } from '@/__store/cssAnimationsStore';
+import { flowerAnimation, FlowerAnimationStates } from '@/__types/animations/flower';
 import { productsValuableAnswers } from '@/__types/product';
 import { buildStripeCheckoutBody } from '@/__utils/stripe';
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
@@ -8,7 +10,8 @@ import { SubscriptionFlowDataType } from '__flows/subscription/subscriptionQuest
 import { useGetCompatibleProducts } from '__hooks/Product';
 import { FlowInstances, useFlowsStore } from '__store/flowsStore';
 import LoadingDataScreen from 'components/DataFetching/LoadingDataScreen';
-import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 import { CompatibleProductsCarouselItem } from './CompatibleProductsCarouselItem/CompatibleProductsCarouselItem';
 
 type Props = {
@@ -16,6 +19,8 @@ type Props = {
 };
 
 export const CompatibleProducts = ({ flowName }: Props) => {
+  const tShared = useTranslations('flows.shared');
+  const tErrors = useTranslations('errors');
   const [checkoutCarouselApi, setCheckoutCarouselApi] = useState<CarouselApi | undefined>(
     undefined
   );
@@ -23,7 +28,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
 
   const answers = getData(flowName) as SubscriptionFlowDataType;
 
-  const { compatibleProducts, isGetCompatibleProductsLoading, isGetCompatibleProductsError } =
+  const { compatibleProducts, isGetCompatibleProductsLoading, errorGetCompatibleProducts } =
     useGetCompatibleProducts(answers);
   const {
     createStripeCheckoutSession,
@@ -31,7 +36,17 @@ export const CompatibleProducts = ({ flowName }: Props) => {
     errorStripeCheckoutSession
   } = useStripeCheckoutSession();
 
+  const { setComponentState } = useCssAnimationStore();
+
   const [selectedProductIndex, setSelectedProductIndex] = useState(0);
+
+  useEffect(() => {
+    if (isGetCompatibleProductsLoading || isLoadingStripeCheckoutSession) {
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_INFINITE);
+    } else {
+      setComponentState(flowerAnimation.key, FlowerAnimationStates.HIDDEN);
+    }
+  }, [isGetCompatibleProductsLoading, isLoadingStripeCheckoutSession]);
 
   const handleBuy = async () => {
     const selectedProduct = compatibleProducts?.products[selectedProductIndex];
@@ -48,11 +63,18 @@ export const CompatibleProducts = ({ flowName }: Props) => {
   };
 
   if (isLoadingStripeCheckoutSession || isGetCompatibleProductsLoading) {
-    return <LoadingDataScreen />;
+    const loadingMessage = isLoadingStripeCheckoutSession
+      ? tShared('loadingCheckout')
+      : tShared('loadingSubscription');
+    return <LoadingDataScreen message={loadingMessage} />;
   }
 
-  if (errorStripeCheckoutSession || isGetCompatibleProductsError) {
-    return <ErrorDataScreen />;
+  if (errorStripeCheckoutSession || errorGetCompatibleProducts) {
+    /** @todo: fix to show error throwed by server components */
+    const errorMessage = errorStripeCheckoutSession
+      ? tErrors('No open vendor found within the specified distance')
+      : tErrors('noSubscription');
+    return <ErrorDataScreen message={errorMessage} />;
   }
 
   return (
@@ -70,7 +92,7 @@ export const CompatibleProducts = ({ flowName }: Props) => {
         <CarouselItem>
           <div className="flex w-full h-full justify-center">
             {isGetCompatibleProductsLoading && <LoadingDataScreen />}
-            {isGetCompatibleProductsError && <ErrorDataScreen />}
+            {errorGetCompatibleProducts && <ErrorDataScreen />}
             {compatibleProducts && (
               <CompatibleProductsCarouselItem
                 containerCarouselApi={checkoutCarouselApi}
@@ -81,17 +103,18 @@ export const CompatibleProducts = ({ flowName }: Props) => {
                 relatedProducts={compatibleProducts.related_products}
                 deliveryDate={compatibleProducts.delivery_date}
                 subscription={compatibleProducts.subscription}
+                price={compatibleProducts.price}
               />
             )}
           </div>
         </CarouselItem>
         {compatibleProducts?.related_products && compatibleProducts.related_products.length && (
           <ProductCardsCarouselItem
-            title="Le nostre composizioni"
+            title="Sfoglia le piante"
             shouldPrev
             products={compatibleProducts.related_products}
             isLoading={isGetCompatibleProductsLoading}
-            isError={isGetCompatibleProductsError}
+            isError={errorGetCompatibleProducts ? true : false}
             containerCarouselApi={checkoutCarouselApi}
             layout="carousel"
             cardType="image"

@@ -148,5 +148,11 @@
       "10": "November",
       "11": "December"
     }
+  },
+  "components": {
+    "datePicker": {
+      "placeholder": "Seleziona una data",
+      "label": "Data"
+    }
   }
 }

@@ -8,10 +8,10 @@ import {
 } from '@/components/ui/carousel';
 import { useNativeEvent } from '__hooks/nativeEvent';
 import { Product } from 'lib/woocomerce/models/product';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductCard from './ProductCard/ProductCard';
 
-export type Props = {
+export type ProductsGridProps = {
   products: Product[];
   containerCarouselApi?: CarouselApi | null;
   layout?: 'grid' | 'carousel';
@@ -23,8 +23,10 @@ export default function ProductsGrid({
   containerCarouselApi,
   layout = 'grid',
   cardType = 'description'
-}: Props) {
+}: ProductsGridProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>(undefined);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useNativeEvent(
     containerRef,
@@ -87,12 +89,18 @@ export default function ProductsGrid({
     { passive: false }
   );
 
+  useEffect(() => {
+    carouselApi?.on('scroll', (e) => {
+      setCurrentIndex(e.selectedScrollSnap());
+    });
+  }, [carouselApi]);
+
   return (
     <>
       {layout === 'grid' && (
         <div
           ref={containerRef}
-          className="hidden grid-cols-1 sm:grid md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 overflow-y-scroll scrollbar-hide z-50"
+          className="hidden w-full grid-cols-1 px-4 sm:grid sm:grid-cols-2  sm:pb-[4rem] lg:grid-cols-3 sm:grid-rows-[max-content_max-content_max-content_max-content] lg:grid-rows-[max-content_max-content_max-content] items-start gap-8 flex-1 overflow-x-visible overflow-y-scroll scrollbar-hide z-50"
         >
           {products?.map((product, index) => {
             return <ProductCard key={product.id} product={product} />;
@@ -102,7 +110,7 @@ export default function ProductsGrid({
       )}
       {layout === 'carousel' && (
         <Carousel className="w-full overflow-visible hidden sm:block">
-          <CarouselContent className="pl-[15%]">
+          <CarouselContent>
             {products?.map((product) => (
               <CarouselItem key={product.id} className="basis-[300px] p-2">
                 <div className="flex items-center justify-center">
@@ -115,12 +123,16 @@ export default function ProductsGrid({
           <CarouselNext className="-right-12" />
         </Carousel>
       )}
-      <Carousel className="w-full overflow-visible sm:hidden">
-        <CarouselContent className="pl-[15%]">
-          {products?.map((product) => (
-            <CarouselItem key={product.id} className="basis-[85%]">
-              <div className="flex p-2 items-center justify-center">
-                <ProductCard product={product} />
+      <Carousel className="w-full overflow-visible sm:hidden px-10" setApi={setCarouselApi}>
+        <CarouselContent>
+          {products?.map((product, index) => (
+            <CarouselItem key={product.id} className="basis-[300px] p-2">
+              <div className="p-2">
+                <ProductCard
+                  product={product}
+                  cardType={cardType}
+                  hovered={index === currentIndex}
+                />
               </div>
             </CarouselItem>
           ))}

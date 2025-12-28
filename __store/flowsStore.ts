@@ -93,7 +93,10 @@ export const useFlowsStore = create<FlowsStore>()(
               [flowName]: {
                 ...flow,
                 currentNodeId: nodeId,
-                history: currentNodeId ? [...history, currentNodeId] : history
+                history:
+                  currentNodeId && !flow.flow.steps[currentNodeId]?.skipHistory
+                    ? [...history, currentNodeId]
+                    : history
               }
             }
           };

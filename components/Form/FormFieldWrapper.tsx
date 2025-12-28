@@ -1,7 +1,7 @@
 'use client';
 
 import FieldWrapper, { FieldWrapperProps } from '@/components/FieldWrapper';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormMessage } from '@/components/ui/form';
 import { ReactElement } from 'react';
 import { FieldValues, useFormContext } from 'react-hook-form';
 
@@ -26,11 +26,9 @@ export default function FormFieldWrapper({
       control={formContext.control}
       name={name}
       render={({ field }) => (
-        <FormItem>
-          <FieldWrapper {...wrapperProps} message={<FormMessage />}>
-            {children && <FormControl>{children(field)}</FormControl>}
-          </FieldWrapper>
-        </FormItem>
+        <FieldWrapper {...wrapperProps} message={<FormMessage />}>
+          {children && <FormControl>{children(field)}</FormControl>}
+        </FieldWrapper>
       )}
     />
   );

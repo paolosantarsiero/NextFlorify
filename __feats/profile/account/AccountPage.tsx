@@ -10,8 +10,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-import EmailDialog from './emailDialog/EmailDialog';
-import PasswordDialog from './passwordDialog/PasswordDialog';
 
 export default function AccountPage() {
   const t = useTranslations('ProfilePage.AccountPage');
@@ -39,10 +37,18 @@ export default function AccountPage() {
             />
           </Form>
         </form>
-        <FieldWrapper label="Email" decorator={<EmailDialog />}>
+        <FieldWrapper
+          label="Email"
+          decorator={
+            <></> // TODO: add email dialog
+            // <EmailDialog />
+          }
+        >
           <Input disabled value={session.data?.user?.user_email} />
         </FieldWrapper>
-        <FieldWrapper label="Password" decorator={<PasswordDialog />}>
+        <FieldWrapper label="Password" decorator={<></>}>
+          {/* <PasswordDialog /> */}
+          {/* TODO: add password dialog */}
           <Input disabled value="********" type="password" />
         </FieldWrapper>
       </div>
@@ -50,7 +56,7 @@ export default function AccountPage() {
         <Button
           variant={'gradient'}
           type="submit"
-          className=""
+          className="mt-2"
           onClick={() => infoForm.handleSubmit(onInfoSubmit)}
         >
           {tInfoForm('submit')}

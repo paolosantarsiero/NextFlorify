@@ -1,10 +1,18 @@
-// TODO: Localize this component
+import { useTranslations } from 'next-intl';
+import Floro from '../rive/floro';
 
-export default function ErrorDataScreen() {
+export type ErrorDataScreenProps = {
+  message?: string;
+};
+
+export default function ErrorDataScreen({ message }: ErrorDataScreenProps) {
+  const tError = useTranslations('errors');
   return (
-    <div className="flex flex-col items-center justify-center h-full flex-1">
-      <h1 className="text-lg font-bold text-center">Errore</h1>
-      <p className="text-sm text-secondary text-center">Si è verificato un errore.</p>
+    <div className="flex flex-col items-center justify-center h-full mx-auto">
+      <Floro flowName={'subscription'} state={'idle'} navigation={false} />
+      <p className="text-xl text-center font-bold text-card-foreground max-w-[200px]">
+        {message ? message : tError('unknown')}
+      </p>
     </div>
   );
 }

@@ -32,6 +32,6 @@ export const useGetCompatibleProducts = (answers: SubscriptionFlowDataType) => {
     compatibleProducts: query.data,
     refetchGetCompatibleProducts: query.refetch,
     isGetCompatibleProductsLoading: query.isLoading,
-    isGetCompatibleProductsError: query.isError
+    errorGetCompatibleProducts: query.error
   };
 };

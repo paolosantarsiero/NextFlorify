@@ -1,13 +1,14 @@
 import { FLOWER_ANIMATION_NAME, FlowerAnimationStates } from '@/__types/animations/flower';
-import { getAnniversayDateByAnniversary } from '@/lib/utils';
+import { CoordinatesSchema, CoordinatesType } from '@/__types/geocoding';
+import { formatDateToDDMMYYYY, getAnniversayDateByAnniversary } from '@/lib/utils';
 import { Flow } from '__flows/_flow';
 import { FlowNode } from '__flows/_flowNode';
 import {
+  AnniversaryDateSchema,
+  AnniversaryDateType,
   AnniversaryEnum,
   AnniversarySchema,
   AnniversaryType,
-  AnniversayDateSchema,
-  AnniversayDateType,
   ColorEnum,
   ColorSchema,
   ColorType,
@@ -64,6 +65,7 @@ export const STYLE_NODE = 'style';
 export const PERFUME_NODE = 'perfume';
 export const ANNIVERSARY_DATE_NODE = 'anniversary_date';
 export const NOTES_NODE = 'notes';
+export const COORDINATES_NODE = 'coordinates';
 
 const PathNode: FlowNode<PathType, SubscriptionFlowDataType> = {
   id: PATH_NODE,
@@ -116,7 +118,7 @@ const colorNode: FlowNode<ColorType, SubscriptionFlowDataType> = {
       case 'large':
         return 'flowerLarge';
       default:
-        return 'flowerLarge';
+        return 'color';
     }
   },
   schema: ColorSchema,
@@ -152,18 +154,20 @@ const frequencyNode: FlowNode<FrequencyType, SubscriptionFlowDataType> = {
 const dayNode: FlowNode<DayType, SubscriptionFlowDataType> = {
   id: DAY_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'calendar',
+  riveState: (data: SubscriptionFlowDataType) => 'calendarDay',
   schema: DaySchema,
-  cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (flowData: SubscriptionFlowDataType) =>
-    flowData.preference === 'plant' ? NOTES_NODE : 'end',
-  inputType: 'buttonMultiSelect',
+  cssAnimations: [
+    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_STATIC }
+  ],
+  next: (flowData: SubscriptionFlowDataType) => NOTES_NODE,
+  inputType: 'buttonSelect',
   answers: DayEnum
 };
 
 const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
   id: VASE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'plant',
   schema: VaseSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: SubscriptionFlowDataType) => SURPRISE_NODE,
@@ -174,6 +178,7 @@ const vaseNode: FlowNode<VaseType, SubscriptionFlowDataType> = {
 const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
   id: SURPRISE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'surprise',
   schema: SurpriseSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (data: SubscriptionFlowDataType) => DAY_NODE,
@@ -184,6 +189,7 @@ const surpriseNode: FlowNode<SurpriseType, SubscriptionFlowDataType> = {
 const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {
   id: FOR_WHOM_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'romantic',
   schema: ForSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => ANNIVERSARIES_NODE,
@@ -194,10 +200,13 @@ const forNode: FlowNode<ForType, SubscriptionFlowDataType> = {
 const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
   id: ANNIVERSARIES_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'recurrence',
   schema: AnniversarySchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => {
-    flowData.anniversary_date = getAnniversayDateByAnniversary(flowData.anniversaries);
+    flowData.anniversary_date = formatDateToDDMMYYYY(
+      getAnniversayDateByAnniversary(flowData.anniversaries)
+    );
 
     return ['other', 'birthday', 'anniversary'].includes(flowData.anniversaries)
       ? ANNIVERSARY_DATE_NODE
@@ -210,6 +219,7 @@ const anniversariesNode: FlowNode<AnniversaryType, SubscriptionFlowDataType> = {
 const styleNode: FlowNode<StyleType, SubscriptionFlowDataType> = {
   id: STYLE_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'style',
   schema: StyleSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => PERFUME_NODE,
@@ -220,6 +230,7 @@ const styleNode: FlowNode<StyleType, SubscriptionFlowDataType> = {
 const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
   id: PERFUME_NODE,
   component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'perfume',
   schema: PerfumeSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => SIZE_NODE,
@@ -227,23 +238,54 @@ const perfumeNode: FlowNode<PerfumeType, SubscriptionFlowDataType> = {
   answers: PerfumeEnum
 };
 
-const anniversaryDate: FlowNode<AnniversayDateType, SubscriptionFlowDataType> = {
+const anniversaryDate: FlowNode<AnniversaryDateType, SubscriptionFlowDataType> = {
   id: ANNIVERSARY_DATE_NODE,
   component: undefined,
-  schema: AnniversayDateSchema,
+  riveState: (data: SubscriptionFlowDataType) => 'calendar',
+  schema: AnniversaryDateSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
   next: (flowData: SubscriptionFlowDataType) => COLOR_NODE,
-  inputType: 'date'
+  inputType: 'date',
+  skipHistory: true
 };
 
 const notesNode: FlowNode<NotesType, SubscriptionFlowDataType> = {
   id: NOTES_NODE,
   component: undefined,
-  riveState: (data: SubscriptionFlowDataType) => 'watching',
+  riveState: (data: SubscriptionFlowDataType) => {
+    if (data?.preference === 'flower' && data?.path === 'myself') {
+      return 'next';
+    } else if (data?.path === 'other') {
+      switch (data?.size) {
+        case 'small':
+          return 'flowerSmall';
+        case 'medium':
+          return 'flowerMedium';
+        case 'large':
+          return 'flowerLarge';
+        default:
+          return 'next';
+      }
+    } else {
+      return 'next';
+    }
+  },
   schema: NotesSchema,
   cssAnimations: [{ component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING }],
-  next: (flowData: SubscriptionFlowDataType) => 'end', // TODO: change to end
+  next: (flowData: SubscriptionFlowDataType) => COORDINATES_NODE,
   inputType: 'text'
+};
+
+const coordinatesNode: FlowNode<CoordinatesType, SubscriptionFlowDataType> = {
+  id: COORDINATES_NODE,
+  component: undefined,
+  riveState: (data: SubscriptionFlowDataType) => 'shipping',
+  schema: CoordinatesSchema,
+  cssAnimations: [
+    { component: FLOWER_ANIMATION_NAME, state: FlowerAnimationStates.LOADING_INFINITE }
+  ],
+  next: (flowData: SubscriptionFlowDataType) => 'end',
+  inputType: 'coordinates'
 };
 
 export const questionsFlow: Flow = {
@@ -264,6 +306,7 @@ export const questionsFlow: Flow = {
     [STYLE_NODE]: styleNode,
     [PERFUME_NODE]: perfumeNode,
     [ANNIVERSARY_DATE_NODE]: anniversaryDate,
-    [NOTES_NODE]: notesNode
+    [NOTES_NODE]: notesNode,
+    [COORDINATES_NODE]: coordinatesNode
   }
 };

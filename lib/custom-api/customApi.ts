@@ -37,6 +37,8 @@ export type CreateStripeCheckoutSessionDataType = {
   variants?: Variant[];
   answers?: Answer[];
   note?: string;
+  customer_lat?: number;
+  customer_lng?: number;
 };
 
 export type CreateStripeCheckoutSessionResponse = {
@@ -49,6 +51,7 @@ export async function getProductsBySubscriptionType(data: getCompatibleProductsB
   related_products: Product[];
   subscription: Stripe.Product;
   delivery_date: string;
+  price: Stripe.Price;
 }> {
   return customApiClient
     .post('/woocommerce/product-subscription', data)

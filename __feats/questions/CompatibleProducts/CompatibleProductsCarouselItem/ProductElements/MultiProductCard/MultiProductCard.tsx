@@ -1,7 +1,7 @@
 import Floro from '@/components/rive/floro';
 import { Card } from '@/components/ui/card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { cn } from '@/lib/utils';
+import { castStripeIntervalToFrequency, cn } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/woocomerce/models/product';
@@ -14,10 +14,11 @@ import SelectProductCard from './SelectCarousel/SelectProductCard';
 
 type Props = {
   containerCarouselApi?: CarouselApi;
-  relatedProducts?: Partial<Product>[];
-  products?: Partial<Product>[];
+  relatedProducts?: Product[];
+  products?: Product[];
   deliveryDate?: string;
-  subscription?: Partial<Stripe.Product>;
+  subscription?: Stripe.Product;
+  price?: Stripe.Price;
   onSelect: (index: number) => void;
   selectedIndex: number;
   onBuy: () => void;
@@ -28,6 +29,7 @@ export const MultiProductCard = ({
   relatedProducts,
   products,
   subscription,
+  price,
   deliveryDate,
   onSelect,
   selectedIndex,
@@ -35,7 +37,12 @@ export const MultiProductCard = ({
 }: Props) => {
   const tProductPage = useTranslations('ProductPage');
   const tShared = useTranslations('shared');
+  const tSubscription = useTranslations('ProfilePage.SubscriptionPage.subscriptionCard');
   const [productsCarouselApi, setProductsCarouselApi] = useState<CarouselApi | null>(null);
+  const frequency = castStripeIntervalToFrequency(
+    price?.recurring?.interval,
+    price?.recurring?.interval_count
+  );
 
   useEffect(() => {
     if (productsCarouselApi) {
@@ -46,30 +53,31 @@ export const MultiProductCard = ({
   }, [productsCarouselApi]);
 
   return (
-    <div className="flex flex-col w-full justify-center items-center px-4 relative">
+    <div className="flex flex-col w-full justify-center px-4 relative">
       <div className="flex flex-col items-center gap-2">
-        <div className="w-67 translate-y-4 z-10">
+        <div className="w-67 translate-y-4 z-10 hidden sm:block">
           <Floro
-            state="idle"
+            state="lookingDown"
             flowName="subscription"
             navigation={false}
             className="h-30 translate-y-5 z-0"
           />
-          <div className="z-10 h-14 p-6-mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg">
+          <div className="relative z-10 h-14 p-6-mt-[24px] hover:scale-110 transition-transform duration-300 ease-in-out text-center items-center justify-center flex shadow-[0_4px_13px_rgba(0,0,0,0.15)] rounded-full bg-background text-md font-bold text-lg">
             {tProductPage('whatWeChoose')}
           </div>
         </div>
         <Card
           className={cn(
-            'w-full rounded-3xl border-none bg-background backdrop-blur-sm',
-            'h-120 sm:w-98',
-            'py-8 px-4',
+            'w-full rounded-3xl border-none bg-background/50 backdrop-blur-sm shadow-[0_4px_13px_rgba(0,0,0,0.15)]',
+            'sm:w-98',
+            'py-8 px-6',
             'flex flex-col',
-            'justify-between'
+            'justify-between',
+            'mt-12 sm:mt-0'
           )}
         >
           {/* TOP SECTION */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3">
             <div className="flex flex-col">
               <p className="text-2xl font-bold line-clamp-1">{subscription?.name ?? ''}</p>
               <p className="text-sm leading-5 h-20 line-clamp-4 font-light">
@@ -131,23 +139,29 @@ export const MultiProductCard = ({
                 <CalendarDaysIcon className="w-4 h-4" />
                 {tProductPage('frequency')}
               </p>
-              {/* TODO: add frequency */}
-              <p className="text-sm font-bold">{subscription?.metadata?.frequency ?? ''}</p>
+              <p className="text-sm">{tSubscription(`planInterval.${frequency}`)}</p>
             </div>
             <div className="flex flex-col items-end">
               <p className="text-sm font-bold flex flex-row  gap-2">
                 <Clock10 className="w-4 h-4" />
                 {tProductPage('deliveryDay')}
               </p>
-              {/* TODO: fix delivery date */}
-              <p className="text-sm font-bold">{deliveryDate}</p>
+              <p className="text-sm">
+                {deliveryDate
+                  ? new Date(deliveryDate).toLocaleDateString('it-IT', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })
+                  : ''}
+              </p>
             </div>
           </div>
         </Card>
-        <div className="flex flex-row w-full justify-end">
+        <div className="flex flex-row w-full justify-center">
           <div className="flex flex-col justify-end items-end gap-1">
             <p className="text-2xl font-bold">
-              {products?.[selectedIndex]?.price}€{' '}
+              {(price?.unit_amount ?? 0) / 100}€{' '}
               <span className="text-[15px] font-normal">{tShared('includedVat')}</span>
             </p>
             <Button variant="gradient" className="" onClick={onBuy}>

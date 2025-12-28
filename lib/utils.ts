@@ -2,6 +2,8 @@ import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQue
 import { Carnation } from '@/assets/images/flowers/Carnation';
 import { Daisy } from '@/assets/images/flowers/Daisy';
 import { Mimosa } from '@/assets/images/flowers/Mimosa';
+import { Mixed } from '@/assets/images/flowers/Mixed';
+import { Peonies } from '@/assets/images/flowers/Peonies';
 import { Rose } from '@/assets/images/flowers/Rose';
 import { Girasole } from '@/assets/images/flowers/Sunflower';
 import { Tulip } from '@/assets/images/flowers/Tulip';
@@ -9,6 +11,7 @@ import clsx, { ClassValue } from 'clsx';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import countries from '../types/countries.json';
+import { getDeliveryDate, Order } from './woocomerce/models/orders';
 import { getProductAttributes, Product } from './woocomerce/models/product';
 
 export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
@@ -60,26 +63,49 @@ const getEasterDate = (year: number) => {
 export const getAnniversayDateByAnniversary = (
   anniversary: SubscriptionFlowDataType['anniversaries']
 ) => {
-  const pad = (n: number) => n.toString().padStart(2, '0');
-  const formatDate = (date: Date) =>
-    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-
   switch (anniversary) {
     case 'mothers-day':
-      return formatDate(new Date(new Date().getFullYear(), 4, 14));
+      return new Date(new Date().getFullYear(), 4, 14);
     case 'fathers-day':
-      return formatDate(new Date(new Date().getFullYear(), 5, 19));
+      return new Date(new Date().getFullYear(), 5, 19);
     case 'womens-day':
-      return formatDate(new Date(new Date().getFullYear(), 2, 8));
+      return new Date(new Date().getFullYear(), 2, 8);
     case 'christmas':
-      return formatDate(new Date(new Date().getFullYear(), 11, 25));
+      return new Date(new Date().getFullYear(), 11, 25);
     case 'easter':
-      return formatDate(getEasterDate(new Date().getFullYear()));
+      return getEasterDate(new Date().getFullYear());
     case 'saint-valentine':
-      return formatDate(new Date(new Date().getFullYear(), 1, 14));
+      return new Date(new Date().getFullYear(), 1, 14);
     default:
-      return null;
+      return new Date(new Date().getFullYear(), 0, 1);
   }
+};
+
+export const formatDateToDDMMYYYY = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+
+export const fromDDMMYYYYToDate = (dateString: string): Date => {
+  const [dayStr, monthStr, yearStr] = dateString.split('-');
+  const day = parseInt(dayStr ?? '0', 10);
+  const month = parseInt(monthStr ?? '0', 10);
+  const year = parseInt(yearStr ?? '0', 10);
+
+  if (!day || !month || !year) {
+    throw new Error('Data non valida: usa il formato dd-mm-yyyy');
+  }
+
+  const date = new Date(year, month - 1, day);
+
+  // Verifica che la data creata sia coerente con l’input
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    throw new Error('Data non valida: giorno, mese o anno non esistenti');
+  }
+
+  return date;
 };
 
 export const castStripeIntervalToFrequency = (
@@ -106,10 +132,10 @@ export const getProductIcon = (product: Partial<Product>) => {
     case 'mimosa':
       return Mimosa;
     case 'mixed':
-      return Daisy;
+      return Mixed;
     case 'peonies':
     case 'peony':
-      return Daisy;
+      return Peonies;
     case 'rose':
       return Rose;
     case 'sunflower':
@@ -119,4 +145,34 @@ export const getProductIcon = (product: Partial<Product>) => {
     default:
       return Tulip;
   }
+};
+
+export const getLastNextDelivery = (
+  orders: Order[]
+): { lastDelivery: string | undefined; nextDelivery: string | undefined } => {
+  const nextOrder = orders && orders.length > 0 && orders[0] && getDeliveryDate(orders[0]);
+  const nextOrderDate = nextOrder
+    ? nextOrder > new Date()
+      ? nextOrder.toLocaleDateString('it-IT', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })
+      : undefined
+    : undefined;
+  const lastOrder =
+    orders && orders.length > 1 && orders[1] && getDeliveryDate(orders[1])
+      ? getDeliveryDate(orders[1])
+      : nextOrder;
+  const lastOrderDate = lastOrder
+    ? lastOrder < new Date()
+      ? lastOrder.toLocaleDateString('it-IT', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })
+      : undefined
+    : undefined;
+
+  return { lastDelivery: lastOrderDate, nextDelivery: nextOrderDate };
 };

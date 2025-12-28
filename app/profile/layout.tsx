@@ -23,9 +23,9 @@ export default function ProfileLayout({ tab }: { tab: React.ReactNode }) {
       {isLoadingCustomer ? (
         <LoadingDataScreen />
       ) : (
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-7 w-full h-full pt-15 sm:pt-56 items-center sm:items-start sm:justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-7 w-full h-full pt-15 sm:pt-40 items-center sm:items-start sm:justify-center overflow-y-scroll">
           <ProfileNavigation customer={customer ?? null} />
-          <div className="w-100 h-106 sm:pt-8 px-6 sm:px-0">{tab}</div>
+          <div className="w-100 sm:pt-8 px-6 sm:px-0">{tab}</div>
         </div>
       )}
     </section>

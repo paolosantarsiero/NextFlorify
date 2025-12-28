@@ -10,14 +10,24 @@ import { useEffect, useState } from 'react';
 
 type ButtonMultiInputProps = {
   node: FlowNode<any, any>;
-  onAnswer: (answer: any) => void;
+  onAnswerAction: (answer: any) => void;
   flowTranslations: Flow['translations'];
+  initialValue?: string[];
 };
 
-export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMultiInputProps) => {
+export const ButtonMultiInput = ({
+  node,
+  onAnswerAction,
+  initialValue,
+  flowTranslations
+}: ButtonMultiInputProps) => {
   const t = useTranslations(flowTranslations as NamespaceKeys<IntlMessages, 'flows'>);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>(initialValue || []);
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSelected(initialValue || []);
+  }, [initialValue, node.id]);
 
   useEffect(() => {
     const schema = node.schema;
@@ -25,7 +35,7 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
       const validationResult = schema.safeParse({ [node.id]: selected });
       setSchemaStatus(validationResult.success);
     }
-  }, [selected]);
+  }, [selected, node.id]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -34,7 +44,8 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
           <Toggle
             key={`${node.id}-${opt}`}
             variant="outline"
-            className="rounded-xl bg-background px-8 py-3"
+            className="rounded-xl bg-background px-5 py-3"
+            pressed={selected.includes(opt)}
             onClick={() =>
               setSelected((prev) =>
                 prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
@@ -48,8 +59,7 @@ export const ButtonMultiInput = ({ node, onAnswer, flowTranslations }: ButtonMul
       <Button
         variant="ghost"
         onClick={() => {
-          onAnswer({ [node.id]: selected });
-          setSelected([]);
+          onAnswerAction({ [node.id]: selected });
         }}
         disabled={!schemaStatus}
         className="absolute bottom-0 right-0 rounded-full z-50 translate-y-10"

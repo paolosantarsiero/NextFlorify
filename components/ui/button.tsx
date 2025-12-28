@@ -19,14 +19,14 @@ const buttonVariants = cva(
           'border border-gray-2 bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground text-dark-gray-1',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         gradient:
-          'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white rounded-full hover:from-tiffanyGreen/80 hover:to-violetRose/80',
-        gradientOutline: 'px-10 py-0',
+          'bg-gradient-to-r from-tiffanyGreen to-violetRose text-white uppercase rounded-full hover:from-tiffanyGreen/80 hover:to-violetRose/80',
+        gradientOutline: 'bg-transparent px-10 py-0',
         link: 'text-primary underline-offset-4 hover:underline'
       },
       size: {
         default: 'h-10 px-4 py-2 text-base',
         sm: 'h-7 rounded-md px-4 py-2 text-xs',
-        lg: 'h-10 rounded-md px-8',
+        lg: 'h-10 text-md px-5 py-7',
         icon: 'h-9 w-9'
       }
     },

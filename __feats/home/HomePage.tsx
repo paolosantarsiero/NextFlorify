@@ -1,14 +1,46 @@
 'use client';
 
+import { useCssAnimationStore } from '@/__store/cssAnimationsStore';
+import { flowerAnimation, FlowerAnimationStates } from '@/__types/animations/flower';
 import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCarouselItem/ProductCardsCarouselItem';
 import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel';
 import { useProducts } from '__hooks/Product';
-import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import TopSection from './topSection/TopSection';
 
 export default function HomePage() {
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const { setComponentState } = useCssAnimationStore();
+  const { data: session } = useSession();
+
+  // Reset animation state in home page
+  useEffect(() => {
+    setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+  }, []);
+
+  useEffect(() => {
+    // Check if the session is expired
+    if (session?.expires) {
+      const expiresAt = new Date(session.expires);
+      if (expiresAt < new Date()) {
+        signOut({ redirect: false });
+      }
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (carouselApi) {
+      carouselApi.on('select', () => {
+        if (carouselApi.selectedScrollSnap() === 1) {
+          setComponentState(flowerAnimation.key, FlowerAnimationStates.HIDDEN);
+        } else {
+          setComponentState(flowerAnimation.key, FlowerAnimationStates.LOADING_STATIC);
+        }
+      });
+    }
+  }, [carouselApi]);
 
   return (
     <div className="w-full h-dvh flex items-center justify-center">

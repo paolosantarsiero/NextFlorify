@@ -6,8 +6,9 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
+    // User not having a Stripe ID means they have no subscriptions
     if (!session?.user?.stripe_id) {
-      return NextResponse.json({ error: 'User not authorized' }, { status: 401 });
+      return NextResponse.json({ error: 'User not authorized' }, { status: 400 });
     }
 
     const subscriptions = await customApiClient.get(
