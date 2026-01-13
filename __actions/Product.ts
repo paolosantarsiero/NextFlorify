@@ -38,9 +38,9 @@ export const getCompatibleProducts = async (
     const response = await getProductsBySubscriptionType(body);
     // Sort related products by product month
     response.related_products.sort((a, b) => {
-      const aMonth = getProductAttributes(a, 'pa_product_month')?.[0] || '';
-      const bMonth = getProductAttributes(b, 'pa_product_month')?.[0] || '';
-      return aMonth.localeCompare(bMonth);
+      const aMonth = parseInt(getProductAttributes(a, 'pa_product_month')?.[0] || '0', 10);
+      const bMonth = parseInt(getProductAttributes(b, 'pa_product_month')?.[0] || '0', 10);
+      return aMonth - bMonth;
     });
     return response;
   } catch (error) {
