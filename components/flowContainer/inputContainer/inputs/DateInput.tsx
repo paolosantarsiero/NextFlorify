@@ -1,19 +1,17 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { DatePicker } from '@/components/ui/datePicker';
 import { formatDateToDDMMYYYY } from '@/lib/utils';
-import { FlowNode } from '__flows/_flowNode';
+import { FlowNode, type OnPendingSubmitChange } from '__flows/_flowNode';
 import { addYears } from 'date-fns';
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 type DateInputProps = {
   node: FlowNode<any, any>;
   onAnswerAction: (answer: any) => void;
+  onPendingSubmitChange?: OnPendingSubmitChange;
 };
 
-export const DateInput = ({ node, onAnswerAction }: DateInputProps) => {
-  const tShared = useTranslations('flows.shared');
+export const DateInput = ({ node, onAnswerAction, onPendingSubmitChange }: DateInputProps) => {
   const [value, setValue] = useState<Date | undefined>(undefined);
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
 
@@ -23,20 +21,16 @@ export const DateInput = ({ node, onAnswerAction }: DateInputProps) => {
       const validationResult = schema.safeParse({ [node.id]: formatDateToDDMMYYYY(value) });
       setSchemaStatus(validationResult.success);
     }
-  }, [value]);
+  }, [node, value]);
+
+  useEffect(() => {
+    const payload = value !== undefined ? { [node.id]: formatDateToDDMMYYYY(value) } : null;
+    onPendingSubmitChange?.(payload, schemaStatus);
+  }, [node.id, value, schemaStatus, onPendingSubmitChange]);
 
   return (
-    <div className="flex gap-2 items-center w-full max-w-[300px] mx-auto">
+    <div className="flex flex-col gap-3 w-full max-w-[300px] mx-auto">
       <DatePicker onSelect={(date) => setValue(date)} maxDate={addYears(new Date(), 1)} />
-      <Button
-        type="submit"
-        variant="ghost"
-        className="absolute bottom-0 right-0 rounded-full z-50 translate-y-10"
-        disabled={!schemaStatus}
-        onClick={() => onAnswerAction({ [node.id]: formatDateToDDMMYYYY(value || new Date()) })}
-      >
-        {tShared('submit')}
-      </Button>
     </div>
   );
 };

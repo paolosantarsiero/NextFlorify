@@ -38,10 +38,20 @@ type Props = {
   navigation: boolean;
   className?: string;
   onGoHome?: () => void;
+  replayFromHistory?: boolean;
+  onReplayComplete?: () => void;
 };
 
-export default function Floro({ state, flowName, navigation, onGoHome, className }: Props) {
-  const { goBack, reset, getData, getCurrentNodeId, getFlow } = useFlowsStore();
+export default function Floro({
+  state,
+  flowName,
+  navigation,
+  onGoHome,
+  className,
+  replayFromHistory,
+  onReplayComplete
+}: Props) {
+  const { goBack, reset, getData, getCurrentNodeId, getFlow, flows } = useFlowsStore();
   const { rive, RiveComponent } = useRive({
     src: '/floro.riv',
     stateMachines: ['State'],
@@ -178,18 +188,16 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     rive?.play(animationName); // cambia animazione
   };
 
-  useEffect(() => {
-    switch (state) {
+  const applyState = (targetState: FloroRiveState) => {
+    switch (targetState) {
       case 'idle':
         watchingTrigger?.fire();
         break;
       case 'watching':
         watchingAction();
-        //flowerFlow();
         break;
       case 'watchingHome':
         watchingHomeAction();
-        //flowerFlow();
         break;
       case 'flower':
         flowerFlow();
@@ -225,11 +233,7 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         shippingAction();
         break;
       case 'surprise':
-        nextAnimation();
-        break;
       case 'next':
-        nextAnimation();
-        break;
       case 'packaging':
         nextAnimation();
         break;
@@ -244,10 +248,17 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
         break;
       case 'sweet':
         break;
-      //prevAnimation();
+      case 'custom':
+        break;
     }
+  };
+
+  useEffect(() => {
+    if (replayFromHistory) return;
+    applyState(state);
   }, [
     state,
+    replayFromHistory,
     flowerTrigger,
     flowerLength,
     plantTrigger,
@@ -260,11 +271,59 @@ export default function Floro({ state, flowName, navigation, onGoHome, className
     perfumeTrigger,
     shippingTrigger,
     watchingTrigger,
+    watchingHomeTrigger,
     sweetTrigger,
     lookingDownTrigger,
     backTrigger,
     nextTrigger
   ]);
+
+  useEffect(() => {
+    if (!replayFromHistory) return;
+
+    const flowDef = getFlow(flowName);
+    const currentNodeId = getCurrentNodeId(flowName);
+    const flowInstance = flows[flowName];
+
+    if (!flowDef || !currentNodeId || !flowInstance) {
+      onReplayComplete?.();
+      return;
+    }
+
+    const nodeIds = [...flowInstance.history, currentNodeId].filter(
+      (id): id is string => typeof id === 'string' && Boolean(flowDef.steps[id])
+    );
+
+    if (!nodeIds.length) {
+      onReplayComplete?.();
+      return;
+    }
+
+    const data = getData(flowName);
+    const STEP_MS = 400;
+    let index = 0;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const step = () => {
+      const id = nodeIds.at(index);
+      const node = id !== undefined ? flowDef.steps[id] : undefined;
+      const riveState = node?.riveState?.(data as never) as FloroRiveState | undefined;
+      if (riveState) applyState(riveState);
+
+      index += 1;
+      if (index < nodeIds.length) {
+        timeoutId = setTimeout(step, STEP_MS);
+      } else {
+        onReplayComplete?.();
+      }
+    };
+
+    timeoutId = setTimeout(step, 350);
+
+    return () => {
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    };
+  }, [replayFromHistory]);
 
   return (
     <div className={cn('w-full h-[300px] relative z-10 ', className)}>
