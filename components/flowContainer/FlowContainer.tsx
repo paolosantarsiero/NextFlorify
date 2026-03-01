@@ -160,14 +160,14 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="relative w-full bg-background min-h-[5.5rem] max-h-[8rem] mt-3 rounded-xl overflow-hidden">
+      <div className="relative w-full bg-background min-h-[5.5rem] max-h-[8rem] mt-3 overflow-hidden">
         <ScrollShadow position="top" visible={showTopShadow} />
         <ScrollShadow position="bottom" visible={showBottomShadow} />
 
         {/* scrollable content */}
         <div
           ref={scrollRef}
-          className={clsx('h-full py-1.5 px-3 pt-3 rounded-xl', {
+          className={clsx('h-full py-1.5 px-3 pt-3', {
             'overflow-y-auto scrollbar-hide': currentNode.inputType !== 'coordinates'
           })}
         >
