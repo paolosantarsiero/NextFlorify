@@ -178,3 +178,9 @@ main {
 .geoapify-autocomplete-input:focus {
   border-color: #9d0371;
 }
+
+.geoapify-autocomplete-items {
+  max-height: 120px !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}

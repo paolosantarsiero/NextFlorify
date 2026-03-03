@@ -160,7 +160,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="relative w-full bg-background min-h-[5.5rem] max-h-[8rem] mt-3 overflow-hidden">
+      <div className="relative w-full bg-background min-h-[6.5rem] md:max-h-[8rem] mt-3">
         <ScrollShadow position="top" visible={showTopShadow} />
         <ScrollShadow position="bottom" visible={showBottomShadow} />
 
@@ -191,7 +191,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
             variant="ghost"
             onClick={handleContinue}
             disabled={!canContinue}
-            className="fixed bottom-4 right-4 md:static rounded-full"
+            className="rounded-full"
           >
             {continueLabel}
             <Check className="w-5 h-5 ml-2" width={20} height={20} strokeWidth={3} />

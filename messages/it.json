@@ -234,6 +234,10 @@
       },
       "submit": "Registrati"
     },
+    "haveAccount": {
+      "title": "Hai già un account?",
+      "link": "Accedi"
+    },
     "toast": {
       "signupFailed": "Registrazione fallita",
       "signupSuccessful": "Registrazione riuscita"

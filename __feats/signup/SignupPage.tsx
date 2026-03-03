@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
@@ -71,6 +72,9 @@ export default function SignupPage() {
             </Button>
           </Form>
         </form>
+        <p className="text-sm text-secondary-foreground">
+          {tPage('haveAccount.title')} <Link href="/login">{tPage('haveAccount.link')}</Link>
+        </p>
       </div>
     </section>
   );
