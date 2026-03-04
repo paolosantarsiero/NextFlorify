@@ -1,18 +1,23 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { FlowNode } from '__flows/_flowNode';
+import { FlowNode, type OnPendingSubmitChange } from '__flows/_flowNode';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 type TextInputProps = {
   node: FlowNode<any, any>;
   onAnswerAction: (answer: any) => void;
+  onPendingSubmitChange?: OnPendingSubmitChange;
   initialValue?: string;
 };
 
-export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps) => {
+export const TextInput = ({
+  node,
+  onAnswerAction,
+  onPendingSubmitChange,
+  initialValue
+}: TextInputProps) => {
   const tShared = useTranslations('flows.shared');
   const [value, setValue] = useState(initialValue || '');
   const [schemaStatus, setSchemaStatus] = useState<boolean>(false);
@@ -23,10 +28,14 @@ export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps
       const validationResult = schema.safeParse({ [node.id]: value });
       setSchemaStatus(validationResult.success);
     }
-  }, [value]);
+  }, [node, value]);
+
+  useEffect(() => {
+    onPendingSubmitChange?.({ [node.id]: value }, schemaStatus);
+  }, [node.id, value, schemaStatus, onPendingSubmitChange]);
 
   return (
-    <div className="flex gap-2 items-center w-full max-w-[400px] mx-auto">
+    <div className="flex flex-col gap-3 w-full max-w-[400px] mx-auto">
       <Textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -34,15 +43,6 @@ export const TextInput = ({ node, onAnswerAction, initialValue }: TextInputProps
         className="py-4 px-4 resize-none"
         placeholder={tShared('notes')}
       />
-      <Button
-        type="submit"
-        variant="ghost"
-        className="absolute bottom-0 right-0 rounded-full z-50 translate-y-10"
-        disabled={!schemaStatus}
-        onClick={() => onAnswerAction({ [node.id]: value })}
-      >
-        {tShared('submit')}
-      </Button>
     </div>
   );
 };
