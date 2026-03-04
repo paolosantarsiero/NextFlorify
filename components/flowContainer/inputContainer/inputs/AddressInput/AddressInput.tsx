@@ -2,8 +2,8 @@
 
 import '@geoapify/geocoder-autocomplete/styles/round-borders.css';
 import {
-    GeoapifyContext,
-    GeoapifyGeocoderAutocomplete
+  GeoapifyContext,
+  GeoapifyGeocoderAutocomplete
 } from '@geoapify/react-geocoder-autocomplete';
 import { FlowNode, type OnPendingSubmitChange } from '__flows/_flowNode';
 import { useTranslations } from 'next-intl';

@@ -3,9 +3,9 @@
 import { useFlowsStore } from '@/__store/flowsStore';
 import { Flow } from '__flows/_flow';
 import {
-    FlowNode,
-    INPUT_TYPES_WITH_PENDING_SUBMIT,
-    type OnPendingSubmitChange
+  FlowNode,
+  INPUT_TYPES_WITH_PENDING_SUBMIT,
+  type OnPendingSubmitChange
 } from '__flows/_flowNode';
 import { AddressInput } from './inputs/AddressInput/AddressInput';
 import { BooleanInput } from './inputs/BooleanInput';
