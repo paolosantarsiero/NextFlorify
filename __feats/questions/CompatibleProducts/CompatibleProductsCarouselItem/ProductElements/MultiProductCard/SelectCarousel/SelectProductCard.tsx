@@ -46,7 +46,7 @@ export default function SelectProductCard({
             <p className="text-2xl font-bold line-clamp-1 truncate">
               {isSurprise ? 'Sorpresa' : product.name}
             </p>
-            {(product && !isSurprise) && (
+            {product && !isSurprise && (
               <ProductDialog
                 product={product}
                 dialogTrigger={
