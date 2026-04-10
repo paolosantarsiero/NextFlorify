@@ -160,15 +160,17 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 flex flex-col w-full mt-3">
+      <div className="relative w-full bg-background flex-1 min-h-0 mt-3 flex flex-col">
+        <ScrollShadow position="top" visible={showTopShadow} />
+        <ScrollShadow position="bottom" visible={showBottomShadow} />
+
+        {/* scrollable content */}
         <div
           ref={scrollRef}
-          className={clsx('relative w-full bg-background min-h-0 py-1.5 px-3 pt-3', {
+          className={clsx('flex-1 min-h-0 py-1.5 px-3 pt-3', {
             'overflow-y-auto scrollbar-hide': currentNode.inputType !== 'coordinates'
           })}
         >
-          <ScrollShadow position="top" visible={showTopShadow} />
-          <ScrollShadow position="bottom" visible={showBottomShadow} />
           {currentNode && (
             <InputContainer
               node={currentNode}
@@ -182,20 +184,20 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
             />
           )}
         </div>
-        {hasContinueButton && (
-          <div className="w-full flex justify-end px-4 mt-4 flex-shrink-0">
-            <Button
-              variant="ghost"
-              onClick={handleContinue}
-              disabled={!canContinue}
-              className="rounded-full"
-            >
-              {continueLabel}
-              <Check className="w-5 h-5 ml-2" width={20} height={20} strokeWidth={3} />
-            </Button>
-          </div>
-        )}
       </div>
+      {hasContinueButton && (
+        <div className="w-full flex justify-end px-4 mt-4 flex-shrink-0">
+          <Button
+            variant="ghost"
+            onClick={handleContinue}
+            disabled={!canContinue}
+            className="rounded-full"
+          >
+            {continueLabel}
+            <Check className="w-5 h-5 ml-2" width={20} height={20} strokeWidth={3} />
+          </Button>
+        </div>
+      )}
       <PendingFlowDialog
         flowTranslations={flow.translations as NamespaceKeys<IntlMessages, 'flows'>}
         onStartAction={() => {
