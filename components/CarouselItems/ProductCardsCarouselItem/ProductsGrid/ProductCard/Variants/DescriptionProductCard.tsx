@@ -24,7 +24,7 @@ export default function ProductCard({ product, className, hovered }: Props) {
     <Card
       className={cn(
         'group relative bg-transparent backdrop-blur-sm border-0 overflow-hidden min-h-0 rounded-2xl shadow-[0_5px_16px_rgba(0,0,0,0.1)] flex flex-col z-50 pt-20 px-6 pb-6 gap-3',
-        hovered && 'group-hover grayscale-0 !grayscale-0', // force hover styles if hovered is true
+        hovered && 'group-hover !grayscale-0', // force hover styles if hovered is true
 
         className ?? ''
       )}
