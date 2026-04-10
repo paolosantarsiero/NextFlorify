@@ -139,7 +139,7 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
     : tShared('submit');
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 w-full sm:max-w-[500px] items-center justify-start z-10">
+    <div className="flex flex-col flex-1 md:flex-none min-h-0 w-full sm:max-w-[500px] items-center justify-start z-10">
       <div className="flex flex-col w-full justify-start items-center mt-[70px] flex-shrink-0">
         <div className="w-full max-h-[360px] md:h-[316px] overflow-hidden relative">
           <Cloud className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-12 z-0" />
@@ -160,14 +160,14 @@ export const FlowContainer = <T,>({ flowName, onEnd, onGoHome }: FlowContainerPr
         </div>
       </div>
 
-      <div className="relative w-full bg-background flex-1 min-h-0 mt-3 flex flex-col">
+      <div className="relative w-full bg-background flex-1 md:flex-none min-h-0 mt-3 flex flex-col">
         <ScrollShadow position="top" visible={showTopShadow} />
         <ScrollShadow position="bottom" visible={showBottomShadow} />
 
         {/* scrollable content */}
         <div
           ref={scrollRef}
-          className={clsx('flex-1 min-h-0 py-1.5 px-3 pt-3', {
+          className={clsx('flex-1 md:flex-none min-h-0 py-1.5 px-3 pt-3', {
             'overflow-y-auto scrollbar-hide': currentNode.inputType !== 'coordinates'
           })}
         >

@@ -23,7 +23,7 @@ export default function QuestionsPage() {
   };
 
   return (
-    <div className="flex flex-1 min-h-0 flex-col items-center">
+    <div className="flex flex-1 md:flex-none min-h-0 flex-col items-center">
       {ended && <CompatibleProducts flowName="subscription" />}
 
       {!ended && (
