@@ -1,5 +1,6 @@
 import { SubscriptionFlowDataType } from '@/__flows/subscription/subscriptionQuestionsSchema';
 import { useFlowsStore } from '@/__store/flowsStore';
+import ProductDialog from '@/components/CarouselItems/ProductCardsCarouselItem/ProductsGrid/ProductDialog/ProductDialog';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn, getProductIcon } from 'lib/utils';
@@ -41,9 +42,21 @@ export default function SelectProductCard({
       {icon && createElement(icon, { className: 'absolute top-0 right-0' })}
       <div className="flex flex-col gap-2 w-52 z-50">
         <div className="flex flex-col gap-0">
-          <p className="text-2xl font-bold line-clamp-1">
-            {isSurprise ? 'Sorpresa' : product.name}
-          </p>
+          <div className="flex flex-row gap-2 items-center">
+            <p className="text-2xl font-bold line-clamp-1 truncate">
+              {isSurprise ? 'Sorpresa' : product.name}
+            </p>
+            {product && !isSurprise && (
+              <ProductDialog
+                product={product}
+                dialogTrigger={
+                  <Button variant="ghost" className="rounded-full size-5 p-0">
+                    <InfoIcon className="w-4 h-4" />
+                  </Button>
+                }
+              />
+            )}
+          </div>
         </div>
         <p className="text-sm font-normal leading-[18px] line-clamp-3">
           {!isSurprise
@@ -54,6 +67,7 @@ export default function SelectProductCard({
               )
             : ''}
         </p>
+
         {goToCompatibleProducts && (
           <Button
             variant="ghost"
@@ -71,6 +85,7 @@ export default function SelectProductCard({
             {t('affinity')} {product.score} %
           </p>
         )}
+
         {onNext && (
           <Button
             variant="ghost"

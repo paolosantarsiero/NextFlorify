@@ -6,10 +6,12 @@ import ProductCardsCarouselItem from '@/components/CarouselItems/ProductCardsCar
 import { Carousel, CarouselApi, CarouselContent } from '@/components/ui/carousel';
 import { useProducts } from '__hooks/Product';
 import { signOut, useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import TopSection from './topSection/TopSection';
 
 export default function HomePage() {
+  const t = useTranslations('HomePage');
   const { products, isProductsLoading, isProductsError, refetchProducts } = useProducts();
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const { setComponentState } = useCssAnimationStore();
@@ -57,7 +59,7 @@ export default function HomePage() {
         <CarouselContent className="-mt-1 h-dvh">
           <TopSection carouselApi={carouselApi} />
           <ProductCardsCarouselItem
-            title="Le nostre composizioni"
+            title={t('ourCompositions')}
             shouldPrev
             products={products}
             isLoading={isProductsLoading}
